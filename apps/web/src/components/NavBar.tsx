@@ -7,6 +7,7 @@ const LINKS = [
   { href: '/', label: 'البحث' },
   { href: '/visitors', label: 'الزوار' },
   { href: '/matches', label: 'الاهتمامات' },
+  { href: '/store', label: 'المتجر' },
 ];
 
 export function NavBar() {
