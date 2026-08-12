@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { isAxiosError } from 'axios';
 import { useAuthStore } from '@/store/auth.store';
 import { getMyVerificationStatus, submitVerification, VerificationStatusResponse } from '@/services/verification.service';
-import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { ImageUploader } from '@/components/ImageUploader';
 import { ShieldCheckIcon } from '@/components/icons';
 
 export default function VerificationPage() {
@@ -70,28 +70,16 @@ export default function VerificationPage() {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-4">
-            <Input
-              id="idDocumentUrl"
-              label="رابط صورة CIN / Passport"
-              placeholder="https://..."
-              value={idDocumentUrl}
-              onChange={(e) => setIdDocumentUrl(e.target.value)}
-              required
+            <ImageUploader label="صورة CIN / Passport" onUploaded={setIdDocumentUrl} folder="zawaj/verification" />
+            <ImageUploader
+              label="وثيقة الإقامة بالخارج (اختياري)"
+              onUploaded={setResidencyDocumentUrl}
+              folder="zawaj/verification"
             />
-            <Input
-              id="residencyDocumentUrl"
-              label="رابط وثيقة الإقامة بالخارج (اختياري)"
-              placeholder="https://..."
-              value={residencyDocumentUrl}
-              onChange={(e) => setResidencyDocumentUrl(e.target.value)}
-            />
-            <p className="text-xs text-ink-500">
-              * فـ النسخة النهائية غادي يكون رفع مباشر للصورة (Cloudinary) بدل الرابط.
-            </p>
 
             {serverError && <p className="text-sm text-red-500">{serverError}</p>}
 
-            <Button type="submit" loading={loading} className="mt-2 w-full">
+            <Button type="submit" loading={loading} disabled={!idDocumentUrl} className="mt-2 w-full">
               صيفط للمراجعة
             </Button>
           </form>

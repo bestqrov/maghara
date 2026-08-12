@@ -9,6 +9,7 @@ import {
 } from '@/services/payments.service';
 import { Button } from './Button';
 import { Input } from './Input';
+import { ImageUploader } from './ImageUploader';
 import { colors } from '@/theme/colors';
 
 const METHODS: { value: PaymentMethod; label: string; kind: 'crypto' | 'manual' }[] = [
@@ -128,14 +129,15 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
                 </View>
               )}
 
-              {selected && (
+              {selected && selected.kind === 'crypto' && (
                 <View style={{ marginTop: 12, width: '100%' }}>
-                  <Input
-                    label={selected.kind === 'crypto' ? 'TxHash' : 'رابط صورة الوصل'}
-                    value={reference}
-                    onChangeText={setReference}
-                    placeholder={selected.kind === 'crypto' ? '0x...' : 'https://...'}
-                  />
+                  <Input label="TxHash" value={reference} onChangeText={setReference} placeholder="0x..." />
+                </View>
+              )}
+
+              {selected && selected.kind === 'manual' && (
+                <View style={{ marginTop: 12, width: '100%' }}>
+                  <ImageUploader label="صورة الوصل" onUploaded={setReference} folder="zawaj/receipts" />
                 </View>
               )}
 

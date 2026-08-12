@@ -9,9 +9,10 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { OptionPicker } from '@/components/OptionPicker';
 import { StepIndicator } from '@/components/StepIndicator';
+import { ImageUploader } from '@/components/ImageUploader';
 import { colors } from '@/theme/colors';
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -31,6 +32,7 @@ export default function RegisterScreen() {
   const [relocationPreference, setRelocationPreference] = useState('OPEN_TO_MOVE');
   const [jobTitle, setJobTitle] = useState('');
   const [bio, setBio] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
 
   const isLastStep = step === TOTAL_STEPS - 1;
 
@@ -70,7 +72,12 @@ export default function RegisterScreen() {
       });
       setSession(accessToken, user);
 
-      const updatedUser = await updateProfile({ relocationPreference: relocationPreference as any, jobTitle, bio });
+      const updatedUser = await updateProfile({
+        relocationPreference: relocationPreference as any,
+        jobTitle,
+        bio,
+        photos: photoUrl ? [photoUrl] : undefined,
+      });
       setSession(accessToken, updatedUser);
 
       router.replace('/verification');
@@ -142,6 +149,10 @@ export default function RegisterScreen() {
                 <Input label="المهنة (اختياري)" value={jobTitle} onChangeText={setJobTitle} />
                 <Input label="نبذة عنك (اختياري)" value={bio} onChangeText={setBio} />
               </>
+            )}
+
+            {step === 4 && (
+              <ImageUploader label="صورة البروفايل (اختياري)" onUploaded={setPhotoUrl} folder="zawaj/profiles" />
             )}
 
             {error && <Text style={styles.error}>{error}</Text>}

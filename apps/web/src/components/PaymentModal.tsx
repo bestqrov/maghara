@@ -10,6 +10,7 @@ import {
 } from '@/services/payments.service';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
+import { ImageUploader } from './ImageUploader';
 
 const METHODS: { value: PaymentMethod; label: string; kind: 'crypto' | 'manual' }[] = [
   { value: 'CRYPTO_TRC20', label: 'USDT (TRC-20)', kind: 'crypto' },
@@ -110,14 +111,15 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
               </div>
             )}
 
-            {selected && (
+            {selected && selected.kind === 'crypto' && (
               <div className="mt-4">
-                <Input
-                  label={selected.kind === 'crypto' ? 'TxHash' : 'رابط صورة الوصل'}
-                  value={reference}
-                  onChange={(e) => setReference(e.target.value)}
-                  placeholder={selected.kind === 'crypto' ? '0x...' : 'https://...'}
-                />
+                <Input label="TxHash" value={reference} onChange={(e) => setReference(e.target.value)} placeholder="0x..." />
+              </div>
+            )}
+
+            {selected && selected.kind === 'manual' && (
+              <div className="mt-4">
+                <ImageUploader label="صورة الوصل" onUploaded={setReference} folder="zawaj/receipts" />
               </div>
             )}
 

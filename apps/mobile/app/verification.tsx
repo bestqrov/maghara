@@ -4,8 +4,8 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { isAxiosError } from 'axios';
 import { useAuthStore } from '@/store/auth.store';
 import { getMyVerificationStatus, submitVerification, VerificationStatusResponse } from '@/services/verification.service';
-import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
+import { ImageUploader } from '@/components/ImageUploader';
 import { colors } from '@/theme/colors';
 
 export default function VerificationScreen() {
@@ -66,11 +66,14 @@ export default function VerificationScreen() {
           </View>
         ) : (
           <View style={styles.form}>
-            <Input label="رابط صورة CIN / Passport" placeholder="https://..." value={idDocumentUrl} onChangeText={setIdDocumentUrl} />
-            <Input label="رابط وثيقة الإقامة بالخارج (اختياري)" placeholder="https://..." value={residencyDocumentUrl} onChangeText={setResidencyDocumentUrl} />
-            <Text style={styles.hint}>* فـ النسخة النهائية غادي يكون رفع مباشر للصورة (Cloudinary) بدل الرابط.</Text>
+            <ImageUploader label="صورة CIN / Passport" onUploaded={setIdDocumentUrl} folder="zawaj/verification" />
+            <ImageUploader
+              label="وثيقة الإقامة بالخارج (اختياري)"
+              onUploaded={setResidencyDocumentUrl}
+              folder="zawaj/verification"
+            />
             {error && <Text style={styles.error}>{error}</Text>}
-            <Button loading={loading} onPress={onSubmit}>
+            <Button loading={loading} onPress={onSubmit} disabled={!idDocumentUrl}>
               صيفط للمراجعة
             </Button>
           </View>

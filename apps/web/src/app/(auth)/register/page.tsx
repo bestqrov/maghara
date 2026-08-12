@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
 import { StepIndicator } from '@/components/StepIndicator';
+import { ImageUploader } from '@/components/ImageUploader';
 
 type WizardFields = RegisterPayload & {
   relocationPreference: 'OPEN_TO_MOVE' | 'LOOKING_FOR_EXPAT' | 'LOCAL_ONLY';
@@ -24,6 +25,7 @@ const STEP_FIELDS: (keyof WizardFields)[][] = [
   ['firstName', 'gender', 'birthDate'],
   ['residenceCountry', 'currentCity', 'originCountry'],
   ['relocationPreference', 'jobTitle', 'bio'],
+  [],
 ];
 
 const TOTAL_STEPS = STEP_FIELDS.length;
@@ -32,6 +34,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const setSession = useAuthStore((s) => s.setSession);
   const [step, setStep] = useState(0);
+  const [photoUrl, setPhotoUrl] = useState('');
   const [serverError, setServerError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -73,6 +76,7 @@ export default function RegisterPage() {
         relocationPreference: values.relocationPreference,
         jobTitle: values.jobTitle,
         bio: values.bio,
+        photos: photoUrl ? [photoUrl] : undefined,
       });
       setSession(accessToken, updatedUser);
 
@@ -189,6 +193,10 @@ export default function RegisterPage() {
               <Input id="jobTitle" label="المهنة (اختياري)" {...register('jobTitle')} />
               <Input id="bio" label="نبذة عنك (اختياري)" {...register('bio')} />
             </>
+          )}
+
+          {step === 4 && (
+            <ImageUploader label="صورة البروفايل (اختياري)" onUploaded={setPhotoUrl} folder="zawaj/profiles" />
           )}
 
           {serverError && <p className="text-sm text-red-500">{serverError}</p>}
