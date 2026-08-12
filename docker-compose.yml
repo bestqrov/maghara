@@ -10,13 +10,13 @@ services:
     env_file:
       - .env
     environment:
-      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongodb:27017/zawaj?authSource=admin
       REDIS_HOST: redis
       REDIS_PORT: 6379
     depends_on:
-      - mongodb
       - redis
 
+  # mongodb and mongo-express below are for LOCAL MongoDB only.
+  # Not needed while MONGODB_URI in .env points to MongoDB Atlas.
   mongodb:
     image: mongo:latest
     container_name: zawaj_db
@@ -28,6 +28,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    profiles: ["local-db"]
 
   mongo-express:
     image: mongo-express:latest
@@ -41,6 +42,7 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongodb:27017/
     depends_on:
       - mongodb
+    profiles: ["local-db"]
 
   redis:
     image: redis:alpine

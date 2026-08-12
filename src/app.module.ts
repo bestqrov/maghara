@@ -11,6 +11,7 @@ import { VisitorsModule } from './modules/visitors/visitors.module';
 import { MatchingModule } from './modules/matching/matching.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { PaymentsModule } from './modules/payments/payments.module';
+import { VerificationModule } from './modules/verification/verification.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PaymentsModule } from './modules/payments/payments.module';
     MatchingModule,
     ChatModule,
     PaymentsModule,
+    VerificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

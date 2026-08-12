@@ -16,6 +16,15 @@ export class MatchCriteria {
 export const MatchCriteriaSchema = SchemaFactory.createForClass(MatchCriteria);
 
 @Schema({ _id: false })
+export class VerificationDocuments {
+  @Prop() idDocumentUrl?: string;
+  @Prop() residencyDocumentUrl?: string;
+  @Prop() rejectionReason?: string;
+  @Prop() submittedAt?: Date;
+}
+export const VerificationDocumentsSchema = SchemaFactory.createForClass(VerificationDocuments);
+
+@Schema({ _id: false })
 export class Profile {
   @Prop({ required: true }) firstName: string;
   @Prop({ enum: ['MALE', 'FEMALE'], required: true }) gender: Gender;
@@ -49,6 +58,8 @@ export class User extends Document {
     default: 'UNVERIFIED',
   })
   verificationStatus: VerificationStatus;
+  @Prop({ type: VerificationDocumentsSchema })
+  verificationDocuments?: VerificationDocuments;
 
   @Prop({ enum: ['FREE', 'VIP', 'CROSS_BORDER_VIP'], default: 'FREE' })
   subscriptionTier: SubscriptionTier;

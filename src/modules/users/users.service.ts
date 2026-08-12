@@ -9,13 +9,14 @@ export class UsersService {
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
   async findById(userId: string) {
-    const user = await this.userModel.findById(userId);
+    const user = await this.userModel.findById(userId).select('-passwordHash');
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
 
   async updateProfile(userId: string, dto: UpdateProfileDto) {
-    const user = await this.findById(userId);
+    const user = await this.userModel.findById(userId);
+    if (!user) throw new NotFoundException('User not found');
 
     const { minAge, maxAge, targetCountries, targetCities, ...profileFields } = dto;
     Object.assign(user.profile, profileFields);
@@ -31,6 +32,6 @@ export class UsersService {
     }
 
     await user.save();
-    return user;
+    return this.findById(userId);
   }
 }
