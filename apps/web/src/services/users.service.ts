@@ -1,6 +1,13 @@
 import { api } from './api';
 import { AuthUser } from '@/store/auth.store';
 
+export interface FullUser extends AuthUser {
+  coinBalance: number;
+  dailyInterestsSent: number;
+  isVerified: boolean;
+  verificationStatus: string;
+}
+
 export interface UpdateProfilePayload {
   firstName?: string;
   currentCity?: string;
@@ -18,7 +25,7 @@ export interface UpdateProfilePayload {
 }
 
 export async function getMe() {
-  const { data } = await api.get<AuthUser>('/users/me');
+  const { data } = await api.get<FullUser>('/users/me');
   return data;
 }
 
