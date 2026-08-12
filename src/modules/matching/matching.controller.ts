@@ -14,6 +14,11 @@ export class MatchingController {
     return this.matchingService.search(user.userId, dto);
   }
 
+  @Get('my-matches')
+  getMyMatches(@CurrentUser() user: { userId: string }) {
+    return this.matchingService.getMyMatches(user.userId);
+  }
+
   @Post('interest/:receiverId')
   sendInterest(
     @CurrentUser() user: { userId: string },

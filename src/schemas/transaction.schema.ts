@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type PaymentMethod =
   | 'CRYPTO_TRC20'
@@ -12,7 +12,7 @@ export type TransactionStatus = 'PENDING' | 'SUCCESS' | 'FAILED';
 
 @Schema({ timestamps: true })
 export class Transaction extends Document {
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
   userId: Types.ObjectId;
 
   @Prop({ required: true }) amount: number;

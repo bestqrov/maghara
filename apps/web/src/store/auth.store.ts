@@ -23,6 +23,7 @@ export interface AuthUser {
 interface AuthState {
   token: string | null;
   user: AuthUser | null;
+  hasHydrated: boolean;
   setSession: (token: string, user: AuthUser) => void;
   updateUser: (user: AuthUser) => void;
   logout: () => void;
@@ -33,10 +34,16 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       token: null,
       user: null,
+      hasHydrated: false,
       setSession: (token, user) => set({ token, user }),
       updateUser: (user) => set({ user }),
       logout: () => set({ token: null, user: null }),
     }),
-    { name: 'zawaj-auth' },
+    {
+      name: 'zawaj-auth',
+      onRehydrateStorage: () => (state) => {
+        if (state) state.hasHydrated = true;
+      },
+    },
   ),
 );

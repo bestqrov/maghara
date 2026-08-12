@@ -10,10 +10,12 @@ import { VerificationBanner } from '@/components/VerificationBanner';
 import { SearchFiltersBar } from '@/components/SearchFiltersBar';
 import { ProfileCard } from '@/components/ProfileCard';
 import { Button } from '@/components/ui/Button';
+import { NavBar } from '@/components/NavBar';
+import { recordVisit } from '@/services/visitors.service';
 
 export default function HomePage() {
   const router = useRouter();
-  const { token, user, logout } = useAuthStore();
+  const { token, user, hasHydrated, logout } = useAuthStore();
   const [verification, setVerification] = useState<VerificationStatusResponse | null>(null);
   const [results, setResults] = useState<SearchResultProfile[]>([]);
   const [dailyInterestsSent, setDailyInterestsSent] = useState(0);
@@ -37,6 +39,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    if (!hasHydrated) return;
     if (!token) {
       router.replace('/login');
       return;
@@ -44,7 +47,7 @@ export default function HomePage() {
     getMyVerificationStatus().then(setVerification).catch(() => setVerification(null));
     getMe().then((me) => setDailyInterestsSent(me.dailyInterestsSent)).catch(() => {});
     runSearch({});
-  }, [token, router, runSearch]);
+  }, [token, hasHydrated, router, runSearch]);
 
   async function handleSendInterest(receiverId: string) {
     try {
@@ -63,6 +66,7 @@ export default function HomePage() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-6 px-4 py-8">
+      <NavBar />
       <header className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-emerald-700">أهلاً {user.profile.firstName} 👋</h1>
@@ -103,6 +107,7 @@ export default function HomePage() {
               key={result._id}
               result={result}
               onSendInterest={handleSendInterest}
+              onView={recordVisit}
               sending={false}
               sent={sentIds.has(result._id)}
             />

@@ -11,15 +11,16 @@ function calculateAge(birthDate: string) {
 interface ProfileCardProps {
   result: SearchResultProfile;
   onSendInterest: (id: string) => void;
+  onView?: (id: string) => void;
   sent: boolean;
 }
 
-export function ProfileCard({ result, onSendInterest, sent }: ProfileCardProps) {
+export function ProfileCard({ result, onSendInterest, onView, sent }: ProfileCardProps) {
   const { profile } = result;
   const photoUri = profile.photos[0] ?? 'https://placehold.co/400x500/eef6f0/2f7a52?text=Zawaj';
 
   return (
-    <View style={styles.card}>
+    <Pressable onPress={() => !result.blurred && onView?.(result._id)} style={styles.card}>
       <BlurredImage
         source={{ uri: photoUri }}
         isBlurred={result.blurred}
@@ -47,7 +48,7 @@ export function ProfileCard({ result, onSendInterest, sent }: ProfileCardProps) 
           </Text>
         </Pressable>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

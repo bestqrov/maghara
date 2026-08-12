@@ -15,6 +15,8 @@ import { VerificationBanner } from '@/components/VerificationBanner';
 import { SearchFiltersBar } from '@/components/SearchFiltersBar';
 import { ProfileCard } from '@/components/ProfileCard';
 import { Button } from '@/components/Button';
+import { NavBar } from '@/components/NavBar';
+import { recordVisit } from '@/services/visitors.service';
 import { colors } from '@/theme/colors';
 
 export default function HomeScreen() {
@@ -75,6 +77,7 @@ export default function HomeScreen() {
       columnWrapperStyle={styles.columnWrapper}
       ListHeaderComponent={
         <View style={styles.headerSection}>
+          <NavBar />
           <View style={styles.header}>
             <View>
               <Text style={styles.greeting}>أهلاً {user.profile.firstName} 👋</Text>
@@ -110,7 +113,7 @@ export default function HomeScreen() {
       }
       renderItem={({ item }) => (
         <View style={styles.cardWrapper}>
-          <ProfileCard result={item} onSendInterest={handleSendInterest} sent={sentIds.has(item._id)} />
+          <ProfileCard result={item} onSendInterest={handleSendInterest} onView={recordVisit} sent={sentIds.has(item._id)} />
         </View>
       )}
     />

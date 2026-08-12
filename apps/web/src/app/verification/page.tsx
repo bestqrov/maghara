@@ -11,7 +11,7 @@ import { ShieldCheckIcon } from '@/components/icons';
 
 export default function VerificationPage() {
   const router = useRouter();
-  const token = useAuthStore((s) => s.token);
+  const { token, hasHydrated } = useAuthStore();
   const [status, setStatus] = useState<VerificationStatusResponse | null>(null);
   const [idDocumentUrl, setIdDocumentUrl] = useState('');
   const [residencyDocumentUrl, setResidencyDocumentUrl] = useState('');
@@ -19,12 +19,13 @@ export default function VerificationPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!hasHydrated) return;
     if (!token) {
       router.replace('/login');
       return;
     }
     getMyVerificationStatus().then(setStatus).catch(() => setStatus(null));
-  }, [token, router]);
+  }, [token, hasHydrated, router]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();

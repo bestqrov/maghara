@@ -95,6 +95,28 @@ export class MatchingService {
     }
   }
 
+  async getMyMatches(userId: string) {
+    const matches = await this.matchModel
+      .find({ $or: [{ senderId: userId }, { receiverId: userId }] })
+      .sort({ updatedAt: -1 })
+      .populate('senderId', 'profile.firstName profile.photos isVerified')
+      .populate('receiverId', 'profile.firstName profile.photos isVerified');
+
+    return matches.map((match) => {
+      const m = match as any;
+      const isSender = m.senderId._id.toString() === userId;
+      const other = isSender ? m.receiverId : m.senderId;
+      return {
+        _id: m._id,
+        status: m.status,
+        isSuperLike: m.isSuperLike,
+        direction: isSender ? 'SENT' : 'RECEIVED',
+        otherUser: other,
+        createdAt: m.createdAt,
+      };
+    });
+  }
+
   async respondToMatch(userId: string, matchId: string, accept: boolean) {
     const match = await this.matchModel.findById(matchId);
     if (!match) throw new NotFoundException('Match not found');
