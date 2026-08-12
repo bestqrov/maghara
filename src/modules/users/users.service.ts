@@ -19,7 +19,11 @@ export class UsersService {
     if (!user) throw new NotFoundException('User not found');
 
     const { minAge, maxAge, targetCountries, targetCities, ...profileFields } = dto;
-    Object.assign(user.profile, profileFields);
+    for (const [key, value] of Object.entries(profileFields)) {
+      if (value !== undefined) {
+        (user.profile as unknown as Record<string, unknown>)[key] = value;
+      }
+    }
 
     if (minAge !== undefined || maxAge !== undefined || targetCountries || targetCities) {
       user.profile.matchCriteria = {

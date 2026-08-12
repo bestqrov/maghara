@@ -1,0 +1,51 @@
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export interface AuthUser {
+  id: string;
+  phoneNumber: string;
+  subscriptionTier: 'FREE' | 'VIP' | 'CROSS_BORDER_VIP';
+  profile: {
+    firstName: string;
+    gender: 'MALE' | 'FEMALE';
+    birthDate: string;
+    residenceCountry: string;
+    currentCity: string;
+    originCountry: string;
+    relocationPreference: string;
+    photos: string[];
+    isPhotoBlurred: boolean;
+    bio?: string;
+    jobTitle?: string;
+  };
+}
+
+interface AuthState {
+  token: string | null;
+  user: AuthUser | null;
+  hasHydrated: boolean;
+  setSession: (token: string, user: AuthUser) => void;
+  updateUser: (user: AuthUser) => void;
+  logout: () => void;
+}
+
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      token: null,
+      user: null,
+      hasHydrated: false,
+      setSession: (token, user) => set({ token, user }),
+      updateUser: (user) => set({ user }),
+      logout: () => set({ token: null, user: null }),
+    }),
+    {
+      name: 'zawaj-auth',
+      storage: createJSONStorage(() => AsyncStorage),
+      onRehydrateStorage: () => (state) => {
+        if (state) state.hasHydrated = true;
+      },
+    },
+  ),
+);
