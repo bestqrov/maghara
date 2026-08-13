@@ -92,6 +92,16 @@ export function HeartIcon({ className = 'h-5 w-5' }: IconProps) {
   );
 }
 
+export function RingsIcon({ className = 'h-8 w-8' }: IconProps) {
+  return (
+    <svg viewBox="0 0 32 20" fill="none" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth={1.4} />
+      <circle cx="20" cy="12" r="7" stroke="currentColor" strokeWidth={1.4} />
+      <path d="M12.5 5.4L16 2l3.5 3.4" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function SpinnerIcon({ className = 'h-4 w-4' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={`animate-spin ${className}`} aria-hidden="true">
