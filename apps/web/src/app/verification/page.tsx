@@ -87,7 +87,7 @@ export default function VerificationPage() {
 
         <button
           type="button"
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/feed')}
           className="mt-6 w-full text-center text-sm font-semibold text-ink-500 underline"
         >
           تخطى دابا، نوثق من بعد

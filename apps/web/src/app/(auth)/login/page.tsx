@@ -30,7 +30,7 @@ export default function LoginPage() {
     try {
       const { accessToken, user } = await login(values);
       setSession(accessToken, user);
-      router.push('/');
+      router.push('/feed');
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 401) {
         setServerError('رقم الهاتف أو الپاسوورد غير صحيحين');
