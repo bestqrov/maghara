@@ -27,6 +27,12 @@ export function NavBar() {
           </Pressable>
         );
       })}
+      <Pressable
+        onPress={() => router.push('/settings')}
+        style={[styles.iconTab, pathname === '/settings' && styles.tabActive]}
+      >
+        <Text style={[styles.tabText, pathname === '/settings' && styles.tabTextActive]}>⚙️</Text>
+      </Pressable>
     </View>
   );
 }
@@ -34,6 +40,7 @@ export function NavBar() {
 const styles = StyleSheet.create({
   nav: { flexDirection: 'row', backgroundColor: colors.white, borderRadius: 16, padding: 6, gap: 6 },
   tab: { flex: 1, borderRadius: 12, paddingVertical: 10, alignItems: 'center' },
+  iconTab: { borderRadius: 12, paddingVertical: 10, paddingHorizontal: 12, alignItems: 'center', justifyContent: 'center' },
   tabActive: { backgroundColor: colors.emerald600 },
   tabText: { fontSize: 13, fontWeight: '700', color: colors.emerald700 },
   tabTextActive: { color: colors.white },

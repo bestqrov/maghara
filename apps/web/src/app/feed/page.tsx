@@ -46,7 +46,7 @@ export default function FeedPage() {
     }
     getMyVerificationStatus().then(setVerification).catch(() => setVerification(null));
     getMe().then((me) => setDailyInterestsSent(me.dailyInterestsSent)).catch(() => {});
-    runSearch({});
+    runSearch({ scope: 'LOCAL' });
   }, [token, hasHydrated, router, runSearch]);
 
   async function handleSendInterest(receiverId: string) {

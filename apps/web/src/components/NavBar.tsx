@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { GearIcon } from '@/components/icons';
 
 const LINKS = [
   { href: '/feed', label: 'البحث' },
@@ -29,6 +30,15 @@ export function NavBar() {
           </Link>
         );
       })}
+      <Link
+        href="/settings"
+        aria-label="الإعدادات"
+        className={`flex items-center justify-center rounded-xl px-3 transition ${
+          pathname === '/settings' ? 'bg-emerald-600 text-white' : 'text-emerald-700 hover:bg-emerald-50'
+        }`}
+      >
+        <GearIcon className="h-4 w-4" />
+      </Link>
     </nav>
   );
 }

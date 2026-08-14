@@ -1,0 +1,1666 @@
+[
+  {
+    "phoneNumber": "+212600000001",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 50,
+    "profile": {
+      "firstName": "مريم",
+      "gender": "FEMALE",
+      "birthDate": "1997-04-12T00:00:00.000Z",
+      "residenceCountry": "فرنسا",
+      "currentCity": "باريس",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندسة برمجيات",
+      "educationLevel": "ماستر / مهندس",
+      "bio": "إنسانة هادئة ومثقفة، مقيمة فـ باريس، أبحث عن ابن بلد جاد يخاف الله ويبحث عن الاستقرار وتكوين أسرة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 28,
+        "maxAge": 38,
+        "targetCountries": [
+          "المغرب",
+          "فرنسا"
+        ],
+        "targetCities": [
+          "الدار البيضاء",
+          "الرباط",
+          "باريس"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000002",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 10,
+    "profile": {
+      "firstName": "أمين",
+      "gender": "MALE",
+      "birthDate": "1992-08-25T00:00:00.000Z",
+      "residenceCountry": "المغرب",
+      "currentCity": "الدار البيضاء",
+      "originCountry": "المغرب",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "إطار مالي فـ شركة",
+      "educationLevel": "ماستر",
+      "bio": "ولد الناس من الكازا، معقول، أبحث عن شريكة حياة متفهمة وجادة للزواج الحلال.",
+      "photos": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 23,
+        "maxAge": 31,
+        "targetCountries": [
+          "المغرب",
+          "إسبانيا",
+          "كندا"
+        ],
+        "targetCities": [
+          "الدار البيضاء",
+          "الرباط",
+          "طنجة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000003",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 100,
+    "profile": {
+      "firstName": "سارة",
+      "gender": "FEMALE",
+      "birthDate": "1995-11-03T00:00:00.000Z",
+      "residenceCountry": "إسبانيا",
+      "currentCity": "مدريد",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مترجمة ومعلمة",
+      "educationLevel": "إجازة",
+      "bio": "أعيش فـ إسبانيا، أقدس الحياة الزوجية والمودة والرحمة. أبحث عن شخص جاد ومستقر.",
+      "photos": [
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 29,
+        "maxAge": 40,
+        "targetCountries": [
+          "المغرب",
+          "إسبانيا"
+        ],
+        "targetCities": [
+          "شمال المغرب",
+          "مدريد"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000004",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": false,
+    "verificationStatus": "UNVERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "ياسين",
+      "gender": "MALE",
+      "birthDate": "1990-01-15T00:00:00.000Z",
+      "residenceCountry": "المغرب",
+      "currentCity": "طنجة",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "مقاول حُر",
+      "educationLevel": "جامعي",
+      "bio": "من مدينة طنجة، أستقر فـ المغرب وأبحث عن بنت الناس جادة ومحترمة لبناء عائلة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 22,
+        "maxAge": 30,
+        "targetCountries": [
+          "المغرب"
+        ],
+        "targetCities": [
+          "طنجة",
+          "تطوان"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000005",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 30,
+    "profile": {
+      "firstName": "إيمان",
+      "gender": "FEMALE",
+      "birthDate": "1998-06-20T00:00:00.000Z",
+      "residenceCountry": "المغرب",
+      "currentCity": "الرباط",
+      "originCountry": "المغرب",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "صيدلانية",
+      "educationLevel": "دكتوراه فـ الصيدلة",
+      "bio": "طبيعة هادئة، متدينة ومثقفة، أبحث عن شريك حياة طموح ومستقر أخلاقياً ومادياً.",
+      "photos": [
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 27,
+        "maxAge": 36,
+        "targetCountries": [
+          "المغرب",
+          "كندا",
+          "فرنسا"
+        ],
+        "targetCities": [
+          "الرباط",
+          "سلا"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000006",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 80,
+    "profile": {
+      "firstName": "عمر",
+      "gender": "MALE",
+      "birthDate": "1989-03-30T00:00:00.000Z",
+      "residenceCountry": "كندا",
+      "currentCity": "مونتريال",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندس شبكات",
+      "educationLevel": "ماستر",
+      "bio": "مقيم فـ كندا منذ 6 سنوات، أبحث عن شريكة حياة مغربية تخاف الله وتبحث عن الاستقرار فـ مونتريال.",
+      "photos": [
+        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 24,
+        "maxAge": 32,
+        "targetCountries": [
+          "المغرب",
+          "كندا"
+        ],
+        "targetCities": [
+          "مراكش",
+          "الدار البيضاء",
+          "مونتريال"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000007",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "كوثر",
+      "gender": "FEMALE",
+      "birthDate": "1996-09-14T00:00:00.000Z",
+      "residenceCountry": "المغرب",
+      "currentCity": "مراكش",
+      "originCountry": "المغرب",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "مصممة ديكور",
+      "educationLevel": "إجازة",
+      "bio": "محبة للحياة الأسرية، إيجابية، أبحث عن إنسان جاد وصادق لتكوين بيت سعيد.",
+      "photos": [
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 28,
+        "maxAge": 37,
+        "targetCountries": [
+          "المغرب",
+          "الإمارات"
+        ],
+        "targetCities": [
+          "مراكش",
+          "أكادير"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000008",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": false,
+    "verificationStatus": "UNVERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "يوسف",
+      "gender": "MALE",
+      "birthDate": "1994-05-18T00:00:00.000Z",
+      "residenceCountry": "المغرب",
+      "currentCity": "أكادير",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "أستاذ اللغات",
+      "educationLevel": "إجازة معتمدة",
+      "bio": "أستاذ فـ أكادير، إنسان هادئ وبسيط، أبحث عن بنت الناس للتواصل الجاد والزواج الشرعي.",
+      "photos": [
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 22,
+        "maxAge": 29,
+        "targetCountries": [
+          "المغرب"
+        ],
+        "targetCities": [
+          "أكادير",
+          "إنزكان"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000009",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 20,
+    "profile": {
+      "firstName": "حنان",
+      "gender": "FEMALE",
+      "birthDate": "1993-12-01T00:00:00.000Z",
+      "residenceCountry": "الإمارات",
+      "currentCity": "دبي",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مديرة تسويق",
+      "educationLevel": "ماستر",
+      "bio": "طموحة ومستقلة، مقيمة فـ دبي، أبحث عن ولد البلد جاد ومحترم يشاركني مسيرة الحياة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 30,
+        "maxAge": 42,
+        "targetCountries": [
+          "المغرب",
+          "الإمارات"
+        ],
+        "targetCities": [
+          "دبي",
+          "الدار البيضاء"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000010",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 50,
+    "profile": {
+      "firstName": "حمزة",
+      "gender": "MALE",
+      "birthDate": "1991-07-22T00:00:00.000Z",
+      "residenceCountry": "بلجيكا",
+      "currentCity": "بروكسل",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مدير مشاريع بناء",
+      "educationLevel": "ماستر تطبيقية",
+      "bio": "مقيم فـ بروكسل، أبحث عن إنسانة متخلقة ومحترمة من المغرب لالتحاق بي وبناء منزل سعيد.",
+      "photos": [
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 23,
+        "maxAge": 31,
+        "targetCountries": [
+          "المغرب",
+          "بلجيكا"
+        ],
+        "targetCities": [
+          "فاس",
+          "مكناس",
+          "طنجة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+201000000001",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 60,
+    "profile": {
+      "firstName": "أحمد",
+      "gender": "MALE",
+      "birthDate": "1988-05-14T00:00:00.000Z",
+      "residenceCountry": "مصر",
+      "currentCity": "القاهرة",
+      "originCountry": "مصر",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "طبيب أطفال",
+      "educationLevel": "دكتوراه فـ الطب",
+      "bio": "طبيب استشاري بالقاهرة، هادئ ومستقر، أبحث عن شريكة حياة صالحة ومثقفة لتكوين أسرة سعيدة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 25,
+        "maxAge": 33,
+        "targetCountries": [
+          "مصر",
+          "المغرب",
+          "الإمارات"
+        ],
+        "targetCities": [
+          "القاهرة",
+          "الرباط",
+          "دبي"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+966500000002",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 120,
+    "profile": {
+      "firstName": "فهد",
+      "gender": "MALE",
+      "birthDate": "1985-11-20T00:00:00.000Z",
+      "residenceCountry": "السعودية",
+      "currentCity": "الرياض",
+      "originCountry": "السعودية",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندس بترول",
+      "educationLevel": "ماستر فـ الهندسة",
+      "bio": "رجل أعمال ومهندس بالرياض، أقدر الحياة الزوجية والاستقرار، أبحث عن زوجة جادة ومحترمة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 24,
+        "maxAge": 33,
+        "targetCountries": [
+          "السعودية",
+          "المغرب",
+          "الأردن"
+        ],
+        "targetCities": [
+          "الرياض",
+          "جدة",
+          "الدار البيضاء"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+971500000003",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 90,
+    "profile": {
+      "firstName": "راشد",
+      "gender": "MALE",
+      "birthDate": "1993-02-10T00:00:00.000Z",
+      "residenceCountry": "الإمارات",
+      "currentCity": "أبوظبي",
+      "originCountry": "الإمارات",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "محلل مالی",
+      "educationLevel": "بكالوريوس اقتصاد",
+      "bio": "إماراتي مقيم بأبوظبي، مهتم بالاستثمار والسفر، أبحث عن إنسانة راقية للزواج الحلال.",
+      "photos": [
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 22,
+        "maxAge": 28,
+        "targetCountries": [
+          "الإمارات",
+          "المغرب"
+        ],
+        "targetCities": [
+          "أبوظبي",
+          "دبي",
+          "مراكش"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+974500000004",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 150,
+    "profile": {
+      "firstName": "ناصر",
+      "gender": "MALE",
+      "birthDate": "1980-09-05T00:00:00.000Z",
+      "residenceCountry": "قطر",
+      "currentCity": "الدوحة",
+      "originCountry": "قطر",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مدير تنفيذي",
+      "educationLevel": "ماستر إدارة أعمال",
+      "bio": "قطري مقيم بالدوحة، ناضج ورزين، أبحث عن زوجة ثانية أو أولى صالحة تخاف الله ومستعدة للاستقرار بالدوحة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 26,
+        "maxAge": 38,
+        "targetCountries": [
+          "قطر",
+          "المغرب",
+          "تونس"
+        ],
+        "targetCities": [
+          "الدوحة",
+          "طنجة",
+          "تونس"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+33600000015",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 70,
+    "profile": {
+      "firstName": "مهدي",
+      "gender": "MALE",
+      "birthDate": "1995-07-18T00:00:00.000Z",
+      "residenceCountry": "فرنسا",
+      "currentCity": "ليون",
+      "originCountry": "الجزائر",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندس معماري",
+      "educationLevel": "ماستر هندسة",
+      "bio": "جزائري مقيم بفرنسا، طموح ومحب للثقافة والفن، أبحث عن شريكة مغاربية لبناء حياة مشتركة بفرنسا.",
+      "photos": [
+        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 23,
+        "maxAge": 30,
+        "targetCountries": [
+          "فرنسا",
+          "المغرب",
+          "الجزائر"
+        ],
+        "targetCities": [
+          "ليون",
+          "الرباط",
+          "وهران"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+491500000016",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 40,
+    "profile": {
+      "firstName": "طارق",
+      "gender": "MALE",
+      "birthDate": "1991-03-12T00:00:00.000Z",
+      "residenceCountry": "ألمانيا",
+      "currentCity": "فرانكفورت",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مطور برمجيات الذكاء الاصطناعي",
+      "educationLevel": "ماستر علوم الحاسوب",
+      "bio": "مغربي مقيم بفرانكفورت، جاد ومحافظ، أبحث عن فتاة محترمة ومتعلمة للالتحاق بي بألمانيا.",
+      "photos": [
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 22,
+        "maxAge": 29,
+        "targetCountries": [
+          "المغرب",
+          "ألمانيا"
+        ],
+        "targetCities": [
+          "فاس",
+          "مكناس",
+          "فرانكفورت"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+447000000017",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 85,
+    "profile": {
+      "firstName": "سامي",
+      "gender": "MALE",
+      "birthDate": "1987-12-01T00:00:00.000Z",
+      "residenceCountry": "بريطانيا",
+      "currentCity": "لندن",
+      "originCountry": "تونس",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "صيدلي رئيسي",
+      "educationLevel": "دكتوراه صيدلة",
+      "bio": "تونسي مقيم بلندن منذ 8 سنوات، هادئ ومسؤول، أبحث عن شريكة حياة جادة ومثقفة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 25,
+        "maxAge": 34,
+        "targetCountries": [
+          "بريطانيا",
+          "تونس",
+          "المغرب"
+        ],
+        "targetCities": [
+          "لندن",
+          "تونس",
+          "الدار البيضاء"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+31600000018",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 10,
+    "profile": {
+      "firstName": "إلياس",
+      "gender": "MALE",
+      "birthDate": "1998-01-25T00:00:00.000Z",
+      "residenceCountry": "هولندا",
+      "currentCity": "أقصر/أمستردام",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "أخصائي علاج طبيعي",
+      "educationLevel": "بكالوريوس",
+      "bio": "شاب مغربي هولندي، يحب الرياضة والسفر، أبحث عن بنت الناس جادة ومرحة للزواج الحلال.",
+      "photos": [
+        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 20,
+        "maxAge": 26,
+        "targetCountries": [
+          "المغرب",
+          "هولندا"
+        ],
+        "targetCities": [
+          "الحسيمة",
+          "الناظور",
+          "أمستردام"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+962700000019",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 30,
+    "profile": {
+      "firstName": "علاء الدين",
+      "gender": "MALE",
+      "birthDate": "1983-08-30T00:00:00.000Z",
+      "residenceCountry": "الأردن",
+      "currentCity": "عمان",
+      "originCountry": "الأردن",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "استشاري تسويق دولي",
+      "educationLevel": "ماستر",
+      "bio": "أردني مقيم بعمان، مثقف ومسؤول، أبحث عن فتاة محترمة وواعية لتأسيس بيت قائم على المودة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 27,
+        "maxAge": 37,
+        "targetCountries": [
+          "الأردن",
+          "المغرب",
+          "الإمارات"
+        ],
+        "targetCities": [
+          "عمان",
+          "الرباط",
+          "دبي"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+34600000020",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": false,
+    "verificationStatus": "UNVERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "كريم",
+      "gender": "MALE",
+      "birthDate": "1994-04-10T00:00:00.000Z",
+      "residenceCountry": "إسبانيا",
+      "currentCity": "برشلونة",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "تقني اتصالات",
+      "educationLevel": "دبلوم عالي",
+      "bio": "مقيم ببرشلونة، أبحث عن شريكة مغربية متخلقة ومحترمة تفهم الحياة بالخارج.",
+      "photos": [
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 21,
+        "maxAge": 28,
+        "targetCountries": [
+          "المغرب",
+          "إسبانيا"
+        ],
+        "targetCities": [
+          "طنجة",
+          "تطوان",
+          "برشلونة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+966500000021",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 50,
+    "profile": {
+      "firstName": "خالد",
+      "gender": "MALE",
+      "birthDate": "1977-10-15T00:00:00.000Z",
+      "residenceCountry": "السعودية",
+      "currentCity": "جدة",
+      "originCountry": "السعودية",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "أستاذ جامعي",
+      "educationLevel": "دكتوراه فـ الأدب",
+      "bio": "أستاذ جامعي بجدة، رجل ناضج، مطلق بدون أطفال، أبحث عن زوجة ثانية أو أولى متفهمة وصالحة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 30,
+        "maxAge": 42,
+        "targetCountries": [
+          "السعودية",
+          "المغرب",
+          "مصر"
+        ],
+        "targetCities": [
+          "جدة",
+          "مراكش",
+          "القاهرة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+201000000022",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "مصطفى",
+      "gender": "MALE",
+      "birthDate": "2001-06-05T00:00:00.000Z",
+      "residenceCountry": "مصر",
+      "currentCity": "الإسكندرية",
+      "originCountry": "مصر",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "مصمم جرافيك وفيديوهات",
+      "educationLevel": "بكالوريوس فنون",
+      "bio": "شاب طموح فـ بداية مساره المهني، أبحث عن إنسانة طيبة وجادة للارتباط والاستقرار مستقبلاً.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 20,
+        "maxAge": 25,
+        "targetCountries": [
+          "مصر",
+          "المغرب",
+          "الإمارات"
+        ],
+        "targetCities": [
+          "الإسكندرية",
+          "الدار البيضاء"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+33600000023",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 110,
+    "profile": {
+      "firstName": "سفيان",
+      "gender": "MALE",
+      "birthDate": "1986-02-28T00:00:00.000Z",
+      "residenceCountry": "فرنسا",
+      "currentCity": "مرسيليا",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "صاحب مقهى ومطعم",
+      "educationLevel": "دبلوم محترف",
+      "bio": "مستقر فـ مرسيليا، ولد الناس، أبحث عن شريكة حياة مغربية جادة للتفاهم والزواج.",
+      "photos": [
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 25,
+        "maxAge": 35,
+        "targetCountries": [
+          "المغرب",
+          "فرنسا"
+        ],
+        "targetCities": [
+          "أكادير",
+          "مراكش",
+          "مرسيليا"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+965500000024",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 75,
+    "profile": {
+      "firstName": "عبدالعزيز",
+      "gender": "MALE",
+      "birthDate": "1990-11-11T00:00:00.000Z",
+      "residenceCountry": "الكويت",
+      "currentCity": "الكويت العاصمة",
+      "originCountry": "الكويت",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندس مدني",
+      "educationLevel": "بكالوريوس هندسة",
+      "bio": "كويتي مقيم بالعاصمة، محترم ومسؤول، أبحث عن زوجة صالحة ومحترمة لتكوين عائلة بالشرع والحلال.",
+      "photos": [
+        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 22,
+        "maxAge": 30,
+        "targetCountries": [
+          "الكويت",
+          "المغرب",
+          "مصر"
+        ],
+        "targetCities": [
+          "الكويت",
+          "الرباط",
+          "القاهرة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+905000000025",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "بلال",
+      "gender": "MALE",
+      "birthDate": "1997-09-09T00:00:00.000Z",
+      "residenceCountry": "تركيا",
+      "currentCity": "إسطنبول",
+      "originCountry": "سوريا",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "مترجم ومسوق إلكتروني",
+      "educationLevel": "جامعي",
+      "bio": "سوري مقيم بتركيا، شاب طموح وهادئ، أبحث عن فتاة جادة ومحترمة تفهم تقلبات الحياة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 20,
+        "maxAge": 26,
+        "targetCountries": [
+          "تركيا",
+          "المغرب",
+          "ألمانيا"
+        ],
+        "targetCities": [
+          "إسطنبول",
+          "الدار البيضاء"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+32400000026",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 65,
+    "profile": {
+      "firstName": "أنور",
+      "gender": "MALE",
+      "birthDate": "1982-01-14T00:00:00.000Z",
+      "residenceCountry": "بلجيكا",
+      "currentCity": "أنتويرب",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مدير لوجستيك فـ ميناء",
+      "educationLevel": "ماستر",
+      "bio": "مغربي بلجيكي، ناضج ومستقر مادياً، أبحث عن زوجة جادة ومحترمة تبدأ معي صفحة جديدة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 26,
+        "maxAge": 37,
+        "targetCountries": [
+          "المغرب",
+          "بلجيكا"
+        ],
+        "targetCities": [
+          "طنجة",
+          "فاس",
+          "أنتويرب"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+216500000027",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "وسيم",
+      "gender": "MALE",
+      "birthDate": "1992-12-24T00:00:00.000Z",
+      "residenceCountry": "تونس",
+      "currentCity": "صفاقس",
+      "originCountry": "تونس",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "مهندس اتصالات",
+      "educationLevel": "ماستر هندسة",
+      "bio": "مهندس تونسي بصفاقس، مثقف ورياضي، أبحث عن إنسانة صالحة وواعية لتأسيس عائلة متماسكة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 23,
+        "maxAge": 31,
+        "targetCountries": [
+          "تونس",
+          "المغرب",
+          "فرنسا"
+        ],
+        "targetCities": [
+          "صفاقس",
+          "تونس",
+          "الرباط"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+14380000028",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 95,
+    "profile": {
+      "firstName": "أنس",
+      "gender": "MALE",
+      "birthDate": "1989-06-17T00:00:00.000Z",
+      "residenceCountry": "كندا",
+      "currentCity": "أوتاوا",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "محلل نظم معلوماتية",
+      "educationLevel": "ماستر فـ انفورماتيك",
+      "bio": "مقيم بكندا، مستقر ومسؤول، أبحث عن فتاة مغربية متخلقة وصالحة للالتحاق بي.",
+      "photos": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 24,
+        "maxAge": 32,
+        "targetCountries": [
+          "المغرب",
+          "كندا"
+        ],
+        "targetCities": [
+          "الرباط",
+          "سلا",
+          "أوتاوا"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+971500000029",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 40,
+    "profile": {
+      "firstName": "عثمان",
+      "gender": "MALE",
+      "birthDate": "1996-03-03T00:00:00.000Z",
+      "residenceCountry": "الإمارات",
+      "currentCity": "دبي",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مدير فندق فخم",
+      "educationLevel": "إجازة مهنية",
+      "bio": "مغربي فـ دبي، طموح وإيجابي، أبحث عن شريكة حياة مغربية تخاف الله ومتفهمة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 22,
+        "maxAge": 28,
+        "targetCountries": [
+          "المغرب",
+          "الإمارات"
+        ],
+        "targetCities": [
+          "الدار البيضاء",
+          "دبي"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+968900000030",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 35,
+    "profile": {
+      "firstName": "سعيد",
+      "gender": "MALE",
+      "birthDate": "1984-10-08T00:00:00.000Z",
+      "residenceCountry": "عمان",
+      "currentCity": "مسقط",
+      "originCountry": "عمان",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندس طيران",
+      "educationLevel": "بكالوريوس هندسة",
+      "bio": "عماني مقيم بمسقط، رزين ومحترم، أبحث عن زوجة صالحة ومحترمة لتأسيس بيت ملؤه المودة والرحمة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": false,
+      "matchCriteria": {
+        "minAge": 25,
+        "maxAge": 36,
+        "targetCountries": [
+          "عمان",
+          "المغرب",
+          "مصر"
+        ],
+        "targetCities": [
+          "مسقط",
+          "الرباط",
+          "القاهرة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+201000000031",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "نور",
+      "gender": "FEMALE",
+      "birthDate": "1999-02-14T00:00:00.000Z",
+      "residenceCountry": "مصر",
+      "currentCity": "القاهرة",
+      "originCountry": "مصر",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "مهندسة ديكور داخلي",
+      "educationLevel": "بكالوريوس فنون",
+      "bio": "من القاهرة، خريجة هندسة، هادئة وطموحة، أبحث عن شاب جاد ومحترم للتواصل بالحلال وبناء أسرة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 26,
+        "maxAge": 34,
+        "targetCountries": [
+          "مصر",
+          "السعودية",
+          "المغرب"
+        ],
+        "targetCities": [
+          "القاهرة",
+          "الرياض",
+          "الرباط"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+966500000032",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 100,
+    "profile": {
+      "firstName": "ريم",
+      "gender": "FEMALE",
+      "birthDate": "1993-07-21T00:00:00.000Z",
+      "residenceCountry": "السعودية",
+      "currentCity": "الرياض",
+      "originCountry": "السعودية",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "مديرة موارد بشرية",
+      "educationLevel": "ماستر إدارة",
+      "bio": "سعودية بالرياض، مثقفة ومستقلة، أبحث عن رجل كفء ومحترم يقدر الحياة الزوجية والمشاركة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 30,
+        "maxAge": 40,
+        "targetCountries": [
+          "السعودية"
+        ],
+        "targetCities": [
+          "الرياض",
+          "جدة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+971500000033",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 45,
+    "profile": {
+      "firstName": "لينا",
+      "gender": "FEMALE",
+      "birthDate": "1996-05-11T00:00:00.000Z",
+      "residenceCountry": "الإمارات",
+      "currentCity": "دبي",
+      "originCountry": "سوريا",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "خبيرة تجميل ومكياج",
+      "educationLevel": "إجازة",
+      "bio": "سورية مقيمة بدبي، لطيفة ومحبة للحياة، أبحث عن شريك حياة جاد ومستقر أخلاقياً ومادياً.",
+      "photos": [
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 28,
+        "maxAge": 38,
+        "targetCountries": [
+          "الإمارات",
+          "السعودية",
+          "المغرب"
+        ],
+        "targetCities": [
+          "دبي",
+          "الرياض",
+          "الدار البيضاء"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+33600000034",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 60,
+    "profile": {
+      "firstName": "ياسمين",
+      "gender": "FEMALE",
+      "birthDate": "1991-10-04T00:00:00.000Z",
+      "residenceCountry": "فرنسا",
+      "currentCity": "باريس",
+      "originCountry": "تونس",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "طبيبة أسنان",
+      "educationLevel": "دكتوراه طب أسنان",
+      "bio": "تونسية مقيمة بباريس، جادة ومثقفة، أبحث عن ابن بلد مغاربي محترم ومستقر للزواج الشرعي.",
+      "photos": [
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 32,
+        "maxAge": 42,
+        "targetCountries": [
+          "فرنسا",
+          "المغرب",
+          "تونس"
+        ],
+        "targetCities": [
+          "باريس",
+          "الرباط",
+          "تونس"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+491500000035",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 30,
+    "profile": {
+      "firstName": "حبيبة",
+      "gender": "FEMALE",
+      "birthDate": "1997-08-30T00:00:00.000Z",
+      "residenceCountry": "ألمانيا",
+      "currentCity": "برلين",
+      "originCountry": "مصر",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "باحثة فـ العلوم البيولوجية",
+      "educationLevel": "ماستر فـ العلوم",
+      "bio": "مصرية تعمل فـ برلين، متدينة وهادئة، أبحث عن زوج صالح ومسؤول يخاف الله فـ معاملته.",
+      "photos": [
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 27,
+        "maxAge": 36,
+        "targetCountries": [
+          "ألمانيا",
+          "مصر",
+          "المغرب"
+        ],
+        "targetCities": [
+          "برلين",
+          "القاهرة",
+          "الرباط"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+974500000036",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "شيخة",
+      "gender": "FEMALE",
+      "birthDate": "1994-01-19T00:00:00.000Z",
+      "residenceCountry": "قطر",
+      "currentCity": "الدوحة",
+      "originCountry": "قطر",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "أخصائية تغذية",
+      "educationLevel": "بكالوريوس علوم صحية",
+      "bio": "قطرية مقيمة بالدوحة، محترمة وهادئة، أبحث عن رجل كفء وصالح للزواج والاستقرار.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 28,
+        "maxAge": 37,
+        "targetCountries": [
+          "قطر"
+        ],
+        "targetCities": [
+          "الدوحة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+34600000037",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 10,
+    "profile": {
+      "firstName": "أمل",
+      "gender": "FEMALE",
+      "birthDate": "2000-03-15T00:00:00.000Z",
+      "residenceCountry": "إسبانيا",
+      "currentCity": "فالنسيا",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "طالبة ماستر إدارة",
+      "educationLevel": "بكالوريوس",
+      "bio": "شابة مغربية بـ فالنسيا، طموحة وبسيطة، أبحث عن إنسان صادق ومحترم للزواج بالحلال.",
+      "photos": [
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 24,
+        "maxAge": 31,
+        "targetCountries": [
+          "إسبانيا",
+          "المغرب"
+        ],
+        "targetCities": [
+          "طنجة",
+          "تطوان",
+          "فالنسيا"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+962700000038",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 20,
+    "profile": {
+      "firstName": "دانا",
+      "gender": "FEMALE",
+      "birthDate": "1992-09-08T00:00:00.000Z",
+      "residenceCountry": "الأردن",
+      "currentCity": "عمان",
+      "originCountry": "الأردن",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "مهندسة معمارية",
+      "educationLevel": "بكالوريوس هندسة",
+      "bio": "أردنية بعمان، إنسانية إيجابية وراقية، أبحث عن شريك حياة طموح ومستقر أخلاقياً.",
+      "photos": [
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 30,
+        "maxAge": 40,
+        "targetCountries": [
+          "الأردن",
+          "الإمارات",
+          "المغرب"
+        ],
+        "targetCities": [
+          "عمان",
+          "دبي",
+          "الرباط"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+14380000039",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 80,
+    "profile": {
+      "firstName": "منى",
+      "gender": "FEMALE",
+      "birthDate": "1988-11-27T00:00:00.000Z",
+      "residenceCountry": "كندا",
+      "currentCity": "تورونتو",
+      "originCountry": "مصر",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مديرة محاسبة",
+      "educationLevel": "ماستر محاسبة",
+      "bio": "مصرية بتورونتو، ناضجة ومستقرة، أبحث عن إنسان محترم وواعي يبحث عن تأسيس عائلة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 33,
+        "maxAge": 44,
+        "targetCountries": [
+          "كندا",
+          "مصر",
+          "المغرب"
+        ],
+        "targetCities": [
+          "تورونتو",
+          "القاهرة"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+968900000040",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "مريم",
+      "gender": "FEMALE",
+      "birthDate": "1995-04-12T00:00:00.000Z",
+      "residenceCountry": "عمان",
+      "currentCity": "مسقط",
+      "originCountry": "عمان",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "معلمة لغة إنجليزية",
+      "educationLevel": "بكالوريوس تربيع",
+      "bio": "عمانية بمسقط، هادئة ومحترمة، أبحث عن زوج صالح يخاف الله ومستعد لبناء بيت سعيد.",
+      "photos": [
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 27,
+        "maxAge": 36,
+        "targetCountries": [
+          "عمان"
+        ],
+        "targetCities": [
+          "مسقط"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+447000000041",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 70,
+    "profile": {
+      "firstName": "سارة",
+      "gender": "FEMALE",
+      "birthDate": "1993-06-22T00:00:00.000Z",
+      "residenceCountry": "بريطانيا",
+      "currentCity": "مانشستر",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مهندسة بيانات",
+      "educationLevel": "ماستر الذكاء الاصطناعي",
+      "bio": "مغربية بمانشستر، متخلقة ومثقفة، أبحث عن ولد البلد جاد ومستقر للزواج والعيش بالخارج.",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 28,
+        "maxAge": 37,
+        "targetCountries": [
+          "بريطانيا",
+          "المغرب"
+        ],
+        "targetCities": [
+          "الرباط",
+          "الدار البيضاء",
+          "مانشستر"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+965500000042",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 50,
+    "profile": {
+      "firstName": "فاطمة",
+      "gender": "FEMALE",
+      "birthDate": "1990-02-17T00:00:00.000Z",
+      "residenceCountry": "الكويت",
+      "currentCity": "الكويت العاصمة",
+      "originCountry": "الكويت",
+      "relocationPreference": "LOCAL_ONLY",
+      "jobTitle": "مهندسة بترول",
+      "educationLevel": "بكالوريوس هندسة",
+      "bio": "كويتية، محترمة ورزينة، أبحث عن رجل صالح كفء يقدر الحياة الزوجية والمودة.",
+      "photos": [
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 31,
+        "maxAge": 42,
+        "targetCountries": [
+          "الكويت"
+        ],
+        "targetCities": [
+          "الكويت"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+213500000043",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "FREE",
+    "coinBalance": 0,
+    "profile": {
+      "firstName": "زينب",
+      "gender": "FEMALE",
+      "birthDate": "1998-10-10T00:00:00.000Z",
+      "residenceCountry": "الجزائر",
+      "currentCity": "وهران",
+      "originCountry": "الجزائر",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "أستاذة جامعية مساعدة",
+      "educationLevel": "ماستر",
+      "bio": "من وهران، محترمة ومتدينة، أبحث عن زوج صالح ومحترم لبناء بيت سعيد ومستقر.",
+      "photos": [
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 25,
+        "maxAge": 33,
+        "targetCountries": [
+          "الجزائر",
+          "المغرب",
+          "فرنسا"
+        ],
+        "targetCities": [
+          "وهران",
+          "الجزائر العاصمة",
+          "الرباط"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+32400000044",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "CROSS_BORDER_VIP",
+    "coinBalance": 40,
+    "profile": {
+      "firstName": "إلهام",
+      "gender": "FEMALE",
+      "birthDate": "1986-07-07T00:00:00.000Z",
+      "residenceCountry": "بلجيكا",
+      "currentCity": "بروكسل",
+      "originCountry": "المغرب",
+      "relocationPreference": "LOOKING_FOR_EXPAT",
+      "jobTitle": "مترجمة فـ البرلمان الأوربي",
+      "educationLevel": "ماستر ترجمة",
+      "bio": "مغربية ببروكسل، هادئة وناضجة، أبحث عن ولد الحلال جاد ومحترم لتأسيس عائلة بالخارج.",
+      "photos": [
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 35,
+        "maxAge": 46,
+        "targetCountries": [
+          "بلجيكا",
+          "المغرب"
+        ],
+        "targetCities": [
+          "طنجة",
+          "تطوان",
+          "بروكسل"
+        ]
+      }
+    }
+  },
+  {
+    "phoneNumber": "+212600000045",
+    "passwordHash": "$2b$12$9ICQOryqkWVTwdD2Tiy1G.Ld/v/z4Y0swkif5LGE9bxgxbZRNx7UK",
+    "isVerified": true,
+    "verificationStatus": "VERIFIED",
+    "subscriptionTier": "VIP",
+    "coinBalance": 25,
+    "profile": {
+      "firstName": "أسماء",
+      "gender": "FEMALE",
+      "birthDate": "1995-12-19T00:00:00.000Z",
+      "residenceCountry": "المغرب",
+      "currentCity": "فاس",
+      "originCountry": "المغرب",
+      "relocationPreference": "OPEN_TO_MOVE",
+      "jobTitle": "طبيبة عامة",
+      "educationLevel": "دكتوراه طب",
+      "bio": "طبيبة من فاس، خلوقة ومحترمة، أبحث عن شريك حياة يخاف الله، طموح ومستقر.",
+      "photos": [
+        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop"
+      ],
+      "isPhotoBlurred": true,
+      "matchCriteria": {
+        "minAge": 28,
+        "maxAge": 38,
+        "targetCountries": [
+          "المغرب",
+          "فرنسا",
+          "كندا"
+        ],
+        "targetCities": [
+          "فاس",
+          "الرباط",
+          "باريس"
+        ]
+      }
+    }
+  }
+]

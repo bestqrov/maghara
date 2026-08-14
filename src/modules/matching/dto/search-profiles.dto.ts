@@ -11,6 +11,8 @@ export class SearchProfilesDto {
   @IsIn(['OPEN_TO_MOVE', 'LOOKING_FOR_EXPAT', 'LOCAL_ONLY'])
   relocationPreference?: string;
 
+  @IsOptional() @IsIn(['LOCAL', 'DIASPORA']) scope?: 'LOCAL' | 'DIASPORA';
+
   @IsOptional() @Type(() => Number) @IsInt() @Min(1) page?: number = 1;
   @IsOptional() @Type(() => Number) @IsInt() @Min(1) @Max(50) limit?: number = 20;
 }

@@ -6,6 +6,7 @@ export interface SearchFilters {
   targetCountry?: string;
   targetCity?: string;
   relocationPreference?: 'OPEN_TO_MOVE' | 'LOOKING_FOR_EXPAT' | 'LOCAL_ONLY';
+  scope?: 'LOCAL' | 'DIASPORA';
   page?: number;
   limit?: number;
 }

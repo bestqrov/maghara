@@ -19,6 +19,18 @@
 
   --color-rose-50: #fdf6f4;
   --color-rose-100: #f8e6e2;
+  --color-rose-300: #ef9fb0;
+  --color-rose-500: #d94670;
+  --color-rose-600: #b8335a;
+  --color-rose-700: #942a49;
+
+  --color-blue-50: #eaf1fa;
+  --color-blue-100: #cfe0f2;
+  --color-blue-300: #7ea8d6;
+  --color-blue-500: #2c5a96;
+  --color-blue-600: #21456f;
+  --color-blue-700: #17324f;
+  --color-blue-900: #0c1d2e;
 
   --color-ink-500: #4a5a52;
   --color-ink-700: #263832;
@@ -47,6 +59,18 @@
 
   --color-rose-50: var(--color-rose-50);
   --color-rose-100: var(--color-rose-100);
+  --color-rose-300: var(--color-rose-300);
+  --color-rose-500: var(--color-rose-500);
+  --color-rose-600: var(--color-rose-600);
+  --color-rose-700: var(--color-rose-700);
+
+  --color-blue-50: var(--color-blue-50);
+  --color-blue-100: var(--color-blue-100);
+  --color-blue-300: var(--color-blue-300);
+  --color-blue-500: var(--color-blue-500);
+  --color-blue-600: var(--color-blue-600);
+  --color-blue-700: var(--color-blue-700);
+  --color-blue-900: var(--color-blue-900);
 
   --color-ink-500: var(--color-ink-500);
   --color-ink-700: var(--color-ink-700);
@@ -56,4 +80,67 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ---------- Landing page motion ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-enter {
+  animation: fade-up 0.8s ease both;
+}
+
+.float-anim {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.spin-anim {
+  animation: spin-slow 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-enter,
+  .float-anim,
+  .spin-anim {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

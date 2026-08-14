@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 import { SpinnerIcon } from '../icons';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'gold' | 'ghost';
+  variant?: 'primary' | 'gold' | 'ghost' | 'outline' | 'rose';
   loading?: boolean;
 }
 
@@ -10,6 +10,8 @@ const variants = {
   primary: 'bg-emerald-600 text-white hover:bg-emerald-700 disabled:bg-emerald-300',
   gold: 'bg-gold-500 text-emerald-900 hover:bg-gold-600 disabled:bg-gold-100',
   ghost: 'bg-transparent text-emerald-700 hover:bg-emerald-50 disabled:text-emerald-300',
+  outline: 'border border-blue-300 bg-transparent text-blue-700 hover:bg-blue-50 disabled:text-blue-300',
+  rose: 'bg-rose-500 text-white hover:bg-rose-600 disabled:bg-rose-300',
 };
 
 export function Button({ variant = 'primary', loading, disabled, className = '', children, ...props }: ButtonProps) {

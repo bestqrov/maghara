@@ -25,7 +25,7 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = {
-  title: "Zawaj",
+  title: "قسمة و نصيب",
   description: "منصة عصرية وجادة للتعارف بقصد الزواج الحلال",
 };
 
@@ -35,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ar"
       dir="rtl"
       className={`${geistSans.variable} ${geistMono.variable} ${amiri.variable} ${tajawal.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">{children}</body>
     </html>

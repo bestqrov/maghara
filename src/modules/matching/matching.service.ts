@@ -8,6 +8,14 @@ import { SearchProfilesDto } from './dto/search-profiles.dto';
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
 
+function escapeRegex(value: string) {
+  return value.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function exactCaseInsensitive(value: string) {
+  return new RegExp(`^${escapeRegex(value)}$`, 'i');
+}
+
 @Injectable()
 export class MatchingService {
   constructor(
@@ -27,9 +35,13 @@ export class MatchingService {
       'profile.gender': oppositeGender,
     };
 
-    if (dto.targetCountry) filter['profile.residenceCountry'] = dto.targetCountry;
-    if (dto.targetCity) filter['profile.currentCity'] = dto.targetCity;
-    if (dto.relocationPreference) filter['profile.relocationPreference'] = dto.relocationPreference;
+    const targetCountry = dto.targetCountry || (dto.scope === 'LOCAL' ? me.profile.residenceCountry : undefined);
+    const relocationPreference =
+      dto.relocationPreference || (dto.scope === 'DIASPORA' ? 'LOOKING_FOR_EXPAT' : undefined);
+
+    if (targetCountry) filter['profile.residenceCountry'] = exactCaseInsensitive(targetCountry);
+    if (dto.targetCity) filter['profile.currentCity'] = exactCaseInsensitive(dto.targetCity);
+    if (relocationPreference) filter['profile.relocationPreference'] = relocationPreference;
     if (dto.minAge || dto.maxAge) {
       const now = new Date();
       filter['profile.birthDate'] = {};

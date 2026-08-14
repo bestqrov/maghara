@@ -28,7 +28,19 @@ export const registerStep4Schema = z.object({
   bio: z.string().max(500, 'النص طويل بزاف').optional(),
 });
 
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, 'خاصك تكتب الپاسوورد الحالي'),
+    newPassword: z.string().min(8, 'خاصو يكون 8 حروف على الأقل'),
+    confirmPassword: z.string().min(1, 'أكد الپاسوورد الجديد'),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'الپاسوورد الجديد ماشي متطابق مع التأكيد',
+    path: ['confirmPassword'],
+  });
+
 export type LoginInput = z.infer<typeof loginSchema>;
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 export type RegisterStep1Input = z.infer<typeof registerStep1Schema>;
 export type RegisterStep2Input = z.infer<typeof registerStep2Schema>;
 export type RegisterStep3Input = z.infer<typeof registerStep3Schema>;

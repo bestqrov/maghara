@@ -23,7 +23,7 @@ export function SearchFiltersBar({ onSearch, loading }: SearchFiltersBarProps) {
       maxAge: maxAge ? Number(maxAge) : undefined,
       targetCountry: targetCountry || undefined,
       targetCity: targetCity || undefined,
-      relocationPreference: nextTab === 'diaspora' ? 'LOOKING_FOR_EXPAT' : undefined,
+      scope: nextTab === 'diaspora' ? 'DIASPORA' : 'LOCAL',
     });
   }
 
