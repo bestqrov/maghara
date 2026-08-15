@@ -15,9 +15,11 @@ import { getSocket } from '@/services/socket';
 import { PaywallModal } from '@/components/PaywallModal';
 import { Button } from '@/components/Button';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 export default function ChatScreen() {
   const router = useRouter();
+  const { dict, row, textAlign, isRTL } = useAppDict();
   const { conversationId, matchId } = useLocalSearchParams<{ conversationId: string; matchId?: string }>();
   const { token, user } = useAuthStore();
 
@@ -60,7 +62,7 @@ export default function ChatScreen() {
 
     socket.on('exception', (payload: { message?: string | string[] }) => {
       const msg = Array.isArray(payload?.message) ? payload.message[0] : payload?.message;
-      setError(msg ?? 'ماقدرناش نصيفطو الرسالة');
+      setError(msg ?? dict.chat.errorSendFailed);
       if (msg?.includes('limit') || msg?.includes('Upgrade')) setShowPaywall(true);
     });
 
@@ -69,6 +71,7 @@ export default function ChatScreen() {
       socket.off('exception');
       socket.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, conversationId]);
 
   function handleSend() {
@@ -89,7 +92,7 @@ export default function ChatScreen() {
       await refreshConversation();
       setShowPaywall(false);
     } catch {
-      setError('ماعندكش نقط كافية، شحن ولا ترقى لـ VIP');
+      setError(dict.chat.errorUnlockFailed);
     } finally {
       setUnlocking(false);
     }
@@ -104,8 +107,11 @@ export default function ChatScreen() {
         keyExtractor={(m) => m._id}
         renderItem={({ item }) => {
           const mine = item.senderId === user?.id;
+          // "Mine" bubbles align to the trailing edge of the current text direction.
+          const trailing = isRTL ? 'flex-start' : 'flex-end';
+          const leading = isRTL ? 'flex-end' : 'flex-start';
           return (
-            <View style={[styles.bubbleRow, { justifyContent: mine ? 'flex-end' : 'flex-start' }]}>
+            <View style={[styles.bubbleRow, { justifyContent: mine ? trailing : leading }]}>
               <View style={[styles.bubble, mine ? styles.bubbleMine : styles.bubbleTheirs]}>
                 <Text style={mine ? styles.bubbleTextMine : styles.bubbleTextTheirs}>{item.messageText}</Text>
               </View>
@@ -115,29 +121,27 @@ export default function ChatScreen() {
       />
 
       {conversation && (
-        <Text style={styles.counter}>
-          {conversation.totalMessagesCount}/{FREE_MESSAGE_LIMIT} رسائل مجانية
-        </Text>
+        <Text style={styles.counter}>{dict.chat.freeMessages(conversation.totalMessagesCount, FREE_MESSAGE_LIMIT)}</Text>
       )}
       {error && <Text style={styles.error}>{error}</Text>}
 
       {isLocked ? (
-        <View style={styles.lockedRow}>
-          <Text style={styles.lockedText}>وصلتي لحد الرسائل المجانية</Text>
+        <View style={[styles.lockedRow, { flexDirection: row }]}>
+          <Text style={styles.lockedText}>{dict.chat.limitReached}</Text>
           <Button variant="gold" onPress={() => setShowPaywall(true)}>
-            افتح الشات
+            {dict.chat.unlockChat}
           </Button>
         </View>
       ) : (
-        <View style={styles.inputRow}>
+        <View style={[styles.inputRow, { flexDirection: row }]}>
           <TextInput
             value={text}
             onChangeText={setText}
-            placeholder="كتب رسالتك..."
+            placeholder={dict.chat.placeholder}
             placeholderTextColor={colors.ink500}
-            style={styles.input}
+            style={[styles.input, { textAlign }]}
           />
-          <Button onPress={handleSend}>صيفط</Button>
+          <Button onPress={handleSend}>{dict.chat.send}</Button>
         </View>
       )}
 
@@ -145,7 +149,7 @@ export default function ChatScreen() {
         visible={showPaywall}
         loading={unlocking}
         onUnlockWithCoins={handleUnlock}
-        onUpgradeVip={() => setError('باقة VIP قريباً 🚀')}
+        onUpgradeVip={() => setError(dict.chat.vipComingSoon)}
         onClose={() => setShowPaywall(false)}
       />
     </KeyboardAvoidingView>
@@ -162,8 +166,8 @@ const styles = StyleSheet.create({
   bubbleTextTheirs: { color: colors.emerald900, fontSize: 14 },
   counter: { fontSize: 11, color: colors.ink500, textAlign: 'center', paddingVertical: 4 },
   error: { fontSize: 12, color: colors.red500, textAlign: 'center' },
-  inputRow: { flexDirection: 'row-reverse', gap: 8, padding: 12, borderTopWidth: 1, borderTopColor: colors.emerald100 },
-  input: { flex: 1, borderWidth: 1, borderColor: colors.emerald100, borderRadius: 14, paddingHorizontal: 14, backgroundColor: colors.white, textAlign: 'right', color: colors.ink700 },
-  lockedRow: { flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: 12, borderTopWidth: 1, borderTopColor: colors.emerald100 },
+  inputRow: { gap: 8, padding: 12, borderTopWidth: 1, borderTopColor: colors.emerald100 },
+  input: { flex: 1, borderWidth: 1, borderColor: colors.emerald100, borderRadius: 14, paddingHorizontal: 14, backgroundColor: colors.white, color: colors.ink700 },
+  lockedRow: { alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: 12, borderTopWidth: 1, borderTopColor: colors.emerald100 },
   lockedText: { fontSize: 13, color: colors.ink500 },
 });

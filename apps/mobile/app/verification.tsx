@@ -7,9 +7,11 @@ import { getMyVerificationStatus, submitVerification, VerificationStatusResponse
 import { Button } from '@/components/Button';
 import { ImageUploader } from '@/components/ImageUploader';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 export default function VerificationScreen() {
   const router = useRouter();
+  const { dict } = useAppDict();
   const token = useAuthStore((s) => s.token);
   const [status, setStatus] = useState<VerificationStatusResponse | null>(null);
   const [idDocumentUrl, setIdDocumentUrl] = useState('');
@@ -23,6 +25,7 @@ export default function VerificationScreen() {
       return;
     }
     getMyVerificationStatus().then(setStatus).catch(() => setStatus(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   async function onSubmit() {
@@ -34,9 +37,9 @@ export default function VerificationScreen() {
       setStatus(updated);
     } catch (err) {
       if (isAxiosError(err)) {
-        setError(err.response?.data?.message ?? 'كاين مشكل، حاول مرة أخرى');
+        setError(err.response?.data?.message ?? dict.common.errorGeneric);
       } else {
-        setError('كاين مشكل، حاول مرة أخرى');
+        setError(dict.common.errorGeneric);
       }
     } finally {
       setLoading(false);
@@ -51,36 +54,32 @@ export default function VerificationScreen() {
         <View style={styles.badge}>
           <Text style={styles.badgeIcon}>🛡️</Text>
         </View>
-        <Text style={styles.title}>وثّق حسابك مجاناً</Text>
-        <Text style={styles.subtitle}>
-          صيفط CIN أو Passport للحصول على شارة &quot;عضو جاد وموثق&quot; وزد فرصك فـ الظهور
-        </Text>
+        <Text style={styles.title}>{dict.verification.title}</Text>
+        <Text style={styles.subtitle}>{dict.verification.subtitle}</Text>
 
         {alreadySubmitted ? (
           <View style={styles.pendingBox}>
             <Text style={styles.pendingText}>
-              {status?.verificationStatus === 'VERIFIED'
-                ? 'حسابك موثق بالفعل ✓'
-                : 'طلب التوثيق ديالك قيد المراجعة، غادي نعلموك بالنتيجة قريباً'}
+              {status?.verificationStatus === 'VERIFIED' ? dict.verification.alreadyVerified : dict.verification.alreadyPending}
             </Text>
           </View>
         ) : (
           <View style={styles.form}>
-            <ImageUploader label="صورة CIN / Passport" onUploaded={setIdDocumentUrl} folder="zawaj/verification" />
+            <ImageUploader label={dict.verification.idLabel} onUploaded={setIdDocumentUrl} folder="zawaj/verification" />
             <ImageUploader
-              label="وثيقة الإقامة بالخارج (اختياري)"
+              label={dict.verification.residencyLabel}
               onUploaded={setResidencyDocumentUrl}
               folder="zawaj/verification"
             />
             {error && <Text style={styles.error}>{error}</Text>}
             <Button loading={loading} onPress={onSubmit} disabled={!idDocumentUrl}>
-              صيفط للمراجعة
+              {dict.verification.submit}
             </Button>
           </View>
         )}
 
         <Button variant="ghost" onPress={() => router.replace('/')}>
-          تخطى دابا، نوثق من بعد
+          {dict.verification.skip}
         </Button>
       </View>
     </ScrollView>
@@ -97,6 +96,5 @@ const styles = StyleSheet.create({
   form: { width: '100%', gap: 14 },
   pendingBox: { width: '100%', backgroundColor: colors.emerald50, borderRadius: 14, padding: 14 },
   pendingText: { color: colors.emerald700, textAlign: 'center', fontSize: 13 },
-  hint: { fontSize: 11, color: colors.ink500, textAlign: 'right' },
   error: { fontSize: 13, color: colors.red500, textAlign: 'center' },
 });

@@ -2,6 +2,7 @@ import { Modal, StyleSheet, Text, View } from 'react-native';
 import { Button } from './Button';
 import { colors } from '@/theme/colors';
 import { UNLOCK_COIN_COST } from '@/services/chat.service';
+import { useAppDict } from '@/hooks/useLocale';
 
 interface PaywallModalProps {
   visible: boolean;
@@ -12,6 +13,7 @@ interface PaywallModalProps {
 }
 
 export function PaywallModal({ visible, onUnlockWithCoins, onUpgradeVip, onClose, loading }: PaywallModalProps) {
+  const { dict } = useAppDict();
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
@@ -19,20 +21,18 @@ export function PaywallModal({ visible, onUnlockWithCoins, onUpgradeVip, onClose
           <View style={styles.badge}>
             <Text style={styles.badgeIcon}>💬</Text>
           </View>
-          <Text style={styles.title}>وصلتي لمرحلة مهمة!</Text>
-          <Text style={styles.subtitle}>
-            باش تكمل الشات بسلاسة، فتحو بـ {UNLOCK_COIN_COST} نقط أو ترقى لـ VIP للشات بلا حدود
-          </Text>
+          <Text style={styles.title}>{dict.paywallModal.title}</Text>
+          <Text style={styles.subtitle}>{dict.paywallModal.body(UNLOCK_COIN_COST)}</Text>
 
           <View style={{ gap: 10, width: '100%', marginTop: 16 }}>
             <Button variant="gold" onPress={onUpgradeVip} disabled={loading}>
-              ترقى لـ VIP
+              {dict.paywallModal.upgradeVip}
             </Button>
             <Button loading={loading} onPress={onUnlockWithCoins}>
-              {`فتح بـ ${UNLOCK_COIN_COST} نقط`}
+              {dict.paywallModal.unlockWithCoins(UNLOCK_COIN_COST)}
             </Button>
             <Button variant="ghost" onPress={onClose} disabled={loading}>
-              إغلاق
+              {dict.paywallModal.close}
             </Button>
           </View>
         </View>

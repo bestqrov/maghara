@@ -11,11 +11,13 @@ import { OptionPicker } from '@/components/OptionPicker';
 import { StepIndicator } from '@/components/StepIndicator';
 import { ImageUploader } from '@/components/ImageUploader';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 const TOTAL_STEPS = 5;
 
 export default function RegisterScreen() {
   const router = useRouter();
+  const { dict, row } = useAppDict();
   const setSession = useAuthStore((s) => s.setSession);
   const [step, setStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +47,7 @@ export default function RegisterScreen() {
 
   function goNext() {
     if (!validateStep()) {
-      setError('خاصك تعمر الحقول المطلوبة');
+      setError(dict.register.errorFieldsRequired);
       return;
     }
     setError(null);
@@ -83,9 +85,9 @@ export default function RegisterScreen() {
       router.replace('/verification');
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 409) {
-        setError('رقم الهاتف هذا مسجل من قبل');
+        setError(dict.register.errorPhoneTaken);
       } else {
-        setError('كاين مشكل، حاول مرة أخرى');
+        setError(dict.common.errorGeneric);
       }
     } finally {
       setLoading(false);
@@ -96,90 +98,102 @@ export default function RegisterScreen() {
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
-          <Text style={styles.title}>إنشاء حساب جديد</Text>
-          <Text style={styles.subtitle}>
-            خطوة {step + 1} من {TOTAL_STEPS}
-          </Text>
+          <Text style={styles.title}>{dict.register.title}</Text>
+          <Text style={styles.subtitle}>{dict.register.stepOf(step + 1, TOTAL_STEPS)}</Text>
           <StepIndicator total={TOTAL_STEPS} current={step} />
 
           <View style={styles.form}>
             {step === 0 && (
               <>
-                <Input label="رقم الهاتف" placeholder="+212600000000" value={phoneNumber} onChangeText={setPhoneNumber} keyboardType="phone-pad" />
-                <Input label="الپاسوورد" secureTextEntry value={password} onChangeText={setPassword} />
+                <Input
+                  label={dict.register.phoneLabel}
+                  placeholder={dict.register.phonePlaceholder}
+                  value={phoneNumber}
+                  onChangeText={setPhoneNumber}
+                  keyboardType="phone-pad"
+                />
+                <Input label={dict.register.passwordLabel} secureTextEntry value={password} onChangeText={setPassword} />
               </>
             )}
 
             {step === 1 && (
               <>
-                <Input label="السمية" value={firstName} onChangeText={setFirstName} />
+                <Input label={dict.register.firstNameLabel} value={firstName} onChangeText={setFirstName} />
                 <OptionPicker
-                  label="الجنس"
+                  label={dict.register.genderLabel}
                   value={gender}
                   onChange={(v) => setGender(v as 'MALE' | 'FEMALE')}
                   options={[
-                    { value: 'MALE', label: 'ذكر' },
-                    { value: 'FEMALE', label: 'أنثى' },
+                    { value: 'MALE', label: dict.register.genderMale },
+                    { value: 'FEMALE', label: dict.register.genderFemale },
                   ]}
                 />
-                <Input label="تاريخ الميلاد (YYYY-MM-DD)" placeholder="1995-01-01" value={birthDate} onChangeText={setBirthDate} />
+                <Input
+                  label={dict.register.birthDateLabel}
+                  placeholder={dict.register.birthDatePlaceholder}
+                  value={birthDate}
+                  onChangeText={setBirthDate}
+                />
               </>
             )}
 
             {step === 2 && (
               <>
-                <Input label="بلد الإقامة الحالية" placeholder="المغرب، فرنسا، الإمارات..." value={residenceCountry} onChangeText={setResidenceCountry} />
-                <Input label="المدينة" value={currentCity} onChangeText={setCurrentCity} />
-                <Input label="بلد الأصل" value={originCountry} onChangeText={setOriginCountry} />
+                <Input
+                  label={dict.register.residenceCountryLabel}
+                  placeholder={dict.register.residenceCountryPlaceholder}
+                  value={residenceCountry}
+                  onChangeText={setResidenceCountry}
+                />
+                <Input label={dict.register.currentCityLabel} value={currentCity} onChangeText={setCurrentCity} />
+                <Input label={dict.register.originCountryLabel} value={originCountry} onChangeText={setOriginCountry} />
               </>
             )}
 
             {step === 3 && (
               <>
                 <OptionPicker
-                  label="الاستعداد للانتقال أو الزواج بالجالية"
+                  label={dict.register.relocationLabel}
                   value={relocationPreference}
                   onChange={setRelocationPreference}
                   options={[
-                    { value: 'OPEN_TO_MOVE', label: 'مستعد نتنقل' },
-                    { value: 'LOOKING_FOR_EXPAT', label: 'كنبحث فـ الجالية' },
-                    { value: 'LOCAL_ONLY', label: 'فـ بلدي فقط' },
+                    { value: 'OPEN_TO_MOVE', label: dict.register.relocationOpen },
+                    { value: 'LOOKING_FOR_EXPAT', label: dict.register.relocationExpat },
+                    { value: 'LOCAL_ONLY', label: dict.register.relocationLocal },
                   ]}
                 />
-                <Input label="المهنة (اختياري)" value={jobTitle} onChangeText={setJobTitle} />
-                <Input label="نبذة عنك (اختياري)" value={bio} onChangeText={setBio} />
+                <Input label={dict.register.jobTitleLabel} value={jobTitle} onChangeText={setJobTitle} />
+                <Input label={dict.register.bioLabel} value={bio} onChangeText={setBio} />
               </>
             )}
 
-            {step === 4 && (
-              <ImageUploader label="صورة البروفايل (اختياري)" onUploaded={setPhotoUrl} folder="zawaj/profiles" />
-            )}
+            {step === 4 && <ImageUploader label={dict.register.photoLabel} onUploaded={setPhotoUrl} folder="zawaj/profiles" />}
 
             {error && <Text style={styles.error}>{error}</Text>}
 
-            <View style={styles.actions}>
+            <View style={[styles.actions, { flexDirection: row }]}>
               {step > 0 && (
                 <Button variant="ghost" onPress={goBack} style={styles.flexBtn}>
-                  رجوع
+                  {dict.register.back}
                 </Button>
               )}
               {!isLastStep ? (
                 <Button onPress={goNext} style={styles.flexBtn}>
-                  التالي
+                  {dict.register.next}
                 </Button>
               ) : (
                 <Button loading={loading} onPress={onSubmit} style={styles.flexBtn}>
-                  إنشاء الحساب
+                  {dict.register.submit}
                 </Button>
               )}
             </View>
           </View>
 
           {step === 0 && (
-            <View style={styles.footer}>
-              <Text style={styles.footerText}>عندك حساب من قبل؟ </Text>
+            <View style={[styles.footer, { flexDirection: row }]}>
+              <Text style={styles.footerText}>{dict.register.haveAccount}</Text>
               <Link href="/(auth)/login" style={styles.footerLink}>
-                دخول
+                {dict.register.loginLink}
               </Link>
             </View>
           )}
@@ -197,9 +211,9 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 13, color: colors.ink500, textAlign: 'center' },
   form: { gap: 14, marginTop: 8 },
   error: { fontSize: 13, color: colors.red500, textAlign: 'center' },
-  actions: { flexDirection: 'row-reverse', gap: 12, marginTop: 4 },
+  actions: { gap: 12, marginTop: 4 },
   flexBtn: { flex: 1 },
-  footer: { flexDirection: 'row-reverse', justifyContent: 'center', marginTop: 8 },
+  footer: { justifyContent: 'center', marginTop: 8 },
   footerText: { fontSize: 13, color: colors.ink500 },
   footerLink: { fontSize: 13, fontWeight: '700', color: colors.emerald600 },
 });

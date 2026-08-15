@@ -7,20 +7,22 @@ import { getOrCreateConversation } from '@/services/chat.service';
 import { NavBar } from '@/components/NavBar';
 import { Button } from '@/components/Button';
 import { colors } from '@/theme/colors';
-
-const STATUS_LABEL: Record<string, string> = {
-  PENDING: 'فـ الانتظار',
-  ACCEPTED: 'متوافقين',
-  REJECTED: 'مرفوض',
-  ENGAGED: 'مخطوبين 💍',
-};
+import { useAppDict } from '@/hooks/useLocale';
 
 export default function MatchesScreen() {
   const router = useRouter();
+  const { dict, row, textAlign } = useAppDict();
   const { token, hasHydrated } = useAuthStore();
   const [matches, setMatches] = useState<MatchEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
+
+  const STATUS_LABEL: Record<string, string> = {
+    PENDING: dict.matches.statusPending,
+    ACCEPTED: dict.matches.statusAccepted,
+    REJECTED: dict.matches.statusRejected,
+    ENGAGED: dict.matches.statusEngaged,
+  };
 
   async function refresh() {
     setLoading(true);
@@ -38,6 +40,7 @@ export default function MatchesScreen() {
       return;
     }
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, hasHydrated]);
 
   async function handleAccept(matchId: string) {
@@ -84,41 +87,41 @@ export default function MatchesScreen() {
       ListHeaderComponent={
         <View style={{ gap: 14, marginBottom: 8 }}>
           <NavBar />
-          <Text style={styles.title}>الاهتمامات والمطابقات</Text>
-          {!loading && matches.length === 0 && <Text style={styles.empty}>ماعندكش حتى اهتمام دابا</Text>}
+          <Text style={[styles.title, { textAlign }]}>{dict.matches.title}</Text>
+          {!loading && matches.length === 0 && <Text style={styles.empty}>{dict.matches.empty}</Text>}
         </View>
       }
       renderItem={({ item }) => {
         const photoUri = item.otherUser.profile.photos[0] ?? 'https://placehold.co/100x100/eef6f0/2f7a52?text=Z';
         const isBusy = busyId === item._id;
         return (
-          <View style={styles.row}>
+          <View style={[styles.row, { flexDirection: row }]}>
             <Image source={{ uri: photoUri }} style={styles.avatar} />
             <View style={{ flex: 1 }}>
-              <Text style={styles.name}>{item.otherUser.profile.firstName}</Text>
-              <Text style={styles.status}>
-                {STATUS_LABEL[item.status]} · {item.direction === 'SENT' ? 'بعثتي اهتمام' : 'صيفط ليك اهتمام'}
+              <Text style={[styles.name, { textAlign }]}>{item.otherUser.profile.firstName}</Text>
+              <Text style={[styles.status, { textAlign }]}>
+                {STATUS_LABEL[item.status]} · {item.direction === 'SENT' ? dict.matches.directionSent : dict.matches.directionReceived}
               </Text>
             </View>
             <View style={styles.actions}>
               {item.status === 'PENDING' && item.direction === 'RECEIVED' && (
                 <>
                   <Button variant="gold" disabled={isBusy} onPress={() => handleAccept(item._id)}>
-                    قبول
+                    {dict.matches.accept}
                   </Button>
                   <Button variant="ghost" disabled={isBusy} onPress={() => handleReject(item._id)}>
-                    رفض
+                    {dict.matches.reject}
                   </Button>
                 </>
               )}
               {(item.status === 'ACCEPTED' || item.status === 'ENGAGED') && (
                 <>
                   <Button disabled={isBusy} onPress={() => openChat(item._id)}>
-                    الشات
+                    {dict.matches.chat}
                   </Button>
                   {item.status === 'ACCEPTED' && (
                     <Button variant="gold" disabled={isBusy} onPress={() => handleEngaged(item._id)}>
-                      Engaged
+                      {dict.matches.markEngaged}
                     </Button>
                   )}
                 </>
@@ -134,11 +137,11 @@ export default function MatchesScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   content: { padding: 16, gap: 10 },
-  title: { fontSize: 18, fontWeight: '800', color: colors.emerald700, textAlign: 'right' },
+  title: { fontSize: 18, fontWeight: '800', color: colors.emerald700 },
   empty: { fontSize: 13, color: colors.ink500, textAlign: 'center', paddingVertical: 20 },
-  row: { flexDirection: 'row-reverse', alignItems: 'center', gap: 12, backgroundColor: colors.white, borderRadius: 18, padding: 12, marginBottom: 10 },
+  row: { alignItems: 'center', gap: 12, backgroundColor: colors.white, borderRadius: 18, padding: 12, marginBottom: 10 },
   avatar: { width: 52, height: 52, borderRadius: 26 },
-  name: { fontSize: 14, fontWeight: '700', color: colors.emerald900, textAlign: 'right' },
-  status: { fontSize: 12, color: colors.ink500, textAlign: 'right', marginTop: 2 },
+  name: { fontSize: 14, fontWeight: '700', color: colors.emerald900 },
+  status: { fontSize: 12, color: colors.ink500, marginTop: 2 },
   actions: { flexDirection: 'row', gap: 6 },
 });

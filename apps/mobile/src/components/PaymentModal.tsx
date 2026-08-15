@@ -11,14 +11,7 @@ import { Button } from './Button';
 import { Input } from './Input';
 import { ImageUploader } from './ImageUploader';
 import { colors } from '@/theme/colors';
-
-const METHODS: { value: PaymentMethod; label: string; kind: 'crypto' | 'manual' }[] = [
-  { value: 'CRYPTO_TRC20', label: 'USDT (TRC-20)', kind: 'crypto' },
-  { value: 'CRYPTO_POLYGON', label: 'USDT (Polygon)', kind: 'crypto' },
-  { value: 'CRYPTO_SOLANA', label: 'USDT (Solana)', kind: 'crypto' },
-  { value: 'BANK_TRANSFER', label: 'تحويل بنكي', kind: 'manual' },
-  { value: 'CASH_PLUS', label: 'Cash Plus', kind: 'manual' },
-];
+import { useAppDict } from '@/hooks/useLocale';
 
 interface PaymentModalProps {
   visible: boolean;
@@ -30,11 +23,20 @@ interface PaymentModalProps {
 }
 
 export function PaymentModal({ visible, amount, type, title, onClose, onSuccess }: PaymentModalProps) {
+  const { dict, row, textAlign } = useAppDict();
   const [method, setMethod] = useState<PaymentMethod | null>(null);
   const [reference, setReference] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+
+  const METHODS: { value: PaymentMethod; label: string; kind: 'crypto' | 'manual' }[] = [
+    { value: 'CRYPTO_TRC20', label: 'USDT (TRC-20)', kind: 'crypto' },
+    { value: 'CRYPTO_POLYGON', label: 'USDT (Polygon)', kind: 'crypto' },
+    { value: 'CRYPTO_SOLANA', label: 'USDT (Solana)', kind: 'crypto' },
+    { value: 'BANK_TRANSFER', label: dict.paymentModal.bankTransfer, kind: 'manual' },
+    { value: 'CASH_PLUS', label: dict.paymentModal.cashPlus, kind: 'manual' },
+  ];
 
   const selected = METHODS.find((m) => m.value === method);
 
@@ -54,7 +56,7 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
       setDone(true);
       onSuccess();
     } catch {
-      setError('كاين مشكل، حاول مرة أخرى');
+      setError(dict.paymentModal.errorGeneric);
     } finally {
       setLoading(false);
     }
@@ -77,8 +79,8 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
               <View style={styles.successBadge}>
                 <Text style={{ fontSize: 22 }}>✓</Text>
               </View>
-              <Text style={styles.title}>صيفطنا طلبك للمراجعة</Text>
-              <Text style={styles.subtitle}>غادي نأكدو العملية ونفعلو الخدمة قريباً</Text>
+              <Text style={styles.title}>{dict.paymentModal.doneTitle}</Text>
+              <Text style={styles.subtitle}>{dict.paymentModal.doneSubtitle}</Text>
               <Button
                 onPress={() => {
                   reset();
@@ -86,15 +88,15 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
                 }}
                 style={{ width: '100%', marginTop: 16 }}
               >
-                تمام
+                {dict.paymentModal.doneButton}
               </Button>
             </View>
           ) : (
             <>
               <Text style={styles.title}>{title}</Text>
-              <Text style={styles.subtitle}>اختار طريقة الدفع</Text>
+              <Text style={styles.subtitle}>{dict.paymentModal.choosePaymentMethod}</Text>
 
-              <View style={{ gap: 8, marginTop: 12 }}>
+              <View style={{ gap: 8, marginTop: 12, width: '100%' }}>
                 {METHODS.map((m) => {
                   const active = method === m.value;
                   return (
@@ -106,7 +108,7 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
                       }}
                       style={[styles.methodBtn, active && styles.methodBtnActive]}
                     >
-                      <Text style={[styles.methodText, active && styles.methodTextActive]}>{m.label}</Text>
+                      <Text style={[styles.methodText, { textAlign }, active && styles.methodTextActive]}>{m.label}</Text>
                     </Pressable>
                   );
                 })}
@@ -114,36 +116,36 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
 
               {selected && selected.kind === 'crypto' && (
                 <View style={styles.infoBox}>
-                  <Text style={styles.infoTitle}>صيفط {amount} MAD (USDT) لهاد العنوان:</Text>
+                  <Text style={[styles.infoTitle, { textAlign }]}>{dict.paymentModal.sendCryptoTo(amount)}</Text>
                   <Text style={styles.infoMono}>{CRYPTO_WALLETS[selected.value]}</Text>
-                  <Text style={styles.warning}>⚠️ هاد العنوان placeholder ديمو، خاصو يتبدل قبل الإطلاق</Text>
+                  <Text style={[styles.warning, { textAlign }]}>{dict.paymentModal.placeholderWarningCrypto}</Text>
                 </View>
               )}
 
               {selected && selected.kind === 'manual' && (
                 <View style={styles.infoBox}>
-                  <Text style={styles.infoTitle}>حوّل {amount} MAD لـ:</Text>
-                  <Text style={styles.infoBank}>{BANK_DETAILS[selected.value].bank}</Text>
+                  <Text style={[styles.infoTitle, { textAlign }]}>{dict.paymentModal.transferTo(amount)}</Text>
+                  <Text style={[styles.infoBank, { textAlign }]}>{BANK_DETAILS[selected.value].bank}</Text>
                   <Text style={styles.infoMono}>{BANK_DETAILS[selected.value].rib}</Text>
-                  <Text style={styles.warning}>⚠️ هادو معطيات placeholder — خاصهم يتبدلو قبل الإطلاق</Text>
+                  <Text style={[styles.warning, { textAlign }]}>{dict.paymentModal.placeholderWarningBank}</Text>
                 </View>
               )}
 
               {selected && selected.kind === 'crypto' && (
                 <View style={{ marginTop: 12, width: '100%' }}>
-                  <Input label="TxHash" value={reference} onChangeText={setReference} placeholder="0x..." />
+                  <Input label={dict.paymentModal.txHashLabel} value={reference} onChangeText={setReference} placeholder="0x..." />
                 </View>
               )}
 
               {selected && selected.kind === 'manual' && (
                 <View style={{ marginTop: 12, width: '100%' }}>
-                  <ImageUploader label="صورة الوصل" onUploaded={setReference} folder="zawaj/receipts" />
+                  <ImageUploader label={dict.paymentModal.receiptLabel} onUploaded={setReference} folder="zawaj/receipts" />
                 </View>
               )}
 
               {error && <Text style={styles.error}>{error}</Text>}
 
-              <View style={{ flexDirection: 'row-reverse', gap: 10, marginTop: 16, width: '100%' }}>
+              <View style={{ flexDirection: row, gap: 10, marginTop: 16, width: '100%' }}>
                 <Button
                   variant="ghost"
                   onPress={() => {
@@ -152,10 +154,10 @@ export function PaymentModal({ visible, amount, type, title, onClose, onSuccess 
                   }}
                   style={{ flex: 1 }}
                 >
-                  إغلاق
+                  {dict.paymentModal.close}
                 </Button>
                 <Button onPress={handleSubmit} loading={loading} disabled={!method || !reference.trim()} style={{ flex: 1 }}>
-                  تأكيد
+                  {dict.paymentModal.confirmPayment}
                 </Button>
               </View>
             </>
@@ -174,12 +176,12 @@ const styles = StyleSheet.create({
   successBadge: { width: 48, height: 48, borderRadius: 24, backgroundColor: colors.emerald50, alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
   methodBtn: { borderWidth: 1, borderColor: colors.emerald100, borderRadius: 14, paddingVertical: 10, paddingHorizontal: 14, width: '100%' },
   methodBtnActive: { borderColor: colors.emerald500, backgroundColor: colors.emerald50 },
-  methodText: { fontSize: 13, color: colors.ink700, textAlign: 'right' },
+  methodText: { fontSize: 13, color: colors.ink700 },
   methodTextActive: { color: colors.emerald700, fontWeight: '700' },
   infoBox: { width: '100%', backgroundColor: colors.gold100, borderRadius: 14, padding: 12, marginTop: 12 },
-  infoTitle: { fontSize: 12, fontWeight: '700', color: colors.emerald900, textAlign: 'right' },
-  infoBank: { fontSize: 12, color: colors.emerald700, textAlign: 'right', marginTop: 4 },
+  infoTitle: { fontSize: 12, fontWeight: '700', color: colors.emerald900 },
+  infoBank: { fontSize: 12, color: colors.emerald700, marginTop: 4 },
   infoMono: { fontSize: 12, color: colors.emerald700, backgroundColor: colors.white, padding: 8, borderRadius: 8, marginTop: 6, textAlign: 'left' },
-  warning: { fontSize: 11, color: '#dc2626', marginTop: 8, textAlign: 'right' },
+  warning: { fontSize: 11, color: '#dc2626', marginTop: 8 },
   error: { fontSize: 13, color: colors.red500, textAlign: 'center', marginTop: 8 },
 });

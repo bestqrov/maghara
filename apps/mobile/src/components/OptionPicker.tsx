@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 interface Option {
   value: string;
@@ -14,10 +15,11 @@ interface OptionPickerProps {
 }
 
 export function OptionPicker({ label, value, onChange, options }: OptionPickerProps) {
+  const { textAlign, alignEnd } = useAppDict();
   return (
     <View style={styles.wrapper}>
-      {label && <Text style={styles.label}>{label}</Text>}
-      <View style={styles.row}>
+      {label && <Text style={[styles.label, { textAlign }]}>{label}</Text>}
+      <View style={[styles.row, { justifyContent: alignEnd }]}>
         {options.map((option) => {
           const selected = option.value === value;
           return (
@@ -37,8 +39,8 @@ export function OptionPicker({ label, value, onChange, options }: OptionPickerPr
 
 const styles = StyleSheet.create({
   wrapper: { gap: 6 },
-  label: { fontSize: 13, fontWeight: '600', color: colors.ink700, textAlign: 'right' },
-  row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end' },
+  label: { fontSize: 13, fontWeight: '600', color: colors.ink700 },
+  row: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   chip: {
     borderWidth: 1,
     borderColor: colors.emerald100,

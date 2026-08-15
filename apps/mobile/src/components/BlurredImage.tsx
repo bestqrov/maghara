@@ -1,6 +1,7 @@
 import { Image, ImageSourcePropType, Pressable, StyleSheet, Text, View } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 interface BlurredImageProps {
   source: ImageSourcePropType;
@@ -10,13 +11,8 @@ interface BlurredImageProps {
   onUnlockPress?: () => void;
 }
 
-export function BlurredImage({
-  source,
-  isBlurred,
-  lockLabel = 'فتح بالنقط أو VIP',
-  style,
-  onUnlockPress,
-}: BlurredImageProps) {
+export function BlurredImage({ source, isBlurred, lockLabel, style, onUnlockPress }: BlurredImageProps) {
+  const { dict } = useAppDict();
   return (
     <View style={[styles.wrapper, style]}>
       <Image source={source} style={styles.image} />
@@ -26,7 +22,7 @@ export function BlurredImage({
             <View style={styles.lockBadge}>
               <Text style={styles.lockIcon}>🔒</Text>
             </View>
-            <Text style={styles.lockLabel}>{lockLabel}</Text>
+            <Text style={styles.lockLabel}>{lockLabel ?? dict.profileCard.lockLabel}</Text>
           </Pressable>
         </BlurView>
       )}

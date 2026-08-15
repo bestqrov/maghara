@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BlurredImage } from './BlurredImage';
 import { colors } from '@/theme/colors';
 import { SearchResultProfile } from '@/services/matching.service';
+import { useAppDict } from '@/hooks/useLocale';
 
 function calculateAge(birthDate: string) {
   const diff = Date.now() - new Date(birthDate).getTime();
@@ -16,6 +17,7 @@ interface ProfileCardProps {
 }
 
 export function ProfileCard({ result, onSendInterest, onView, sent }: ProfileCardProps) {
+  const { dict, row, textAlign } = useAppDict();
   const { profile } = result;
   const photoUri = profile.photos[0] ?? 'https://placehold.co/400x500/eef6f0/2f7a52?text=Zawaj';
 
@@ -25,16 +27,16 @@ export function ProfileCard({ result, onSendInterest, onView, sent }: ProfileCar
         source={{ uri: photoUri }}
         isBlurred={result.blurred}
         style={styles.image}
-        lockLabel="فتح بالنقط أو VIP"
+        lockLabel={dict.profileCard.lockLabel}
       />
       <View style={styles.body}>
-        <View style={styles.nameRow}>
+        <View style={[styles.nameRow, { flexDirection: row }]}>
           <Text style={styles.name}>
             {result.blurred ? '••••••' : profile.firstName}, {calculateAge(profile.birthDate)}
           </Text>
           {result.isVerified && <Text style={styles.badge}>🛡️</Text>}
         </View>
-        <Text style={styles.location}>
+        <Text style={[styles.location, { textAlign }]}>
           {profile.currentCity} · {profile.residenceCountry}
         </Text>
 
@@ -44,7 +46,7 @@ export function ProfileCard({ result, onSendInterest, onView, sent }: ProfileCar
           style={[styles.button, (result.blurred || sent) && styles.buttonDisabled]}
         >
           <Text style={[styles.buttonText, (result.blurred || sent) && styles.buttonTextDisabled]}>
-            {sent ? 'تم الإرسال ✓' : 'إبعث اهتمام'}
+            {sent ? dict.profileCard.sent : dict.profileCard.sendInterest}
           </Text>
         </Pressable>
       </View>
@@ -56,10 +58,10 @@ const styles = StyleSheet.create({
   card: { flex: 1, backgroundColor: colors.white, borderRadius: 22, overflow: 'hidden' },
   image: { width: '100%', aspectRatio: 4 / 5 },
   body: { padding: 12, gap: 4 },
-  nameRow: { flexDirection: 'row-reverse', alignItems: 'center', gap: 6 },
+  nameRow: { alignItems: 'center', gap: 6 },
   name: { fontSize: 14, fontWeight: '700', color: colors.emerald900 },
   badge: { fontSize: 12 },
-  location: { fontSize: 12, color: colors.ink500, textAlign: 'right' },
+  location: { fontSize: 12, color: colors.ink500 },
   button: { marginTop: 8, backgroundColor: colors.emerald600, borderRadius: 12, paddingVertical: 10, alignItems: 'center' },
   buttonDisabled: { backgroundColor: colors.emerald100 },
   buttonText: { color: colors.white, fontWeight: '700', fontSize: 13 },

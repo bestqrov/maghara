@@ -3,6 +3,7 @@ import { ActivityIndicator, Image, Pressable, StyleSheet, Text, View } from 'rea
 import * as ImagePicker from 'expo-image-picker';
 import { uploadToCloudinary } from '@/services/cloudinary.service';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 interface ImageUploaderProps {
   label: string;
@@ -12,6 +13,7 @@ interface ImageUploaderProps {
 }
 
 export function ImageUploader({ label, value, onUploaded, folder }: ImageUploaderProps) {
+  const { dict, textAlign, row } = useAppDict();
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(value ?? null);
@@ -19,7 +21,7 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
   async function pickImage() {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) {
-      setError('خاصنا الإذن باش نوصلو للصور');
+      setError(dict.imageUploader.permissionDenied);
       return;
     }
 
@@ -37,7 +39,7 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
       const url = await uploadToCloudinary(uri, folder);
       onUploaded(url);
     } catch {
-      setError('ماقدرناش نرفعو الصورة، حاول مرة أخرى');
+      setError(dict.imageUploader.errorUploadFailed);
     } finally {
       setUploading(false);
     }
@@ -45,8 +47,8 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
 
   return (
     <View style={{ gap: 6 }}>
-      <Text style={styles.label}>{label}</Text>
-      <Pressable onPress={pickImage} style={styles.box}>
+      <Text style={[styles.label, { textAlign }]}>{label}</Text>
+      <Pressable onPress={pickImage} style={[styles.box, { flexDirection: row }]}>
         {preview ? (
           <Image source={{ uri: preview }} style={styles.preview} />
         ) : (
@@ -55,19 +57,18 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
           </View>
         )}
         <Text style={styles.actionText}>
-          {uploading ? 'كتصيفط...' : preview ? 'بدّل الصورة' : 'اختار صورة'}
+          {uploading ? dict.imageUploader.uploading : preview ? dict.imageUploader.changePhoto : dict.imageUploader.choosePhoto}
         </Text>
         {uploading && <ActivityIndicator color={colors.emerald600} />}
       </Pressable>
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error && <Text style={[styles.error, { textAlign }]}>{error}</Text>}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  label: { fontSize: 13, fontWeight: '600', color: colors.ink700, textAlign: 'right' },
+  label: { fontSize: 13, fontWeight: '600', color: colors.ink700 },
   box: {
-    flexDirection: 'row-reverse',
     alignItems: 'center',
     gap: 12,
     borderWidth: 1,
@@ -80,5 +81,5 @@ const styles = StyleSheet.create({
   placeholder: { width: 56, height: 56, borderRadius: 12, backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' },
   preview: { width: 56, height: 56, borderRadius: 12 },
   actionText: { fontSize: 13, color: colors.emerald700 },
-  error: { fontSize: 12, color: colors.red500, textAlign: 'right' },
+  error: { fontSize: 12, color: colors.red500 },
 });

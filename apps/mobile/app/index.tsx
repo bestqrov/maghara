@@ -18,9 +18,11 @@ import { Button } from '@/components/Button';
 import { NavBar } from '@/components/NavBar';
 import { recordVisit } from '@/services/visitors.service';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { dict, row, textAlign, alignEnd } = useAppDict();
   const { token, user, hasHydrated, logout } = useAuthStore();
   const [verification, setVerification] = useState<VerificationStatusResponse | null>(null);
   const [results, setResults] = useState<SearchResultProfile[]>([]);
@@ -31,18 +33,21 @@ export default function HomeScreen() {
 
   const isVip = user?.subscriptionTier === 'VIP' || user?.subscriptionTier === 'CROSS_BORDER_VIP';
 
-  const runSearch = useCallback(async (filters: SearchFilters) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await searchProfiles(filters);
-      setResults(data);
-    } catch {
-      setError('ماقدرناش نجيبو النتائج، حاول مرة أخرى');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const runSearch = useCallback(
+    async (filters: SearchFilters) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await searchProfiles(filters);
+        setResults(data);
+      } catch {
+        setError(dict.feed.errorSearchFailed);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [dict],
+  );
 
   useEffect(() => {
     if (!hasHydrated) return;
@@ -53,6 +58,7 @@ export default function HomeScreen() {
     getMyVerificationStatus().then(setVerification).catch(() => setVerification(null));
     getMe().then((me) => setDailyInterestsSent(me.dailyInterestsSent)).catch(() => {});
     runSearch({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, hasHydrated]);
 
   async function handleSendInterest(receiverId: string) {
@@ -60,8 +66,8 @@ export default function HomeScreen() {
       await sendInterest(receiverId);
       setSentIds((prev) => new Set(prev).add(receiverId));
       setDailyInterestsSent((n) => n + 1);
-    } catch (err) {
-      setError('ماقدرناش نبعثو الاهتمام');
+    } catch {
+      setError(dict.feed.errorSendInterestFailed);
     }
   }
 
@@ -78,18 +84,16 @@ export default function HomeScreen() {
       ListHeaderComponent={
         <View style={styles.headerSection}>
           <NavBar />
-          <View style={styles.header}>
+          <View style={[styles.header, { flexDirection: row }]}>
             <View>
-              <Text style={styles.greeting}>أهلاً {user.profile.firstName} 👋</Text>
-              <Text style={styles.location}>
+              <Text style={[styles.greeting, { textAlign }]}>{dict.feed.greeting(user.profile.firstName)}</Text>
+              <Text style={[styles.location, { textAlign }]}>
                 {user.profile.currentCity} · {user.profile.residenceCountry}
               </Text>
             </View>
-            <View style={{ alignItems: 'flex-end', gap: 6 }}>
+            <View style={{ alignItems: alignEnd, gap: 6 }}>
               {!isVip && (
-                <Text style={styles.counter}>
-                  {dailyInterestsSent}/{DAILY_FREE_INTERESTS} اهتمامات اليوم
-                </Text>
+                <Text style={styles.counter}>{dict.feed.interestsToday(dailyInterestsSent, DAILY_FREE_INTERESTS)}</Text>
               )}
               <Button
                 variant="ghost"
@@ -98,7 +102,7 @@ export default function HomeScreen() {
                   router.replace('/(auth)/login');
                 }}
               >
-                خروج
+                {dict.common.logout}
               </Button>
             </View>
           </View>
@@ -106,9 +110,7 @@ export default function HomeScreen() {
           {verification && <VerificationBanner status={verification.verificationStatus} />}
           <SearchFiltersBar onSearch={runSearch} loading={loading} />
           {error && <Text style={styles.error}>{error}</Text>}
-          {results.length === 0 && !loading && (
-            <Text style={styles.empty}>ماكاين حتى نتيجة دابا، حاول تبدل الفلاتر</Text>
-          )}
+          {results.length === 0 && !loading && <Text style={styles.empty}>{dict.feed.noResults}</Text>}
         </View>
       }
       renderItem={({ item }) => (
@@ -124,9 +126,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
   content: { padding: 16, gap: 12 },
   headerSection: { gap: 14, marginBottom: 8 },
-  header: { flexDirection: 'row-reverse', justifyContent: 'space-between', alignItems: 'flex-start' },
-  greeting: { fontSize: 18, fontWeight: '800', color: colors.emerald700, textAlign: 'right' },
-  location: { fontSize: 13, color: colors.ink500, textAlign: 'right', marginTop: 2 },
+  header: { justifyContent: 'space-between', alignItems: 'flex-start' },
+  greeting: { fontSize: 18, fontWeight: '800', color: colors.emerald700 },
+  location: { fontSize: 13, color: colors.ink500, marginTop: 2 },
   counter: { fontSize: 11, fontWeight: '700', color: colors.emerald700, backgroundColor: colors.emerald50, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999 },
   columnWrapper: { gap: 12 },
   cardWrapper: { flex: 1 },

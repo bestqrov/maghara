@@ -7,9 +7,11 @@ import { useAuthStore } from '@/store/auth.store';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { colors } from '@/theme/colors';
+import { useAppDict } from '@/hooks/useLocale';
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { dict, row } = useAppDict();
   const setSession = useAuthStore((s) => s.setSession);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -25,9 +27,9 @@ export default function LoginScreen() {
       router.replace('/');
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 401) {
-        setError('رقم الهاتف أو الپاسوورد غير صحيحين');
+        setError(dict.login.errorInvalid);
       } else {
-        setError('كاين مشكل، حاول مرة أخرى');
+        setError(dict.common.errorGeneric);
       }
     } finally {
       setLoading(false);
@@ -38,22 +40,28 @@ export default function LoginScreen() {
     <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
-          <Text style={styles.title}>مرحباً بك من جديد</Text>
-          <Text style={styles.subtitle}>دخل لحسابك وكمّل رحلتك نحو الزواج</Text>
+          <Text style={styles.title}>{dict.login.title}</Text>
+          <Text style={styles.subtitle}>{dict.login.subtitle}</Text>
 
           <View style={styles.form}>
-            <Input label="رقم الهاتف" placeholder="+212600000000" value={phoneNumber} onChangeText={setPhoneNumber} keyboardType="phone-pad" />
-            <Input label="الپاسوورد" secureTextEntry value={password} onChangeText={setPassword} />
+            <Input
+              label={dict.login.phoneLabel}
+              placeholder={dict.login.phonePlaceholder}
+              value={phoneNumber}
+              onChangeText={setPhoneNumber}
+              keyboardType="phone-pad"
+            />
+            <Input label={dict.login.passwordLabel} secureTextEntry value={password} onChangeText={setPassword} />
             {error && <Text style={styles.error}>{error}</Text>}
             <Button loading={loading} onPress={onSubmit}>
-              دخول
+              {dict.login.submit}
             </Button>
           </View>
 
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>ماعندكش حساب؟ </Text>
+          <View style={[styles.footer, { flexDirection: row }]}>
+            <Text style={styles.footerText}>{dict.login.noAccount}</Text>
             <Link href="/(auth)/register" style={styles.footerLink}>
-              سجل دابا
+              {dict.login.registerLink}
             </Link>
           </View>
         </View>
@@ -70,7 +78,7 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 13, color: colors.ink500, textAlign: 'center' },
   form: { gap: 14, marginTop: 8 },
   error: { fontSize: 13, color: colors.red500, textAlign: 'center' },
-  footer: { flexDirection: 'row-reverse', justifyContent: 'center', marginTop: 8 },
+  footer: { justifyContent: 'center', marginTop: 8 },
   footerText: { fontSize: 13, color: colors.ink500 },
   footerLink: { fontSize: 13, fontWeight: '700', color: colors.emerald600 },
 });
