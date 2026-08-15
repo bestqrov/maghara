@@ -1,26 +1,31 @@
-import Link from 'next/link';
-import { ShieldCheckIcon } from './icons';
+'use client';
 
-const COPY: Record<string, { title: string; subtitle: string; tone: string }> = {
-  UNVERIFIED: {
-    title: 'وثّق حسابك مجاناً',
-    subtitle: 'احصل على شارة "عضو جاد وموثق" وزد فرصك فـ الظهور فـ البحث',
-    tone: 'bg-gold-100 text-emerald-900',
-  },
-  PENDING: {
-    title: 'التوثيق قيد المراجعة',
-    subtitle: 'غادي نراجعو الوثائق ديالك ونعلموك بالنتيجة قريباً',
-    tone: 'bg-emerald-50 text-emerald-700',
-  },
-  REJECTED: {
-    title: 'التوثيق تم رفضه',
-    subtitle: 'حاول تصيفط وثيقة أوضح، أو تواصل مع الدعم',
-    tone: 'bg-rose-100 text-rose-700',
-  },
-};
+import { ShieldCheckIcon } from './icons';
+import { LocaleLink } from './LocaleLink';
+import { useAppDict } from '@/hooks/useLocale';
 
 export function VerificationBanner({ status }: { status: 'UNVERIFIED' | 'PENDING' | 'VERIFIED' | 'REJECTED' }) {
+  const { dict } = useAppDict();
   if (status === 'VERIFIED') return null;
+
+  const COPY: Record<string, { title: string; subtitle: string; tone: string }> = {
+    UNVERIFIED: {
+      title: dict.verificationBanner.unverifiedTitle,
+      subtitle: dict.verificationBanner.unverifiedSubtitle,
+      tone: 'bg-gold-100 text-blue-900',
+    },
+    PENDING: {
+      title: dict.verificationBanner.pendingTitle,
+      subtitle: dict.verificationBanner.pendingSubtitle,
+      tone: 'bg-blue-50 text-blue-700',
+    },
+    REJECTED: {
+      title: dict.verificationBanner.rejectedTitle,
+      subtitle: dict.verificationBanner.rejectedSubtitle,
+      tone: 'bg-rose-100 text-rose-700',
+    },
+  };
+
   const copy = COPY[status];
 
   return (
@@ -33,9 +38,12 @@ export function VerificationBanner({ status }: { status: 'UNVERIFIED' | 'PENDING
         </div>
       </div>
       {status !== 'PENDING' && (
-        <Link href="/verification" className="whitespace-nowrap text-xs font-semibold underline">
-          وثّق دابا
-        </Link>
+        <LocaleLink
+          href="/verification"
+          className="whitespace-nowrap rounded-xl bg-white/70 px-3 py-1.5 text-xs font-semibold text-blue-900 transition hover:bg-white"
+        >
+          {dict.verificationBanner.verifyNow}
+        </LocaleLink>
       )}
     </div>
   );

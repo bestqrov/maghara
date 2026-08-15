@@ -63,9 +63,19 @@ export class User extends Document {
 
   @Prop({ enum: ['FREE', 'VIP', 'CROSS_BORDER_VIP'], default: 'FREE' })
   subscriptionTier: SubscriptionTier;
+  /** Only meaningful for VIP time granted by a promo code / referral reward — payment-purchased VIP has no expiry. */
+  @Prop() vipExpiresAt?: Date;
   @Prop({ default: 0 }) coinBalance: number;
   @Prop({ default: 0 }) dailyInterestsSent: number;
   @Prop({ default: () => new Date() }) lastInterestReset: Date;
+
+  // sparse (not required at the schema/index level): the 46 pre-existing seeded
+  // users predate this field, and a non-sparse unique index would fail to build
+  // against multiple documents all missing it. New registrations always get one
+  // via auth.service.ts; see scripts/backfillReferralCodes.ts for existing users.
+  @Prop({ unique: true, sparse: true, uppercase: true }) referralCode?: string;
+  @Prop({ type: Types.ObjectId, ref: 'User' }) referredBy?: Types.ObjectId;
+  @Prop({ type: [String], default: [] }) redeemedPromoCodes: string[];
 
   @Prop({ type: ProfileSchema, required: true }) profile: Profile;
 }
@@ -73,3 +83,4 @@ export class User extends Document {
 export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ 'profile.currentCity': 1 });
 UserSchema.index({ 'profile.residenceCountry': 1 });
+UserSchema.index({ referredBy: 1 });

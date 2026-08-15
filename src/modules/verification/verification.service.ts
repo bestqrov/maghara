@@ -4,6 +4,8 @@ import { Model } from 'mongoose';
 import { User } from '../../schemas/user.schema';
 import { SubmitVerificationDto } from './dto/submit-verification.dto';
 
+const REFERRAL_BONUS_COINS = 10;
+
 @Injectable()
 export class VerificationService {
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
@@ -46,6 +48,15 @@ export class VerificationService {
     user.verificationStatus = 'VERIFIED';
     user.isVerified = true;
     if (user.verificationDocuments) user.verificationDocuments.rejectionReason = undefined;
+
+    // Referral reward fires exactly once: approve() only ever runs on a PENDING
+    // user (guarded by findPending), and a user can never return to PENDING
+    // after being VERIFIED, so this can't double-credit on a later re-approval.
+    if (user.referredBy) {
+      user.coinBalance += REFERRAL_BONUS_COINS;
+      await this.userModel.updateOne({ _id: user.referredBy }, { $inc: { coinBalance: REFERRAL_BONUS_COINS } });
+    }
+
     await user.save();
     return this.getMyStatus(userId);
   }

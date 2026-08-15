@@ -1,0 +1,402 @@
+[
+  {
+    "id": "casablanca",
+    "type": "city",
+    "targetCity": "الدار البيضاء",
+    "targetCountry": "المغرب",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-casablanca",
+        "displayName": "الدار البيضاء",
+        "h1": "الزواج والخطبة الحلال في الدار البيضاء - قسمة ونصيب",
+        "metaTitle": "زواج وخطوبة حلال في الدار البيضاء | قسمة ونصيب",
+        "metaDescription": "تعرّف على عازبين وعازبات موثقين بالهوية في الدار البيضاء عبر قسمة ونصيب، منصة جادة للزواج الحلال بملفات موثقة وخصوصية تامة، بعيدًا عن الحسابات الوهمية.",
+        "heroText": "منصة قسمة ونصيب تجمع الجادين والجادات في الدار البيضاء لبناء بيت مسلم قائم على المودة والرحمة، عبر ملفات موثقة بالهوية وخصوصية تامة."
+      },
+      "fr": {
+        "slug": "marriage-casablanca",
+        "displayName": "Casablanca",
+        "h1": "Mariage Halal à Casablanca - Qisma W Nasib",
+        "metaTitle": "Mariage Halal à Casablanca | Qisma W Nasib",
+        "metaDescription": "Découvrez des célibataires vérifiés par pièce d'identité à Casablanca sur Qisma W Nasib, la plateforme sérieuse pour un mariage halal, loin des faux profils.",
+        "heroText": "Qisma W Nasib rassemble des célibataires sérieux à Casablanca pour construire un foyer musulman fondé sur l'amour et la bienveillance, avec des profils vérifiés et une confidentialité totale."
+      },
+      "en": {
+        "slug": "marriage-casablanca",
+        "displayName": "Casablanca",
+        "h1": "Halal Marriage in Casablanca - Qisma W Nasib",
+        "metaTitle": "Halal Marriage in Casablanca | Qisma W Nasib",
+        "metaDescription": "Meet ID-verified singles in Casablanca on Qisma W Nasib, the serious platform for halal marriage — real profiles, no fake accounts.",
+        "heroText": "Qisma W Nasib brings together serious singles in Casablanca to build a Muslim household founded on love and compassion, with ID-verified profiles and complete privacy."
+      },
+      "es": {
+        "slug": "bodas-casablanca",
+        "displayName": "Casablanca",
+        "h1": "Matrimonio Halal en Casablanca - Qisma W Nasib",
+        "metaTitle": "Matrimonio Halal en Casablanca | Qisma W Nasib",
+        "metaDescription": "Conoce solteros verificados por identidad en Casablanca en Qisma W Nasib, la plataforma seria para un matrimonio halal, sin perfiles falsos.",
+        "heroText": "Qisma W Nasib reúne a solteros serios en Casablanca para construir un hogar musulmán basado en el amor y la compasión, con perfiles verificados y privacidad total."
+      }
+    }
+  },
+  {
+    "id": "rabat",
+    "type": "city",
+    "targetCity": "الرباط",
+    "targetCountry": "المغرب",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-rabat",
+        "displayName": "الرباط",
+        "h1": "الزواج والخطبة الحلال في الرباط - قسمة ونصيب",
+        "metaTitle": "زواج وخطوبة حلال في الرباط | قسمة ونصيب",
+        "metaDescription": "تعرّف على عازبين وعازبات موثقين بالهوية في الرباط عبر قسمة ونصيب، منصة جادة للزواج الحلال بملفات موثقة وخصوصية تامة، بعيدًا عن الحسابات الوهمية.",
+        "heroText": "منصة قسمة ونصيب تجمع الجادين والجادات في الرباط لبناء بيت مسلم قائم على المودة والرحمة، عبر ملفات موثقة بالهوية وخصوصية تامة."
+      },
+      "fr": {
+        "slug": "marriage-rabat",
+        "displayName": "Rabat",
+        "h1": "Mariage Halal à Rabat - Qisma W Nasib",
+        "metaTitle": "Mariage Halal à Rabat | Qisma W Nasib",
+        "metaDescription": "Découvrez des célibataires vérifiés par pièce d'identité à Rabat sur Qisma W Nasib, la plateforme sérieuse pour un mariage halal, loin des faux profils.",
+        "heroText": "Qisma W Nasib rassemble des célibataires sérieux à Rabat pour construire un foyer musulman fondé sur l'amour et la bienveillance, avec des profils vérifiés et une confidentialité totale."
+      },
+      "en": {
+        "slug": "marriage-rabat",
+        "displayName": "Rabat",
+        "h1": "Halal Marriage in Rabat - Qisma W Nasib",
+        "metaTitle": "Halal Marriage in Rabat | Qisma W Nasib",
+        "metaDescription": "Meet ID-verified singles in Rabat on Qisma W Nasib, the serious platform for halal marriage — real profiles, no fake accounts.",
+        "heroText": "Qisma W Nasib brings together serious singles in Rabat to build a Muslim household founded on love and compassion, with ID-verified profiles and complete privacy."
+      },
+      "es": {
+        "slug": "bodas-rabat",
+        "displayName": "Rabat",
+        "h1": "Matrimonio Halal en Rabat - Qisma W Nasib",
+        "metaTitle": "Matrimonio Halal en Rabat | Qisma W Nasib",
+        "metaDescription": "Conoce solteros verificados por identidad en Rabat en Qisma W Nasib, la plataforma seria para un matrimonio halal, sin perfiles falsos.",
+        "heroText": "Qisma W Nasib reúne a solteros serios en Rabat para construir un hogar musulmán basado en el amor y la compasión, con perfiles verificados y privacidad total."
+      }
+    }
+  },
+  {
+    "id": "marrakech",
+    "type": "city",
+    "targetCity": "مراكش",
+    "targetCountry": "المغرب",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-marrakech",
+        "displayName": "مراكش",
+        "h1": "الزواج والخطبة الحلال في مراكش - قسمة ونصيب",
+        "metaTitle": "زواج وخطوبة حلال في مراكش | قسمة ونصيب",
+        "metaDescription": "تعرّف على عازبين وعازبات موثقين بالهوية في مراكش عبر قسمة ونصيب، منصة جادة للزواج الحلال بملفات موثقة وخصوصية تامة، بعيدًا عن الحسابات الوهمية.",
+        "heroText": "منصة قسمة ونصيب تجمع الجادين والجادات في مراكش لبناء بيت مسلم قائم على المودة والرحمة، عبر ملفات موثقة بالهوية وخصوصية تامة."
+      },
+      "fr": {
+        "slug": "marriage-marrakech",
+        "displayName": "Marrakech",
+        "h1": "Mariage Halal à Marrakech - Qisma W Nasib",
+        "metaTitle": "Mariage Halal à Marrakech | Qisma W Nasib",
+        "metaDescription": "Découvrez des célibataires vérifiés par pièce d'identité à Marrakech sur Qisma W Nasib, la plateforme sérieuse pour un mariage halal, loin des faux profils.",
+        "heroText": "Qisma W Nasib rassemble des célibataires sérieux à Marrakech pour construire un foyer musulman fondé sur l'amour et la bienveillance, avec des profils vérifiés et une confidentialité totale."
+      },
+      "en": {
+        "slug": "marriage-marrakech",
+        "displayName": "Marrakech",
+        "h1": "Halal Marriage in Marrakech - Qisma W Nasib",
+        "metaTitle": "Halal Marriage in Marrakech | Qisma W Nasib",
+        "metaDescription": "Meet ID-verified singles in Marrakech on Qisma W Nasib, the serious platform for halal marriage — real profiles, no fake accounts.",
+        "heroText": "Qisma W Nasib brings together serious singles in Marrakech to build a Muslim household founded on love and compassion, with ID-verified profiles and complete privacy."
+      },
+      "es": {
+        "slug": "bodas-marrakech",
+        "displayName": "Marrakech",
+        "h1": "Matrimonio Halal en Marrakech - Qisma W Nasib",
+        "metaTitle": "Matrimonio Halal en Marrakech | Qisma W Nasib",
+        "metaDescription": "Conoce solteros verificados por identidad en Marrakech en Qisma W Nasib, la plataforma seria para un matrimonio halal, sin perfiles falsos.",
+        "heroText": "Qisma W Nasib reúne a solteros serios en Marrakech para construir un hogar musulmán basado en el amor y la compasión, con perfiles verificados y privacidad total."
+      }
+    }
+  },
+  {
+    "id": "tangier",
+    "type": "city",
+    "targetCity": "طنجة",
+    "targetCountry": "المغرب",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-tangier",
+        "displayName": "طنجة",
+        "h1": "الزواج والخطبة الحلال في طنجة - قسمة ونصيب",
+        "metaTitle": "زواج وخطوبة حلال في طنجة | قسمة ونصيب",
+        "metaDescription": "تعرّف على عازبين وعازبات موثقين بالهوية في طنجة عبر قسمة ونصيب، منصة جادة للزواج الحلال بملفات موثقة وخصوصية تامة، بعيدًا عن الحسابات الوهمية.",
+        "heroText": "منصة قسمة ونصيب تجمع الجادين والجادات في طنجة لبناء بيت مسلم قائم على المودة والرحمة، عبر ملفات موثقة بالهوية وخصوصية تامة."
+      },
+      "fr": {
+        "slug": "marriage-tanger",
+        "displayName": "Tanger",
+        "h1": "Mariage Halal à Tanger - Qisma W Nasib",
+        "metaTitle": "Mariage Halal à Tanger | Qisma W Nasib",
+        "metaDescription": "Découvrez des célibataires vérifiés par pièce d'identité à Tanger sur Qisma W Nasib, la plateforme sérieuse pour un mariage halal, loin des faux profils.",
+        "heroText": "Qisma W Nasib rassemble des célibataires sérieux à Tanger pour construire un foyer musulman fondé sur l'amour et la bienveillance, avec des profils vérifiés et une confidentialité totale."
+      },
+      "en": {
+        "slug": "marriage-tangier",
+        "displayName": "Tangier",
+        "h1": "Halal Marriage in Tangier - Qisma W Nasib",
+        "metaTitle": "Halal Marriage in Tangier | Qisma W Nasib",
+        "metaDescription": "Meet ID-verified singles in Tangier on Qisma W Nasib, the serious platform for halal marriage — real profiles, no fake accounts.",
+        "heroText": "Qisma W Nasib brings together serious singles in Tangier to build a Muslim household founded on love and compassion, with ID-verified profiles and complete privacy."
+      },
+      "es": {
+        "slug": "bodas-tanger",
+        "displayName": "Tánger",
+        "h1": "Matrimonio Halal en Tánger - Qisma W Nasib",
+        "metaTitle": "Matrimonio Halal en Tánger | Qisma W Nasib",
+        "metaDescription": "Conoce solteros verificados por identidad en Tánger en Qisma W Nasib, la plataforma seria para un matrimonio halal, sin perfiles falsos.",
+        "heroText": "Qisma W Nasib reúne a solteros serios en Tánger para construir un hogar musulmán basado en el amor y la compasión, con perfiles verificados y privacidad total."
+      }
+    }
+  },
+  {
+    "id": "agadir",
+    "type": "city",
+    "targetCity": "أكادير",
+    "targetCountry": "المغرب",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-agadir",
+        "displayName": "أكادير",
+        "h1": "الزواج والخطبة الحلال في أكادير - قسمة ونصيب",
+        "metaTitle": "زواج وخطوبة حلال في أكادير | قسمة ونصيب",
+        "metaDescription": "تعرّف على عازبين وعازبات موثقين بالهوية في أكادير عبر قسمة ونصيب، منصة جادة للزواج الحلال بملفات موثقة وخصوصية تامة، بعيدًا عن الحسابات الوهمية.",
+        "heroText": "منصة قسمة ونصيب تجمع الجادين والجادات في أكادير لبناء بيت مسلم قائم على المودة والرحمة، عبر ملفات موثقة بالهوية وخصوصية تامة."
+      },
+      "fr": {
+        "slug": "marriage-agadir",
+        "displayName": "Agadir",
+        "h1": "Mariage Halal à Agadir - Qisma W Nasib",
+        "metaTitle": "Mariage Halal à Agadir | Qisma W Nasib",
+        "metaDescription": "Découvrez des célibataires vérifiés par pièce d'identité à Agadir sur Qisma W Nasib, la plateforme sérieuse pour un mariage halal, loin des faux profils.",
+        "heroText": "Qisma W Nasib rassemble des célibataires sérieux à Agadir pour construire un foyer musulman fondé sur l'amour et la bienveillance, avec des profils vérifiés et une confidentialité totale."
+      },
+      "en": {
+        "slug": "marriage-agadir",
+        "displayName": "Agadir",
+        "h1": "Halal Marriage in Agadir - Qisma W Nasib",
+        "metaTitle": "Halal Marriage in Agadir | Qisma W Nasib",
+        "metaDescription": "Meet ID-verified singles in Agadir on Qisma W Nasib, the serious platform for halal marriage — real profiles, no fake accounts.",
+        "heroText": "Qisma W Nasib brings together serious singles in Agadir to build a Muslim household founded on love and compassion, with ID-verified profiles and complete privacy."
+      },
+      "es": {
+        "slug": "bodas-agadir",
+        "displayName": "Agadir",
+        "h1": "Matrimonio Halal en Agadir - Qisma W Nasib",
+        "metaTitle": "Matrimonio Halal en Agadir | Qisma W Nasib",
+        "metaDescription": "Conoce solteros verificados por identidad en Agadir en Qisma W Nasib, la plataforma seria para un matrimonio halal, sin perfiles falsos.",
+        "heroText": "Qisma W Nasib reúne a solteros serios en Agadir para construir un hogar musulmán basado en el amor y la compasión, con perfiles verificados y privacidad total."
+      }
+    }
+  },
+  {
+    "id": "france",
+    "type": "diaspora",
+    "targetCity": null,
+    "targetCountry": "فرنسا",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-morocco-france",
+        "displayName": "فرنسا",
+        "h1": "الزواج الحلال للجالية المغربية في فرنسا - قسمة ونصيب",
+        "metaTitle": "زواج المغاربة في فرنسا | قسمة ونصيب",
+        "metaDescription": "منصة قسمة ونصيب تربط أبناء الجالية المغربية في فرنسا بعازبين وعازبات موثقين بالهوية للزواج الحلال والاستقرار، سواء بالبقاء بالمهجر أو العودة للوطن.",
+        "heroText": "تعارفٌ جادّ وآمن بين الجالية المغربية في فرنسا والراغبين في الزواج الدولي، بملفات موثقة وخصوصية تامة عبر قسمة ونصيب."
+      },
+      "fr": {
+        "slug": "marriage-maroc-france",
+        "displayName": "France",
+        "h1": "Mariage Halal pour la Diaspora Marocaine en France - Qisma W Nasib",
+        "metaTitle": "Mariage pour la Diaspora Marocaine en France | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connecte la diaspora marocaine en France à des célibataires vérifiés par pièce d'identité pour un mariage halal sérieux, à l'étranger ou de retour au pays.",
+        "heroText": "Une rencontre sérieuse et sécurisée entre la diaspora marocaine en France et les personnes en quête d'un mariage international, avec des profils vérifiés sur Qisma W Nasib."
+      },
+      "en": {
+        "slug": "marriage-morocco-france",
+        "displayName": "France",
+        "h1": "Halal Marriage for the Moroccan Diaspora in France - Qisma W Nasib",
+        "metaTitle": "Marriage for the Moroccan Diaspora in France | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connects the Moroccan diaspora in France with ID-verified singles for a serious halal marriage, whether staying abroad or returning home.",
+        "heroText": "A serious, secure connection between the Moroccan diaspora in France and those seeking international marriage, with verified profiles on Qisma W Nasib."
+      },
+      "es": {
+        "slug": "bodas-marruecos-francia",
+        "displayName": "Francia",
+        "h1": "Matrimonio Halal para la Diáspora Marroquí en Francia - Qisma W Nasib",
+        "metaTitle": "Matrimonio para la Diáspora Marroquí en Francia | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib conecta a la diáspora marroquí en Francia con solteros verificados por identidad para un matrimonio halal serio, ya sea en el extranjero o de regreso a casa.",
+        "heroText": "Un encuentro serio y seguro entre la diáspora marroquí en Francia y quienes buscan un matrimonio internacional, con perfiles verificados en Qisma W Nasib."
+      }
+    }
+  },
+  {
+    "id": "spain",
+    "type": "diaspora",
+    "targetCity": null,
+    "targetCountry": "إسبانيا",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-morocco-spain",
+        "displayName": "إسبانيا",
+        "h1": "الزواج الحلال للجالية المغربية في إسبانيا - قسمة ونصيب",
+        "metaTitle": "زواج المغاربة في إسبانيا | قسمة ونصيب",
+        "metaDescription": "منصة قسمة ونصيب تربط أبناء الجالية المغربية في إسبانيا بعازبين وعازبات موثقين بالهوية للزواج الحلال والاستقرار، سواء بالبقاء بالمهجر أو العودة للوطن.",
+        "heroText": "تعارفٌ جادّ وآمن بين الجالية المغربية في إسبانيا والراغبين في الزواج الدولي، بملفات موثقة وخصوصية تامة عبر قسمة ونصيب."
+      },
+      "fr": {
+        "slug": "marriage-maroc-espagne",
+        "displayName": "Espagne",
+        "h1": "Mariage Halal pour la Diaspora Marocaine en Espagne - Qisma W Nasib",
+        "metaTitle": "Mariage pour la Diaspora Marocaine en Espagne | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connecte la diaspora marocaine en Espagne à des célibataires vérifiés par pièce d'identité pour un mariage halal sérieux, à l'étranger ou de retour au pays.",
+        "heroText": "Une rencontre sérieuse et sécurisée entre la diaspora marocaine en Espagne et les personnes en quête d'un mariage international, avec des profils vérifiés sur Qisma W Nasib."
+      },
+      "en": {
+        "slug": "marriage-morocco-spain",
+        "displayName": "Spain",
+        "h1": "Halal Marriage for the Moroccan Diaspora in Spain - Qisma W Nasib",
+        "metaTitle": "Marriage for the Moroccan Diaspora in Spain | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connects the Moroccan diaspora in Spain with ID-verified singles for a serious halal marriage, whether staying abroad or returning home.",
+        "heroText": "A serious, secure connection between the Moroccan diaspora in Spain and those seeking international marriage, with verified profiles on Qisma W Nasib."
+      },
+      "es": {
+        "slug": "bodas-marruecos-espana",
+        "displayName": "España",
+        "h1": "Matrimonio Halal para la Diáspora Marroquí en España - Qisma W Nasib",
+        "metaTitle": "Matrimonio para la Diáspora Marroquí en España | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib conecta a la diáspora marroquí en España con solteros verificados por identidad para un matrimonio halal serio, ya sea en el extranjero o de regreso a casa.",
+        "heroText": "Un encuentro serio y seguro entre la diáspora marroquí en España y quienes buscan un matrimonio internacional, con perfiles verificados en Qisma W Nasib."
+      }
+    }
+  },
+  {
+    "id": "canada",
+    "type": "diaspora",
+    "targetCity": null,
+    "targetCountry": "كندا",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-morocco-canada",
+        "displayName": "كندا",
+        "h1": "الزواج الحلال للجالية المغربية في كندا - قسمة ونصيب",
+        "metaTitle": "زواج المغاربة في كندا | قسمة ونصيب",
+        "metaDescription": "منصة قسمة ونصيب تربط أبناء الجالية المغربية في كندا بعازبين وعازبات موثقين بالهوية للزواج الحلال والاستقرار، سواء بالبقاء بالمهجر أو العودة للوطن.",
+        "heroText": "تعارفٌ جادّ وآمن بين الجالية المغربية في كندا والراغبين في الزواج الدولي، بملفات موثقة وخصوصية تامة عبر قسمة ونصيب."
+      },
+      "fr": {
+        "slug": "marriage-maroc-canada",
+        "displayName": "Canada",
+        "h1": "Mariage Halal pour la Diaspora Marocaine en Canada - Qisma W Nasib",
+        "metaTitle": "Mariage pour la Diaspora Marocaine en Canada | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connecte la diaspora marocaine en Canada à des célibataires vérifiés par pièce d'identité pour un mariage halal sérieux, à l'étranger ou de retour au pays.",
+        "heroText": "Une rencontre sérieuse et sécurisée entre la diaspora marocaine en Canada et les personnes en quête d'un mariage international, avec des profils vérifiés sur Qisma W Nasib."
+      },
+      "en": {
+        "slug": "marriage-morocco-canada",
+        "displayName": "Canada",
+        "h1": "Halal Marriage for the Moroccan Diaspora in Canada - Qisma W Nasib",
+        "metaTitle": "Marriage for the Moroccan Diaspora in Canada | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connects the Moroccan diaspora in Canada with ID-verified singles for a serious halal marriage, whether staying abroad or returning home.",
+        "heroText": "A serious, secure connection between the Moroccan diaspora in Canada and those seeking international marriage, with verified profiles on Qisma W Nasib."
+      },
+      "es": {
+        "slug": "bodas-marruecos-canada",
+        "displayName": "Canadá",
+        "h1": "Matrimonio Halal para la Diáspora Marroquí en Canadá - Qisma W Nasib",
+        "metaTitle": "Matrimonio para la Diáspora Marroquí en Canadá | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib conecta a la diáspora marroquí en Canadá con solteros verificados por identidad para un matrimonio halal serio, ya sea en el extranjero o de regreso a casa.",
+        "heroText": "Un encuentro serio y seguro entre la diáspora marroquí en Canadá y quienes buscan un matrimonio internacional, con perfiles verificados en Qisma W Nasib."
+      }
+    }
+  },
+  {
+    "id": "uae",
+    "type": "diaspora",
+    "targetCity": null,
+    "targetCountry": "الإمارات",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-morocco-uae",
+        "displayName": "الإمارات",
+        "h1": "الزواج الحلال للجالية المغربية في الإمارات - قسمة ونصيب",
+        "metaTitle": "زواج المغاربة في الإمارات | قسمة ونصيب",
+        "metaDescription": "منصة قسمة ونصيب تربط أبناء الجالية المغربية في الإمارات بعازبين وعازبات موثقين بالهوية للزواج الحلال والاستقرار، سواء بالبقاء بالمهجر أو العودة للوطن.",
+        "heroText": "تعارفٌ جادّ وآمن بين الجالية المغربية في الإمارات والراغبين في الزواج الدولي، بملفات موثقة وخصوصية تامة عبر قسمة ونصيب."
+      },
+      "fr": {
+        "slug": "marriage-maroc-emirats",
+        "displayName": "Émirats Arabes Unis",
+        "h1": "Mariage Halal pour la Diaspora Marocaine en Émirats Arabes Unis - Qisma W Nasib",
+        "metaTitle": "Mariage pour la Diaspora Marocaine en Émirats Arabes Unis | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connecte la diaspora marocaine en Émirats Arabes Unis à des célibataires vérifiés par pièce d'identité pour un mariage halal sérieux, à l'étranger ou de retour au pays.",
+        "heroText": "Une rencontre sérieuse et sécurisée entre la diaspora marocaine en Émirats Arabes Unis et les personnes en quête d'un mariage international, avec des profils vérifiés sur Qisma W Nasib."
+      },
+      "en": {
+        "slug": "marriage-morocco-uae",
+        "displayName": "UAE",
+        "h1": "Halal Marriage for the Moroccan Diaspora in UAE - Qisma W Nasib",
+        "metaTitle": "Marriage for the Moroccan Diaspora in UAE | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connects the Moroccan diaspora in UAE with ID-verified singles for a serious halal marriage, whether staying abroad or returning home.",
+        "heroText": "A serious, secure connection between the Moroccan diaspora in UAE and those seeking international marriage, with verified profiles on Qisma W Nasib."
+      },
+      "es": {
+        "slug": "bodas-marruecos-emiratos",
+        "displayName": "Emiratos Árabes Unidos",
+        "h1": "Matrimonio Halal para la Diáspora Marroquí en Emiratos Árabes Unidos - Qisma W Nasib",
+        "metaTitle": "Matrimonio para la Diáspora Marroquí en Emiratos Árabes Unidos | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib conecta a la diáspora marroquí en Emiratos Árabes Unidos con solteros verificados por identidad para un matrimonio halal serio, ya sea en el extranjero o de regreso a casa.",
+        "heroText": "Un encuentro serio y seguro entre la diáspora marroquí en Emiratos Árabes Unidos y quienes buscan un matrimonio internacional, con perfiles verificados en Qisma W Nasib."
+      }
+    }
+  },
+  {
+    "id": "belgium",
+    "type": "diaspora",
+    "targetCity": null,
+    "targetCountry": "بلجيكا",
+    "locales": {
+      "ar": {
+        "slug": "zawaj-morocco-belgium",
+        "displayName": "بلجيكا",
+        "h1": "الزواج الحلال للجالية المغربية في بلجيكا - قسمة ونصيب",
+        "metaTitle": "زواج المغاربة في بلجيكا | قسمة ونصيب",
+        "metaDescription": "منصة قسمة ونصيب تربط أبناء الجالية المغربية في بلجيكا بعازبين وعازبات موثقين بالهوية للزواج الحلال والاستقرار، سواء بالبقاء بالمهجر أو العودة للوطن.",
+        "heroText": "تعارفٌ جادّ وآمن بين الجالية المغربية في بلجيكا والراغبين في الزواج الدولي، بملفات موثقة وخصوصية تامة عبر قسمة ونصيب."
+      },
+      "fr": {
+        "slug": "marriage-maroc-belgique",
+        "displayName": "Belgique",
+        "h1": "Mariage Halal pour la Diaspora Marocaine en Belgique - Qisma W Nasib",
+        "metaTitle": "Mariage pour la Diaspora Marocaine en Belgique | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connecte la diaspora marocaine en Belgique à des célibataires vérifiés par pièce d'identité pour un mariage halal sérieux, à l'étranger ou de retour au pays.",
+        "heroText": "Une rencontre sérieuse et sécurisée entre la diaspora marocaine en Belgique et les personnes en quête d'un mariage international, avec des profils vérifiés sur Qisma W Nasib."
+      },
+      "en": {
+        "slug": "marriage-morocco-belgium",
+        "displayName": "Belgium",
+        "h1": "Halal Marriage for the Moroccan Diaspora in Belgium - Qisma W Nasib",
+        "metaTitle": "Marriage for the Moroccan Diaspora in Belgium | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib connects the Moroccan diaspora in Belgium with ID-verified singles for a serious halal marriage, whether staying abroad or returning home.",
+        "heroText": "A serious, secure connection between the Moroccan diaspora in Belgium and those seeking international marriage, with verified profiles on Qisma W Nasib."
+      },
+      "es": {
+        "slug": "bodas-marruecos-belgica",
+        "displayName": "Bélgica",
+        "h1": "Matrimonio Halal para la Diáspora Marroquí en Bélgica - Qisma W Nasib",
+        "metaTitle": "Matrimonio para la Diáspora Marroquí en Bélgica | Qisma W Nasib",
+        "metaDescription": "Qisma W Nasib conecta a la diáspora marroquí en Bélgica con solteros verificados por identidad para un matrimonio halal serio, ya sea en el extranjero o de regreso a casa.",
+        "heroText": "Un encuentro serio y seguro entre la diáspora marroquí en Bélgica y quienes buscan un matrimonio internacional, con perfiles verificados en Qisma W Nasib."
+      }
+    }
+  }
+]

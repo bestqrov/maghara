@@ -5,6 +5,7 @@ export interface AuthUser {
   id: string;
   phoneNumber: string;
   subscriptionTier: 'FREE' | 'VIP' | 'CROSS_BORDER_VIP';
+  referralCode?: string;
   profile: {
     firstName: string;
     gender: 'MALE' | 'FEMALE';

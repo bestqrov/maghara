@@ -4,6 +4,7 @@ import { Model, Types } from 'mongoose';
 import { Match } from '../../schemas/match.schema';
 import { User } from '../../schemas/user.schema';
 import { SearchProfilesDto } from './dto/search-profiles.dto';
+import { resolveIsVip } from '../../common/utils/subscription.util';
 
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
@@ -27,7 +28,7 @@ export class MatchingService {
     const me = await this.userModel.findById(userId);
     if (!me) throw new NotFoundException('User not found');
 
-    const isVip = me.subscriptionTier === 'VIP' || me.subscriptionTier === 'CROSS_BORDER_VIP';
+    const isVip = await resolveIsVip(me);
     const oppositeGender = me.profile.gender === 'MALE' ? 'FEMALE' : 'MALE';
 
     const filter: Record<string, any> = {
@@ -77,7 +78,7 @@ export class MatchingService {
     if (senderId === receiverId) throw new BadRequestException('Cannot send interest to yourself');
 
     const sender = await this.resetDailyCounterIfNeeded(senderId);
-    const isVip = sender.subscriptionTier === 'VIP' || sender.subscriptionTier === 'CROSS_BORDER_VIP';
+    const isVip = await resolveIsVip(sender);
 
     if (!isVip && sender.dailyInterestsSent >= DAILY_FREE_INTERESTS) {
       throw new BadRequestException('Daily free interest limit reached. Upgrade to VIP or use coins.');

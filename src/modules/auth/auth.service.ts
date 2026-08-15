@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from '../../schemas/user.schema';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { generateUniqueReferralCode } from '../../common/utils/referral-code.util';
 
 const BCRYPT_ROUNDS = 12;
 
@@ -23,11 +24,21 @@ export class AuthService {
     }
 
     const passwordHash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
+    const referralCode = await generateUniqueReferralCode(this.userModel);
+
+    // Best-effort: an unknown/malformed referral code should never block signup.
+    let referredBy: Types.ObjectId | undefined;
+    if (dto.referralCode) {
+      const referrer = await this.userModel.findOne({ referralCode: dto.referralCode.trim().toUpperCase() });
+      if (referrer) referredBy = referrer._id as Types.ObjectId;
+    }
 
     const user = await this.userModel.create({
       phoneNumber: dto.phoneNumber,
       email: dto.email,
       passwordHash,
+      referralCode,
+      referredBy,
       profile: {
         firstName: dto.firstName,
         gender: dto.gender,
@@ -64,6 +75,7 @@ export class AuthService {
         id: userId,
         phoneNumber: user.phoneNumber,
         subscriptionTier: user.subscriptionTier,
+        referralCode: user.referralCode,
         profile: user.profile,
       },
     };

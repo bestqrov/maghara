@@ -20,7 +20,7 @@ export function BlurredImage({
   onUnlockClick,
 }: BlurredImageProps) {
   return (
-    <div className={`relative overflow-hidden rounded-2xl bg-emerald-50 ${className}`}>
+    <div className={`relative overflow-hidden rounded-2xl bg-blue-50 ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
@@ -31,9 +31,9 @@ export function BlurredImage({
         <button
           type="button"
           onClick={onUnlockClick}
-          className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-emerald-900/40 text-white transition hover:bg-emerald-900/50"
+          className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-blue-900/40 text-white transition hover:bg-blue-900/50"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-500 text-emerald-900">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-500 text-blue-900">
             <LockClosedIcon className="h-5 w-5" />
           </span>
           <span className="px-3 text-center text-sm font-medium">{lockLabel}</span>

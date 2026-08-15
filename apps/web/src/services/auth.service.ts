@@ -11,6 +11,7 @@ export interface RegisterPayload {
   residenceCountry: string;
   currentCity: string;
   originCountry: string;
+  referralCode?: string;
 }
 
 export interface LoginPayload {

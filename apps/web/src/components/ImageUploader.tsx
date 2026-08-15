@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { uploadToCloudinary } from '@/services/cloudinary.service';
+import { useAppDict } from '@/hooks/useLocale';
 
 interface ImageUploaderProps {
   label: string;
@@ -11,6 +12,7 @@ interface ImageUploaderProps {
 }
 
 export function ImageUploader({ label, value, onUploaded, folder }: ImageUploaderProps) {
+  const { dict } = useAppDict();
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +26,7 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
       const url = await uploadToCloudinary(file, folder);
       onUploaded(url);
     } catch {
-      setError('ماقدرناش نرفعو الصورة، حاول مرة أخرى');
+      setError(dict.imageUploader.errorUploadFailed);
     } finally {
       setUploading(false);
     }
@@ -46,7 +48,7 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="flex items-center gap-3 rounded-xl border border-dashed border-emerald-200 bg-emerald-50 p-3 text-right transition hover:bg-emerald-100"
+        className="flex items-center gap-3 rounded-xl border border-dashed border-rose-200 bg-rose-50 p-3 text-right transition hover:bg-rose-100"
       >
         {preview ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -54,8 +56,8 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
         ) : (
           <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-white text-2xl">📷</span>
         )}
-        <span className="text-sm text-emerald-700">
-          {uploading ? 'كتصيفط...' : preview ? 'بدّل الصورة' : 'اختار صورة'}
+        <span className="text-sm text-rose-700">
+          {uploading ? dict.imageUploader.uploading : preview ? dict.imageUploader.changePhoto : dict.imageUploader.choosePhoto}
         </span>
       </button>
       {error && <span className="text-xs text-red-500">{error}</span>}

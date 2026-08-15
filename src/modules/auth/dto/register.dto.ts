@@ -11,4 +11,7 @@ export class RegisterDto {
   @IsString() residenceCountry: string;
   @IsString() currentCity: string;
   @IsString() originCountry: string;
+
+  /** Referrer's own referralCode, e.g. from a /register?ref=CODE link. Unknown/invalid codes are ignored, never block signup. */
+  @IsOptional() @IsString() referralCode?: string;
 }

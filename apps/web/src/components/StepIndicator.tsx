@@ -5,7 +5,7 @@ export function StepIndicator({ total, current }: { total: number; current: numb
         <span
           key={index}
           className={`h-1.5 rounded-full transition-all ${
-            index === current ? 'w-8 bg-emerald-600' : index < current ? 'w-4 bg-emerald-300' : 'w-4 bg-emerald-100'
+            index === current ? 'w-8 bg-rose-500' : index < current ? 'w-4 bg-rose-300' : 'w-4 bg-blue-100'
           }`}
         />
       ))}
