@@ -91,7 +91,7 @@ export default function LandingPage() {
       <div className="relative">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/hero.png?v=5"
+          src="/hero.png?v=6"
           alt="قسمة و نصيب — ربط القلوب على سنة الله ورسوله"
           className="h-auto max-h-[580px] w-full object-cover object-top"
         />

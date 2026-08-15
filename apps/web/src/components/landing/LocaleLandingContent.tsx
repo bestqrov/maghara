@@ -58,7 +58,7 @@ export function LocaleLandingContent({ locale }: { locale: Locale }) {
 
   if (!hasHydrated || token) return null;
 
-  const heroSrc = locale === 'ar' ? '/hero.png?v=5' : `/hero-${locale}.png?v=1`;
+  const heroSrc = locale === 'ar' ? '/hero.png?v=6' : `/hero-${locale}.png?v=2`;
 
   return (
     <main className="flex min-h-screen flex-col">
