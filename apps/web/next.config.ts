@@ -42,6 +42,13 @@ const nextConfig: NextConfig = {
         destination: '/ar/chat/:conversationId',
         permanent: true,
       },
+      // Arabic landing content lives at the bare "/" (untouched root page),
+      // not "/ar" — only "/ar/<slug>" (SEO) and "/ar/<app-route>" are real.
+      {
+        source: '/ar',
+        destination: '/',
+        permanent: false,
+      },
     ];
   },
 };
