@@ -24,17 +24,6 @@ import {
 
 const FEATURE_ICONS = [ShieldCheckIcon, GlobeIcon, EyeIcon, ChatIcon];
 
-// Mirrors the original KEYWORD_LINKS hrefs 1:1, by index, against dict.keywords.links.
-const KEYWORD_HREF_KIND: ('register' | 'trust' | 'features')[] = [
-  'register',
-  'trust',
-  'register',
-  'features',
-  'features',
-  'features',
-  'features',
-];
-
 function OrnamentDivider() {
   return (
     <div className="flex items-center justify-center gap-3" aria-hidden="true">
@@ -253,33 +242,6 @@ export function LocaleLandingContent({ locale }: { locale: Locale }) {
             </Button>
           </Link>
         </Reveal>
-      </section>
-
-      {/* Keyword / sitemap strip */}
-      <section className="bg-blue-900 px-4 py-14">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-8 text-center">
-          {dict.keywords.links.map((label, i) => {
-            const kind = KEYWORD_HREF_KIND[i];
-            const href = kind === 'register' ? registerHref : `#${kind}`;
-            return (
-              <a
-                key={label}
-                href={href}
-                className="font-display text-xl font-bold text-blue-100 transition hover:text-rose-300 sm:text-2xl"
-              >
-                {label}
-              </a>
-            );
-          })}
-          {dict.keywords.soon.map((label) => (
-            <span key={label} className="flex flex-col items-center gap-1.5">
-              <span className="font-display text-xl font-bold text-blue-100/40 sm:text-2xl">{label}</span>
-              <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-bold text-blue-200">
-                {dict.nav.soon}
-              </span>
-            </span>
-          ))}
-        </div>
       </section>
 
       <footer className="mt-auto flex flex-col items-center gap-4 border-t border-blue-100 px-4 py-10">

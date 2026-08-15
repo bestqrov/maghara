@@ -51,18 +51,6 @@ const STEPS = [
 
 const TRUST_POINTS = ['تسجيلٌ مجاني بالكامل', 'بياناتك مشفَّرة وآمنة', 'دعمٌ ومتابعة بالعربية'];
 
-const KEYWORD_LINKS = [
-  { href: '/register', label: 'تطبيق زواج' },
-  { href: '#trust', label: 'للمسلمين' },
-  { href: '/register', label: 'مجاني' },
-  { href: '#features', label: 'تعارف جادّ' },
-  { href: '#features', label: 'تشات آمن' },
-  { href: '#features', label: 'توثيق' },
-  { href: '#features', label: 'الجالية والمهجر' },
-];
-
-const KEYWORD_SOON = ['الخطّابة', 'قصص الزواج'];
-
 function OrnamentDivider() {
   return (
     <div className="flex items-center justify-center gap-3" aria-hidden="true">
@@ -281,29 +269,6 @@ export default function LandingPage() {
             </Button>
           </Link>
         </Reveal>
-      </section>
-
-      {/* Keyword / sitemap strip */}
-      <section className="bg-blue-900 px-4 py-14">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-10 gap-y-8 text-center">
-          {KEYWORD_LINKS.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="font-display text-xl font-bold text-blue-100 transition hover:text-rose-300 sm:text-2xl"
-            >
-              {item.label}
-            </a>
-          ))}
-          {KEYWORD_SOON.map((label) => (
-            <span key={label} className="flex flex-col items-center gap-1.5">
-              <span className="font-display text-xl font-bold text-blue-100/40 sm:text-2xl">{label}</span>
-              <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-bold text-blue-200">
-                قريبًا
-              </span>
-            </span>
-          ))}
-        </div>
       </section>
 
       <footer className="mt-auto flex flex-col items-center gap-4 border-t border-blue-100 px-4 py-10">
