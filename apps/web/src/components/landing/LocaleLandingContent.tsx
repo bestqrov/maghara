@@ -58,6 +58,8 @@ export function LocaleLandingContent({ locale }: { locale: Locale }) {
 
   if (!hasHydrated || token) return null;
 
+  const heroSrc = locale === 'ar' ? '/hero.png?v=5' : `/hero-${locale}.png?v=1`;
+
   return (
     <main className="flex min-h-screen flex-col">
       <LandingHeader />
@@ -66,7 +68,7 @@ export function LocaleLandingContent({ locale }: { locale: Locale }) {
       <div className="relative">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/hero.png?v=4"
+          src={heroSrc}
           alt={dict.footer.text}
           className="h-auto max-h-[580px] w-full object-cover object-top"
         />
