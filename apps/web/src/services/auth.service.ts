@@ -33,3 +33,10 @@ export async function login(payload: LoginPayload) {
   const { data } = await api.post<AuthResponse>('/auth/login', payload);
   return data;
 }
+
+export async function checkPhoneAvailability(phoneNumber: string) {
+  const { data } = await api.get<{ available: boolean }>('/auth/phone-availability', {
+    params: { phoneNumber },
+  });
+  return data.available;
+}

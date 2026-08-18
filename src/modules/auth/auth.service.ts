@@ -17,6 +17,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+  async isPhoneAvailable(phoneNumber: string) {
+    if (!phoneNumber) return true;
+    const existing = await this.userModel.findOne({ phoneNumber }).select('_id');
+    return !existing;
+  }
+
   async register(dto: RegisterDto) {
     const existing = await this.userModel.findOne({ phoneNumber: dto.phoneNumber });
     if (existing) {

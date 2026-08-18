@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useRouter } from 'expo-router';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { isAxiosError } from 'axios';
-import { register as registerUser } from '@/services/auth.service';
+import { register as registerUser, checkPhoneAvailability } from '@/services/auth.service';
 import { updateProfile } from '@/services/users.service';
 import { useAuthStore } from '@/store/auth.store';
 import { Input } from '@/components/Input';
@@ -22,6 +22,7 @@ export default function RegisterScreen() {
   const [step, setStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [checkingPhone, setCheckingPhone] = useState(false);
 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -45,12 +46,28 @@ export default function RegisterScreen() {
     return true;
   }
 
-  function goNext() {
+  async function goNext() {
     if (!validateStep()) {
       setError(dict.register.errorFieldsRequired);
       return;
     }
     setError(null);
+
+    if (step === 0) {
+      setCheckingPhone(true);
+      try {
+        const available = await checkPhoneAvailability(phoneNumber);
+        if (!available) {
+          setError(dict.register.errorPhoneTaken);
+          return;
+        }
+      } catch {
+        // Best-effort: if the check itself fails, let the final submit catch a real conflict.
+      } finally {
+        setCheckingPhone(false);
+      }
+    }
+
     setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
   }
 
@@ -178,7 +195,7 @@ export default function RegisterScreen() {
                 </Button>
               )}
               {!isLastStep ? (
-                <Button onPress={goNext} style={styles.flexBtn}>
+                <Button loading={checkingPhone} onPress={goNext} style={styles.flexBtn}>
                   {dict.register.next}
                 </Button>
               ) : (

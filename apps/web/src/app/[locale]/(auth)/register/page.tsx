@@ -4,7 +4,7 @@ import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { isAxiosError } from 'axios';
-import { register as registerUser, RegisterPayload } from '@/services/auth.service';
+import { register as registerUser, checkPhoneAvailability, RegisterPayload } from '@/services/auth.service';
 import { updateProfile } from '@/services/users.service';
 import { useAuthStore } from '@/store/auth.store';
 import { Input } from '@/components/ui/Input';
@@ -54,15 +54,35 @@ function RegisterForm() {
   const {
     register,
     trigger,
+    getValues,
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<WizardFields>({
     defaultValues: { gender: 'MALE', relocationPreference: 'OPEN_TO_MOVE' },
   });
+  const [checkingPhone, setCheckingPhone] = useState(false);
 
   async function goNext() {
     const valid = await trigger(STEP_FIELDS[step]);
-    if (valid) setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+    if (!valid) return;
+
+    if (step === 0) {
+      setCheckingPhone(true);
+      try {
+        const available = await checkPhoneAvailability(getValues('phoneNumber'));
+        if (!available) {
+          setError('phoneNumber', { message: dict.register.errorPhoneTaken });
+          return;
+        }
+      } catch {
+        // Best-effort: if the check itself fails, let the final submit catch a real conflict.
+      } finally {
+        setCheckingPhone(false);
+      }
+    }
+
+    setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
   }
 
   function goBack() {
@@ -234,7 +254,7 @@ function RegisterForm() {
               </Button>
             )}
             {!isLastStep ? (
-              <Button key="next" type="button" onClick={goNext} className="flex-1">
+              <Button key="next" type="button" onClick={goNext} loading={checkingPhone} className="flex-1">
                 {dict.register.next}
               </Button>
             ) : (
