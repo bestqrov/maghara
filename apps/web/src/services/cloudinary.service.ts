@@ -13,7 +13,8 @@ export async function uploadToCloudinary(file: File, folder?: string): Promise<s
   });
 
   if (!res.ok) {
-    throw new Error('Image upload failed');
+    const body = await res.text().catch(() => '');
+    throw new Error(`Image upload failed: ${res.status} ${body}`);
   }
 
   const data = await res.json();

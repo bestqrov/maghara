@@ -119,7 +119,12 @@ function RegisterForm() {
       if (isAxiosError(err) && err.response?.status === 409) {
         setServerError(dict.register.errorPhoneTaken);
       } else {
-        setServerError(dict.common.errorGeneric);
+        const detail = isAxiosError(err)
+          ? err.response
+            ? `status ${err.response.status}: ${JSON.stringify(err.response.data)}`
+            : `network error: ${err.message}`
+          : String(err);
+        setServerError(`${dict.common.errorGeneric} [${detail}]`);
       }
     } finally {
       setLoading(false);

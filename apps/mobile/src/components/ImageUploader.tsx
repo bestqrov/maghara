@@ -38,8 +38,8 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
     try {
       const url = await uploadToCloudinary(uri, folder);
       onUploaded(url);
-    } catch {
-      setError(dict.imageUploader.errorUploadFailed);
+    } catch (err) {
+      setError(`${dict.imageUploader.errorUploadFailed} [${err instanceof Error ? err.message : String(err)}]`);
     } finally {
       setUploading(false);
     }
