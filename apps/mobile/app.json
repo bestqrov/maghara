@@ -18,8 +18,8 @@
       "expo-status-bar"
     ],
     "extra": {
-      "apiUrl": "http://localhost:4000",
-      "socketUrl": "http://localhost:4000"
+      "apiUrl": "http://localhost:3000",
+      "socketUrl": "http://localhost:3000"
     }
   }
 }
