@@ -5,6 +5,7 @@ import { isAxiosError } from 'axios';
 import { changeAdminPassword } from '@/services/admin.service';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { CheckCircleIcon } from '@/components/icons';
 
 export function SettingsPanel() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -75,11 +76,25 @@ export function SettingsPanel() {
           required
         />
         {error && <p className="text-sm text-red-500">{error}</p>}
-        {success && <p className="text-sm text-emerald-600">تم تغيير كلمة المرور بنجاح</p>}
         <Button type="submit" loading={loading} className="text-sm">
           حفظ كلمة المرور
         </Button>
       </form>
+
+      {success && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-blue-900/50 p-4">
+          <div className="w-full max-w-sm rounded-3xl bg-surface p-6 text-center shadow-xl">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <CheckCircleIcon className="h-7 w-7" />
+            </div>
+            <h2 className="mt-4 text-lg font-bold text-emerald-700">تم تغيير كلمة المرور بنجاح</h2>
+            <p className="mt-2 text-sm text-ink-500">استعمل كلمة المرور الجديدة في المرة القادمة اللي تدخل فيها.</p>
+            <Button onClick={() => setSuccess(false)} className="mt-6 w-full">
+              حسناً
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
