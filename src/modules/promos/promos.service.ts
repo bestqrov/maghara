@@ -120,4 +120,39 @@ export class PromosService {
   async list() {
     return this.promoCodeModel.find().sort({ createdAt: -1 });
   }
+
+  async adminListReferrals() {
+    return this.userModel.aggregate([
+      { $match: { referralCode: { $exists: true, $ne: null } } },
+      {
+        $lookup: {
+          from: 'users',
+          let: { referrerId: '$_id' },
+          pipeline: [{ $match: { $expr: { $eq: ['$referredBy', '$$referrerId'] } } }],
+          as: 'referred',
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          firstName: '$profile.firstName',
+          phoneNumber: 1,
+          referralCode: 1,
+          coinBalance: 1,
+          totalReferred: { $size: '$referred' },
+          verifiedReferred: {
+            $size: {
+              $filter: {
+                input: '$referred',
+                as: 'r',
+                cond: { $eq: ['$$r.verificationStatus', 'VERIFIED'] },
+              },
+            },
+          },
+        },
+      },
+      { $match: { totalReferred: { $gt: 0 } } },
+      { $sort: { verifiedReferred: -1, totalReferred: -1 } },
+    ]);
+  }
 }

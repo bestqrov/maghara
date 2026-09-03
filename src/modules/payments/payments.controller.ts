@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { AdminGuard } from '../../common/guards/admin.guard';
+import { AdminJwtGuard } from '../../common/guards/admin-jwt.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { PaymentsService } from './payments.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
@@ -20,19 +20,19 @@ export class PaymentsController {
     return this.paymentsService.getMyTransactions(user.userId);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(AdminJwtGuard)
   @Get('admin/transactions/pending')
   listPending() {
     return this.paymentsService.listPending();
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(AdminJwtGuard)
   @Post('admin/transactions/:transactionId/approve')
   approve(@Param('transactionId') transactionId: string) {
     return this.paymentsService.review(transactionId, true);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(AdminJwtGuard)
   @Post('admin/transactions/:transactionId/reject')
   reject(@Param('transactionId') transactionId: string) {
     return this.paymentsService.review(transactionId, false);

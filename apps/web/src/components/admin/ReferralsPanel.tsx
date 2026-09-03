@@ -1,0 +1,67 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { ReferralStats, listReferrals } from '@/services/admin.service';
+
+export function ReferralsPanel() {
+  const [items, setItems] = useState<ReferralStats[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  async function refresh() {
+    setLoading(true);
+    setError(null);
+    try {
+      setItems(await listReferrals());
+    } catch {
+      setError('تعذّر جلب بيانات الإحالات');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    refresh();
+  }, []);
+
+  if (loading) return <p className="text-sm text-ink-500">جارٍ التحميل...</p>;
+
+  return (
+    <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-surface shadow-sm">
+      {error && <p className="p-4 text-sm text-red-500">{error}</p>}
+      <table className="w-full min-w-[560px] text-sm">
+        <thead>
+          <tr className="border-b border-blue-100 text-right text-ink-500">
+            <th className="px-4 py-3 font-medium">العضو</th>
+            <th className="px-4 py-3 font-medium">رمز الإحالة</th>
+            <th className="px-4 py-3 font-medium">إجمالي المُحالين</th>
+            <th className="px-4 py-3 font-medium">الموثّقون منهم</th>
+            <th className="px-4 py-3 font-medium">رصيد النقاط</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => (
+            <tr key={item._id} className="border-b border-blue-50 last:border-0">
+              <td className="px-4 py-3">
+                <p className="font-semibold text-blue-900">{item.firstName}</p>
+                <p className="text-xs text-ink-500">{item.phoneNumber}</p>
+              </td>
+              <td className="px-4 py-3 font-mono text-blue-700">{item.referralCode}</td>
+              <td className="px-4 py-3">{item.totalReferred}</td>
+              <td className="px-4 py-3">{item.verifiedReferred}</td>
+              <td className="px-4 py-3">{item.coinBalance}</td>
+            </tr>
+          ))}
+          {items.length === 0 && (
+            <tr>
+              <td colSpan={5} className="px-4 py-6 text-center text-ink-500">
+                لا توجد إحالات بعد
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}

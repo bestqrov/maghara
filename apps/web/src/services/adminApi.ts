@@ -6,9 +6,9 @@ export const adminApi = axios.create({
 });
 
 adminApi.interceptors.request.use((config) => {
-  const adminKey = useAdminStore.getState().adminKey;
-  if (adminKey) {
-    config.headers['x-admin-key'] = adminKey;
+  const adminToken = useAdminStore.getState().adminToken;
+  if (adminToken) {
+    config.headers.Authorization = `Bearer ${adminToken}`;
   }
   return config;
 });

@@ -1,4 +1,15 @@
+import axios from 'axios';
 import { adminApi } from './adminApi';
+
+export interface ReferralStats {
+  _id: string;
+  firstName: string;
+  phoneNumber: string;
+  referralCode: string;
+  coinBalance: number;
+  totalReferred: number;
+  verifiedReferred: number;
+}
 
 export interface PendingVerification {
   _id: string;
@@ -85,5 +96,26 @@ export async function listPromoCodes() {
 
 export async function createPromoCode(payload: CreatePromoPayload) {
   const { data } = await adminApi.post<PromoCode>('/promos/admin/create', payload);
+  return data;
+}
+
+export async function listReferrals() {
+  const { data } = await adminApi.get<ReferralStats[]>('/promos/admin/referrals');
+  return data;
+}
+
+export async function adminLogin(password: string) {
+  const { data } = await axios.post<{ accessToken: string }>(
+    `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000'}/admin-auth/login`,
+    { password },
+  );
+  return data.accessToken;
+}
+
+export async function changeAdminPassword(currentPassword: string, newPassword: string) {
+  const { data } = await adminApi.post<{ message: string }>('/admin-auth/change-password', {
+    currentPassword,
+    newPassword,
+  });
   return data;
 }

@@ -6,13 +6,17 @@ import { useAdminStore } from '@/store/admin.store';
 import { VerificationsPanel } from '@/components/admin/VerificationsPanel';
 import { PaymentsPanel } from '@/components/admin/PaymentsPanel';
 import { PromosPanel } from '@/components/admin/PromosPanel';
+import { ReferralsPanel } from '@/components/admin/ReferralsPanel';
+import { SettingsPanel } from '@/components/admin/SettingsPanel';
 
-type Tab = 'verifications' | 'payments' | 'promos';
+type Tab = 'verifications' | 'payments' | 'promos' | 'referrals' | 'settings';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'verifications', label: 'طلبات التوثيق' },
   { id: 'payments', label: 'المدفوعات' },
   { id: 'promos', label: 'الأكواد الترويجية' },
+  { id: 'referrals', label: 'الإحالات' },
+  { id: 'settings', label: 'الإعدادات' },
 ];
 
 export default function AdminDashboardPage() {
@@ -43,13 +47,13 @@ export default function AdminDashboardPage() {
       </div>
 
       <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-8">
-        <nav className="flex gap-2 rounded-2xl border border-blue-100 bg-surface p-1.5 shadow-sm">
+        <nav className="scroll-hide flex gap-2 overflow-x-auto rounded-2xl border border-blue-100 bg-surface p-1.5 shadow-sm">
           {TABS.map((t) => (
             <button
               key={t.id}
               type="button"
               onClick={() => setTab(t.id)}
-              className={`flex-1 rounded-xl py-2 text-center text-sm font-semibold transition ${
+              className={`shrink-0 rounded-xl px-4 py-2 text-center text-sm font-semibold whitespace-nowrap transition ${
                 tab === t.id ? 'bg-rose-500 text-white' : 'text-blue-700 hover:bg-rose-50'
               }`}
             >
@@ -61,6 +65,8 @@ export default function AdminDashboardPage() {
         {tab === 'verifications' && <VerificationsPanel />}
         {tab === 'payments' && <PaymentsPanel />}
         {tab === 'promos' && <PromosPanel />}
+        {tab === 'referrals' && <ReferralsPanel />}
+        {tab === 'settings' && <SettingsPanel />}
       </div>
     </main>
   );

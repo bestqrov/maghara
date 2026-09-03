@@ -2,19 +2,19 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface AdminState {
-  adminKey: string | null;
+  adminToken: string | null;
   hasHydrated: boolean;
-  setAdminKey: (key: string) => void;
+  setAdminToken: (token: string) => void;
   logout: () => void;
 }
 
 export const useAdminStore = create<AdminState>()(
   persist(
     (set) => ({
-      adminKey: null,
+      adminToken: null,
       hasHydrated: false,
-      setAdminKey: (key) => set({ adminKey: key }),
-      logout: () => set({ adminKey: null }),
+      setAdminToken: (token) => set({ adminToken: token }),
+      logout: () => set({ adminToken: null }),
     }),
     {
       name: 'zawaj-admin',

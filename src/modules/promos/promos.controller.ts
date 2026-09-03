@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { AdminGuard } from '../../common/guards/admin.guard';
+import { AdminJwtGuard } from '../../common/guards/admin-jwt.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { PromosService } from './promos.service';
 import { RedeemPromoDto } from './dto/redeem-promo.dto';
@@ -22,15 +22,21 @@ export class PromosController {
     return this.promosService.getReferralInfo(user.userId);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(AdminJwtGuard)
   @Post('admin/create')
   create(@Body() dto: CreatePromoDto) {
     return this.promosService.create(dto);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(AdminJwtGuard)
   @Get('admin/list')
   list() {
     return this.promosService.list();
+  }
+
+  @UseGuards(AdminJwtGuard)
+  @Get('admin/referrals')
+  listReferrals() {
+    return this.promosService.adminListReferrals();
   }
 }

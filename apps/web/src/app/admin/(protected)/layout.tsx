@@ -6,13 +6,13 @@ import { useAdminStore } from '@/store/admin.store';
 
 export default function AdminProtectedLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { adminKey, hasHydrated } = useAdminStore();
+  const { adminToken, hasHydrated } = useAdminStore();
 
   useEffect(() => {
-    if (hasHydrated && !adminKey) router.replace('/admin/login');
-  }, [hasHydrated, adminKey, router]);
+    if (hasHydrated && !adminToken) router.replace('/admin/login');
+  }, [hasHydrated, adminToken, router]);
 
-  if (!hasHydrated || !adminKey) return null;
+  if (!hasHydrated || !adminToken) return null;
 
   return <>{children}</>;
 }
