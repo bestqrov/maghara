@@ -15,6 +15,7 @@ export interface AppDictionary {
     visitors: string;
     matches: string;
     store: string;
+    profileAria: string;
     settingsAria: string;
   };
   login: {
@@ -138,6 +139,24 @@ export interface AppDictionary {
     success: string;
     errorWrongPassword: string;
   };
+  profile: {
+    title: string;
+    subtitle: string;
+    firstNameLabel: string;
+    currentCityLabel: string;
+    residenceCountryLabel: string;
+    originCountryLabel: string;
+    relocationLabel: string;
+    relocationOpen: string;
+    relocationExpat: string;
+    relocationLocal: string;
+    jobTitleLabel: string;
+    bioLabel: string;
+    photoLabel: string;
+    save: string;
+    success: string;
+    errorGeneric: string;
+  };
   store: {
     title: string;
     coinPackagesTitle: string;
@@ -239,6 +258,7 @@ const ar: AppDictionary = {
     visitors: 'الزوار',
     matches: 'الاهتمامات',
     store: 'المتجر',
+    profileAria: 'البروفايل',
     settingsAria: 'الإعدادات',
   },
   login: {
@@ -362,6 +382,24 @@ const ar: AppDictionary = {
     success: 'تبدل الپاسوورد بنجاح',
     errorWrongPassword: 'الپاسوورد الحالي غير صحيح',
   },
+  profile: {
+    title: 'البروفايل ديالي',
+    subtitle: 'بدّل المعلومات ديالك اللي بانة للأعضاء الآخرين',
+    firstNameLabel: 'السمية',
+    currentCityLabel: 'المدينة',
+    residenceCountryLabel: 'بلد الإقامة الحالية',
+    originCountryLabel: 'بلد الأصل',
+    relocationLabel: 'الاستعداد للانتقال أو الزواج بالجالية',
+    relocationOpen: 'مستعد نتنقل',
+    relocationExpat: 'كنبحث فـ الجالية',
+    relocationLocal: 'فـ بلدي فقط',
+    jobTitleLabel: 'المهنة (اختياري)',
+    bioLabel: 'نبذة عنك (اختياري)',
+    photoLabel: 'صورة البروفايل',
+    save: 'حفظ التغييرات',
+    success: 'تبدلت المعلومات ديالك بنجاح',
+    errorGeneric: 'كاين مشكل، حاول مرة أخرى',
+  },
   store: {
     title: 'المتجر والباقات',
     coinPackagesTitle: 'باقات النقط',
@@ -463,6 +501,7 @@ const fr: AppDictionary = {
     visitors: 'Visiteurs',
     matches: 'Intérêts',
     store: 'Boutique',
+    profileAria: 'Profil',
     settingsAria: 'Paramètres',
   },
   login: {
@@ -587,6 +626,24 @@ const fr: AppDictionary = {
     success: 'Mot de passe modifié avec succès',
     errorWrongPassword: 'Le mot de passe actuel est incorrect',
   },
+  profile: {
+    title: 'Mon profil',
+    subtitle: 'Modifiez les informations visibles par les autres membres',
+    firstNameLabel: 'Prénom',
+    currentCityLabel: 'Ville',
+    residenceCountryLabel: 'Pays de résidence actuel',
+    originCountryLabel: 'Pays d\'origine',
+    relocationLabel: 'Disposé(e) à déménager ou épouser un(e) expatrié(e)',
+    relocationOpen: 'Prêt(e) à déménager',
+    relocationExpat: 'Je recherche dans la diaspora',
+    relocationLocal: 'Dans mon pays uniquement',
+    jobTitleLabel: 'Profession (optionnel)',
+    bioLabel: 'À propos de vous (optionnel)',
+    photoLabel: 'Photo de profil',
+    save: 'Enregistrer les modifications',
+    success: 'Vos informations ont été mises à jour avec succès',
+    errorGeneric: 'Un problème est survenu, réessayez',
+  },
   store: {
     title: 'Boutique et forfaits',
     coinPackagesTitle: 'Packs de pièces',
@@ -690,6 +747,7 @@ const en: AppDictionary = {
     visitors: 'Visitors',
     matches: 'Interests',
     store: 'Store',
+    profileAria: 'Profile',
     settingsAria: 'Settings',
   },
   login: {
@@ -814,6 +872,24 @@ const en: AppDictionary = {
     success: 'Password changed successfully',
     errorWrongPassword: 'Current password is incorrect',
   },
+  profile: {
+    title: 'My profile',
+    subtitle: 'Edit the information other members can see',
+    firstNameLabel: 'First name',
+    currentCityLabel: 'City',
+    residenceCountryLabel: 'Current country of residence',
+    originCountryLabel: 'Country of origin',
+    relocationLabel: 'Willingness to relocate or marry someone abroad',
+    relocationOpen: 'Open to relocating',
+    relocationExpat: 'Looking within the diaspora',
+    relocationLocal: 'Local only',
+    jobTitleLabel: 'Job title (optional)',
+    bioLabel: 'About you (optional)',
+    photoLabel: 'Profile photo',
+    save: 'Save changes',
+    success: 'Your information was updated successfully',
+    errorGeneric: 'Something went wrong, please try again',
+  },
   store: {
     title: 'Store & plans',
     coinPackagesTitle: 'Coin packages',
@@ -916,6 +992,7 @@ const es: AppDictionary = {
     visitors: 'Visitantes',
     matches: 'Intereses',
     store: 'Tienda',
+    profileAria: 'Perfil',
     settingsAria: 'Ajustes',
   },
   login: {
@@ -1039,6 +1116,24 @@ const es: AppDictionary = {
     save: 'Guardar',
     success: 'Contraseña cambiada con éxito',
     errorWrongPassword: 'La contraseña actual es incorrecta',
+  },
+  profile: {
+    title: 'Mi perfil',
+    subtitle: 'Edita la información que ven los demás miembros',
+    firstNameLabel: 'Nombre',
+    currentCityLabel: 'Ciudad',
+    residenceCountryLabel: 'País de residencia actual',
+    originCountryLabel: 'País de origen',
+    relocationLabel: 'Disposición a mudarse o casarse con alguien de la diáspora',
+    relocationOpen: 'Dispuesto/a a mudarme',
+    relocationExpat: 'Busco en la diáspora',
+    relocationLocal: 'Solo en mi país',
+    jobTitleLabel: 'Profesión (opcional)',
+    bioLabel: 'Sobre ti (opcional)',
+    photoLabel: 'Foto de perfil',
+    save: 'Guardar cambios',
+    success: 'Tu información se actualizó con éxito',
+    errorGeneric: 'Ocurrió un problema, inténtalo de nuevo',
   },
   store: {
     title: 'Tienda y planes',

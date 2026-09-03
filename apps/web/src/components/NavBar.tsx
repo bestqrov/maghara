@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { GearIcon } from '@/components/icons';
+import { GearIcon, UserIcon } from '@/components/icons';
 import { LocaleLink } from '@/components/LocaleLink';
 import { LanguageSelector } from '@/components/seo/LanguageSelector';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
@@ -52,6 +52,15 @@ export function NavBar() {
             </LocaleLink>
           );
         })}
+        <LocaleLink
+          href="/profile"
+          aria-label={dict.nav.profileAria}
+          className={`flex items-center justify-center rounded-xl px-3 transition ${
+            pathname === withLocale(locale, '/profile') ? 'bg-rose-500 text-white' : 'text-blue-700 hover:bg-rose-50'
+          }`}
+        >
+          <UserIcon className="h-4 w-4" />
+        </LocaleLink>
         <LocaleLink
           href="/settings"
           aria-label={dict.nav.settingsAria}
