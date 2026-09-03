@@ -35,11 +35,11 @@ export function NavBar() {
     <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-surface p-1.5 shadow-sm sm:gap-3">
       <LocaleLink
         href="/feed"
-        className="font-display flex shrink-0 items-center gap-1.5 pr-1 pl-2 text-sm font-bold text-blue-900"
+        className="font-display flex shrink-0 flex-col items-center justify-center gap-0.5 rounded-xl px-2.5 py-1 text-center font-bold text-blue-900 transition hover:bg-rose-50"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo-icon.png" alt="" className="h-7 w-auto" />
-        <span className="hidden lg:inline">{dict.common.brand}</span>
+        <span className="hidden text-[10px] leading-none whitespace-nowrap lg:inline">{dict.common.brand}</span>
       </LocaleLink>
       <nav className="scroll-hide flex min-w-0 flex-1 items-center gap-1 overflow-x-auto sm:gap-2">
         {LINKS.map((link) => {
