@@ -17,6 +17,7 @@ export interface AppDictionary {
     store: string;
     profileAria: string;
     settingsAria: string;
+    logoutAria: string;
   };
   login: {
     title: string;
@@ -260,6 +261,7 @@ const ar: AppDictionary = {
     store: 'المتجر',
     profileAria: 'البروفايل',
     settingsAria: 'الإعدادات',
+    logoutAria: 'خروج',
   },
   login: {
     title: 'مرحباً بك من جديد',
@@ -503,6 +505,7 @@ const fr: AppDictionary = {
     store: 'Boutique',
     profileAria: 'Profil',
     settingsAria: 'Paramètres',
+    logoutAria: 'Déconnexion',
   },
   login: {
     title: 'Bon retour parmi nous',
@@ -749,6 +752,7 @@ const en: AppDictionary = {
     store: 'Store',
     profileAria: 'Profile',
     settingsAria: 'Settings',
+    logoutAria: 'Logout',
   },
   login: {
     title: 'Welcome back',
@@ -994,6 +998,7 @@ const es: AppDictionary = {
     store: 'Tienda',
     profileAria: 'Perfil',
     settingsAria: 'Ajustes',
+    logoutAria: 'Cerrar sesión',
   },
   login: {
     title: 'Bienvenido de nuevo',

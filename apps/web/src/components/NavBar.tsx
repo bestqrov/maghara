@@ -1,15 +1,18 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { GearIcon, UserIcon } from '@/components/icons';
+import { usePathname, useRouter } from 'next/navigation';
+import { GearIcon, LogoutIcon, UserIcon } from '@/components/icons';
 import { LocaleLink } from '@/components/LocaleLink';
 import { LanguageSelector } from '@/components/seo/LanguageSelector';
+import { useAuthStore } from '@/store/auth.store';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 import { SUPPORTED_LOCALES, type Locale } from '@/lib/seo';
 
 export function NavBar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { locale, dict } = useAppDict();
+  const logout = useAuthStore((s) => s.logout);
 
   const pathWithoutLocale = pathname.replace(new RegExp(`^/${locale}`), '') || '/';
   const hrefByLocale = SUPPORTED_LOCALES.reduce(
@@ -70,6 +73,17 @@ export function NavBar() {
         >
           <GearIcon className="h-4 w-4" />
         </LocaleLink>
+        <button
+          type="button"
+          aria-label={dict.nav.logoutAria}
+          onClick={() => {
+            logout();
+            router.push(withLocale(locale, '/login'));
+          }}
+          className="flex items-center justify-center rounded-xl px-3 text-blue-700 transition hover:bg-rose-50"
+        >
+          <LogoutIcon className="h-4 w-4" />
+        </button>
       </nav>
       <LanguageSelector currentLocale={locale} hrefByLocale={hrefByLocale} label={dict.languageSelector.label} />
     </div>

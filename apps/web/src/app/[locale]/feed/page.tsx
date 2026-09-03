@@ -9,7 +9,6 @@ import { searchProfiles, sendInterest, SearchFilters, SearchResultProfile, DAILY
 import { VerificationBanner } from '@/components/VerificationBanner';
 import { SearchFiltersBar } from '@/components/SearchFiltersBar';
 import { ProfileCard } from '@/components/ProfileCard';
-import { Button } from '@/components/ui/Button';
 import { NavBar } from '@/components/NavBar';
 import { WeddingEmblem } from '@/components/WeddingEmblem';
 import { recordVisit } from '@/services/visitors.service';
@@ -18,7 +17,7 @@ import { useAppDict, withLocale } from '@/hooks/useLocale';
 export default function FeedPage() {
   const router = useRouter();
   const { locale, dict } = useAppDict();
-  const { token, user, hasHydrated, logout } = useAuthStore();
+  const { token, user, hasHydrated } = useAuthStore();
   const [verification, setVerification] = useState<VerificationStatusResponse | null>(null);
   const [results, setResults] = useState<SearchResultProfile[]>([]);
   const [dailyInterestsSent, setDailyInterestsSent] = useState(0);
@@ -95,15 +94,6 @@ export default function FeedPage() {
                 {dict.feed.interestsToday(dailyInterestsSent, DAILY_FREE_INTERESTS)}
               </span>
             )}
-            <Button
-              variant="ghost"
-              onClick={() => {
-                logout();
-                router.push(withLocale(locale, '/login'));
-              }}
-            >
-              {dict.common.logout}
-            </Button>
           </div>
         </header>
 

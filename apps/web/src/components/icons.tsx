@@ -140,6 +140,20 @@ export function UserIcon({ className = 'h-5 w-5' }: IconProps) {
   );
 }
 
+export function LogoutIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M15 4.5h2.5a2 2 0 012 2v11a2 2 0 01-2 2H15M9 8l-4 4 4 4M5 12h12"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function SpinnerIcon({ className = 'h-4 w-4' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={`animate-spin ${className}`} aria-hidden="true">
