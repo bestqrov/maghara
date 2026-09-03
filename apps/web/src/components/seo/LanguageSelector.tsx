@@ -39,10 +39,11 @@ export function LanguageSelector({ currentLocale, hrefByLocale, label }: Languag
         onClick={() => setOpen((v) => !v)}
         aria-label={label}
         aria-expanded={open}
-        className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-surface px-3 py-1.5 text-sm font-semibold text-blue-900 transition hover:bg-blue-50"
+        className="flex items-center gap-1 rounded-full border border-blue-100 bg-surface px-2.5 py-1.5 text-sm font-semibold text-blue-900 transition hover:bg-blue-50"
       >
-        <span aria-hidden="true">{current.flag}</span>
-        <span>{current.nativeName}</span>
+        <span aria-hidden="true" className="text-base leading-none">
+          {current.flag}
+        </span>
         <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5 text-blue-400" aria-hidden="true">
           <path
             fillRule="evenodd"
