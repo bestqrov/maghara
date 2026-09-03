@@ -14,6 +14,16 @@ const EMPTY: PaymentSettings = {
   internationalWire: { bankName: '', accountHolder: '', iban: '', swiftBic: '', bankAddress: '' },
 };
 
+/** Fills in any section the server response is missing, so a partial/older shape never crashes the form. */
+function withDefaults(data: Partial<PaymentSettings> | null | undefined): PaymentSettings {
+  return {
+    cryptoWallets: { ...EMPTY.cryptoWallets, ...data?.cryptoWallets },
+    bankTransfer: { ...EMPTY.bankTransfer, ...data?.bankTransfer },
+    cashPlus: { ...EMPTY.cashPlus, ...data?.cashPlus },
+    internationalWire: { ...EMPTY.internationalWire, ...data?.internationalWire },
+  };
+}
+
 export function PaymentSettingsPanel() {
   const { dict } = useAdminDict();
   const [form, setForm] = useState<PaymentSettings>(EMPTY);
@@ -26,7 +36,7 @@ export function PaymentSettingsPanel() {
     setLoading(true);
     setError(null);
     try {
-      setForm(await getAdminPaymentSettings());
+      setForm(withDefaults(await getAdminPaymentSettings()));
     } catch {
       setError(dict.paymentSettings.errorFetch);
     } finally {
@@ -46,7 +56,7 @@ export function PaymentSettingsPanel() {
     setSuccess(false);
     setSaving(true);
     try {
-      setForm(await updatePaymentSettings(form));
+      setForm(withDefaults(await updatePaymentSettings(form)));
       setSuccess(true);
     } catch {
       setError(dict.paymentSettings.errorSave);
