@@ -11,6 +11,7 @@ import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
 import { ImageUploader } from '@/components/ImageUploader';
 import { NavBar } from '@/components/NavBar';
+import { WeddingEmblem } from '@/components/WeddingEmblem';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 
 type ProfileFormFields = Pick<
@@ -90,66 +91,91 @@ export default function ProfilePage() {
   if (!hasHydrated || !token) return null;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-6 px-4 py-8">
-      <NavBar />
-      <h1 className="text-xl font-bold text-emerald-700">{dict.profile.title}</h1>
+    <main
+      className="relative min-h-screen overflow-hidden"
+      style={{
+        background: 'radial-gradient(60% 40% at 85% 0%, var(--color-rose-50) 0%, var(--background) 65%)',
+      }}
+    >
+      <WeddingEmblem className="spin-anim pointer-events-none absolute right-1/2 top-0 h-[520px] w-[520px] -translate-y-1/3 translate-x-1/2 text-blue-700 opacity-[0.05] sm:h-[680px] sm:w-[680px]" />
 
-      <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-sm">
-        <p className="text-sm text-ink-500">{dict.profile.subtitle}</p>
+      <div className="relative mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-8">
+        <NavBar />
 
-        {ready && (
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-6 flex flex-col gap-4">
-            <ImageUploader
-              label={dict.profile.photoLabel}
-              value={photoUrl}
-              onUploaded={setPhotoUrl}
-              folder="zawaj/profiles"
-            />
-            <Input
-              id="firstName"
-              label={dict.profile.firstNameLabel}
-              {...register('firstName', { required: true })}
-              error={errors.firstName ? dict.common.errorGeneric : undefined}
-            />
-            <Input
-              id="residenceCountry"
-              label={dict.profile.residenceCountryLabel}
-              {...register('residenceCountry', { required: true })}
-              error={errors.residenceCountry ? dict.common.errorGeneric : undefined}
-            />
-            <Input
-              id="currentCity"
-              label={dict.profile.currentCityLabel}
-              {...register('currentCity', { required: true })}
-              error={errors.currentCity ? dict.common.errorGeneric : undefined}
-            />
-            <Input
-              id="originCountry"
-              label={dict.profile.originCountryLabel}
-              {...register('originCountry', { required: true })}
-              error={errors.originCountry ? dict.common.errorGeneric : undefined}
-            />
-            <Select
-              id="relocationPreference"
-              label={dict.profile.relocationLabel}
-              {...register('relocationPreference')}
-              options={[
-                { value: 'OPEN_TO_MOVE', label: dict.profile.relocationOpen },
-                { value: 'LOOKING_FOR_EXPAT', label: dict.profile.relocationExpat },
-                { value: 'LOCAL_ONLY', label: dict.profile.relocationLocal },
-              ]}
-            />
-            <Input id="jobTitle" label={dict.profile.jobTitleLabel} {...register('jobTitle')} />
-            <Input id="bio" label={dict.profile.bioLabel} {...register('bio')} />
+        <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-white/90 p-6 shadow-sm backdrop-blur-sm sm:p-10">
+          <WeddingEmblem className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 text-rose-500 opacity-[0.06] sm:h-56 sm:w-56" />
 
-            {serverError && <p className="text-sm text-red-500">{serverError}</p>}
-            {success && <p className="text-sm text-emerald-600">{dict.profile.success}</p>}
+          <div className="relative flex flex-col items-center gap-3 text-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-icon.png" alt="" className="h-12 w-auto" />
+            <h1 className="font-display text-2xl font-bold text-blue-900">{dict.profile.title}</h1>
+            <p className="max-w-sm text-sm text-ink-500">{dict.profile.subtitle}</p>
+          </div>
 
-            <Button type="submit" loading={loading} className="mt-2 w-full">
-              {dict.profile.save}
-            </Button>
-          </form>
-        )}
+          {ready && (
+            <form onSubmit={handleSubmit(onSubmit)} className="relative mt-8 flex flex-col gap-5">
+              <div className="flex justify-center">
+                <ImageUploader
+                  label={dict.profile.photoLabel}
+                  value={photoUrl}
+                  onUploaded={setPhotoUrl}
+                  folder="zawaj/profiles"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <Input
+                  id="firstName"
+                  label={dict.profile.firstNameLabel}
+                  {...register('firstName', { required: true })}
+                  error={errors.firstName ? dict.common.errorGeneric : undefined}
+                />
+                <Input
+                  id="jobTitle"
+                  label={dict.profile.jobTitleLabel}
+                  {...register('jobTitle')}
+                />
+                <Input
+                  id="residenceCountry"
+                  label={dict.profile.residenceCountryLabel}
+                  {...register('residenceCountry', { required: true })}
+                  error={errors.residenceCountry ? dict.common.errorGeneric : undefined}
+                />
+                <Input
+                  id="currentCity"
+                  label={dict.profile.currentCityLabel}
+                  {...register('currentCity', { required: true })}
+                  error={errors.currentCity ? dict.common.errorGeneric : undefined}
+                />
+                <Input
+                  id="originCountry"
+                  label={dict.profile.originCountryLabel}
+                  {...register('originCountry', { required: true })}
+                  error={errors.originCountry ? dict.common.errorGeneric : undefined}
+                />
+                <Select
+                  id="relocationPreference"
+                  label={dict.profile.relocationLabel}
+                  {...register('relocationPreference')}
+                  options={[
+                    { value: 'OPEN_TO_MOVE', label: dict.profile.relocationOpen },
+                    { value: 'LOOKING_FOR_EXPAT', label: dict.profile.relocationExpat },
+                    { value: 'LOCAL_ONLY', label: dict.profile.relocationLocal },
+                  ]}
+                />
+              </div>
+
+              <Input id="bio" label={dict.profile.bioLabel} {...register('bio')} />
+
+              {serverError && <p className="text-sm text-red-500">{serverError}</p>}
+              {success && <p className="text-sm text-emerald-600">{dict.profile.success}</p>}
+
+              <Button type="submit" loading={loading} className="mt-2 w-full sm:w-auto sm:self-center sm:px-10">
+                {dict.profile.save}
+              </Button>
+            </form>
+          )}
+        </div>
       </div>
     </main>
   );

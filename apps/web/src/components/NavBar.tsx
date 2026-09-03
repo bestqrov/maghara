@@ -31,23 +31,23 @@ export function NavBar() {
   ];
 
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-white p-1.5 shadow-sm">
+    <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-white p-1.5 shadow-sm sm:gap-3">
       <LocaleLink
         href="/feed"
-        className="font-display flex items-center gap-1.5 pr-1 pl-2 text-sm font-bold text-blue-900"
+        className="font-display flex shrink-0 items-center gap-1.5 pr-1 pl-2 text-sm font-bold text-blue-900"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo-icon.png" alt="" className="h-7 w-auto" />
-        <span className="hidden sm:inline">{dict.common.brand}</span>
+        <span className="hidden lg:inline">{dict.common.brand}</span>
       </LocaleLink>
-      <nav className="flex flex-1 gap-2">
+      <nav className="scroll-hide flex min-w-0 flex-1 items-center gap-1 overflow-x-auto sm:gap-2">
         {LINKS.map((link) => {
           const active = pathname === withLocale(locale, link.href);
           return (
             <LocaleLink
               key={link.href}
               href={link.href}
-              className={`flex-1 rounded-xl py-2 text-center text-sm font-semibold transition ${
+              className={`shrink-0 rounded-xl px-2.5 py-2 text-center text-xs font-semibold whitespace-nowrap transition sm:px-4 sm:text-sm ${
                 active ? 'bg-rose-500 text-white' : 'text-blue-700 hover:bg-rose-50'
               }`}
             >
@@ -58,7 +58,7 @@ export function NavBar() {
         <LocaleLink
           href="/profile"
           aria-label={dict.nav.profileAria}
-          className={`flex items-center justify-center rounded-xl px-3 transition ${
+          className={`flex shrink-0 items-center justify-center rounded-xl px-3 py-2 transition ${
             pathname === withLocale(locale, '/profile') ? 'bg-rose-500 text-white' : 'text-blue-700 hover:bg-rose-50'
           }`}
         >
@@ -67,7 +67,7 @@ export function NavBar() {
         <LocaleLink
           href="/settings"
           aria-label={dict.nav.settingsAria}
-          className={`flex items-center justify-center rounded-xl px-3 transition ${
+          className={`flex shrink-0 items-center justify-center rounded-xl px-3 py-2 transition ${
             pathname === withLocale(locale, '/settings') ? 'bg-rose-500 text-white' : 'text-blue-700 hover:bg-rose-50'
           }`}
         >
@@ -80,12 +80,14 @@ export function NavBar() {
             logout();
             router.push(withLocale(locale, '/login'));
           }}
-          className="flex items-center justify-center rounded-xl px-3 text-blue-700 transition hover:bg-rose-50"
+          className="flex shrink-0 items-center justify-center rounded-xl px-3 py-2 text-blue-700 transition hover:bg-rose-50"
         >
           <LogoutIcon className="h-4 w-4" />
         </button>
       </nav>
-      <LanguageSelector currentLocale={locale} hrefByLocale={hrefByLocale} label={dict.languageSelector.label} />
+      <div className="shrink-0">
+        <LanguageSelector currentLocale={locale} hrefByLocale={hrefByLocale} label={dict.languageSelector.label} />
+      </div>
     </div>
   );
 }

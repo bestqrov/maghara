@@ -133,6 +133,14 @@ body {
   animation: spin-slow 60s linear infinite;
 }
 
+.scroll-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .hero-enter,
