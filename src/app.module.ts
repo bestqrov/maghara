@@ -15,6 +15,7 @@ import { VerificationModule } from './modules/verification/verification.module';
 import { PublicModule } from './modules/public/public.module';
 import { PromosModule } from './modules/promos/promos.module';
 import { AdminAuthModule } from './modules/admin-auth/admin-auth.module';
+import { PaymentSettingsModule } from './modules/payment-settings/payment-settings.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AdminAuthModule } from './modules/admin-auth/admin-auth.module';
     PublicModule,
     PromosModule,
     AdminAuthModule,
+    PaymentSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

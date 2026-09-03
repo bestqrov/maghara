@@ -1,13 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import {
-  BANK_DETAILS,
-  createTransaction,
-  CRYPTO_WALLETS,
-  PaymentMethod,
-  TransactionType,
-} from '@/services/payments.service';
+import { useEffect, useState } from 'react';
+import { createTransaction, PaymentMethod, TransactionType } from '@/services/payments.service';
+import { getPaymentSettings, PaymentSettings } from '@/services/paymentSettings.service';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
 import { ImageUploader } from './ImageUploader';
@@ -21,13 +16,52 @@ interface PaymentModalProps {
   onSuccess: () => void;
 }
 
+function destinationLines(method: PaymentMethod, settings: PaymentSettings | null): { label: string; value: string }[] {
+  if (!settings) return [];
+  switch (method) {
+    case 'CRYPTO_TRC20':
+      return settings.cryptoWallets.trc20 ? [{ label: 'USDT (TRC-20)', value: settings.cryptoWallets.trc20 }] : [];
+    case 'CRYPTO_POLYGON':
+      return settings.cryptoWallets.polygon ? [{ label: 'USDT (Polygon)', value: settings.cryptoWallets.polygon }] : [];
+    case 'CRYPTO_SOLANA':
+      return settings.cryptoWallets.solana ? [{ label: 'USDT (Solana)', value: settings.cryptoWallets.solana }] : [];
+    case 'BANK_TRANSFER':
+      return [
+        settings.bankTransfer.bankName ? { label: 'البنك', value: settings.bankTransfer.bankName } : null,
+        settings.bankTransfer.accountHolder ? { label: 'صاحب الحساب', value: settings.bankTransfer.accountHolder } : null,
+        settings.bankTransfer.rib ? { label: 'RIB', value: settings.bankTransfer.rib } : null,
+      ].filter((l): l is { label: string; value: string } => l !== null);
+    case 'CASH_PLUS':
+      return settings.cashPlus.code ? [{ label: 'الرمز', value: settings.cashPlus.code }] : [];
+    case 'INTERNATIONAL_WIRE':
+      return [
+        settings.internationalWire.bankName ? { label: 'البنك', value: settings.internationalWire.bankName } : null,
+        settings.internationalWire.accountHolder
+          ? { label: 'صاحب الحساب', value: settings.internationalWire.accountHolder }
+          : null,
+        settings.internationalWire.iban ? { label: 'IBAN', value: settings.internationalWire.iban } : null,
+        settings.internationalWire.swiftBic ? { label: 'SWIFT/BIC', value: settings.internationalWire.swiftBic } : null,
+        settings.internationalWire.bankAddress
+          ? { label: 'عنوان البنك', value: settings.internationalWire.bankAddress }
+          : null,
+      ].filter((l): l is { label: string; value: string } => l !== null);
+  }
+}
+
 export function PaymentModal({ amount, type, title, onClose, onSuccess }: PaymentModalProps) {
   const { dict } = useAppDict();
+  const [settings, setSettings] = useState<PaymentSettings | null>(null);
   const [method, setMethod] = useState<PaymentMethod | null>(null);
   const [reference, setReference] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    getPaymentSettings()
+      .then(setSettings)
+      .catch(() => setSettings(null));
+  }, []);
 
   const METHODS: { value: PaymentMethod; label: string; kind: 'crypto' | 'manual' }[] = [
     { value: 'CRYPTO_TRC20', label: 'USDT (TRC-20)', kind: 'crypto' },
@@ -35,9 +69,11 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
     { value: 'CRYPTO_SOLANA', label: 'USDT (Solana)', kind: 'crypto' },
     { value: 'BANK_TRANSFER', label: dict.paymentModal.bankTransfer, kind: 'manual' },
     { value: 'CASH_PLUS', label: 'Cash Plus', kind: 'manual' },
+    { value: 'INTERNATIONAL_WIRE', label: dict.paymentModal.internationalWire, kind: 'manual' },
   ];
 
   const selected = METHODS.find((m) => m.value === method);
+  const lines = method ? destinationLines(method, settings) : [];
 
   async function handleSubmit() {
     if (!method || !reference.trim()) return;
@@ -90,24 +126,25 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
               ))}
             </div>
 
-            {selected && selected.kind === 'crypto' && (
+            {selected && (
               <div className="mt-4 rounded-xl bg-gold-100 p-3 text-xs">
-                <p className="font-semibold text-emerald-900">{dict.paymentModal.sendCryptoTo(amount)}</p>
-                <p className="mt-1 break-all rounded-lg bg-surface p-2 font-mono text-emerald-700">
-                  {CRYPTO_WALLETS[selected.value]}
+                <p className="font-semibold text-emerald-900">
+                  {selected.kind === 'crypto'
+                    ? dict.paymentModal.sendCryptoTo(amount)
+                    : dict.paymentModal.transferTo(amount)}
                 </p>
-                <p className="mt-2 text-red-600">{dict.paymentModal.placeholderWarningCrypto}</p>
-              </div>
-            )}
-
-            {selected && selected.kind === 'manual' && (
-              <div className="mt-4 rounded-xl bg-gold-100 p-3 text-xs">
-                <p className="font-semibold text-emerald-900">{dict.paymentModal.transferTo(amount)}</p>
-                <p className="mt-1 text-emerald-700">{BANK_DETAILS[selected.value].bank}</p>
-                <p className="mt-1 break-all rounded-lg bg-surface p-2 font-mono text-emerald-700">
-                  {BANK_DETAILS[selected.value].rib}
-                </p>
-                <p className="mt-2 text-red-600">{dict.paymentModal.placeholderWarningBank}</p>
+                {lines.length > 0 ? (
+                  <div className="mt-1 flex flex-col gap-1.5">
+                    {lines.map((line) => (
+                      <div key={line.label}>
+                        <p className="text-emerald-800/70">{line.label}</p>
+                        <p className="break-all rounded-lg bg-surface p-2 font-mono text-emerald-700">{line.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mt-1 text-red-600">{dict.paymentModal.notConfigured}</p>
+                )}
               </div>
             )}
 

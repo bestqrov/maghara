@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { adminApi } from './adminApi';
+import type { PaymentSettings } from './paymentSettings.service';
 
 export interface ReferralStats {
   _id: string;
@@ -117,5 +118,15 @@ export async function changeAdminPassword(currentPassword: string, newPassword: 
     currentPassword,
     newPassword,
   });
+  return data;
+}
+
+export async function getAdminPaymentSettings() {
+  const { data } = await adminApi.get<PaymentSettings>('/payment-settings');
+  return data;
+}
+
+export async function updatePaymentSettings(payload: Partial<PaymentSettings>) {
+  const { data } = await adminApi.patch<PaymentSettings>('/payment-settings', payload);
   return data;
 }

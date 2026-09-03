@@ -1,6 +1,12 @@
 import { api } from './api';
 
-export type PaymentMethod = 'CRYPTO_TRC20' | 'CRYPTO_POLYGON' | 'CRYPTO_SOLANA' | 'BANK_TRANSFER' | 'CASH_PLUS';
+export type PaymentMethod =
+  | 'CRYPTO_TRC20'
+  | 'CRYPTO_POLYGON'
+  | 'CRYPTO_SOLANA'
+  | 'BANK_TRANSFER'
+  | 'CASH_PLUS'
+  | 'INTERNATIONAL_WIRE';
 export type TransactionType = 'COIN_PURCHASE' | 'VIP_SUBSCRIPTION' | 'VERIFICATION_FEE';
 export type TransactionStatus = 'PENDING' | 'SUCCESS' | 'FAILED';
 
@@ -40,14 +46,3 @@ export const COIN_PACKAGES = [
 ] as const;
 
 export const VIP_PLAN = { amount: 99, label: 'VIP شهري', priceLabel: '99 درهم / الشهر' } as const;
-
-export const CRYPTO_WALLETS: Record<string, string> = {
-  CRYPTO_TRC20: 'PLACEHOLDER_TRC20_ADDRESS_CONFIGURE_ME',
-  CRYPTO_POLYGON: 'PLACEHOLDER_POLYGON_ADDRESS_CONFIGURE_ME',
-  CRYPTO_SOLANA: 'PLACEHOLDER_SOLANA_ADDRESS_CONFIGURE_ME',
-};
-
-export const BANK_DETAILS: Record<string, { bank: string; rib: string }> = {
-  BANK_TRANSFER: { bank: 'CIH Bank', rib: 'PLACEHOLDER_RIB_CONFIGURE_ME' },
-  CASH_PLUS: { bank: 'Cash Plus', rib: 'PLACEHOLDER_CASHPLUS_CODE_CONFIGURE_ME' },
-};

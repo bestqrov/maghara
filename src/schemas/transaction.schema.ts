@@ -6,7 +6,8 @@ export type PaymentMethod =
   | 'CRYPTO_POLYGON'
   | 'CRYPTO_SOLANA'
   | 'BANK_TRANSFER'
-  | 'CASH_PLUS';
+  | 'CASH_PLUS'
+  | 'INTERNATIONAL_WIRE';
 export type TransactionType = 'COIN_PURCHASE' | 'VIP_SUBSCRIPTION' | 'VERIFICATION_FEE';
 export type TransactionStatus = 'PENDING' | 'SUCCESS' | 'FAILED';
 
@@ -19,7 +20,7 @@ export class Transaction extends Document {
   @Prop({ default: 'USDT' }) currency: string;
 
   @Prop({
-    enum: ['CRYPTO_TRC20', 'CRYPTO_POLYGON', 'CRYPTO_SOLANA', 'BANK_TRANSFER', 'CASH_PLUS'],
+    enum: ['CRYPTO_TRC20', 'CRYPTO_POLYGON', 'CRYPTO_SOLANA', 'BANK_TRANSFER', 'CASH_PLUS', 'INTERNATIONAL_WIRE'],
     required: true,
   })
   paymentMethod: PaymentMethod;

@@ -185,10 +185,10 @@ export interface AppDictionary {
     choosePaymentMethod: string;
     bankTransfer: string;
     cashPlus: string;
+    internationalWire: string;
     sendCryptoTo: (amount: number) => string;
-    placeholderWarningCrypto: string;
     transferTo: (amount: number) => string;
-    placeholderWarningBank: string;
+    notConfigured: string;
     txHashLabel: string;
     receiptLabel: string;
     close: string;
@@ -435,10 +435,10 @@ const ar: AppDictionary = {
     choosePaymentMethod: 'اختر طريقة الدفع',
     bankTransfer: 'تحويل بنكي',
     cashPlus: 'Cash Plus',
+    internationalWire: 'حوالة دولية (IBAN/SWIFT)',
     sendCryptoTo: (amount) => `أرسل ${amount} MAD (USDT) إلى هذا العنوان:`,
-    placeholderWarningCrypto: '⚠️ هذا العنوان تجريبي وليس عنواناً حقيقياً — يجب استبداله قبل الإطلاق',
     transferTo: (amount) => `حوّل ${amount} MAD إلى:`,
-    placeholderWarningBank: '⚠️ هذه بيانات تجريبية — يجب استبدالها قبل الإطلاق',
+    notConfigured: 'هذه الطريقة غير مفعّلة حالياً، اختر طريقة أخرى أو تواصل مع الدعم',
     txHashLabel: 'TxHash',
     receiptLabel: 'صورة الوصل',
     close: 'إغلاق',
@@ -686,11 +686,10 @@ const fr: AppDictionary = {
     choosePaymentMethod: 'Choisissez un mode de paiement',
     bankTransfer: 'Virement bancaire',
     cashPlus: 'Cash Plus',
+    internationalWire: 'Virement international (IBAN/SWIFT)',
     sendCryptoTo: (amount) => `Envoyez ${amount} MAD (USDT) à cette adresse :`,
-    placeholderWarningCrypto:
-      "⚠️ Cette adresse est un placeholder de démo, pas une adresse réelle — à remplacer avant le lancement",
     transferTo: (amount) => `Virez ${amount} MAD à :`,
-    placeholderWarningBank: '⚠️ Ces informations sont des placeholders — à remplacer avant le lancement',
+    notConfigured: "Ce moyen n'est pas encore activé, choisissez-en un autre ou contactez le support",
     txHashLabel: 'TxHash',
     receiptLabel: 'Photo du reçu',
     close: 'Fermer',
@@ -939,10 +938,10 @@ const en: AppDictionary = {
     choosePaymentMethod: 'Choose a payment method',
     bankTransfer: 'Bank transfer',
     cashPlus: 'Cash Plus',
+    internationalWire: 'International wire (IBAN/SWIFT)',
     sendCryptoTo: (amount) => `Send ${amount} MAD (USDT) to this address:`,
-    placeholderWarningCrypto: '⚠️ This is a demo placeholder address, not a real one — must be replaced before launch',
     transferTo: (amount) => `Transfer ${amount} MAD to:`,
-    placeholderWarningBank: '⚠️ This is placeholder data — must be replaced before launch',
+    notConfigured: 'This method is not enabled yet, pick another one or contact support',
     txHashLabel: 'TxHash',
     receiptLabel: 'Receipt photo',
     close: 'Close',
@@ -1191,11 +1190,10 @@ const es: AppDictionary = {
     choosePaymentMethod: 'Elige un método de pago',
     bankTransfer: 'Transferencia bancaria',
     cashPlus: 'Cash Plus',
+    internationalWire: 'Transferencia internacional (IBAN/SWIFT)',
     sendCryptoTo: (amount) => `Envía ${amount} MAD (USDT) a esta dirección:`,
-    placeholderWarningCrypto:
-      '⚠️ Esta dirección es un placeholder de demostración, no una dirección real — debe reemplazarse antes del lanzamiento',
     transferTo: (amount) => `Transfiere ${amount} MAD a:`,
-    placeholderWarningBank: '⚠️ Estos son datos de placeholder — deben reemplazarse antes del lanzamiento',
+    notConfigured: 'Este método aún no está activado, elige otro o contacta con soporte',
     txHashLabel: 'TxHash',
     receiptLabel: 'Foto del recibo',
     close: 'Cerrar',

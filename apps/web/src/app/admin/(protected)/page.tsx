@@ -8,12 +8,14 @@ import { PaymentsPanel } from '@/components/admin/PaymentsPanel';
 import { PromosPanel } from '@/components/admin/PromosPanel';
 import { ReferralsPanel } from '@/components/admin/ReferralsPanel';
 import { SettingsPanel } from '@/components/admin/SettingsPanel';
+import { PaymentSettingsPanel } from '@/components/admin/PaymentSettingsPanel';
 
-type Tab = 'verifications' | 'payments' | 'promos' | 'referrals' | 'settings';
+type Tab = 'verifications' | 'payments' | 'paymentSettings' | 'promos' | 'referrals' | 'settings';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'verifications', label: 'طلبات التوثيق' },
   { id: 'payments', label: 'المدفوعات' },
+  { id: 'paymentSettings', label: 'حسابات الاستلام' },
   { id: 'promos', label: 'الأكواد الترويجية' },
   { id: 'referrals', label: 'الإحالات' },
   { id: 'settings', label: 'الإعدادات' },
@@ -64,6 +66,7 @@ export default function AdminDashboardPage() {
 
         {tab === 'verifications' && <VerificationsPanel />}
         {tab === 'payments' && <PaymentsPanel />}
+        {tab === 'paymentSettings' && <PaymentSettingsPanel />}
         {tab === 'promos' && <PromosPanel />}
         {tab === 'referrals' && <ReferralsPanel />}
         {tab === 'settings' && <SettingsPanel />}
