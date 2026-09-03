@@ -5,7 +5,7 @@ import { isAxiosError } from 'axios';
 import { redeemPromoCode, RedeemPromoResponse } from '@/services/promos.service';
 import { Input } from './ui/Input';
 import { Button } from './ui/Button';
-import { ShieldCheckIcon } from './icons';
+import { GiftIcon, ShieldCheckIcon } from './icons';
 import { useAppDict } from '@/hooks/useLocale';
 import type { AppDictionary } from '@/dictionaries/app';
 
@@ -55,9 +55,16 @@ export function PromoCodeInput({ onRedeemed }: PromoCodeInputProps) {
   }
 
   return (
-    <div className="w-full max-w-sm rounded-3xl border border-blue-100 bg-surface p-6 shadow-sm">
-      <h3 className="font-display text-lg font-bold text-blue-900">{dict.promoInput.title}</h3>
-      <p className="mt-1 text-sm text-ink-500">{dict.promoInput.subtitle}</p>
+    <div className="h-full w-full rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-100 text-gold-600">
+          <GiftIcon className="h-5 w-5" />
+        </span>
+        <div>
+          <h3 className="font-display font-bold text-blue-900">{dict.promoInput.title}</h3>
+          <p className="text-xs text-ink-500">{dict.promoInput.subtitle}</p>
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit} className="mt-4 flex items-start gap-2">
         <div className="flex-1">

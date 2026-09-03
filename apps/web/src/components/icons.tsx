@@ -181,6 +181,36 @@ export function MoonIcon({ className = 'h-5 w-5' }: IconProps) {
   );
 }
 
+export function GiftIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M4 9h16v3H4V9zm1 3h14v8a1 1 0 01-1 1H6a1 1 0 01-1-1v-8zM12 9V6.5M12 9c-1.2 0-3-1-3-2.5A1.5 1.5 0 0110.5 5c1.4 0 1.5 2 1.5 4zm0 0c1.2 0 3-1 3-2.5A1.5 1.5 0 0013.5 5c-1.4 0-1.5 2-1.5 4zm0 0v12"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ShareIcon({ className = 'h-5 w-5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <circle cx="6" cy="12" r="2.3" stroke="currentColor" strokeWidth={1.6} />
+      <circle cx="17" cy="6" r="2.3" stroke="currentColor" strokeWidth={1.6} />
+      <circle cx="17" cy="18" r="2.3" stroke="currentColor" strokeWidth={1.6} />
+      <path
+        d="M8 10.8l7-3.6M8 13.2l7 3.6"
+        stroke="currentColor"
+        strokeWidth={1.6}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function SpinnerIcon({ className = 'h-4 w-4' }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={`animate-spin ${className}`} aria-hidden="true">

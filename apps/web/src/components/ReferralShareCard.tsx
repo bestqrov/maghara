@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getReferralInfo, ReferralInfo } from '@/services/promos.service';
 import { Button } from './ui/Button';
-import { CheckCircleIcon } from './icons';
+import { CheckCircleIcon, ShareIcon } from './icons';
 import { useAppDict } from '@/hooks/useLocale';
 
 function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) {
@@ -45,9 +45,16 @@ export function ReferralShareCard() {
   }
 
   return (
-    <div className="w-full max-w-sm rounded-3xl border border-rose-100 bg-rose-50/60 p-6">
-      <h3 className="font-display text-lg font-bold text-blue-900">{dict.referralCard.title}</h3>
-      <p className="mt-1 text-sm text-ink-500">{dict.referralCard.subtitle}</p>
+    <div className="w-full rounded-2xl border border-rose-100 bg-rose-50/60 p-5 shadow-sm">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-600">
+          <ShareIcon className="h-5 w-5" />
+        </span>
+        <div>
+          <h3 className="font-display font-bold text-blue-900">{dict.referralCard.title}</h3>
+          <p className="text-xs text-ink-500">{dict.referralCard.subtitle}</p>
+        </div>
+      </div>
 
       <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-100 bg-surface px-4 py-3">
         <span className="font-display font-bold tracking-widest text-blue-900">{info.referralCode}</span>
