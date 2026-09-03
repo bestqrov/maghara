@@ -1,41 +1,41 @@
 import { z } from 'zod';
 
 export const loginSchema = z.object({
-  phoneNumber: z.string().min(8, 'رقم الهاتف قصير بزاف'),
-  password: z.string().min(1, 'خاصك تكتب الپاسوورد'),
+  phoneNumber: z.string().min(8, 'رقم الهاتف قصير جداً'),
+  password: z.string().min(1, 'يجب إدخال كلمة المرور'),
 });
 
 export const registerStep1Schema = z.object({
-  phoneNumber: z.string().min(8, 'رقم الهاتف قصير بزاف'),
-  password: z.string().min(8, 'خاصو يكون 8 حروف على الأقل'),
+  phoneNumber: z.string().min(8, 'رقم الهاتف قصير جداً'),
+  password: z.string().min(8, 'يجب أن تتكون من 8 أحرف على الأقل'),
 });
 
 export const registerStep2Schema = z.object({
-  firstName: z.string().min(2, 'السمية قصيرة بزاف'),
+  firstName: z.string().min(2, 'الاسم الأول قصير جداً'),
   gender: z.enum(['MALE', 'FEMALE']),
-  birthDate: z.string().min(1, 'خاصك تحدد تاريخ الميلاد'),
+  birthDate: z.string().min(1, 'يجب تحديد تاريخ الميلاد'),
 });
 
 export const registerStep3Schema = z.object({
-  residenceCountry: z.string().min(2, 'خاصك تحدد بلد الإقامة'),
-  currentCity: z.string().min(2, 'خاصك تحدد المدينة'),
-  originCountry: z.string().min(2, 'خاصك تحدد بلد الأصل'),
+  residenceCountry: z.string().min(2, 'يجب تحديد بلد الإقامة'),
+  currentCity: z.string().min(2, 'يجب تحديد المدينة'),
+  originCountry: z.string().min(2, 'يجب تحديد بلد الأصل'),
 });
 
 export const registerStep4Schema = z.object({
   relocationPreference: z.enum(['OPEN_TO_MOVE', 'LOOKING_FOR_EXPAT', 'LOCAL_ONLY']),
   jobTitle: z.string().optional(),
-  bio: z.string().max(500, 'النص طويل بزاف').optional(),
+  bio: z.string().max(500, 'النص طويل جداً').optional(),
 });
 
 export const changePasswordSchema = z
   .object({
-    currentPassword: z.string().min(1, 'خاصك تكتب الپاسوورد الحالي'),
-    newPassword: z.string().min(8, 'خاصو يكون 8 حروف على الأقل'),
-    confirmPassword: z.string().min(1, 'أكد الپاسوورد الجديد'),
+    currentPassword: z.string().min(1, 'يجب إدخال كلمة المرور الحالية'),
+    newPassword: z.string().min(8, 'يجب أن تتكون من 8 أحرف على الأقل'),
+    confirmPassword: z.string().min(1, 'يجب تأكيد كلمة المرور الجديدة'),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
-    message: 'الپاسوورد الجديد ماشي متطابق مع التأكيد',
+    message: 'كلمة المرور الجديدة غير مطابقة للتأكيد',
     path: ['confirmPassword'],
   });
 
