@@ -16,6 +16,7 @@ import { PublicModule } from './modules/public/public.module';
 import { PromosModule } from './modules/promos/promos.module';
 import { AdminAuthModule } from './modules/admin-auth/admin-auth.module';
 import { PaymentSettingsModule } from './modules/payment-settings/payment-settings.module';
+import { AnalyticsModule } from './modules/analytics/analytics.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { PaymentSettingsModule } from './modules/payment-settings/payment-settin
     PromosModule,
     AdminAuthModule,
     PaymentSettingsModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

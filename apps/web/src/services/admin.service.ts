@@ -2,6 +2,18 @@ import axios from 'axios';
 import { adminApi } from './adminApi';
 import type { PaymentSettings } from './paymentSettings.service';
 
+export interface AnalyticsOverview {
+  users: { total: number; verified: number; vip: number; newThisMonth: number };
+  revenue: {
+    total: number;
+    thisMonth: number;
+    byType: Record<'COIN_PURCHASE' | 'VIP_SUBSCRIPTION' | 'VERIFICATION_FEE', number>;
+    byMonth: { month: string; total: number }[];
+  };
+  pending: { verifications: number; payments: number };
+  promos: { active: number };
+}
+
 export interface ReferralStats {
   _id: string;
   firstName: string;
@@ -118,6 +130,11 @@ export async function changeAdminPassword(currentPassword: string, newPassword: 
     currentPassword,
     newPassword,
   });
+  return data;
+}
+
+export async function getAnalyticsOverview() {
+  const { data } = await adminApi.get<AnalyticsOverview>('/analytics/overview');
   return data;
 }
 

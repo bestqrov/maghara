@@ -9,10 +9,12 @@ import { PromosPanel } from '@/components/admin/PromosPanel';
 import { ReferralsPanel } from '@/components/admin/ReferralsPanel';
 import { SettingsPanel } from '@/components/admin/SettingsPanel';
 import { PaymentSettingsPanel } from '@/components/admin/PaymentSettingsPanel';
+import { AnalyticsPanel } from '@/components/admin/AnalyticsPanel';
 
-type Tab = 'verifications' | 'payments' | 'paymentSettings' | 'promos' | 'referrals' | 'settings';
+type Tab = 'analytics' | 'verifications' | 'payments' | 'paymentSettings' | 'promos' | 'referrals' | 'settings';
 
 const TABS: { id: Tab; label: string }[] = [
+  { id: 'analytics', label: 'التحليلات' },
   { id: 'verifications', label: 'طلبات التوثيق' },
   { id: 'payments', label: 'المدفوعات' },
   { id: 'paymentSettings', label: 'حسابات الاستلام' },
@@ -24,12 +26,12 @@ const TABS: { id: Tab; label: string }[] = [
 export default function AdminDashboardPage() {
   const router = useRouter();
   const logout = useAdminStore((s) => s.logout);
-  const [tab, setTab] = useState<Tab>('verifications');
+  const [tab, setTab] = useState<Tab>('analytics');
 
   return (
     <main className="min-h-screen bg-background">
       <div className="border-b border-blue-100 bg-surface">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo-icon.png" alt="" className="h-8 w-auto" />
@@ -48,7 +50,7 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-8">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8">
         <nav className="scroll-hide flex gap-2 overflow-x-auto rounded-2xl border border-blue-100 bg-surface p-1.5 shadow-sm">
           {TABS.map((t) => (
             <button
@@ -64,6 +66,7 @@ export default function AdminDashboardPage() {
           ))}
         </nav>
 
+        {tab === 'analytics' && <AnalyticsPanel />}
         {tab === 'verifications' && <VerificationsPanel />}
         {tab === 'payments' && <PaymentsPanel />}
         {tab === 'paymentSettings' && <PaymentSettingsPanel />}
