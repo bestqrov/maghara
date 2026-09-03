@@ -3,7 +3,7 @@ import { AuthUser } from '@/store/auth.store';
 
 export interface RegisterPayload {
   phoneNumber: string;
-  email?: string;
+  email: string;
   password: string;
   firstName: string;
   gender: 'MALE' | 'FEMALE';

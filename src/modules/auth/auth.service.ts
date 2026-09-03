@@ -24,9 +24,14 @@ export class AuthService {
   }
 
   async register(dto: RegisterDto) {
-    const existing = await this.userModel.findOne({ phoneNumber: dto.phoneNumber });
-    if (existing) {
+    const existingPhone = await this.userModel.findOne({ phoneNumber: dto.phoneNumber });
+    if (existingPhone) {
       throw new ConflictException('Phone number already registered');
+    }
+
+    const existingEmail = await this.userModel.findOne({ email: dto.email.toLowerCase() });
+    if (existingEmail) {
+      throw new ConflictException('Email already registered');
     }
 
     const passwordHash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
@@ -41,7 +46,7 @@ export class AuthService {
 
     const user = await this.userModel.create({
       phoneNumber: dto.phoneNumber,
-      email: dto.email,
+      email: dto.email.toLowerCase(),
       passwordHash,
       referralCode,
       referredBy,

@@ -36,6 +36,11 @@ export interface AppDictionary {
     phoneLabel: string;
     phonePlaceholder: string;
     phoneRequired: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailRequired: string;
+    emailInvalid: string;
+    errorEmailTaken: string;
     passwordLabel: string;
     passwordRequired: string;
     passwordMinLength: string;
@@ -280,6 +285,11 @@ const ar: AppDictionary = {
     phoneLabel: 'رقم الهاتف',
     phonePlaceholder: '+212600000000',
     phoneRequired: 'خاصك تكتب رقم الهاتف',
+    emailLabel: 'البريد الإلكتروني',
+    emailPlaceholder: 'example@email.com',
+    emailRequired: 'خاصك تكتب البريد الإلكتروني',
+    emailInvalid: 'خاصك تكتب بريد إلكتروني صحيح',
+    errorEmailTaken: 'هاد البريد الإلكتروني مسجل من قبل',
     passwordLabel: 'الپاسوورد',
     passwordRequired: 'خاصك تكتب الپاسوورد',
     passwordMinLength: 'خاصو يكون 8 حروف على الأقل',
@@ -524,6 +534,11 @@ const fr: AppDictionary = {
     phoneLabel: 'Numéro de téléphone',
     phonePlaceholder: '+212600000000',
     phoneRequired: 'Le numéro de téléphone est requis',
+    emailLabel: 'E-mail',
+    emailPlaceholder: 'exemple@email.com',
+    emailRequired: "L'e-mail est requis",
+    emailInvalid: 'Entrez une adresse e-mail valide',
+    errorEmailTaken: 'Cet e-mail est déjà enregistré',
     passwordLabel: 'Mot de passe',
     passwordRequired: 'Le mot de passe est requis',
     passwordMinLength: 'Doit contenir au moins 8 caractères',
@@ -771,6 +786,11 @@ const en: AppDictionary = {
     phoneLabel: 'Phone number',
     phonePlaceholder: '+212600000000',
     phoneRequired: 'Phone number is required',
+    emailLabel: 'Email',
+    emailPlaceholder: 'example@email.com',
+    emailRequired: 'Email is required',
+    emailInvalid: 'Enter a valid email address',
+    errorEmailTaken: 'This email is already registered',
     passwordLabel: 'Password',
     passwordRequired: 'Password is required',
     passwordMinLength: 'Must be at least 8 characters',
@@ -1017,6 +1037,11 @@ const es: AppDictionary = {
     phoneLabel: 'Número de teléfono',
     phonePlaceholder: '+212600000000',
     phoneRequired: 'El número de teléfono es obligatorio',
+    emailLabel: 'Correo electrónico',
+    emailPlaceholder: 'ejemplo@email.com',
+    emailRequired: 'El correo electrónico es obligatorio',
+    emailInvalid: 'Ingresa un correo electrónico válido',
+    errorEmailTaken: 'Este correo electrónico ya está registrado',
     passwordLabel: 'Contraseña',
     passwordRequired: 'La contraseña es obligatoria',
     passwordMinLength: 'Debe tener al menos 8 caracteres',

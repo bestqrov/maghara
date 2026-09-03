@@ -22,8 +22,10 @@ type WizardFields = RegisterPayload & {
   bio?: string;
 };
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const STEP_FIELDS: (keyof WizardFields)[][] = [
-  ['phoneNumber', 'password'],
+  ['phoneNumber', 'email', 'password'],
   ['firstName', 'gender', 'birthDate'],
   ['residenceCountry', 'currentCity', 'originCountry'],
   ['relocationPreference', 'jobTitle', 'bio'],
@@ -95,6 +97,7 @@ function RegisterForm() {
     try {
       const { accessToken, user } = await registerUser({
         phoneNumber: values.phoneNumber,
+        email: values.email,
         password: values.password,
         firstName: values.firstName,
         gender: values.gender,
@@ -117,7 +120,8 @@ function RegisterForm() {
       router.push(withLocale(locale, '/verification'));
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 409) {
-        setServerError(dict.register.errorPhoneTaken);
+        const message = (err.response.data as { message?: string } | undefined)?.message;
+        setServerError(message === 'Email already registered' ? dict.register.errorEmailTaken : dict.register.errorPhoneTaken);
       } else {
         const detail = isAxiosError(err)
           ? err.response
@@ -164,6 +168,17 @@ function RegisterForm() {
                 placeholder={dict.register.phonePlaceholder}
                 {...register('phoneNumber', { required: dict.register.phoneRequired })}
                 error={errors.phoneNumber?.message}
+              />
+              <Input
+                id="email"
+                type="email"
+                label={dict.register.emailLabel}
+                placeholder={dict.register.emailPlaceholder}
+                {...register('email', {
+                  required: dict.register.emailRequired,
+                  pattern: { value: EMAIL_PATTERN, message: dict.register.emailInvalid },
+                })}
+                error={errors.email?.message}
               />
               <Input
                 id="password"
