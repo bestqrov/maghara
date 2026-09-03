@@ -1,0 +1,89 @@
+import { adminApi } from './adminApi';
+
+export interface PendingVerification {
+  _id: string;
+  phoneNumber: string;
+  profile: { firstName: string };
+  verificationDocuments?: {
+    idDocumentUrl?: string;
+    residencyDocumentUrl?: string;
+    submittedAt?: string;
+  };
+}
+
+export interface PendingTransaction {
+  _id: string;
+  userId: { _id: string; phoneNumber: string; profile: { firstName: string } } | string;
+  amount: number;
+  currency: string;
+  paymentMethod: 'CRYPTO_TRC20' | 'CRYPTO_POLYGON' | 'CRYPTO_SOLANA' | 'BANK_TRANSFER' | 'CASH_PLUS';
+  type: 'COIN_PURCHASE' | 'VIP_SUBSCRIPTION' | 'VERIFICATION_FEE';
+  status: 'PENDING' | 'SUCCESS' | 'FAILED';
+  txHashOrReceipt?: string;
+  createdAt: string;
+}
+
+export type PromoCodeType = 'VIP_DAYS' | 'COINS' | 'CROSS_BORDER_ACCESS';
+
+export interface PromoCode {
+  _id: string;
+  code: string;
+  type: PromoCodeType;
+  rewardValue: number;
+  maxRedemptions: number;
+  currentRedemptions: number;
+  requiresVerification: boolean;
+  expiresAt?: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface CreatePromoPayload {
+  code: string;
+  type: PromoCodeType;
+  rewardValue: number;
+  maxRedemptions: number;
+  requiresVerification?: boolean;
+  expiresAt?: string;
+  isActive?: boolean;
+}
+
+export async function listPendingVerifications() {
+  const { data } = await adminApi.get<PendingVerification[]>('/verification/admin/pending');
+  return data;
+}
+
+export async function approveVerification(userId: string) {
+  const { data } = await adminApi.post(`/verification/admin/${userId}/approve`);
+  return data;
+}
+
+export async function rejectVerification(userId: string, reason?: string) {
+  const { data } = await adminApi.post(`/verification/admin/${userId}/reject`, { reason });
+  return data;
+}
+
+export async function listPendingTransactions() {
+  const { data } = await adminApi.get<PendingTransaction[]>('/payments/admin/transactions/pending');
+  return data;
+}
+
+export async function approveTransaction(transactionId: string) {
+  const { data } = await adminApi.post(`/payments/admin/transactions/${transactionId}/approve`);
+  return data;
+}
+
+export async function rejectTransaction(transactionId: string) {
+  const { data } = await adminApi.post(`/payments/admin/transactions/${transactionId}/reject`);
+  return data;
+}
+
+export async function listPromoCodes() {
+  const { data } = await adminApi.get<PromoCode[]>('/promos/admin/list');
+  return data;
+}
+
+export async function createPromoCode(payload: CreatePromoPayload) {
+  const { data } = await adminApi.post<PromoCode>('/promos/admin/create', payload);
+  return data;
+}

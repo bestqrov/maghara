@@ -38,7 +38,10 @@ export class PaymentsService {
   }
 
   async listPending() {
-    return this.transactionModel.find({ status: 'PENDING' }).sort({ createdAt: 1 });
+    return this.transactionModel
+      .find({ status: 'PENDING' })
+      .sort({ createdAt: 1 })
+      .populate('userId', 'phoneNumber profile.firstName');
   }
 
   async review(transactionId: string, approve: boolean) {
