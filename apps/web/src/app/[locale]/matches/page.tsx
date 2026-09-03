@@ -94,7 +94,7 @@ export default function MatchesPage() {
             const photo = match.otherUser.profile.photos[0] ?? 'https://placehold.co/100x100/eef6f0/2f7a52?text=Z';
             const isBusy = busyId === match._id;
             return (
-              <div key={match._id} className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
+              <div key={match._id} className="flex items-center gap-4 rounded-2xl bg-surface p-4 shadow-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={photo} alt={match.otherUser.profile.firstName} className="h-14 w-14 rounded-full object-cover" />
                 <div className="flex-1">

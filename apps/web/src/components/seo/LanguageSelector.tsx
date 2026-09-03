@@ -39,7 +39,7 @@ export function LanguageSelector({ currentLocale, hrefByLocale, label }: Languag
         onClick={() => setOpen((v) => !v)}
         aria-label={label}
         aria-expanded={open}
-        className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-white px-3 py-1.5 text-sm font-semibold text-blue-900 transition hover:bg-blue-50"
+        className="flex items-center gap-1.5 rounded-full border border-blue-100 bg-surface px-3 py-1.5 text-sm font-semibold text-blue-900 transition hover:bg-blue-50"
       >
         <span aria-hidden="true">{current.flag}</span>
         <span>{current.nativeName}</span>
@@ -53,7 +53,7 @@ export function LanguageSelector({ currentLocale, hrefByLocale, label }: Languag
       </button>
 
       {open && (
-        <div className="absolute end-0 top-full z-20 mt-2 w-40 overflow-hidden rounded-2xl border border-blue-100 bg-white py-1 shadow-lg">
+        <div className="absolute end-0 top-full z-20 mt-2 w-40 overflow-hidden rounded-2xl border border-blue-100 bg-surface py-1 shadow-lg">
           {(Object.keys(LANGUAGE_META) as Locale[]).map((locale) => {
             const meta = LANGUAGE_META[locale];
             const active = locale === currentLocale;

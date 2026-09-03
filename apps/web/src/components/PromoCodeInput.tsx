@@ -55,7 +55,7 @@ export function PromoCodeInput({ onRedeemed }: PromoCodeInputProps) {
   }
 
   return (
-    <div className="w-full max-w-sm rounded-3xl border border-blue-100 bg-white p-6 shadow-sm">
+    <div className="w-full max-w-sm rounded-3xl border border-blue-100 bg-surface p-6 shadow-sm">
       <h3 className="font-display text-lg font-bold text-blue-900">{dict.promoInput.title}</h3>
       <p className="mt-1 text-sm text-ink-500">{dict.promoInput.subtitle}</p>
 

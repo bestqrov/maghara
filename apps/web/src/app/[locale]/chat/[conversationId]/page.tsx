@@ -109,7 +109,7 @@ export default function ChatPage() {
   return (
     <main className="mx-auto flex h-screen w-full max-w-2xl flex-col gap-4 px-4 py-6">
       <NavBar />
-      <div className="flex flex-1 flex-col overflow-hidden rounded-3xl bg-white shadow-sm">
+      <div className="flex flex-1 flex-col overflow-hidden rounded-3xl bg-surface shadow-sm">
         <div className="flex-1 overflow-y-auto p-4">
           {messages.map((m) => {
             const mine = m.senderId === user?.id;

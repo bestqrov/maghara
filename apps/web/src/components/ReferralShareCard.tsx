@@ -49,7 +49,7 @@ export function ReferralShareCard() {
       <h3 className="font-display text-lg font-bold text-blue-900">{dict.referralCard.title}</h3>
       <p className="mt-1 text-sm text-ink-500">{dict.referralCard.subtitle}</p>
 
-      <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-100 bg-white px-4 py-3">
+      <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-100 bg-surface px-4 py-3">
         <span className="font-display font-bold tracking-widest text-blue-900">{info.referralCode}</span>
         <Button type="button" variant="ghost" onClick={handleCopy} className="px-3 py-1.5 text-xs">
           {copied ? (

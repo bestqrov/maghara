@@ -56,7 +56,7 @@ export default function VerificationPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-emerald-50 px-4 py-10">
-      <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-sm">
+      <div className="w-full max-w-sm rounded-3xl bg-surface p-8 shadow-sm">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gold-100 text-gold-600">
           <ShieldCheckIcon className="h-7 w-7" />
         </div>

@@ -26,7 +26,7 @@ export function ProfileCard({ result, onSendInterest, onView, sending, sent }: P
 
   return (
     <div
-      className="flex flex-col overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm"
+      className="flex flex-col overflow-hidden rounded-3xl border border-blue-100 bg-surface shadow-sm"
       onClick={() => !result.blurred && onView?.(result._id)}
     >
       <BlurredImage

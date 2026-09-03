@@ -18,6 +18,7 @@ export interface AppDictionary {
     profileAria: string;
     settingsAria: string;
     logoutAria: string;
+    themeAria: string;
   };
   login: {
     title: string;
@@ -267,6 +268,7 @@ const ar: AppDictionary = {
     profileAria: 'البروفايل',
     settingsAria: 'الإعدادات',
     logoutAria: 'خروج',
+    themeAria: 'بدّل الوضع الداكن/الفاتح',
   },
   login: {
     title: 'مرحباً بك من جديد',
@@ -516,6 +518,7 @@ const fr: AppDictionary = {
     profileAria: 'Profil',
     settingsAria: 'Paramètres',
     logoutAria: 'Déconnexion',
+    themeAria: 'Basculer le mode sombre/clair',
   },
   login: {
     title: 'Bon retour parmi nous',
@@ -768,6 +771,7 @@ const en: AppDictionary = {
     profileAria: 'Profile',
     settingsAria: 'Settings',
     logoutAria: 'Logout',
+    themeAria: 'Toggle dark/light mode',
   },
   login: {
     title: 'Welcome back',
@@ -1019,6 +1023,7 @@ const es: AppDictionary = {
     profileAria: 'Perfil',
     settingsAria: 'Ajustes',
     logoutAria: 'Cerrar sesión',
+    themeAria: 'Cambiar modo oscuro/claro',
   },
   login: {
     title: 'Bienvenido de nuevo',

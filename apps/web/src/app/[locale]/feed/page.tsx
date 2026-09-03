@@ -90,7 +90,7 @@ export default function FeedPage() {
           </div>
           <div className="flex items-center gap-3">
             {!isVip && (
-              <span className="rounded-full border border-rose-200 bg-white px-3 py-1 text-xs font-semibold text-rose-600">
+              <span className="rounded-full border border-rose-200 bg-surface px-3 py-1 text-xs font-semibold text-rose-600">
                 {dict.feed.interestsToday(dailyInterestsSent, DAILY_FREE_INTERESTS)}
               </span>
             )}

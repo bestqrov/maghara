@@ -35,7 +35,7 @@ export function SearchFiltersBar({ onSearch, loading }: SearchFiltersBarProps) {
   }
 
   return (
-    <div className="flex flex-col gap-3 rounded-3xl border border-blue-100 bg-white p-4 shadow-sm">
+    <div className="flex flex-col gap-3 rounded-3xl border border-blue-100 bg-surface p-4 shadow-sm">
       <div className="flex gap-2 rounded-xl bg-blue-50 p-1">
         <button
           type="button"

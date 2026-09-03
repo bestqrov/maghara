@@ -54,7 +54,7 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
           // eslint-disable-next-line @next/next/no-img-element
           <img src={preview} alt={label} className="h-14 w-14 rounded-lg object-cover" />
         ) : (
-          <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-white text-2xl">📷</span>
+          <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-surface text-2xl">📷</span>
         )}
         <span className="text-sm text-rose-700">
           {uploading ? dict.imageUploader.uploading : preview ? dict.imageUploader.changePhoto : dict.imageUploader.choosePhoto}

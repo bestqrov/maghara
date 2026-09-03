@@ -56,7 +56,7 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-900/50 p-4">
-      <div className="w-full max-w-sm rounded-3xl bg-white p-6">
+      <div className="w-full max-w-sm rounded-3xl bg-surface p-6">
         {done ? (
           <div className="text-center">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-2xl">✓</div>
@@ -93,7 +93,7 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
             {selected && selected.kind === 'crypto' && (
               <div className="mt-4 rounded-xl bg-gold-100 p-3 text-xs">
                 <p className="font-semibold text-emerald-900">{dict.paymentModal.sendCryptoTo(amount)}</p>
-                <p className="mt-1 break-all rounded-lg bg-white p-2 font-mono text-emerald-700">
+                <p className="mt-1 break-all rounded-lg bg-surface p-2 font-mono text-emerald-700">
                   {CRYPTO_WALLETS[selected.value]}
                 </p>
                 <p className="mt-2 text-red-600">{dict.paymentModal.placeholderWarningCrypto}</p>
@@ -104,7 +104,7 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
               <div className="mt-4 rounded-xl bg-gold-100 p-3 text-xs">
                 <p className="font-semibold text-emerald-900">{dict.paymentModal.transferTo(amount)}</p>
                 <p className="mt-1 text-emerald-700">{BANK_DETAILS[selected.value].bank}</p>
-                <p className="mt-1 break-all rounded-lg bg-white p-2 font-mono text-emerald-700">
+                <p className="mt-1 break-all rounded-lg bg-surface p-2 font-mono text-emerald-700">
                   {BANK_DETAILS[selected.value].rib}
                 </p>
                 <p className="mt-2 text-red-600">{dict.paymentModal.placeholderWarningBank}</p>

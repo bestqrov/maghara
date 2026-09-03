@@ -40,7 +40,7 @@ export function VerificationBanner({ status }: { status: 'UNVERIFIED' | 'PENDING
       {status !== 'PENDING' && (
         <LocaleLink
           href="/verification"
-          className="whitespace-nowrap rounded-xl bg-white/70 px-3 py-1.5 text-xs font-semibold text-blue-900 transition hover:bg-white"
+          className="whitespace-nowrap rounded-xl bg-white/70 px-3 py-1.5 text-xs font-semibold text-blue-900 transition hover:bg-surface"
         >
           {dict.verificationBanner.verifyNow}
         </LocaleLink>

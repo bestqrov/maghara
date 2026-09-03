@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { GearIcon, LogoutIcon, UserIcon } from '@/components/icons';
 import { LocaleLink } from '@/components/LocaleLink';
 import { LanguageSelector } from '@/components/seo/LanguageSelector';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuthStore } from '@/store/auth.store';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 import { SUPPORTED_LOCALES, type Locale } from '@/lib/seo';
@@ -31,7 +32,7 @@ export function NavBar() {
   ];
 
   return (
-    <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-white p-1.5 shadow-sm sm:gap-3">
+    <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-surface p-1.5 shadow-sm sm:gap-3">
       <LocaleLink
         href="/feed"
         className="font-display flex shrink-0 items-center gap-1.5 pr-1 pl-2 text-sm font-bold text-blue-900"
@@ -84,6 +85,7 @@ export function NavBar() {
         >
           <LogoutIcon className="h-4 w-4" />
         </button>
+        <ThemeToggle ariaLabel={dict.nav.themeAria} />
       </nav>
       <div className="shrink-0">
         <LanguageSelector currentLocale={locale} hrefByLocale={hrefByLocale} label={dict.languageSelector.label} />

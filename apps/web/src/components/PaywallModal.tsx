@@ -16,7 +16,7 @@ export function PaywallModal({ onUnlockWithCoins, onUpgradeVip, onClose, loading
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-900/50 p-4">
-      <div className="w-full max-w-sm rounded-3xl bg-white p-6 text-center">
+      <div className="w-full max-w-sm rounded-3xl bg-surface p-6 text-center">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gold-100 text-2xl">💬</div>
         <h2 className="mt-4 text-lg font-bold text-emerald-700">{dict.paywallModal.title}</h2>
         <p className="mt-2 text-sm text-ink-500">{dict.paywallModal.body(UNLOCK_COIN_COST)}</p>

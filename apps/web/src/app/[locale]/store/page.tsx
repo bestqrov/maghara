@@ -47,7 +47,7 @@ export default function StorePage() {
       <NavBar />
       <h1 className="text-xl font-bold text-emerald-700">{dict.store.title}</h1>
 
-      <section className="rounded-3xl bg-white p-5 shadow-sm">
+      <section className="rounded-3xl bg-surface p-5 shadow-sm">
         <h2 className="font-semibold text-emerald-900">{dict.store.coinPackagesTitle}</h2>
         <div className="mt-3 grid grid-cols-3 gap-3">
           {COIN_PACKAGES.map((pkg) => (
@@ -81,7 +81,7 @@ export default function StorePage() {
         </Button>
       </section>
 
-      <section className="rounded-3xl bg-white p-5 shadow-sm">
+      <section className="rounded-3xl bg-surface p-5 shadow-sm">
         <h2 className="font-semibold text-emerald-900">{dict.store.historyTitle}</h2>
         {transactions.length === 0 ? (
           <p className="mt-3 text-center text-sm text-ink-500">{dict.store.historyEmpty}</p>

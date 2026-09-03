@@ -60,7 +60,7 @@ export default function SettingsPage() {
       <NavBar />
       <h1 className="text-xl font-bold text-emerald-700">{dict.settings.title}</h1>
 
-      <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-sm">
+      <div className="w-full max-w-sm rounded-3xl bg-surface p-8 shadow-sm">
         <h2 className="text-lg font-bold text-emerald-700">{dict.settings.changePasswordTitle}</h2>
         <p className="mt-1 text-sm text-ink-500">{dict.settings.changePasswordSubtitle}</p>
 

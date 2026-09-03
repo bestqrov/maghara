@@ -146,7 +146,7 @@ function RegisterForm() {
     >
       <WeddingEmblem className="spin-anim pointer-events-none absolute right-1/2 top-1/3 h-[520px] w-[520px] -translate-y-1/2 translate-x-1/2 text-blue-700 opacity-[0.05] sm:h-[680px] sm:w-[680px]" />
 
-      <div className="relative w-full max-w-sm rounded-3xl border border-blue-100 bg-white p-8 shadow-sm">
+      <div className="relative w-full max-w-sm rounded-3xl border border-blue-100 bg-surface p-8 shadow-sm">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo-icon.png" alt="" className="mx-auto h-14 w-auto" />
         <h1 className="font-display mt-4 text-center text-2xl font-bold text-blue-900">{dict.register.title}</h1>
