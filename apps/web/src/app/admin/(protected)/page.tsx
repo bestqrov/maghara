@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdminStore } from '@/store/admin.store';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 import { VerificationsPanel } from '@/components/admin/VerificationsPanel';
 import { PaymentsPanel } from '@/components/admin/PaymentsPanel';
 import { PromosPanel } from '@/components/admin/PromosPanel';
@@ -10,23 +11,25 @@ import { ReferralsPanel } from '@/components/admin/ReferralsPanel';
 import { SettingsPanel } from '@/components/admin/SettingsPanel';
 import { PaymentSettingsPanel } from '@/components/admin/PaymentSettingsPanel';
 import { AnalyticsPanel } from '@/components/admin/AnalyticsPanel';
+import { AdminLocaleToggle } from '@/components/admin/AdminLocaleToggle';
 
 type Tab = 'analytics' | 'verifications' | 'payments' | 'paymentSettings' | 'promos' | 'referrals' | 'settings';
-
-const TABS: { id: Tab; label: string }[] = [
-  { id: 'analytics', label: 'التحليلات' },
-  { id: 'verifications', label: 'طلبات التوثيق' },
-  { id: 'payments', label: 'المدفوعات' },
-  { id: 'paymentSettings', label: 'حسابات الاستلام' },
-  { id: 'promos', label: 'الأكواد الترويجية' },
-  { id: 'referrals', label: 'الإحالات' },
-  { id: 'settings', label: 'الإعدادات' },
-];
 
 export default function AdminDashboardPage() {
   const router = useRouter();
   const logout = useAdminStore((s) => s.logout);
+  const { dict } = useAdminDict();
   const [tab, setTab] = useState<Tab>('analytics');
+
+  const TABS: { id: Tab; label: string }[] = [
+    { id: 'analytics', label: dict.dashboard.tabAnalytics },
+    { id: 'verifications', label: dict.dashboard.tabVerifications },
+    { id: 'payments', label: dict.dashboard.tabPayments },
+    { id: 'paymentSettings', label: dict.dashboard.tabPaymentSettings },
+    { id: 'promos', label: dict.dashboard.tabPromos },
+    { id: 'referrals', label: dict.dashboard.tabReferrals },
+    { id: 'settings', label: dict.dashboard.tabSettings },
+  ];
 
   return (
     <main className="min-h-screen bg-background">
@@ -35,18 +38,21 @@ export default function AdminDashboardPage() {
           <div className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo-icon.png" alt="" className="h-8 w-auto" />
-            <h1 className="font-display text-lg font-bold text-blue-900">لوحة تحكم المشرف</h1>
+            <h1 className="font-display text-lg font-bold text-blue-900">{dict.dashboard.title}</h1>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              logout();
-              router.replace('/admin/login');
-            }}
-            className="text-sm font-semibold text-blue-700 hover:text-rose-600"
-          >
-            خروج
-          </button>
+          <div className="flex items-center gap-3">
+            <AdminLocaleToggle />
+            <button
+              type="button"
+              onClick={() => {
+                logout();
+                router.replace('/admin/login');
+              }}
+              className="text-sm font-semibold text-blue-700 hover:text-rose-600"
+            >
+              {dict.dashboard.logout}
+            </button>
+          </div>
         </div>
       </div>
 

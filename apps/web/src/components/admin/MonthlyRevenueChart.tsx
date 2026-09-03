@@ -1,29 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 
 interface MonthlyRevenueChartProps {
   data: { month: string; total: number }[];
 }
 
-const MONTH_LABELS = [
-  'يناير',
-  'فبراير',
-  'مارس',
-  'أبريل',
-  'ماي',
-  'يونيو',
-  'يوليوز',
-  'غشت',
-  'شتنبر',
-  'أكتوبر',
-  'نونبر',
-  'دجنبر',
-];
-
-function monthLabel(key: string): string {
+function monthLabel(months: string[], key: string): string {
   const [, month] = key.split('-');
-  return MONTH_LABELS[Number(month) - 1] ?? key;
+  return months[Number(month) - 1] ?? key;
 }
 
 /** Rounds a max value up to a clean tick step (multiples of 1/2/5 * 10^n). */
@@ -43,6 +29,7 @@ const PADDING_BOTTOM = 28;
 const PADDING_TOP = 12;
 
 export function MonthlyRevenueChart({ data }: MonthlyRevenueChartProps) {
+  const { dict } = useAdminDict();
   const [hovered, setHovered] = useState<number | null>(null);
 
   const max = niceMax(Math.max(...data.map((d) => d.total), 1));
@@ -58,7 +45,12 @@ export function MonthlyRevenueChart({ data }: MonthlyRevenueChartProps) {
 
   return (
     <div className="relative w-full overflow-x-auto">
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full min-w-[480px]" role="img" aria-label="الإيراد الشهري">
+      <svg
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        className="w-full min-w-[480px]"
+        role="img"
+        aria-label={dict.analytics.monthlyRevenueTitle}
+      >
         {ticks.map((t) => (
           <g key={t}>
             <line
@@ -109,7 +101,7 @@ export function MonthlyRevenueChart({ data }: MonthlyRevenueChartProps) {
                 textAnchor="middle"
                 className="fill-ink-500 text-[10px] font-medium"
               >
-                {monthLabel(d.month)}
+                {monthLabel(dict.months, d.month)}
               </text>
             </g>
           );
@@ -136,7 +128,7 @@ export function MonthlyRevenueChart({ data }: MonthlyRevenueChartProps) {
             transform: 'translate(-50%, -130%)',
           }}
         >
-          {monthLabel(data[hovered].month)}: {data[hovered].total.toLocaleString('en-US')} MAD
+          {monthLabel(dict.months, data[hovered].month)}: {data[hovered].total.toLocaleString('en-US')} MAD
         </div>
       )}
     </div>

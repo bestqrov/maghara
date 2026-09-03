@@ -7,10 +7,12 @@ import {
   listPendingVerifications,
   rejectVerification,
 } from '@/services/admin.service';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 
 export function VerificationsPanel() {
+  const { dict } = useAdminDict();
   const [items, setItems] = useState<PendingVerification[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +26,7 @@ export function VerificationsPanel() {
     try {
       setItems(await listPendingVerifications());
     } catch {
-      setError('تعذّر جلب طلبات التوثيق');
+      setError(dict.verifications.errorFetch);
     } finally {
       setLoading(false);
     }
@@ -33,6 +35,7 @@ export function VerificationsPanel() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleApprove(userId: string) {
@@ -41,7 +44,7 @@ export function VerificationsPanel() {
       await approveVerification(userId);
       setItems((prev) => prev.filter((item) => item._id !== userId));
     } catch {
-      setError('تعذّرت الموافقة على الطلب');
+      setError(dict.verifications.errorApprove);
     } finally {
       setBusyId(null);
     }
@@ -54,18 +57,18 @@ export function VerificationsPanel() {
       setItems((prev) => prev.filter((item) => item._id !== userId));
       setRejectingId(null);
     } catch {
-      setError('تعذّر رفض الطلب');
+      setError(dict.verifications.errorReject);
     } finally {
       setBusyId(null);
     }
   }
 
-  if (loading) return <p className="text-sm text-ink-500">جارٍ التحميل...</p>;
+  if (loading) return <p className="text-sm text-ink-500">{dict.common.loading}</p>;
 
   return (
     <div className="flex flex-col gap-4">
       {error && <p className="text-sm text-red-500">{error}</p>}
-      {items.length === 0 && <p className="text-sm text-ink-500">لا توجد طلبات توثيق قيد الانتظار</p>}
+      {items.length === 0 && <p className="text-sm text-ink-500">{dict.verifications.empty}</p>}
 
       {items.map((item) => (
         <div key={item._id} className="rounded-2xl border border-blue-100 bg-surface p-4 shadow-sm">
@@ -82,7 +85,7 @@ export function VerificationsPanel() {
                   rel="noreferrer"
                   className="rounded-lg border border-blue-100 px-3 py-1.5 text-blue-700 hover:bg-blue-50"
                 >
-                  وثيقة الهوية
+                  {dict.verifications.idDocument}
                 </a>
               )}
               {item.verificationDocuments?.residencyDocumentUrl && (
@@ -92,7 +95,7 @@ export function VerificationsPanel() {
                   rel="noreferrer"
                   className="rounded-lg border border-blue-100 px-3 py-1.5 text-blue-700 hover:bg-blue-50"
                 >
-                  وثيقة الإقامة
+                  {dict.verifications.residencyDocument}
                 </a>
               )}
             </div>
@@ -103,7 +106,7 @@ export function VerificationsPanel() {
               <div className="flex-1">
                 <Input
                   id={`reason-${item._id}`}
-                  label="سبب الرفض (اختياري)"
+                  label={dict.verifications.rejectReasonLabel}
                   value={reasonById[item._id] ?? ''}
                   onChange={(e) => setReasonById((prev) => ({ ...prev, [item._id]: e.target.value }))}
                 />
@@ -115,20 +118,20 @@ export function VerificationsPanel() {
                   onClick={() => handleReject(item._id)}
                   className="text-sm"
                 >
-                  تأكيد الرفض
+                  {dict.verifications.confirmReject}
                 </Button>
                 <Button variant="ghost" onClick={() => setRejectingId(null)} className="text-sm">
-                  إلغاء
+                  {dict.verifications.cancel}
                 </Button>
               </div>
             </div>
           ) : (
             <div className="mt-3 flex gap-2">
               <Button loading={busyId === item._id} onClick={() => handleApprove(item._id)} className="text-sm">
-                موافقة
+                {dict.verifications.approve}
               </Button>
               <Button variant="outline" onClick={() => setRejectingId(item._id)} className="text-sm">
-                رفض
+                {dict.verifications.reject}
               </Button>
             </div>
           )}

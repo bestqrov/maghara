@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AnalyticsOverview, getAnalyticsOverview } from '@/services/admin.service';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 import { MonthlyRevenueChart } from './MonthlyRevenueChart';
 import { CheckCircleIcon, RingsIcon, ShieldCheckIcon, UserIcon } from '@/components/icons';
 
@@ -9,13 +10,8 @@ function fmt(n: number) {
   return n.toLocaleString('en-US');
 }
 
-const TYPE_LABELS: Record<keyof AnalyticsOverview['revenue']['byType'], string> = {
-  COIN_PURCHASE: 'شحن نقاط',
-  VIP_SUBSCRIPTION: 'اشتراك VIP',
-  VERIFICATION_FEE: 'توثيق',
-};
-
 export function AnalyticsPanel() {
+  const { dict } = useAdminDict();
   const [data, setData] = useState<AnalyticsOverview | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,62 +20,75 @@ export function AnalyticsPanel() {
     try {
       setData(await getAnalyticsOverview());
     } catch {
-      setError('تعذّر جلب التحليلات');
+      setError(dict.analytics.errorFetch);
     }
   }
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) return <p className="text-sm text-red-500">{error}</p>;
-  if (!data) return <p className="text-sm text-ink-500">جارٍ التحميل...</p>;
+  if (!data) return <p className="text-sm text-ink-500">{dict.common.loading}</p>;
+
+  const typeLabels = dict.payments.types;
 
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-5 shadow-sm">
-          <p className="text-sm font-medium text-ink-500">الإيراد الكلي</p>
+          <p className="text-sm font-medium text-ink-500">{dict.analytics.totalRevenue}</p>
           <p className="font-display mt-1 text-4xl font-bold text-emerald-700">{fmt(data.revenue.total)} MAD</p>
         </div>
         <div className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-          <p className="text-sm font-medium text-ink-500">الإيراد هذا الشهر</p>
+          <p className="text-sm font-medium text-ink-500">{dict.analytics.thisMonthRevenue}</p>
           <p className="font-display mt-1 text-4xl font-bold text-blue-900">{fmt(data.revenue.thisMonth)} MAD</p>
         </div>
       </div>
 
       <div className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-        <h3 className="font-semibold text-blue-900">الإيراد الشهري (آخر 6 أشهر)</h3>
+        <h3 className="font-semibold text-blue-900">{dict.analytics.monthlyRevenueTitle}</h3>
         <div className="mt-4">
           <MonthlyRevenueChart data={data.revenue.byMonth} />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatTile icon={<UserIcon className="h-5 w-5" />} color="blue" label="إجمالي الأعضاء" value={fmt(data.users.total)} />
+        <StatTile
+          icon={<UserIcon className="h-5 w-5" />}
+          color="blue"
+          label={dict.analytics.totalUsers}
+          value={fmt(data.users.total)}
+        />
         <StatTile
           icon={<ShieldCheckIcon className="h-5 w-5" />}
           color="emerald"
-          label="أعضاء موثّقون"
+          label={dict.analytics.verifiedUsers}
           value={fmt(data.users.verified)}
         />
-        <StatTile icon={<RingsIcon className="h-5 w-5" />} color="gold" label="مشتركو VIP" value={fmt(data.users.vip)} />
+        <StatTile
+          icon={<RingsIcon className="h-5 w-5" />}
+          color="gold"
+          label={dict.analytics.vipUsers}
+          value={fmt(data.users.vip)}
+        />
         <StatTile
           icon={<CheckCircleIcon className="h-5 w-5" />}
           color="rose"
-          label="أعضاء جدد هذا الشهر"
+          label={dict.analytics.newUsersThisMonth}
           value={fmt(data.users.newThisMonth)}
         />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-          <h3 className="font-semibold text-blue-900">الإيراد حسب النوع</h3>
+          <h3 className="font-semibold text-blue-900">{dict.analytics.revenueByType}</h3>
           <div className="mt-3 flex flex-col gap-2">
-            {(Object.keys(TYPE_LABELS) as (keyof typeof TYPE_LABELS)[]).map((key) => (
+            {(Object.keys(typeLabels) as (keyof typeof typeLabels)[]).map((key) => (
               <div key={key} className="flex items-center justify-between text-sm">
-                <span className="text-ink-500">{TYPE_LABELS[key]}</span>
+                <span className="text-ink-500">{typeLabels[key]}</span>
                 <span className="font-semibold text-blue-900">{fmt(data.revenue.byType[key])} MAD</span>
               </div>
             ))}
@@ -87,18 +96,18 @@ export function AnalyticsPanel() {
         </div>
 
         <div className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-          <h3 className="font-semibold text-blue-900">قيد الانتظار</h3>
+          <h3 className="font-semibold text-blue-900">{dict.analytics.pendingTitle}</h3>
           <div className="mt-3 flex flex-col gap-2 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-ink-500">طلبات توثيق</span>
+              <span className="text-ink-500">{dict.analytics.pendingVerifications}</span>
               <span className="font-semibold text-blue-900">{fmt(data.pending.verifications)}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-500">معاملات دفع</span>
+              <span className="text-ink-500">{dict.analytics.pendingPayments}</span>
               <span className="font-semibold text-blue-900">{fmt(data.pending.payments)}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-500">أكواد ترويجية فعّالة</span>
+              <span className="text-ink-500">{dict.analytics.activePromos}</span>
               <span className="font-semibold text-blue-900">{fmt(data.promos.active)}</span>
             </div>
           </div>

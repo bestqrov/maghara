@@ -7,23 +7,11 @@ import {
   listPendingTransactions,
   rejectTransaction,
 } from '@/services/admin.service';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 import { Button } from '@/components/ui/Button';
 
-const TYPE_LABELS: Record<PendingTransaction['type'], string> = {
-  COIN_PURCHASE: 'شحن نقاط',
-  VIP_SUBSCRIPTION: 'اشتراك VIP',
-  VERIFICATION_FEE: 'رسوم توثيق',
-};
-
-const METHOD_LABELS: Record<PendingTransaction['paymentMethod'], string> = {
-  CRYPTO_TRC20: 'USDT (TRC20)',
-  CRYPTO_POLYGON: 'USDT (Polygon)',
-  CRYPTO_SOLANA: 'USDT (Solana)',
-  BANK_TRANSFER: 'تحويل بنكي',
-  CASH_PLUS: 'Cash Plus',
-};
-
 export function PaymentsPanel() {
+  const { dict } = useAdminDict();
   const [items, setItems] = useState<PendingTransaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +23,7 @@ export function PaymentsPanel() {
     try {
       setItems(await listPendingTransactions());
     } catch {
-      setError('تعذّر جلب المعاملات');
+      setError(dict.payments.errorFetch);
     } finally {
       setLoading(false);
     }
@@ -44,6 +32,7 @@ export function PaymentsPanel() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleReview(transactionId: string, approve: boolean) {
@@ -53,18 +42,18 @@ export function PaymentsPanel() {
       else await rejectTransaction(transactionId);
       setItems((prev) => prev.filter((item) => item._id !== transactionId));
     } catch {
-      setError('تعذّرت مراجعة المعاملة');
+      setError(dict.payments.errorReview);
     } finally {
       setBusyId(null);
     }
   }
 
-  if (loading) return <p className="text-sm text-ink-500">جارٍ التحميل...</p>;
+  if (loading) return <p className="text-sm text-ink-500">{dict.common.loading}</p>;
 
   return (
     <div className="flex flex-col gap-4">
       {error && <p className="text-sm text-red-500">{error}</p>}
-      {items.length === 0 && <p className="text-sm text-ink-500">لا توجد معاملات قيد الانتظار</p>}
+      {items.length === 0 && <p className="text-sm text-ink-500">{dict.payments.empty}</p>}
 
       {items.map((item) => {
         const user = typeof item.userId === 'string' ? null : item.userId;
@@ -72,7 +61,7 @@ export function PaymentsPanel() {
           <div key={item._id} className="rounded-2xl border border-blue-100 bg-surface p-4 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <p className="font-semibold text-blue-900">{user?.profile.firstName ?? 'مستخدم'}</p>
+                <p className="font-semibold text-blue-900">{user?.profile.firstName ?? dict.payments.unknownUser}</p>
                 <p className="text-sm text-ink-500">{user?.phoneNumber ?? (typeof item.userId === 'string' ? item.userId : '')}</p>
               </div>
               <p className="font-display text-lg font-bold text-emerald-700">
@@ -81,14 +70,22 @@ export function PaymentsPanel() {
             </div>
 
             <div className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-ink-500">
-              <span>النوع: {TYPE_LABELS[item.type]}</span>
-              <span>الطريقة: {METHOD_LABELS[item.paymentMethod]}</span>
-              {item.txHashOrReceipt && <span className="break-all">المرجع: {item.txHashOrReceipt}</span>}
+              <span>
+                {dict.payments.typeLabel}: {dict.payments.types[item.type]}
+              </span>
+              <span>
+                {dict.payments.methodLabel}: {dict.payments.methods[item.paymentMethod]}
+              </span>
+              {item.txHashOrReceipt && (
+                <span className="break-all">
+                  {dict.payments.referenceLabel}: {item.txHashOrReceipt}
+                </span>
+              )}
             </div>
 
             <div className="mt-3 flex gap-2">
               <Button loading={busyId === item._id} onClick={() => handleReview(item._id, true)} className="text-sm">
-                موافقة
+                {dict.payments.approve}
               </Button>
               <Button
                 variant="outline"
@@ -96,7 +93,7 @@ export function PaymentsPanel() {
                 onClick={() => handleReview(item._id, false)}
                 className="text-sm"
               >
-                رفض
+                {dict.payments.reject}
               </Button>
             </div>
           </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getAdminPaymentSettings, updatePaymentSettings } from '@/services/admin.service';
 import type { PaymentSettings } from '@/services/paymentSettings.service';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 
@@ -14,6 +15,7 @@ const EMPTY: PaymentSettings = {
 };
 
 export function PaymentSettingsPanel() {
+  const { dict } = useAdminDict();
   const [form, setForm] = useState<PaymentSettings>(EMPTY);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -26,7 +28,7 @@ export function PaymentSettingsPanel() {
     try {
       setForm(await getAdminPaymentSettings());
     } catch {
-      setError('تعذّر جلب إعدادات الدفع');
+      setError(dict.paymentSettings.errorFetch);
     } finally {
       setLoading(false);
     }
@@ -35,6 +37,7 @@ export function PaymentSettingsPanel() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function onSubmit(e: React.FormEvent) {
@@ -46,23 +49,20 @@ export function PaymentSettingsPanel() {
       setForm(await updatePaymentSettings(form));
       setSuccess(true);
     } catch {
-      setError('تعذّر حفظ إعدادات الدفع');
+      setError(dict.paymentSettings.errorSave);
     } finally {
       setSaving(false);
     }
   }
 
-  if (loading) return <p className="text-sm text-ink-500">جارٍ التحميل...</p>;
+  if (loading) return <p className="text-sm text-ink-500">{dict.common.loading}</p>;
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-6">
-      <p className="text-sm text-ink-500">
-        هاد الحسابات هي اللي كتبان للأعضاء ملي يبغيو يشحنو نقاط أو يشتركو فـ VIP. خلي أي حقل فارغ باش تخفي الطريقة ديالو من
-        المستخدمين.
-      </p>
+      <p className="text-sm text-ink-500">{dict.paymentSettings.intro}</p>
 
       <section className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-        <h3 className="font-semibold text-blue-900">محافظ العملات الرقمية (USDT)</h3>
+        <h3 className="font-semibold text-blue-900">{dict.paymentSettings.cryptoTitle}</h3>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Input
             id="cryptoTrc20"
@@ -86,17 +86,17 @@ export function PaymentSettingsPanel() {
       </section>
 
       <section className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-        <h3 className="font-semibold text-blue-900">تحويل بنكي محلي</h3>
+        <h3 className="font-semibold text-blue-900">{dict.paymentSettings.bankTitle}</h3>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Input
             id="bankName"
-            label="اسم البنك"
+            label={dict.paymentSettings.bankNameLabel}
             value={form.bankTransfer.bankName ?? ''}
             onChange={(e) => setForm((f) => ({ ...f, bankTransfer: { ...f.bankTransfer, bankName: e.target.value } }))}
           />
           <Input
             id="bankAccountHolder"
-            label="صاحب الحساب"
+            label={dict.paymentSettings.accountHolderLabel}
             value={form.bankTransfer.accountHolder ?? ''}
             onChange={(e) =>
               setForm((f) => ({ ...f, bankTransfer: { ...f.bankTransfer, accountHolder: e.target.value } }))
@@ -104,7 +104,7 @@ export function PaymentSettingsPanel() {
           />
           <Input
             id="bankRib"
-            label="RIB"
+            label={dict.paymentSettings.ribLabel}
             value={form.bankTransfer.rib ?? ''}
             onChange={(e) => setForm((f) => ({ ...f, bankTransfer: { ...f.bankTransfer, rib: e.target.value } }))}
           />
@@ -112,11 +112,11 @@ export function PaymentSettingsPanel() {
       </section>
 
       <section className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-        <h3 className="font-semibold text-blue-900">Cash Plus</h3>
+        <h3 className="font-semibold text-blue-900">{dict.paymentSettings.cashPlusTitle}</h3>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Input
             id="cashPlusCode"
-            label="الرمز / الرقم"
+            label={dict.paymentSettings.cashPlusCodeLabel}
             value={form.cashPlus.code ?? ''}
             onChange={(e) => setForm((f) => ({ ...f, cashPlus: { ...f.cashPlus, code: e.target.value } }))}
           />
@@ -124,12 +124,12 @@ export function PaymentSettingsPanel() {
       </section>
 
       <section className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
-        <h3 className="font-semibold text-blue-900">حوالة دولية (IBAN / SWIFT)</h3>
-        <p className="mt-1 text-xs text-ink-500">لأعضاء الجالية اللي بغاو يحولو من برا المغرب.</p>
+        <h3 className="font-semibold text-blue-900">{dict.paymentSettings.wireTitle}</h3>
+        <p className="mt-1 text-xs text-ink-500">{dict.paymentSettings.wireSubtitle}</p>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Input
             id="wireBankName"
-            label="اسم البنك"
+            label={dict.paymentSettings.bankNameLabel}
             value={form.internationalWire.bankName ?? ''}
             onChange={(e) =>
               setForm((f) => ({ ...f, internationalWire: { ...f.internationalWire, bankName: e.target.value } }))
@@ -137,7 +137,7 @@ export function PaymentSettingsPanel() {
           />
           <Input
             id="wireAccountHolder"
-            label="صاحب الحساب"
+            label={dict.paymentSettings.accountHolderLabel}
             value={form.internationalWire.accountHolder ?? ''}
             onChange={(e) =>
               setForm((f) => ({ ...f, internationalWire: { ...f.internationalWire, accountHolder: e.target.value } }))
@@ -145,7 +145,7 @@ export function PaymentSettingsPanel() {
           />
           <Input
             id="wireIban"
-            label="IBAN"
+            label={dict.paymentSettings.ibanLabel}
             value={form.internationalWire.iban ?? ''}
             onChange={(e) =>
               setForm((f) => ({ ...f, internationalWire: { ...f.internationalWire, iban: e.target.value } }))
@@ -153,7 +153,7 @@ export function PaymentSettingsPanel() {
           />
           <Input
             id="wireSwift"
-            label="SWIFT / BIC"
+            label={dict.paymentSettings.swiftLabel}
             value={form.internationalWire.swiftBic ?? ''}
             onChange={(e) =>
               setForm((f) => ({ ...f, internationalWire: { ...f.internationalWire, swiftBic: e.target.value } }))
@@ -161,7 +161,7 @@ export function PaymentSettingsPanel() {
           />
           <Input
             id="wireBankAddress"
-            label="عنوان البنك (اختياري)"
+            label={dict.paymentSettings.bankAddressLabel}
             value={form.internationalWire.bankAddress ?? ''}
             onChange={(e) =>
               setForm((f) => ({ ...f, internationalWire: { ...f.internationalWire, bankAddress: e.target.value } }))
@@ -171,10 +171,10 @@ export function PaymentSettingsPanel() {
       </section>
 
       {error && <p className="text-sm text-red-500">{error}</p>}
-      {success && <p className="text-sm text-emerald-600">تم حفظ إعدادات الدفع بنجاح</p>}
+      {success && <p className="text-sm text-emerald-600">{dict.paymentSettings.success}</p>}
 
       <Button type="submit" loading={saving} className="self-start text-sm">
-        حفظ الإعدادات
+        {dict.paymentSettings.save}
       </Button>
     </form>
   );

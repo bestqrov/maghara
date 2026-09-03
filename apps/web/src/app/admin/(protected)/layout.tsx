@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdminStore } from '@/store/admin.store';
+import { AdminHtmlDirSync } from '@/components/admin/AdminHtmlDirSync';
 
 export default function AdminProtectedLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -14,5 +15,10 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
 
   if (!hasHydrated || !adminToken) return null;
 
-  return <>{children}</>;
+  return (
+    <>
+      <AdminHtmlDirSync />
+      {children}
+    </>
+  );
 }

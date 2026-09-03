@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { isAxiosError } from 'axios';
 import { changeAdminPassword } from '@/services/admin.service';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { CheckCircleIcon } from '@/components/icons';
 
 export function SettingsPanel() {
+  const { dict } = useAdminDict();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,11 +23,11 @@ export function SettingsPanel() {
     setSuccess(false);
 
     if (newPassword.length < 8) {
-      setError('يجب أن تتكون كلمة المرور الجديدة من 8 أحرف على الأقل');
+      setError(dict.settings.errorMinLength);
       return;
     }
     if (newPassword !== confirmPassword) {
-      setError('كلمة المرور الجديدة غير مطابقة للتأكيد');
+      setError(dict.settings.errorMismatch);
       return;
     }
 
@@ -38,9 +40,9 @@ export function SettingsPanel() {
       setConfirmPassword('');
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 401) {
-        setError('كلمة المرور الحالية غير صحيحة');
+        setError(dict.settings.errorWrongPassword);
       } else {
-        setError('تعذّر تغيير كلمة المرور، حاول مرة أخرى');
+        setError(dict.settings.errorGeneric);
       }
     } finally {
       setLoading(false);
@@ -49,11 +51,11 @@ export function SettingsPanel() {
 
   return (
     <div className="w-full max-w-sm rounded-2xl border border-blue-100 bg-surface p-6 shadow-sm">
-      <h3 className="font-semibold text-blue-900">تغيير كلمة مرور المشرف</h3>
+      <h3 className="font-semibold text-blue-900">{dict.settings.title}</h3>
       <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-4">
         <Input
           id="adminCurrentPassword"
-          label="كلمة المرور الحالية"
+          label={dict.settings.currentPasswordLabel}
           type="password"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
@@ -61,7 +63,7 @@ export function SettingsPanel() {
         />
         <Input
           id="adminNewPassword"
-          label="كلمة المرور الجديدة"
+          label={dict.settings.newPasswordLabel}
           type="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
@@ -69,7 +71,7 @@ export function SettingsPanel() {
         />
         <Input
           id="adminConfirmPassword"
-          label="تأكيد كلمة المرور الجديدة"
+          label={dict.settings.confirmPasswordLabel}
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -77,7 +79,7 @@ export function SettingsPanel() {
         />
         {error && <p className="text-sm text-red-500">{error}</p>}
         <Button type="submit" loading={loading} className="text-sm">
-          حفظ كلمة المرور
+          {dict.settings.save}
         </Button>
       </form>
 
@@ -87,10 +89,10 @@ export function SettingsPanel() {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
               <CheckCircleIcon className="h-7 w-7" />
             </div>
-            <h2 className="mt-4 text-lg font-bold text-emerald-700">تم تغيير كلمة المرور بنجاح</h2>
-            <p className="mt-2 text-sm text-ink-500">استعمل كلمة المرور الجديدة في المرة القادمة اللي تدخل فيها.</p>
+            <h2 className="mt-4 text-lg font-bold text-emerald-700">{dict.settings.successTitle}</h2>
+            <p className="mt-2 text-sm text-ink-500">{dict.settings.successSubtitle}</p>
             <Button onClick={() => setSuccess(false)} className="mt-6 w-full">
-              حسناً
+              {dict.settings.successOk}
             </Button>
           </div>
         </div>

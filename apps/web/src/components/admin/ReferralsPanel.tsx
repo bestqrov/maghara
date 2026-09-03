@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { ReferralStats, listReferrals } from '@/services/admin.service';
+import { useAdminDict } from '@/hooks/useAdminLocale';
 
 export function ReferralsPanel() {
+  const { dict } = useAdminDict();
   const [items, setItems] = useState<ReferralStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +16,7 @@ export function ReferralsPanel() {
     try {
       setItems(await listReferrals());
     } catch {
-      setError('تعذّر جلب بيانات الإحالات');
+      setError(dict.referrals.errorFetch);
     } finally {
       setLoading(false);
     }
@@ -23,9 +25,10 @@ export function ReferralsPanel() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return <p className="text-sm text-ink-500">جارٍ التحميل...</p>;
+  if (loading) return <p className="text-sm text-ink-500">{dict.common.loading}</p>;
 
   return (
     <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-surface shadow-sm">
@@ -33,11 +36,11 @@ export function ReferralsPanel() {
       <table className="w-full min-w-[560px] text-sm">
         <thead>
           <tr className="border-b border-blue-100 text-right text-ink-500">
-            <th className="px-4 py-3 font-medium">العضو</th>
-            <th className="px-4 py-3 font-medium">رمز الإحالة</th>
-            <th className="px-4 py-3 font-medium">إجمالي المُحالين</th>
-            <th className="px-4 py-3 font-medium">الموثّقون منهم</th>
-            <th className="px-4 py-3 font-medium">رصيد النقاط</th>
+            <th className="px-4 py-3 font-medium">{dict.referrals.columnMember}</th>
+            <th className="px-4 py-3 font-medium">{dict.referrals.columnCode}</th>
+            <th className="px-4 py-3 font-medium">{dict.referrals.columnTotal}</th>
+            <th className="px-4 py-3 font-medium">{dict.referrals.columnVerified}</th>
+            <th className="px-4 py-3 font-medium">{dict.referrals.columnBalance}</th>
           </tr>
         </thead>
         <tbody>
@@ -56,7 +59,7 @@ export function ReferralsPanel() {
           {items.length === 0 && (
             <tr>
               <td colSpan={5} className="px-4 py-6 text-center text-ink-500">
-                لا توجد إحالات بعد
+                {dict.referrals.empty}
               </td>
             </tr>
           )}
