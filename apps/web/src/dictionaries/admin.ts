@@ -26,7 +26,23 @@ export interface AdminDictionary {
     tabPaymentSettings: string;
     tabPromos: string;
     tabReferrals: string;
+    tabSignupCampaign: string;
     tabSettings: string;
+  };
+  signupCampaign: {
+    intro: string;
+    errorFetch: string;
+    errorSave: string;
+    success: string;
+    save: string;
+    activeLabel: string;
+    startsAtLabel: string;
+    endsAtLabel: string;
+    vipDaysLabel: string;
+    statusRunning: string;
+    statusScheduled: string;
+    statusEnded: string;
+    statusOff: string;
   };
   verifications: {
     errorFetch: string;
@@ -163,7 +179,23 @@ const ar: AdminDictionary = {
     tabPaymentSettings: 'حسابات الاستلام',
     tabPromos: 'الأكواد الترويجية',
     tabReferrals: 'الإحالات',
+    tabSignupCampaign: 'حملة التسجيل',
     tabSettings: 'الإعدادات',
+  },
+  signupCampaign: {
+    intro: 'ملي تكون هاد الحملة فعّالة، كل عضو جديد يسجل خلال الفترة المحددة يربح اشتراك VIP مجاني تلقائياً بلا ما يدخل أي كود.',
+    errorFetch: 'تعذّر جلب إعدادات الحملة',
+    errorSave: 'تعذّر حفظ إعدادات الحملة',
+    success: 'تم حفظ إعدادات الحملة بنجاح',
+    save: 'حفظ الحملة',
+    activeLabel: 'الحملة فعّالة',
+    startsAtLabel: 'تاريخ ووقت البداية',
+    endsAtLabel: 'تاريخ ووقت النهاية',
+    vipDaysLabel: 'عدد أيام VIP الممنوحة',
+    statusRunning: 'جارية الآن 🟢',
+    statusScheduled: 'مجدولة، لم تبدأ بعد ⏳',
+    statusEnded: 'انتهت ⏹️',
+    statusOff: 'موقوفة',
   },
   verifications: {
     errorFetch: 'تعذّر جلب طلبات التوثيق',
@@ -301,7 +333,24 @@ const en: AdminDictionary = {
     tabPaymentSettings: 'Payout accounts',
     tabPromos: 'Promo codes',
     tabReferrals: 'Referrals',
+    tabSignupCampaign: 'Signup campaign',
     tabSettings: 'Settings',
+  },
+  signupCampaign: {
+    intro:
+      'While this campaign is active, every new member who signs up within the window gets free VIP automatically, with no code needed.',
+    errorFetch: 'Could not fetch the campaign settings',
+    errorSave: 'Could not save the campaign settings',
+    success: 'Campaign settings saved successfully',
+    save: 'Save campaign',
+    activeLabel: 'Campaign active',
+    startsAtLabel: 'Start date and time',
+    endsAtLabel: 'End date and time',
+    vipDaysLabel: 'VIP days granted',
+    statusRunning: 'Running now 🟢',
+    statusScheduled: "Scheduled, hasn't started yet ⏳",
+    statusEnded: 'Ended ⏹️',
+    statusOff: 'Off',
   },
   verifications: {
     errorFetch: 'Could not fetch verification requests',

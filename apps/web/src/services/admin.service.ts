@@ -2,6 +2,20 @@ import axios from 'axios';
 import { adminApi } from './adminApi';
 import type { PaymentSettings } from './paymentSettings.service';
 
+export interface SignupCampaign {
+  active: boolean;
+  startsAt?: string;
+  endsAt?: string;
+  vipDays: number;
+}
+
+export interface UpdateSignupCampaignPayload {
+  active?: boolean;
+  startsAt?: string;
+  endsAt?: string;
+  vipDays?: number;
+}
+
 export interface AnalyticsOverview {
   users: { total: number; verified: number; vip: number; newThisMonth: number };
   revenue: {
@@ -130,6 +144,16 @@ export async function changeAdminPassword(currentPassword: string, newPassword: 
     currentPassword,
     newPassword,
   });
+  return data;
+}
+
+export async function getSignupCampaign() {
+  const { data } = await adminApi.get<SignupCampaign>('/signup-campaign');
+  return data;
+}
+
+export async function updateSignupCampaign(payload: UpdateSignupCampaignPayload) {
+  const { data } = await adminApi.patch<SignupCampaign>('/signup-campaign', payload);
   return data;
 }
 

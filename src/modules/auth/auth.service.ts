@@ -7,6 +7,7 @@ import { User } from '../../schemas/user.schema';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { generateUniqueReferralCode } from '../../common/utils/referral-code.util';
+import { SignupCampaignService } from '../signup-campaign/signup-campaign.service';
 
 const BCRYPT_ROUNDS = 12;
 
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
     private readonly jwtService: JwtService,
+    private readonly signupCampaignService: SignupCampaignService,
   ) {}
 
   async isPhoneAvailable(phoneNumber: string) {
@@ -44,12 +46,16 @@ export class AuthService {
       if (referrer) referredBy = referrer._id as Types.ObjectId;
     }
 
+    const campaignVipDays = await this.signupCampaignService.getActiveVipDays();
+
     const user = await this.userModel.create({
       phoneNumber: dto.phoneNumber,
       email: dto.email.toLowerCase(),
       passwordHash,
       referralCode,
       referredBy,
+      subscriptionTier: campaignVipDays ? 'VIP' : 'FREE',
+      vipExpiresAt: campaignVipDays ? new Date(Date.now() + campaignVipDays * 24 * 60 * 60 * 1000) : undefined,
       profile: {
         firstName: dto.firstName,
         gender: dto.gender,

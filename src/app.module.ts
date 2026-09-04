@@ -17,6 +17,7 @@ import { PromosModule } from './modules/promos/promos.module';
 import { AdminAuthModule } from './modules/admin-auth/admin-auth.module';
 import { PaymentSettingsModule } from './modules/payment-settings/payment-settings.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
+import { SignupCampaignModule } from './modules/signup-campaign/signup-campaign.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
     AdminAuthModule,
     PaymentSettingsModule,
     AnalyticsModule,
+    SignupCampaignModule,
   ],
   controllers: [AppController],
   providers: [AppService],
