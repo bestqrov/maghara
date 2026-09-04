@@ -18,6 +18,7 @@ export interface SearchResultProfile {
   subscriptionTier: string;
   blurred: boolean;
   compatibilityScore: number;
+  isOnline: boolean;
   profile: {
     firstName: string;
     gender: 'MALE' | 'FEMALE';
@@ -53,6 +54,7 @@ export interface MatchEntry {
   otherUser: {
     _id: string;
     isVerified: boolean;
+    isOnline: boolean;
     profile: {
       firstName: string;
       photos: string[];

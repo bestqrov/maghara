@@ -3,9 +3,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { ProfileVisitor } from '../../schemas/profile-visitor.schema';
 import { User } from '../../schemas/user.schema';
+import { isUserOnline } from '../../common/utils/online-status.util';
 
 const FREE_VISIBLE_VISITORS = 8;
 const FREE_TEASER_VISITORS = 2;
+
+function withOnlineStatus(visitor: any) {
+  if (!visitor) return visitor;
+  const { lastActiveAt, ...rest } = visitor.toObject();
+  return { ...rest, isOnline: isUserOnline(lastActiveAt) };
+}
 
 @Injectable()
 export class VisitorsService {
@@ -35,18 +42,18 @@ export class VisitorsService {
     let query = this.visitorModel
       .find({ visitedProfileId: new Types.ObjectId(userId) })
       .sort({ visitedAt: -1 })
-      .populate('visitorId', 'profile subscriptionTier');
+      .populate('visitorId', 'profile subscriptionTier lastActiveAt');
 
     if (fetchLimit) query = query.limit(fetchLimit);
 
     const visits = await query.exec();
 
     if (isVip) {
-      return visits.map((v) => ({ visitor: v.visitorId, visitedAt: v.visitedAt, locked: false }));
+      return visits.map((v) => ({ visitor: withOnlineStatus(v.visitorId), visitedAt: v.visitedAt, locked: false }));
     }
 
     return visits.map((v, index) => ({
-      visitor: index < FREE_VISIBLE_VISITORS ? v.visitorId : null,
+      visitor: index < FREE_VISIBLE_VISITORS ? withOnlineStatus(v.visitorId) : null,
       visitedAt: v.visitedAt,
       locked: index >= FREE_VISIBLE_VISITORS,
     }));

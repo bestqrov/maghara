@@ -7,6 +7,7 @@ import { acceptMatch, getMyMatches, markEngaged, MatchEntry, rejectMatch } from 
 import { getOrCreateConversation } from '@/services/chat.service';
 import { NavBar } from '@/components/NavBar';
 import { Button } from '@/components/ui/Button';
+import { OnlineDot } from '@/components/OnlineDot';
 import { ShieldCheckIcon } from '@/components/icons';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 
@@ -95,8 +96,11 @@ export default function MatchesPage() {
             const isBusy = busyId === match._id;
             return (
               <div key={match._id} className="flex items-center gap-4 rounded-2xl bg-surface p-4 shadow-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={photo} alt={match.otherUser.profile.firstName} className="h-14 w-14 rounded-full object-cover" />
+                <div className="relative shrink-0">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={photo} alt={match.otherUser.profile.firstName} className="h-14 w-14 rounded-full object-cover" />
+                  {match.otherUser.isOnline && <OnlineDot className="bottom-0 end-0 h-3.5 w-3.5" />}
+                </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-1.5">
                     <p className="font-semibold text-emerald-900">{match.otherUser.profile.firstName}</p>

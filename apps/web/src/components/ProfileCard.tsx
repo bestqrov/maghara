@@ -53,6 +53,7 @@ export function ProfileCard({ result, onSendInterest, onView, sending, sent }: P
       </div>
       <div className="flex flex-col gap-1 p-4">
         <div className="flex items-center gap-1.5">
+          {!result.blurred && result.isOnline && <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />}
           <h3 className="font-display font-bold text-blue-900">
             {result.blurred ? '••••••' : profile.firstName}, {calculateAge(profile.birthDate)}
           </h3>

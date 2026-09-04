@@ -68,6 +68,7 @@ export class User extends Document {
   @Prop({ default: 0 }) coinBalance: number;
   @Prop({ default: 0 }) dailyInterestsSent: number;
   @Prop({ default: () => new Date() }) lastInterestReset: Date;
+  @Prop() lastActiveAt?: Date;
 
   // sparse (not required at the schema/index level): the 46 pre-existing seeded
   // users predate this field, and a non-sparse unique index would fail to build

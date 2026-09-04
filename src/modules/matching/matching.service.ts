@@ -5,6 +5,7 @@ import { Match } from '../../schemas/match.schema';
 import { User } from '../../schemas/user.schema';
 import { SearchProfilesDto } from './dto/search-profiles.dto';
 import { resolveIsVip } from '../../common/utils/subscription.util';
+import { isUserOnline } from '../../common/utils/online-status.util';
 
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
@@ -133,17 +134,24 @@ export class MatchingService {
       .sort({ isVerified: -1, createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
-      .select('profile isVerified verificationStatus subscriptionTier');
+      .select('profile isVerified verificationStatus subscriptionTier lastActiveAt');
 
     if (isVip) {
-      return results.map((r) => ({ ...r.toObject(), blurred: false, compatibilityScore: computeCompatibility(me, r) }));
+      return results.map((r) => {
+        const { lastActiveAt, ...rest } = r.toObject();
+        return { ...rest, blurred: false, compatibilityScore: computeCompatibility(me, r), isOnline: isUserOnline(lastActiveAt) };
+      });
     }
 
-    return results.map((r, index) => ({
-      ...r.toObject(),
-      blurred: index >= FREE_UNBLURRED_RESULTS,
-      compatibilityScore: computeCompatibility(me, r),
-    }));
+    return results.map((r, index) => {
+      const { lastActiveAt, ...rest } = r.toObject();
+      return {
+        ...rest,
+        blurred: index >= FREE_UNBLURRED_RESULTS,
+        compatibilityScore: computeCompatibility(me, r),
+        isOnline: isUserOnline(lastActiveAt),
+      };
+    });
   }
 
   async sendInterest(senderId: string, receiverId: string, isSuperLike = false) {
@@ -184,19 +192,20 @@ export class MatchingService {
     const matches = await this.matchModel
       .find({ $or: [{ senderId: userId }, { receiverId: userId }] })
       .sort({ updatedAt: -1 })
-      .populate('senderId', 'profile.firstName profile.photos isVerified')
-      .populate('receiverId', 'profile.firstName profile.photos isVerified');
+      .populate('senderId', 'profile.firstName profile.photos isVerified lastActiveAt')
+      .populate('receiverId', 'profile.firstName profile.photos isVerified lastActiveAt');
 
     return matches.map((match) => {
       const m = match as any;
       const isSender = m.senderId._id.toString() === userId;
       const other = isSender ? m.receiverId : m.senderId;
+      const { lastActiveAt, ...otherRest } = other.toObject();
       return {
         _id: m._id,
         status: m.status,
         isSuperLike: m.isSuperLike,
         direction: isSender ? 'SENT' : 'RECEIVED',
-        otherUser: other,
+        otherUser: { ...otherRest, isOnline: isUserOnline(lastActiveAt) },
         createdAt: m.createdAt,
       };
     });

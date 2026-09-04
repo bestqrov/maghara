@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/auth.store';
 import { getMyVisitors, VisitorEntry } from '@/services/visitors.service';
 import { BlurredImage } from '@/components/BlurredImage';
+import { OnlineDot } from '@/components/OnlineDot';
 import { NavBar } from '@/components/NavBar';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 
@@ -54,13 +55,16 @@ export default function VisitorsPage() {
             const photo = entry.visitor?.profile.photos[0] ?? 'https://placehold.co/300x300/eef6f0/2f7a52?text=Zawaj';
             return (
               <div key={index} className="flex flex-col items-center gap-2">
-                <BlurredImage
-                  src={photo}
-                  alt={entry.visitor?.profile.firstName ?? dict.visitors.unknownVisitorAlt}
-                  isBlurred={entry.locked}
-                  className="aspect-square w-full"
-                  lockLabel={dict.visitors.lockLabel}
-                />
+                <div className="relative w-full">
+                  <BlurredImage
+                    src={photo}
+                    alt={entry.visitor?.profile.firstName ?? dict.visitors.unknownVisitorAlt}
+                    isBlurred={entry.locked}
+                    className="aspect-square w-full"
+                    lockLabel={dict.visitors.lockLabel}
+                  />
+                  {!entry.locked && entry.visitor?.isOnline && <OnlineDot className="bottom-1.5 end-1.5 h-3.5 w-3.5" />}
+                </div>
                 <p className="text-xs font-medium text-ink-700">
                   {entry.locked ? dict.visitors.lockedName : entry.visitor?.profile.firstName}
                 </p>

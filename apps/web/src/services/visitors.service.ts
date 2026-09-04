@@ -8,6 +8,7 @@ export interface VisitorEntry {
       photos: string[];
     };
     subscriptionTier: string;
+    isOnline: boolean;
   } | null;
   visitedAt: string;
   locked: boolean;
