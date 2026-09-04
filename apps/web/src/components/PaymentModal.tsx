@@ -20,28 +20,28 @@ function destinationLines(method: PaymentMethod, settings: PaymentSettings | nul
   if (!settings) return [];
   switch (method) {
     case 'CRYPTO_TRC20':
-      return settings.cryptoWallets.trc20 ? [{ label: 'USDT (TRC-20)', value: settings.cryptoWallets.trc20 }] : [];
+      return settings.cryptoWallets?.trc20 ? [{ label: 'USDT (TRC-20)', value: settings.cryptoWallets.trc20 }] : [];
     case 'CRYPTO_POLYGON':
-      return settings.cryptoWallets.polygon ? [{ label: 'USDT (Polygon)', value: settings.cryptoWallets.polygon }] : [];
+      return settings.cryptoWallets?.polygon ? [{ label: 'USDT (Polygon)', value: settings.cryptoWallets.polygon }] : [];
     case 'CRYPTO_SOLANA':
-      return settings.cryptoWallets.solana ? [{ label: 'USDT (Solana)', value: settings.cryptoWallets.solana }] : [];
+      return settings.cryptoWallets?.solana ? [{ label: 'USDT (Solana)', value: settings.cryptoWallets.solana }] : [];
     case 'BANK_TRANSFER':
       return [
-        settings.bankTransfer.bankName ? { label: 'البنك', value: settings.bankTransfer.bankName } : null,
-        settings.bankTransfer.accountHolder ? { label: 'صاحب الحساب', value: settings.bankTransfer.accountHolder } : null,
-        settings.bankTransfer.rib ? { label: 'RIB', value: settings.bankTransfer.rib } : null,
+        settings.bankTransfer?.bankName ? { label: 'البنك', value: settings.bankTransfer.bankName } : null,
+        settings.bankTransfer?.accountHolder ? { label: 'صاحب الحساب', value: settings.bankTransfer.accountHolder } : null,
+        settings.bankTransfer?.rib ? { label: 'RIB', value: settings.bankTransfer.rib } : null,
       ].filter((l): l is { label: string; value: string } => l !== null);
     case 'CASH_PLUS':
-      return settings.cashPlus.code ? [{ label: 'الرمز', value: settings.cashPlus.code }] : [];
+      return settings.cashPlus?.code ? [{ label: 'الرمز', value: settings.cashPlus.code }] : [];
     case 'INTERNATIONAL_WIRE':
       return [
-        settings.internationalWire.bankName ? { label: 'البنك', value: settings.internationalWire.bankName } : null,
-        settings.internationalWire.accountHolder
+        settings.internationalWire?.bankName ? { label: 'البنك', value: settings.internationalWire.bankName } : null,
+        settings.internationalWire?.accountHolder
           ? { label: 'صاحب الحساب', value: settings.internationalWire.accountHolder }
           : null,
-        settings.internationalWire.iban ? { label: 'IBAN', value: settings.internationalWire.iban } : null,
-        settings.internationalWire.swiftBic ? { label: 'SWIFT/BIC', value: settings.internationalWire.swiftBic } : null,
-        settings.internationalWire.bankAddress
+        settings.internationalWire?.iban ? { label: 'IBAN', value: settings.internationalWire.iban } : null,
+        settings.internationalWire?.swiftBic ? { label: 'SWIFT/BIC', value: settings.internationalWire.swiftBic } : null,
+        settings.internationalWire?.bankAddress
           ? { label: 'عنوان البنك', value: settings.internationalWire.bankAddress }
           : null,
       ].filter((l): l is { label: string; value: string } => l !== null);
