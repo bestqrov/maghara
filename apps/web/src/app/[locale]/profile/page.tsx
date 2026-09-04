@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button';
 import { ImageUploader } from '@/components/ImageUploader';
 import { NavBar } from '@/components/NavBar';
 import { WeddingEmblem } from '@/components/WeddingEmblem';
+import { ShieldCheckIcon } from '@/components/icons';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 
 type ProfileFormFields = Pick<
@@ -23,6 +24,9 @@ type ProfileFormFields = Pick<
   | 'relocationPreference'
   | 'jobTitle'
   | 'bio'
+  | 'waliName'
+  | 'waliPhone'
+  | 'waliRelationship'
 >;
 
 export default function ProfilePage() {
@@ -58,6 +62,9 @@ export default function ProfilePage() {
           relocationPreference: me.profile.relocationPreference as ProfileFormFields['relocationPreference'],
           jobTitle: me.profile.jobTitle,
           bio: me.profile.bio,
+          waliName: me.profile.waliName,
+          waliPhone: me.profile.waliPhone,
+          waliRelationship: me.profile.waliRelationship,
         });
         setPhotoUrl(me.profile.photos[0] ?? '');
         setReady(true);
@@ -166,6 +173,23 @@ export default function ProfilePage() {
               </div>
 
               <Input id="bio" label={dict.profile.bioLabel} {...register('bio')} />
+
+              <div className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                    <ShieldCheckIcon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h2 className="font-display font-bold text-blue-900">{dict.profile.waliTitle}</h2>
+                    <p className="text-xs text-ink-500">{dict.profile.waliSubtitle}</p>
+                  </div>
+                </div>
+                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  <Input id="waliName" label={dict.profile.waliNameLabel} {...register('waliName')} />
+                  <Input id="waliPhone" label={dict.profile.waliPhoneLabel} placeholder="+212600000000" {...register('waliPhone')} />
+                  <Input id="waliRelationship" label={dict.profile.waliRelationshipLabel} {...register('waliRelationship')} />
+                </div>
+              </div>
 
               {serverError && <p className="text-sm text-red-500">{serverError}</p>}
               {success && <p className="text-sm text-emerald-600">{dict.profile.success}</p>}

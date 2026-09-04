@@ -43,6 +43,12 @@ export class Profile {
   @Prop({ type: [String], default: [] }) photos: string[];
   @Prop({ default: true }) isPhotoBlurred: boolean;
   @Prop({ type: MatchCriteriaSchema }) matchCriteria?: MatchCriteria;
+
+  // Wali (guardian) contact — never exposed to other members, only ever read
+  // back to the profile's own owner so they can notify their guardian themselves.
+  @Prop() waliName?: string;
+  @Prop() waliPhone?: string;
+  @Prop() waliRelationship?: string;
 }
 export const ProfileSchema = SchemaFactory.createForClass(Profile);
 

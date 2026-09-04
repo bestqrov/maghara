@@ -13,6 +13,10 @@ export class UpdateProfileDto {
   @IsOptional() @IsString() bio?: string;
   @IsOptional() @IsArray() @IsString({ each: true }) photos?: string[];
 
+  @IsOptional() @IsString() waliName?: string;
+  @IsOptional() @IsString() waliPhone?: string;
+  @IsOptional() @IsString() waliRelationship?: string;
+
   @IsOptional() @IsInt() @Min(18) minAge?: number;
   @IsOptional() @IsInt() @Max(90) maxAge?: number;
   @IsOptional() @IsArray() @IsString({ each: true }) targetCountries?: string[];

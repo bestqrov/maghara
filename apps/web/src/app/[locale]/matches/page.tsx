@@ -14,7 +14,7 @@ import { useAppDict, withLocale } from '@/hooks/useLocale';
 export default function MatchesPage() {
   const router = useRouter();
   const { locale, dict } = useAppDict();
-  const { token, hasHydrated } = useAuthStore();
+  const { token, user, hasHydrated } = useAuthStore();
   const [matches, setMatches] = useState<MatchEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -80,6 +80,13 @@ export default function MatchesPage() {
     router.push(withLocale(locale, `/chat/${conversation._id}?matchId=${matchId}`));
   }
 
+  function notifyWali(otherName: string) {
+    const waliPhone = user?.profile.waliPhone?.replace(/[^\d+]/g, '');
+    if (!waliPhone) return;
+    const text = encodeURIComponent(dict.matches.notifyWaliMessage(otherName));
+    window.open(`https://wa.me/${waliPhone.replace('+', '')}?text=${text}`, '_blank', 'noopener,noreferrer');
+  }
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-2xl flex-col gap-6 px-4 py-8">
       <NavBar />
@@ -112,7 +119,7 @@ export default function MatchesPage() {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap justify-end gap-2">
                   {match.status === 'PENDING' && match.direction === 'RECEIVED' && (
                     <>
                       <Button variant="gold" disabled={isBusy} onClick={() => handleAccept(match._id)}>
@@ -131,6 +138,15 @@ export default function MatchesPage() {
                       {match.status === 'ACCEPTED' && (
                         <Button variant="gold" disabled={isBusy} onClick={() => handleEngaged(match._id)}>
                           {dict.matches.markEngaged}
+                        </Button>
+                      )}
+                      {user?.profile.waliPhone && (
+                        <Button
+                          variant="outline"
+                          disabled={isBusy}
+                          onClick={() => notifyWali(match.otherUser.profile.firstName)}
+                        >
+                          {dict.matches.notifyWali}
                         </Button>
                       )}
                     </>

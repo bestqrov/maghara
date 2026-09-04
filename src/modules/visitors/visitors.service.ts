@@ -4,14 +4,15 @@ import { Model, Types } from 'mongoose';
 import { ProfileVisitor } from '../../schemas/profile-visitor.schema';
 import { User } from '../../schemas/user.schema';
 import { isUserOnline } from '../../common/utils/online-status.util';
+import { omitWaliInfo } from '../../common/utils/sanitize-profile.util';
 
 const FREE_VISIBLE_VISITORS = 8;
 const FREE_TEASER_VISITORS = 2;
 
 function withOnlineStatus(visitor: any) {
   if (!visitor) return visitor;
-  const { lastActiveAt, ...rest } = visitor.toObject();
-  return { ...rest, isOnline: isUserOnline(lastActiveAt) };
+  const { lastActiveAt, profile, ...rest } = visitor.toObject();
+  return { ...rest, profile: omitWaliInfo(profile), isOnline: isUserOnline(lastActiveAt) };
 }
 
 @Injectable()

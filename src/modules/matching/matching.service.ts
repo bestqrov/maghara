@@ -7,6 +7,7 @@ import { SearchProfilesDto } from './dto/search-profiles.dto';
 import { resolveIsVip } from '../../common/utils/subscription.util';
 import { isUserOnline } from '../../common/utils/online-status.util';
 import { PushService } from '../push/push.service';
+import { omitWaliInfo } from '../../common/utils/sanitize-profile.util';
 
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
@@ -140,15 +141,22 @@ export class MatchingService {
 
     if (isVip) {
       return results.map((r) => {
-        const { lastActiveAt, ...rest } = r.toObject();
-        return { ...rest, blurred: false, compatibilityScore: computeCompatibility(me, r), isOnline: isUserOnline(lastActiveAt) };
+        const { lastActiveAt, profile, ...rest } = r.toObject();
+        return {
+          ...rest,
+          profile: omitWaliInfo(profile),
+          blurred: false,
+          compatibilityScore: computeCompatibility(me, r),
+          isOnline: isUserOnline(lastActiveAt),
+        };
       });
     }
 
     return results.map((r, index) => {
-      const { lastActiveAt, ...rest } = r.toObject();
+      const { lastActiveAt, profile, ...rest } = r.toObject();
       return {
         ...rest,
+        profile: omitWaliInfo(profile),
         blurred: index >= FREE_UNBLURRED_RESULTS,
         compatibilityScore: computeCompatibility(me, r),
         isOnline: isUserOnline(lastActiveAt),

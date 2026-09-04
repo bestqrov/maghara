@@ -22,6 +22,9 @@ export interface UpdateProfilePayload {
   maxAge?: number;
   targetCountries?: string[];
   targetCities?: string[];
+  waliName?: string;
+  waliPhone?: string;
+  waliRelationship?: string;
 }
 
 export async function getMe() {

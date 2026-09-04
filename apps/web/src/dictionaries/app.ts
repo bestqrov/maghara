@@ -118,6 +118,8 @@ export interface AppDictionary {
     reject: string;
     chat: string;
     markEngaged: string;
+    notifyWali: string;
+    notifyWaliMessage: (otherName: string) => string;
   };
   chat: {
     freeMessages: (used: number, limit: number) => string;
@@ -164,6 +166,11 @@ export interface AppDictionary {
     save: string;
     success: string;
     errorGeneric: string;
+    waliTitle: string;
+    waliSubtitle: string;
+    waliNameLabel: string;
+    waliPhoneLabel: string;
+    waliRelationshipLabel: string;
   };
   store: {
     title: string;
@@ -375,6 +382,8 @@ const ar: AppDictionary = {
     reject: 'رفض',
     chat: 'المحادثة',
     markEngaged: 'سجّل الخطوبة',
+    notifyWali: 'أعلم ولي أمري 📱',
+    notifyWaliMessage: (otherName) => `السلام عليكم، بغيت نعلمك بلي توافقت مع ${otherName} عبر منصة قسمة و نصيب، إن شاء الله نكملو بجدية.`,
   },
   chat: {
     freeMessages: (used, limit) => `${used}/${limit} رسائل مجانية`,
@@ -421,6 +430,11 @@ const ar: AppDictionary = {
     save: 'حفظ التغييرات',
     success: 'تم تحديث معلوماتك بنجاح',
     errorGeneric: 'حدث خطأ ما، حاول مرة أخرى',
+    waliTitle: 'معلومات ولي الأمر (اختياري)',
+    waliSubtitle: 'هاد المعلومات خاصة بيك فقط، ماكتبانش لباقي الأعضاء — كتخليك تعلم ولي أمرك بسهولة عند التوافق.',
+    waliNameLabel: 'اسم ولي الأمر',
+    waliPhoneLabel: 'رقم هاتف ولي الأمر (واتساب)',
+    waliRelationshipLabel: 'صلة القرابة (الأب، الأخ...)',
   },
   store: {
     title: 'المتجر والباقات',
@@ -632,6 +646,8 @@ const fr: AppDictionary = {
     reject: 'Refuser',
     chat: 'Discussion',
     markEngaged: 'Marquer comme fiancés',
+    notifyWali: 'Informer mon tuteur 📱',
+    notifyWaliMessage: (otherName) => `Assalamu alaykum, je voulais vous informer que je suis en accord avec ${otherName} via Qisma W Nasib, in cha Allah nous continuons sérieusement.`,
   },
   chat: {
     freeMessages: (used, limit) => `${used}/${limit} messages gratuits`,
@@ -679,6 +695,12 @@ const fr: AppDictionary = {
     save: 'Enregistrer les modifications',
     success: 'Vos informations ont été mises à jour avec succès',
     errorGeneric: 'Un problème est survenu, réessayez',
+    waliTitle: 'Coordonnées du tuteur (wali) (optionnel)',
+    waliSubtitle:
+      "Ces informations sont privées et ne sont jamais visibles par les autres membres — elles vous permettent d'informer facilement votre tuteur en cas d'accord.",
+    waliNameLabel: 'Nom du tuteur',
+    waliPhoneLabel: 'Téléphone du tuteur (WhatsApp)',
+    waliRelationshipLabel: 'Lien de parenté (père, frère...)',
   },
   store: {
     title: 'Boutique et forfaits',
@@ -891,6 +913,8 @@ const en: AppDictionary = {
     reject: 'Reject',
     chat: 'Chat',
     markEngaged: 'Mark as engaged',
+    notifyWali: 'Notify my guardian 📱',
+    notifyWaliMessage: (otherName) => `Assalamu alaykum, I wanted to let you know I've matched with ${otherName} on Qisma W Nasib, in sha Allah we'll continue seriously.`,
   },
   chat: {
     freeMessages: (used, limit) => `${used}/${limit} free messages`,
@@ -938,6 +962,12 @@ const en: AppDictionary = {
     save: 'Save changes',
     success: 'Your information was updated successfully',
     errorGeneric: 'Something went wrong, please try again',
+    waliTitle: 'Guardian (wali) contact (optional)',
+    waliSubtitle:
+      "This is private to you and never shown to other members — it lets you easily notify your guardian when there's a match.",
+    waliNameLabel: "Guardian's name",
+    waliPhoneLabel: "Guardian's phone (WhatsApp)",
+    waliRelationshipLabel: 'Relationship (father, brother...)',
   },
   store: {
     title: 'Store & plans',
@@ -1150,6 +1180,8 @@ const es: AppDictionary = {
     reject: 'Rechazar',
     chat: 'Chat',
     markEngaged: 'Marcar como comprometidos',
+    notifyWali: 'Avisar a mi tutor 📱',
+    notifyWaliMessage: (otherName) => `Assalamu alaykum, quería avisarte que hice match con ${otherName} en Qisma W Nasib, in sha Allah seguiremos con seriedad.`,
   },
   chat: {
     freeMessages: (used, limit) => `${used}/${limit} mensajes gratis`,
@@ -1197,6 +1229,12 @@ const es: AppDictionary = {
     save: 'Guardar cambios',
     success: 'Tu información se actualizó con éxito',
     errorGeneric: 'Ocurrió un problema, inténtalo de nuevo',
+    waliTitle: 'Contacto del tutor (wali) (opcional)',
+    waliSubtitle:
+      'Esta información es privada y nunca se muestra a otros miembros — te permite avisar fácilmente a tu tutor cuando haya un acuerdo.',
+    waliNameLabel: 'Nombre del tutor',
+    waliPhoneLabel: 'Teléfono del tutor (WhatsApp)',
+    waliRelationshipLabel: 'Parentesco (padre, hermano...)',
   },
   store: {
     title: 'Tienda y planes',
