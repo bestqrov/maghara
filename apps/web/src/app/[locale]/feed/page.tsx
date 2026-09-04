@@ -7,6 +7,7 @@ import { getMyVerificationStatus, VerificationStatusResponse } from '@/services/
 import { getMe } from '@/services/users.service';
 import { searchProfiles, sendInterest, SearchFilters, SearchResultProfile, DAILY_FREE_INTERESTS } from '@/services/matching.service';
 import { VerificationBanner } from '@/components/VerificationBanner';
+import { PushNotificationPrompt } from '@/components/PushNotificationPrompt';
 import { SearchFiltersBar } from '@/components/SearchFiltersBar';
 import { ProfileCard } from '@/components/ProfileCard';
 import { NavBar } from '@/components/NavBar';
@@ -98,6 +99,7 @@ export default function FeedPage() {
         </header>
 
         {verification && <VerificationBanner status={verification.verificationStatus} />}
+        <PushNotificationPrompt />
 
         <SearchFiltersBar onSearch={runSearch} loading={loading} />
 

@@ -6,6 +6,7 @@ import { User } from '../../schemas/user.schema';
 import { SearchProfilesDto } from './dto/search-profiles.dto';
 import { resolveIsVip } from '../../common/utils/subscription.util';
 import { isUserOnline } from '../../common/utils/online-status.util';
+import { PushService } from '../push/push.service';
 
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
@@ -94,6 +95,7 @@ export class MatchingService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
     @InjectModel(Match.name) private readonly matchModel: Model<Match>,
+    private readonly pushService: PushService,
   ) {}
 
   async search(userId: string, dto: SearchProfilesDto) {
@@ -179,6 +181,15 @@ export class MatchingService {
       });
       sender.dailyInterestsSent += 1;
       await sender.save();
+
+      this.pushService
+        .sendToUser(receiverId, {
+          title: 'اهتمام جديد 💍',
+          body: `${sender.profile.firstName} أرسل لك اهتماماً`,
+          url: '/matches',
+        })
+        .catch(() => {});
+
       return match;
     } catch (err: any) {
       if (err.code === 11000) {
@@ -220,6 +231,18 @@ export class MatchingService {
 
     match.status = accept ? 'ACCEPTED' : 'REJECTED';
     await match.save();
+
+    if (accept) {
+      const receiver = await this.userModel.findById(userId).select('profile.firstName');
+      this.pushService
+        .sendToUser(match.senderId.toString(), {
+          title: 'تم قبول اهتمامك 🎉',
+          body: `${receiver?.profile.firstName ?? ''} وافق على الاهتمام ديالك، بدا الشات دابا`,
+          url: '/matches',
+        })
+        .catch(() => {});
+    }
+
     return match;
   }
 

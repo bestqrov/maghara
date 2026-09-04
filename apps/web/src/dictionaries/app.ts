@@ -249,6 +249,12 @@ export interface AppDictionary {
   languageSelector: {
     label: string;
   };
+  pushPrompt: {
+    title: string;
+    subtitle: string;
+    enable: string;
+    later: string;
+  };
 }
 
 const ar: AppDictionary = {
@@ -499,6 +505,12 @@ const ar: AppDictionary = {
   },
   languageSelector: {
     label: 'اللغة',
+  },
+  pushPrompt: {
+    title: 'فعّل الإشعارات 🔔',
+    subtitle: 'باش توصلك الاهتمامات والرسائل الجديدة مباشرة حتى وأنت خارج الموقع',
+    enable: 'تفعيل الإشعارات',
+    later: 'ربما لاحقاً',
   },
 };
 
@@ -753,6 +765,12 @@ const fr: AppDictionary = {
   languageSelector: {
     label: 'Langue',
   },
+  pushPrompt: {
+    title: 'Activez les notifications 🔔',
+    subtitle: 'Pour recevoir vos nouveaux intérêts et messages même en dehors du site',
+    enable: 'Activer les notifications',
+    later: 'Plus tard',
+  },
 };
 
 const en: AppDictionary = {
@@ -1005,6 +1023,12 @@ const en: AppDictionary = {
   },
   languageSelector: {
     label: 'Language',
+  },
+  pushPrompt: {
+    title: 'Turn on notifications 🔔',
+    subtitle: 'Get notified of new interests and messages even when you\'re away from the site',
+    enable: 'Enable notifications',
+    later: 'Maybe later',
   },
 };
 
@@ -1259,6 +1283,12 @@ const es: AppDictionary = {
   },
   languageSelector: {
     label: 'Idioma',
+  },
+  pushPrompt: {
+    title: 'Activa las notificaciones 🔔',
+    subtitle: 'Para recibir tus nuevos intereses y mensajes incluso fuera del sitio',
+    enable: 'Activar notificaciones',
+    later: 'Más tarde',
   },
 };
 

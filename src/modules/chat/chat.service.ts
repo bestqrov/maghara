@@ -6,6 +6,7 @@ import { Message } from '../../schemas/message.schema';
 import { Match } from '../../schemas/match.schema';
 import { User } from '../../schemas/user.schema';
 import { containsContactInfo } from './moderation.util';
+import { PushService } from '../push/push.service';
 
 const FREE_MESSAGE_LIMIT = 10;
 const UNLOCK_COIN_COST = 5;
@@ -17,6 +18,7 @@ export class ChatService {
     @InjectModel(Message.name) private readonly messageModel: Model<Message>,
     @InjectModel(Match.name) private readonly matchModel: Model<Match>,
     @InjectModel(User.name) private readonly userModel: Model<User>,
+    private readonly pushService: PushService,
   ) {}
 
   async getOrCreateConversation(matchId: string, userId: string) {
@@ -73,6 +75,15 @@ export class ChatService {
       conversation.isLockedForFree = true;
     }
     await conversation.save();
+
+    const sender = await this.userModel.findById(senderId).select('profile.firstName');
+    this.pushService
+      .sendToUser(receiverId, {
+        title: sender?.profile.firstName ?? 'رسالة جديدة',
+        body: text.length > 80 ? `${text.slice(0, 80)}…` : text,
+        url: `/chat/${conversation._id}`,
+      })
+      .catch(() => {});
 
     return message;
   }

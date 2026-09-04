@@ -6,6 +6,7 @@ import { Conversation, ConversationSchema } from '../../schemas/conversation.sch
 import { Message, MessageSchema } from '../../schemas/message.schema';
 import { Match, MatchSchema } from '../../schemas/match.schema';
 import { User, UserSchema } from '../../schemas/user.schema';
+import { PushModule } from '../push/push.module';
 import { ChatController } from './chat.controller';
 import { ChatService } from './chat.service';
 import { ChatGateway } from './chat.gateway';
@@ -26,6 +27,7 @@ import { WsJwtGuard } from './ws-jwt.guard';
         secret: config.get<string>('JWT_SECRET'),
       }),
     }),
+    PushModule,
   ],
   controllers: [ChatController],
   providers: [ChatService, ChatGateway, WsJwtGuard],

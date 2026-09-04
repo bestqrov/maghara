@@ -18,6 +18,7 @@ import { AdminAuthModule } from './modules/admin-auth/admin-auth.module';
 import { PaymentSettingsModule } from './modules/payment-settings/payment-settings.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { SignupCampaignModule } from './modules/signup-campaign/signup-campaign.module';
+import { PushModule } from './modules/push/push.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { SignupCampaignModule } from './modules/signup-campaign/signup-campaign.
     PaymentSettingsModule,
     AnalyticsModule,
     SignupCampaignModule,
+    PushModule,
   ],
   controllers: [AppController],
   providers: [AppService],
