@@ -15,7 +15,7 @@ export class PushController {
   }
 
   @Post('unsubscribe')
-  unsubscribe(@Body() dto: UnsubscribePushDto) {
-    return this.pushService.unsubscribe(dto.endpoint);
+  unsubscribe(@CurrentUser() user: { userId: string }, @Body() dto: UnsubscribePushDto) {
+    return this.pushService.unsubscribe(user.userId, dto.endpoint);
   }
 }

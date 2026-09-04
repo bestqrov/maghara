@@ -1,4 +1,4 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ConfigService } from '@nestjs/config';
@@ -10,6 +10,28 @@ export interface PushPayload {
   title: string;
   body: string;
   url?: string;
+}
+
+// Only known browser push services are allowed as a subscription endpoint — the
+// server later makes an outbound HTTPS request to this exact URL (webpush.sendNotification),
+// so accepting an arbitrary client-supplied endpoint here would be a server-side
+// request forgery primitive (an attacker could point it at an internal address).
+const ALLOWED_PUSH_ENDPOINT_HOSTS = [
+  'fcm.googleapis.com', // Chrome, Edge (Chromium), Android
+  'updates.push.services.mozilla.com', // Firefox
+  'push.apple.com', // Safari (and *.push.apple.com)
+  'notify.windows.com', // Legacy Edge (and *.notify.windows.com)
+];
+
+function isAllowedPushEndpoint(endpoint: string): boolean {
+  let url: URL;
+  try {
+    url = new URL(endpoint);
+  } catch {
+    return false;
+  }
+  if (url.protocol !== 'https:') return false;
+  return ALLOWED_PUSH_ENDPOINT_HOSTS.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`));
 }
 
 @Injectable()
@@ -37,6 +59,10 @@ export class PushService implements OnModuleInit {
   }
 
   async subscribe(userId: string, dto: SubscribePushDto) {
+    if (!isAllowedPushEndpoint(dto.endpoint)) {
+      throw new BadRequestException('Unrecognized push subscription endpoint');
+    }
+
     await this.subscriptionModel.findOneAndUpdate(
       { endpoint: dto.endpoint },
       { userId, endpoint: dto.endpoint, p256dh: dto.keys.p256dh, auth: dto.keys.auth },
@@ -45,8 +71,8 @@ export class PushService implements OnModuleInit {
     return { message: 'Subscribed' };
   }
 
-  async unsubscribe(endpoint: string) {
-    await this.subscriptionModel.deleteOne({ endpoint });
+  async unsubscribe(userId: string, endpoint: string) {
+    await this.subscriptionModel.deleteOne({ endpoint, userId });
     return { message: 'Unsubscribed' };
   }
 
