@@ -29,13 +29,28 @@ export function ProfileCard({ result, onSendInterest, onView, sending, sent }: P
       className="flex flex-col overflow-hidden rounded-3xl border border-blue-100 bg-surface shadow-sm"
       onClick={() => !result.blurred && onView?.(result._id)}
     >
-      <BlurredImage
-        src={photo}
-        alt={profile.firstName}
-        isBlurred={result.blurred}
-        className="aspect-[4/5] w-full"
-        lockLabel={dict.profileCard.lockLabel}
-      />
+      <div className="relative">
+        <BlurredImage
+          src={photo}
+          alt={profile.firstName}
+          isBlurred={result.blurred}
+          className="aspect-[4/5] w-full"
+          lockLabel={dict.profileCard.lockLabel}
+        />
+        {!result.blurred && (
+          <span
+            className={`absolute top-2 rounded-full px-2.5 py-1 text-xs font-bold shadow-sm start-2 ${
+              result.compatibilityScore >= 70
+                ? 'bg-emerald-500 text-white'
+                : result.compatibilityScore >= 40
+                  ? 'bg-gold-500 text-blue-900'
+                  : 'bg-surface text-ink-500'
+            }`}
+          >
+            {dict.profileCard.compatibility(result.compatibilityScore)}
+          </span>
+        )}
+      </div>
       <div className="flex flex-col gap-1 p-4">
         <div className="flex items-center gap-1.5">
           <h3 className="font-display font-bold text-blue-900">

@@ -17,6 +17,7 @@ export interface SearchResultProfile {
   verificationStatus: string;
   subscriptionTier: string;
   blurred: boolean;
+  compatibilityScore: number;
   profile: {
     firstName: string;
     gender: 'MALE' | 'FEMALE';

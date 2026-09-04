@@ -17,6 +17,77 @@ function exactCaseInsensitive(value: string) {
   return new RegExp(`^${escapeRegex(value)}$`, 'i');
 }
 
+function ageFromBirthDate(birthDate: Date): number {
+  const now = new Date();
+  let age = now.getFullYear() - birthDate.getFullYear();
+  const monthDiff = now.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birthDate.getDate())) age--;
+  return age;
+}
+
+function includesCaseInsensitive(list: string[], value?: string): boolean {
+  if (!value) return false;
+  return list.some((item) => item.toLowerCase() === value.toLowerCase());
+}
+
+/**
+ * A 0-100 heuristic blending four signals, each scored only when both sides
+ * actually stated a preference (unstated preferences are treated as neutral
+ * rather than penalized, since most profiles never fill in matchCriteria).
+ */
+function computeCompatibility(me: User, candidate: User): number {
+  let score = 0;
+
+  // Age fit (30): candidate's age within my stated range and vice versa.
+  const myCriteria = me.profile.matchCriteria;
+  const candidateCriteria = candidate.profile.matchCriteria;
+  const candidateAge = ageFromBirthDate(candidate.profile.birthDate);
+  const myAge = ageFromBirthDate(me.profile.birthDate);
+
+  const iWantTheirAge = !myCriteria?.minAge && !myCriteria?.maxAge
+    ? true
+    : (!myCriteria.minAge || candidateAge >= myCriteria.minAge) && (!myCriteria.maxAge || candidateAge <= myCriteria.maxAge);
+  const theyWantMyAge = !candidateCriteria?.minAge && !candidateCriteria?.maxAge
+    ? true
+    : (!candidateCriteria.minAge || myAge >= candidateCriteria.minAge) &&
+      (!candidateCriteria.maxAge || myAge <= candidateCriteria.maxAge);
+  score += (iWantTheirAge ? 15 : 0) + (theyWantMyAge ? 15 : 0);
+
+  // Location fit (30): candidate's city/country among my targets, or same residence country.
+  const myTargets = myCriteria?.targetCountries ?? [];
+  const myTargetCities = myCriteria?.targetCities ?? [];
+  if (myTargets.length === 0 && myTargetCities.length === 0) {
+    score += 15;
+  } else if (
+    includesCaseInsensitive(myTargetCities, candidate.profile.currentCity) ||
+    includesCaseInsensitive(myTargets, candidate.profile.residenceCountry)
+  ) {
+    score += 15;
+  }
+  if (candidate.profile.residenceCountry.toLowerCase() === me.profile.residenceCountry.toLowerCase()) {
+    score += 15;
+  } else if (candidate.profile.relocationPreference !== 'LOCAL_ONLY' && me.profile.relocationPreference !== 'LOCAL_ONLY') {
+    score += 8;
+  }
+
+  // Relocation stance fit (20): neither is strictly local-only when the other lives elsewhere.
+  const sameCountry = candidate.profile.residenceCountry.toLowerCase() === me.profile.residenceCountry.toLowerCase();
+  if (sameCountry) {
+    score += 20;
+  } else if (me.profile.relocationPreference !== 'LOCAL_ONLY' && candidate.profile.relocationPreference !== 'LOCAL_ONLY') {
+    score += 20;
+  } else if (me.profile.relocationPreference === 'LOOKING_FOR_EXPAT' || candidate.profile.relocationPreference === 'LOOKING_FOR_EXPAT') {
+    score += 10;
+  }
+
+  // Shared roots (20): same country of origin.
+  if (candidate.profile.originCountry.toLowerCase() === me.profile.originCountry.toLowerCase()) {
+    score += 20;
+  }
+
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
 @Injectable()
 export class MatchingService {
   constructor(
@@ -65,12 +136,13 @@ export class MatchingService {
       .select('profile isVerified verificationStatus subscriptionTier');
 
     if (isVip) {
-      return results.map((r) => ({ ...r.toObject(), blurred: false }));
+      return results.map((r) => ({ ...r.toObject(), blurred: false, compatibilityScore: computeCompatibility(me, r) }));
     }
 
     return results.map((r, index) => ({
       ...r.toObject(),
       blurred: index >= FREE_UNBLURRED_RESULTS,
+      compatibilityScore: computeCompatibility(me, r),
     }));
   }
 

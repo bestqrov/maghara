@@ -93,6 +93,7 @@ export interface AppDictionary {
     sent: string;
     sendInterest: string;
     lockLabel: string;
+    compatibility: (score: number) => string;
   };
   verificationBanner: {
     unverifiedTitle: string;
@@ -343,6 +344,7 @@ const ar: AppDictionary = {
     sent: 'تم الإرسال ✓',
     sendInterest: 'أرسل اهتماماً',
     lockLabel: 'افتح باستخدام النقاط أو VIP',
+    compatibility: (score) => `${score}٪ توافق`,
   },
   verificationBanner: {
     unverifiedTitle: 'وثّق حسابك مجاناً',
@@ -593,6 +595,7 @@ const fr: AppDictionary = {
     sent: 'Envoyé ✓',
     sendInterest: "Envoyer un intérêt",
     lockLabel: 'Débloquer avec des pièces ou VIP',
+    compatibility: (score) => `${score}% compatible`,
   },
   verificationBanner: {
     unverifiedTitle: 'Vérifiez votre compte gratuitement',
@@ -845,6 +848,7 @@ const en: AppDictionary = {
     sent: 'Sent ✓',
     sendInterest: 'Send interest',
     lockLabel: 'Unlock with coins or VIP',
+    compatibility: (score) => `${score}% match`,
   },
   verificationBanner: {
     unverifiedTitle: 'Verify your account for free',
@@ -1097,6 +1101,7 @@ const es: AppDictionary = {
     sent: 'Enviado ✓',
     sendInterest: 'Enviar interés',
     lockLabel: 'Desbloquear con monedas o VIP',
+    compatibility: (score) => `${score}% compatible`,
   },
   verificationBanner: {
     unverifiedTitle: 'Verifica tu cuenta gratis',
