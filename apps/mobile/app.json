@@ -7,10 +7,12 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.qismawanasib.app"
     },
     "android": {
       "predictiveBackGestureEnabled": false,
+      "package": "com.qismawanasib.app",
       "versionCode": 1
     },
     "web": {},
