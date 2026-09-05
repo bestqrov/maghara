@@ -84,6 +84,12 @@ export class User extends Document {
   @Prop({ type: Types.ObjectId, ref: 'User' }) referredBy?: Types.ObjectId;
   @Prop({ type: [String], default: [] }) redeemedPromoCodes: string[];
 
+  // Marks demo/test profiles created by scripts/seed.ts. Excluded from real-user
+  // discovery (matching, public previews) and admin analytics so a bot profile
+  // is never something a paying user can match, chat-unlock, or be shown as a
+  // "verified member" — and never inflates our own growth numbers.
+  @Prop({ default: false }) isSeed: boolean;
+
   @Prop({ type: ProfileSchema, required: true }) profile: Profile;
 }
 

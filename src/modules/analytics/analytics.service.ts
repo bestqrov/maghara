@@ -20,11 +20,12 @@ export class AnalyticsService {
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const rangeStart = new Date(now.getFullYear(), now.getMonth() - (MONTHS_BACK - 1), 1);
 
+    const notSeed = { isSeed: { $ne: true } };
     const [totalUsers, verifiedUsers, vipUsers, newUsersThisMonth] = await Promise.all([
-      this.userModel.countDocuments(),
-      this.userModel.countDocuments({ verificationStatus: 'VERIFIED' }),
-      this.userModel.countDocuments({ subscriptionTier: { $in: ['VIP', 'CROSS_BORDER_VIP'] } }),
-      this.userModel.countDocuments({ createdAt: { $gte: startOfMonth } }),
+      this.userModel.countDocuments(notSeed),
+      this.userModel.countDocuments({ ...notSeed, verificationStatus: 'VERIFIED' }),
+      this.userModel.countDocuments({ ...notSeed, subscriptionTier: { $in: ['VIP', 'CROSS_BORDER_VIP'] } }),
+      this.userModel.countDocuments({ ...notSeed, createdAt: { $gte: startOfMonth } }),
     ]);
 
     const [totalRevenueAgg, thisMonthRevenueAgg, revenueByType, revenueByMonth, pendingVerifications, pendingPayments, activePromoCodes] =

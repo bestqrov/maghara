@@ -36,7 +36,7 @@ export class PublicService {
    * unauthenticated crawlers/scrapers.
    */
   async getVerifiedPreviewProfiles(dto: PublicProfilesQueryDto) {
-    const filter: Record<string, unknown> = { verificationStatus: 'VERIFIED' };
+    const filter: Record<string, unknown> = { verificationStatus: 'VERIFIED', isSeed: { $ne: true } };
     if (dto.city) filter['profile.currentCity'] = exactCaseInsensitive(dto.city);
     if (dto.country) filter['profile.residenceCountry'] = exactCaseInsensitive(dto.country);
 

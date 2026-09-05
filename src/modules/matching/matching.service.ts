@@ -109,6 +109,7 @@ export class MatchingService {
     const filter: Record<string, any> = {
       _id: { $ne: me._id },
       'profile.gender': oppositeGender,
+      isSeed: { $ne: true },
     };
 
     const targetCountry = dto.targetCountry || (dto.scope === 'LOCAL' ? me.profile.residenceCountry : undefined);

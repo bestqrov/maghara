@@ -6,7 +6,7 @@ import { UserSchema } from './src/schemas/user.schema';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-async function seedDatabase() {
+async function markSeedProfiles() {
   if (!MONGODB_URI) {
     throw new Error('MONGODB_URI is not set (check your .env file)');
   }
@@ -19,18 +19,16 @@ async function seedDatabase() {
   const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'seedProfiles.json'), 'utf-8'));
   const phoneNumbers = data.map((entry: { phoneNumber: string }) => entry.phoneNumber);
 
-  await User.deleteMany({ phoneNumber: { $in: phoneNumbers } });
-  console.log('🧹 Cleaned existing test profiles.');
+  const result = await User.updateMany({ phoneNumber: { $in: phoneNumbers } }, { $set: { isSeed: true } });
 
-  await User.insertMany(data.map((entry: object) => ({ ...entry, isSeed: true })));
-  console.log(`🚀 Successfully seeded ${data.length} test profiles!`);
+  console.log(`🚀 Marked ${result.modifiedCount} existing demo profile(s) as isSeed.`);
 
   await mongoose.disconnect();
 }
 
-seedDatabase()
+markSeedProfiles()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error('❌ Error seeding database:', error);
+    console.error('❌ Error marking seed profiles:', error);
     process.exit(1);
   });
