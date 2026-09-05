@@ -117,7 +117,6 @@ export interface AppDictionary {
     send: string;
     errorSendFailed: string;
     errorUnlockFailed: string;
-    vipComingSoon: string;
   };
   paywallModal: {
     title: string;
@@ -162,6 +161,7 @@ export interface AppDictionary {
     vipPlanLabel: string;
     vipPricePerMonth: string;
     coinPriceLabels: [string, string, string];
+    websiteNotice: string;
   };
   paymentModal: {
     choosePaymentMethod: string;
@@ -327,7 +327,6 @@ const ar: AppDictionary = {
     send: 'صيفط',
     errorSendFailed: 'ماقدرناش نصيفطو الرسالة',
     errorUnlockFailed: 'ماعندكش نقط كافية، شحن ولا ترقى لـ VIP',
-    vipComingSoon: 'باقة VIP قريباً 🚀',
   },
   paywallModal: {
     title: 'وصلتي لمرحلة مهمة!',
@@ -372,6 +371,7 @@ const ar: AppDictionary = {
     vipPlanLabel: 'VIP شهري',
     vipPricePerMonth: '99 درهم / الشهر',
     coinPriceLabels: ['20 درهم', '50 درهم', '150 درهم'],
+    websiteNotice: 'الشحن والاشتراك VIP كيتمو عبر الموقع الرسمي. غادي نحولوك لتما.',
   },
   paymentModal: {
     choosePaymentMethod: 'اختار طريقة الدفع',
@@ -537,7 +537,6 @@ const fr: AppDictionary = {
     send: 'Envoyer',
     errorSendFailed: "Impossible d'envoyer le message",
     errorUnlockFailed: 'Solde insuffisant, rechargez ou passez VIP',
-    vipComingSoon: 'Formule VIP bientôt disponible 🚀',
   },
   paywallModal: {
     title: 'Vous avez atteint une étape importante !',
@@ -583,6 +582,7 @@ const fr: AppDictionary = {
     vipPlanLabel: 'VIP mensuel',
     vipPricePerMonth: '99 MAD / mois',
     coinPriceLabels: ['20 MAD', '50 MAD', '150 MAD'],
+    websiteNotice: "La recharge et l'abonnement VIP se font sur le site officiel. Vous allez y être redirigé.",
   },
   paymentModal: {
     choosePaymentMethod: 'Choisissez un mode de paiement',
@@ -750,7 +750,6 @@ const en: AppDictionary = {
     send: 'Send',
     errorSendFailed: 'Could not send the message',
     errorUnlockFailed: 'Not enough coins, top up or upgrade to VIP',
-    vipComingSoon: 'VIP plan coming soon 🚀',
   },
   paywallModal: {
     title: "You've reached an important step!",
@@ -795,6 +794,7 @@ const en: AppDictionary = {
     vipPlanLabel: 'Monthly VIP',
     vipPricePerMonth: '99 MAD / month',
     coinPriceLabels: ['20 MAD', '50 MAD', '150 MAD'],
+    websiteNotice: "Top-ups and VIP subscription happen on the official website. You'll be redirected there.",
   },
   paymentModal: {
     choosePaymentMethod: 'Choose a payment method',
@@ -960,7 +960,6 @@ const es: AppDictionary = {
     send: 'Enviar',
     errorSendFailed: 'No se pudo enviar el mensaje',
     errorUnlockFailed: 'No tienes monedas suficientes, recarga o hazte VIP',
-    vipComingSoon: 'Plan VIP próximamente 🚀',
   },
   paywallModal: {
     title: '¡Has llegado a un paso importante!',
@@ -1006,6 +1005,7 @@ const es: AppDictionary = {
     vipPlanLabel: 'VIP mensual',
     vipPricePerMonth: '99 MAD / mes',
     coinPriceLabels: ['20 MAD', '50 MAD', '150 MAD'],
+    websiteNotice: 'La recarga y la suscripción VIP se realizan en el sitio web oficial. Serás redirigido allí.',
   },
   paymentModal: {
     choosePaymentMethod: 'Elige un método de pago',

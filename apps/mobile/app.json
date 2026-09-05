@@ -42,7 +42,8 @@
     ],
     "extra": {
       "apiUrl": "https://api.9issmaonassib.com",
-      "socketUrl": "https://api.9issmaonassib.com"
+      "socketUrl": "https://api.9issmaonassib.com",
+      "websiteUrl": "https://9issmaonassib.com"
     }
   }
 }
