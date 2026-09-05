@@ -28,7 +28,34 @@ export interface AdminDictionary {
     tabReferrals: string;
     tabSignupCampaign: string;
     tabMembers: string;
+    tabAds: string;
     tabSettings: string;
+  };
+  ads: {
+    errorFetch: string;
+    errorSave: string;
+    success: string;
+    save: string;
+    globalTitle: string;
+    interstitialIntervalLabel: string;
+    nativeIndexLabel: string;
+    manageTitle: string;
+    activeLabel: string;
+    networkLabel: string;
+    appIdLabel: string;
+    publisherIdLabel: string;
+    bannerUnitIdLabel: string;
+    interstitialUnitIdLabel: string;
+    nativeUnitIdLabel: string;
+    appOpenUnitIdLabel: string;
+    placementTitle: string;
+    placementSubtitle: string;
+    placementBannerHome: string;
+    placementBannerMatches: string;
+    placementBannerVisitors: string;
+    placementInterstitialFeed: string;
+    placementNativeFeed: string;
+    placementAppOpen: string;
   };
   members: {
     searchPlaceholder: string;
@@ -202,7 +229,34 @@ const ar: AdminDictionary = {
     tabReferrals: 'الإحالات',
     tabSignupCampaign: 'حملة التسجيل',
     tabMembers: 'الأعضاء',
+    tabAds: 'الإعلانات',
     tabSettings: 'الإعدادات',
+  },
+  ads: {
+    errorFetch: 'تعذّر جلب إعدادات الإعلانات',
+    errorSave: 'تعذّر حفظ إعدادات الإعلانات',
+    success: 'تم حفظ إعدادات الإعلانات بنجاح',
+    save: 'حفظ الإعدادات',
+    globalTitle: 'الإعدادات العامة',
+    interstitialIntervalLabel: 'فاصل الإعلان الانتقالي (كل كم ملف)',
+    nativeIndexLabel: 'موضع الإعلان الأصلي فـ اللائحة',
+    manageTitle: 'إدارة الإعلانات',
+    activeLabel: 'الإعلانات فعّالة',
+    networkLabel: 'شبكة الإعلانات',
+    appIdLabel: 'App ID',
+    publisherIdLabel: 'Publisher ID',
+    bannerUnitIdLabel: 'Banner Ad Unit ID',
+    interstitialUnitIdLabel: 'Interstitial Ad Unit ID',
+    nativeUnitIdLabel: 'Native Ad Unit ID',
+    appOpenUnitIdLabel: 'App Open Ad Unit ID',
+    placementTitle: 'أماكن ظهور الإعلانات',
+    placementSubtitle: 'فعّل أو عطّل كل نوع إعلان فـ الصفحة المناسبة ليه فـ تطبيق الهاتف.',
+    placementBannerHome: 'Banner فـ الصفحة الرئيسية (البحث)',
+    placementBannerMatches: 'Banner فـ صفحة الاهتمامات',
+    placementBannerVisitors: 'Banner فـ صفحة الزوار',
+    placementInterstitialFeed: 'إعلان انتقالي فـ صفحة البحث',
+    placementNativeFeed: 'إعلان أصلي داخل لائحة البحث',
+    placementAppOpen: 'إعلان عند فتح التطبيق',
   },
   members: {
     searchPlaceholder: 'ابحث بالاسم، الهاتف، أو البريد الإلكتروني',
@@ -377,7 +431,34 @@ const en: AdminDictionary = {
     tabReferrals: 'Referrals',
     tabSignupCampaign: 'Signup campaign',
     tabMembers: 'Members',
+    tabAds: 'Ads',
     tabSettings: 'Settings',
+  },
+  ads: {
+    errorFetch: 'Could not fetch ad settings',
+    errorSave: 'Could not save ad settings',
+    success: 'Ad settings saved successfully',
+    save: 'Save settings',
+    globalTitle: 'Global configuration',
+    interstitialIntervalLabel: 'Interstitial ad interval (every N profiles)',
+    nativeIndexLabel: 'Native ad index in list',
+    manageTitle: 'Manage ads',
+    activeLabel: 'Ads active',
+    networkLabel: 'Ad network',
+    appIdLabel: 'App ID',
+    publisherIdLabel: 'Publisher ID',
+    bannerUnitIdLabel: 'Banner Ad Unit ID',
+    interstitialUnitIdLabel: 'Interstitial Ad Unit ID',
+    nativeUnitIdLabel: 'Native Ad Unit ID',
+    appOpenUnitIdLabel: 'App Open Ad Unit ID',
+    placementTitle: 'Ads placement',
+    placementSubtitle: 'Enable or disable each ad format on its matching screen in the mobile app.',
+    placementBannerHome: 'Banner on home (search) screen',
+    placementBannerMatches: 'Banner on matches screen',
+    placementBannerVisitors: 'Banner on visitors screen',
+    placementInterstitialFeed: 'Interstitial ad on the search screen',
+    placementNativeFeed: 'Native ad inside the search results list',
+    placementAppOpen: 'Ad on app open',
   },
   members: {
     searchPlaceholder: 'Search by name, phone, or email',

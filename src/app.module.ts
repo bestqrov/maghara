@@ -20,6 +20,7 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { SignupCampaignModule } from './modules/signup-campaign/signup-campaign.module';
 import { PushModule } from './modules/push/push.module';
 import { AdminUsersModule } from './modules/admin-users/admin-users.module';
+import { AdSettingsModule } from './modules/ad-settings/ad-settings.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { AdminUsersModule } from './modules/admin-users/admin-users.module';
     SignupCampaignModule,
     PushModule,
     AdminUsersModule,
+    AdSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

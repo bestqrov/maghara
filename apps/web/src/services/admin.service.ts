@@ -35,6 +35,31 @@ export interface MemberListItem {
   };
 }
 
+export interface AdPlacements {
+  bannerHome: boolean;
+  bannerMatches: boolean;
+  bannerVisitors: boolean;
+  interstitialFeed: boolean;
+  nativeFeed: boolean;
+  appOpenAd: boolean;
+}
+
+export interface AdSettings {
+  active: boolean;
+  primaryAdNetwork: string;
+  admobAppId?: string;
+  admobPublisherId?: string;
+  admobBannerAdUnitId?: string;
+  admobInterstitialAdUnitId?: string;
+  admobNativeAdUnitId?: string;
+  admobAppOpenAdUnitId?: string;
+  interstitialAdInterval: number;
+  nativeAdIndex: number;
+  placements: AdPlacements;
+}
+
+export type UpdateAdSettingsPayload = Partial<Omit<AdSettings, 'placements'>> & { placements?: Partial<AdPlacements> };
+
 export interface MemberListResponse {
   items: MemberListItem[];
   total: number;
@@ -180,6 +205,16 @@ export async function getSignupCampaign() {
 
 export async function updateSignupCampaign(payload: UpdateSignupCampaignPayload) {
   const { data } = await adminApi.patch<SignupCampaign>('/signup-campaign', payload);
+  return data;
+}
+
+export async function getAdSettings() {
+  const { data } = await adminApi.get<AdSettings>('/ad-settings');
+  return data;
+}
+
+export async function updateAdSettings(payload: UpdateAdSettingsPayload) {
+  const { data } = await adminApi.patch<AdSettings>('/ad-settings', payload);
   return data;
 }
 

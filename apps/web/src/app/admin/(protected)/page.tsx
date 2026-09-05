@@ -13,6 +13,7 @@ import { PaymentSettingsPanel } from '@/components/admin/PaymentSettingsPanel';
 import { AnalyticsPanel } from '@/components/admin/AnalyticsPanel';
 import { SignupCampaignPanel } from '@/components/admin/SignupCampaignPanel';
 import { MembersPanel } from '@/components/admin/MembersPanel';
+import { AdSettingsPanel } from '@/components/admin/AdSettingsPanel';
 import { AdminLocaleToggle } from '@/components/admin/AdminLocaleToggle';
 
 type Tab =
@@ -24,6 +25,7 @@ type Tab =
   | 'referrals'
   | 'signupCampaign'
   | 'members'
+  | 'ads'
   | 'settings';
 
 export default function AdminDashboardPage() {
@@ -41,6 +43,7 @@ export default function AdminDashboardPage() {
     { id: 'referrals', label: dict.dashboard.tabReferrals },
     { id: 'signupCampaign', label: dict.dashboard.tabSignupCampaign },
     { id: 'members', label: dict.dashboard.tabMembers },
+    { id: 'ads', label: dict.dashboard.tabAds },
     { id: 'settings', label: dict.dashboard.tabSettings },
   ];
 
@@ -93,6 +96,7 @@ export default function AdminDashboardPage() {
         {tab === 'referrals' && <ReferralsPanel />}
         {tab === 'signupCampaign' && <SignupCampaignPanel />}
         {tab === 'members' && <MembersPanel />}
+        {tab === 'ads' && <AdSettingsPanel />}
         {tab === 'settings' && <SettingsPanel />}
       </div>
     </main>
