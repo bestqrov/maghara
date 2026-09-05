@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "Zawaj",
+    "name": "قسمة و نصيب",
     "slug": "zawaj",
     "scheme": "zawaj",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.qismawanasib.app"
@@ -13,7 +14,11 @@
     "android": {
       "predictiveBackGestureEnabled": false,
       "package": "com.qismawanasib.app",
-      "versionCode": 1
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0c1d2e"
+      }
     },
     "web": {},
     "plugins": [
@@ -24,6 +29,14 @@
         {
           "androidAppId": "ca-app-pub-3940256099942544~3347511713",
           "iosAppId": "ca-app-pub-3940256099942544~1458002511"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#0c1d2e"
         }
       ]
     ],
