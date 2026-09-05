@@ -2,6 +2,7 @@
   "expo": {
     "name": "قسمة و نصيب",
     "slug": "zawaj",
+    "owner": "advicermano",
     "scheme": "zawaj",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -43,7 +44,11 @@
     "extra": {
       "apiUrl": "https://api.9issmaonassib.com",
       "socketUrl": "https://api.9issmaonassib.com",
-      "websiteUrl": "https://9issmaonassib.com"
+      "websiteUrl": "https://9issmaonassib.com",
+      "router": {},
+      "eas": {
+        "projectId": "3e571528-3169-4393-a46c-23c1c4ff3da6"
+      }
     }
   }
 }
