@@ -12,7 +12,7 @@ export class AppConfigService {
     // Atomic upsert avoids a duplicate singleton doc if two requests race on first read.
     return this.model.findOneAndUpdate(
       {},
-      { $setOnInsert: { general: {}, appSettings: {}, privacyPolicy: {}, termsConditions: {}, appUpdate: {} } },
+      { $setOnInsert: { general: {}, appSettings: {}, privacyPolicy: {}, termsConditions: {}, appUpdate: {}, builds: {} } },
       { upsert: true, new: true },
     );
   }
@@ -24,6 +24,7 @@ export class AppConfigService {
     if (dto.privacyPolicy) Object.assign(config.privacyPolicy, dto.privacyPolicy);
     if (dto.termsConditions) Object.assign(config.termsConditions, dto.termsConditions);
     if (dto.appUpdate) Object.assign(config.appUpdate, dto.appUpdate);
+    if (dto.builds) Object.assign(config.builds, dto.builds);
     if (dto.moreAppsLink !== undefined) config.moreAppsLink = dto.moreAppsLink;
     await config.save();
     return config;

@@ -36,6 +36,13 @@ export class AppUpdateConfig {
 }
 export const AppUpdateConfigSchema = SchemaFactory.createForClass(AppUpdateConfig);
 
+@Schema({ _id: false })
+export class AppBuilds {
+  @Prop() apkUrl?: string;
+  @Prop() aabUrl?: string;
+}
+export const AppBuildsSchema = SchemaFactory.createForClass(AppBuilds);
+
 /** Singleton document: general app metadata, mobile-app behavior toggles, legal docs, and forced-update config. */
 @Schema({ timestamps: true })
 export class AppConfig extends Document {
@@ -44,6 +51,7 @@ export class AppConfig extends Document {
   @Prop({ type: LegalDocSchema, default: {} }) privacyPolicy: LegalDoc;
   @Prop({ type: LegalDocSchema, default: {} }) termsConditions: LegalDoc;
   @Prop({ type: AppUpdateConfigSchema, default: {} }) appUpdate: AppUpdateConfig;
+  @Prop({ type: AppBuildsSchema, default: {} }) builds: AppBuilds;
   @Prop() moreAppsLink?: string;
 }
 

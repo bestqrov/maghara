@@ -28,11 +28,17 @@ class AppUpdateConfigDto {
   @IsOptional() @IsString() appLink?: string;
 }
 
+class AppBuildsDto {
+  @IsOptional() @IsString() apkUrl?: string;
+  @IsOptional() @IsString() aabUrl?: string;
+}
+
 export class UpdateAppConfigDto {
   @IsOptional() @ValidateNested() @Type(() => AppConfigGeneralDto) general?: AppConfigGeneralDto;
   @IsOptional() @ValidateNested() @Type(() => AppConfigSettingsDto) appSettings?: AppConfigSettingsDto;
   @IsOptional() @ValidateNested() @Type(() => LegalDocDto) privacyPolicy?: LegalDocDto;
   @IsOptional() @ValidateNested() @Type(() => LegalDocDto) termsConditions?: LegalDocDto;
   @IsOptional() @ValidateNested() @Type(() => AppUpdateConfigDto) appUpdate?: AppUpdateConfigDto;
+  @IsOptional() @ValidateNested() @Type(() => AppBuildsDto) builds?: AppBuildsDto;
   @IsOptional() @IsString() moreAppsLink?: string;
 }

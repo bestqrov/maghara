@@ -12,6 +12,7 @@ const EMPTY: AppConfig = {
   privacyPolicy: {},
   termsConditions: {},
   appUpdate: { enabled: false, requiredVersionCode: 1 },
+  builds: {},
   moreAppsLink: '',
 };
 
@@ -22,6 +23,7 @@ function withDefaults(data: Partial<AppConfig> | null | undefined): AppConfig {
     privacyPolicy: { ...EMPTY.privacyPolicy, ...data?.privacyPolicy },
     termsConditions: { ...EMPTY.termsConditions, ...data?.termsConditions },
     appUpdate: { ...EMPTY.appUpdate, ...data?.appUpdate },
+    builds: { ...EMPTY.builds, ...data?.builds },
     moreAppsLink: data?.moreAppsLink ?? '',
   };
 }
@@ -177,6 +179,53 @@ export function AppConfigPanel() {
               value={form.appUpdate.description ?? ''}
               onChange={(e) => setForm((f) => ({ ...f, appUpdate: { ...f.appUpdate, description: e.target.value } }))}
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-blue-100 bg-surface p-5 shadow-sm">
+        <h3 className="font-semibold text-blue-900">{dict.appConfig.buildsTitle}</h3>
+        <p className="mt-1 text-xs text-ink-500">{dict.appConfig.buildsSubtitle}</p>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="flex items-end gap-2">
+            <div className="flex-1">
+              <Input
+                id="cfgApkUrl"
+                label={dict.appConfig.apkUrlLabel}
+                value={form.builds.apkUrl ?? ''}
+                onChange={(e) => setForm((f) => ({ ...f, builds: { ...f.builds, apkUrl: e.target.value } }))}
+              />
+            </div>
+            {!!form.builds.apkUrl && (
+              <a
+                href={form.builds.apkUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="whitespace-nowrap rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              >
+                {dict.appConfig.downloadApk}
+              </a>
+            )}
+          </div>
+          <div className="flex items-end gap-2">
+            <div className="flex-1">
+              <Input
+                id="cfgAabUrl"
+                label={dict.appConfig.aabUrlLabel}
+                value={form.builds.aabUrl ?? ''}
+                onChange={(e) => setForm((f) => ({ ...f, builds: { ...f.builds, aabUrl: e.target.value } }))}
+              />
+            </div>
+            {!!form.builds.aabUrl && (
+              <a
+                href={form.builds.aabUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="whitespace-nowrap rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              >
+                {dict.appConfig.downloadAab}
+              </a>
+            )}
           </div>
         </div>
       </section>

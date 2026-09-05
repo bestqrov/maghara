@@ -82,6 +82,7 @@ export interface AppConfig {
     description?: string;
     appLink?: string;
   };
+  builds: { apkUrl?: string; aabUrl?: string };
   moreAppsLink?: string;
 }
 
@@ -91,6 +92,7 @@ export type UpdateAppConfigPayload = {
   privacyPolicy?: Partial<AppConfig['privacyPolicy']>;
   termsConditions?: Partial<AppConfig['termsConditions']>;
   appUpdate?: Partial<AppConfig['appUpdate']>;
+  builds?: Partial<AppConfig['builds']>;
   moreAppsLink?: string;
 };
 

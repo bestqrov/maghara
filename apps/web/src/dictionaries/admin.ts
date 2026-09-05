@@ -59,6 +59,12 @@ export interface AdminDictionary {
     appLinkLabel: string;
     moreAppsTitle: string;
     moreAppsLinkLabel: string;
+    buildsTitle: string;
+    buildsSubtitle: string;
+    apkUrlLabel: string;
+    aabUrlLabel: string;
+    downloadApk: string;
+    downloadAab: string;
   };
   ads: {
     errorFetch: string;
@@ -289,6 +295,12 @@ const ar: AdminDictionary = {
     appLinkLabel: 'رابط المتجر',
     moreAppsTitle: 'تطبيقات أخرى',
     moreAppsLinkLabel: 'رابط',
+    buildsTitle: 'ملفات التطبيق (APK / AAB)',
+    buildsSubtitle: 'الصق الرابط بعد كل مرة تدير eas build، وضغط زر التحميل باش تجيب الملف مباشرة.',
+    apkUrlLabel: 'رابط ملف APK',
+    aabUrlLabel: 'رابط ملف AAB',
+    downloadApk: 'تحميل APK',
+    downloadAab: 'تحميل AAB',
   },
   ads: {
     errorFetch: 'تعذّر جلب إعدادات الإعلانات',
@@ -520,6 +532,12 @@ const en: AdminDictionary = {
     appLinkLabel: 'Store link',
     moreAppsTitle: 'More apps',
     moreAppsLinkLabel: 'Link',
+    buildsTitle: 'App build files (APK / AAB)',
+    buildsSubtitle: 'Paste the link after each eas build, then click download to get the file directly.',
+    apkUrlLabel: 'APK file URL',
+    aabUrlLabel: 'AAB file URL',
+    downloadApk: 'Download APK',
+    downloadAab: 'Download AAB',
   },
   ads: {
     errorFetch: 'Could not fetch ad settings',
