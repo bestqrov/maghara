@@ -5,6 +5,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { getMyVisitors, VisitorEntry } from '@/services/visitors.service';
 import { BlurredImage } from '@/components/BlurredImage';
 import { NavBar } from '@/components/NavBar';
+import { BannerAdSlot } from '@/components/ads/BannerAdSlot';
 import { colors } from '@/theme/colors';
 import { useAppDict } from '@/hooks/useLocale';
 
@@ -44,6 +45,7 @@ export default function VisitorsScreen() {
             <Text style={[styles.title, { textAlign }]}>{dict.visitors.title}</Text>
             <Text style={[styles.subtitle, { textAlign }]}>{dict.visitors.subtitle}</Text>
           </View>
+          <BannerAdSlot placement="bannerVisitors" />
           {lockedCount > 0 && (
             <View style={styles.lockedBanner}>
               <Text style={[styles.lockedText, { textAlign }]}>{dict.visitors.lockedBanner(lockedCount)}</Text>

@@ -6,6 +6,7 @@ import { acceptMatch, getMyMatches, markEngaged, MatchEntry, rejectMatch } from 
 import { getOrCreateConversation } from '@/services/chat.service';
 import { NavBar } from '@/components/NavBar';
 import { Button } from '@/components/Button';
+import { BannerAdSlot } from '@/components/ads/BannerAdSlot';
 import { colors } from '@/theme/colors';
 import { useAppDict } from '@/hooks/useLocale';
 
@@ -88,6 +89,7 @@ export default function MatchesScreen() {
         <View style={{ gap: 14, marginBottom: 8 }}>
           <NavBar />
           <Text style={[styles.title, { textAlign }]}>{dict.matches.title}</Text>
+          <BannerAdSlot placement="bannerMatches" />
           {!loading && matches.length === 0 && <Text style={styles.empty}>{dict.matches.empty}</Text>}
         </View>
       }
