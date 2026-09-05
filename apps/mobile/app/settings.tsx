@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { isAxiosError } from 'axios';
-import { KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Linking, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useAuthStore } from '@/store/auth.store';
-import { changePassword } from '@/services/users.service';
+import { changePassword, deleteAccount } from '@/services/users.service';
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { NavBar } from '@/components/NavBar';
@@ -15,7 +15,7 @@ import { useAppConfigStore } from '@/store/appConfig.store';
 export default function SettingsScreen() {
   const router = useRouter();
   const { dict, textAlign, row } = useAppDict();
-  const { token, hasHydrated } = useAuthStore();
+  const { token, hasHydrated, logout } = useAuthStore();
   const { config } = useAppConfigStore();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -24,6 +24,30 @@ export default function SettingsScreen() {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deletePassword, setDeletePassword] = useState('');
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  async function onConfirmDelete() {
+    setDeleteError(null);
+    setDeleteLoading(true);
+    try {
+      await deleteAccount({ password: deletePassword });
+      setDeleteModalOpen(false);
+      logout();
+      router.replace('/(auth)/login');
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.status === 401) {
+        setDeleteError(dict.settings.deleteAccountErrorWrongPassword);
+      } else {
+        setDeleteError(dict.common.errorGeneric);
+      }
+    } finally {
+      setDeleteLoading(false);
+    }
+  }
 
   useEffect(() => {
     if (hasHydrated && !token) router.replace('/(auth)/login');
@@ -112,7 +136,54 @@ export default function SettingsScreen() {
             )}
           </View>
         )}
+
+        <View style={[styles.card, styles.dangerCard]}>
+          <Text style={[styles.dangerTitle, { textAlign }]}>{dict.settings.deleteAccountTitle}</Text>
+          <Text style={[styles.dangerSubtitle, { textAlign }]}>{dict.settings.deleteAccountSubtitle}</Text>
+          <Button
+            variant="danger"
+            onPress={() => {
+              setDeleteError(null);
+              setDeletePassword('');
+              setDeleteModalOpen(true);
+            }}
+          >
+            {dict.settings.deleteAccountButton}
+          </Button>
+        </View>
       </ScrollView>
+
+      <Modal visible={deleteModalOpen} transparent animationType="fade">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <Text style={styles.dangerTitle}>{dict.settings.deleteAccountConfirmTitle}</Text>
+            <Text style={styles.modalBody}>{dict.settings.deleteAccountConfirmBody}</Text>
+            <View style={{ marginTop: 12, width: '100%' }}>
+              <Input
+                label={dict.settings.deleteAccountPasswordLabel}
+                secureTextEntry
+                value={deletePassword}
+                onChangeText={setDeletePassword}
+              />
+            </View>
+            {deleteError && <Text style={styles.error}>{deleteError}</Text>}
+            <View style={{ flexDirection: row, gap: 10, marginTop: 16, width: '100%' }}>
+              <Button variant="ghost" onPress={() => setDeleteModalOpen(false)} style={{ flex: 1 }}>
+                {dict.settings.deleteAccountCancel}
+              </Button>
+              <Button
+                variant="danger"
+                onPress={onConfirmDelete}
+                loading={deleteLoading}
+                disabled={!deletePassword}
+                style={{ flex: 1 }}
+              >
+                {dict.settings.deleteAccountConfirm}
+              </Button>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
@@ -130,4 +201,10 @@ const styles = StyleSheet.create({
   langRow: { alignItems: 'center', justifyContent: 'space-between', paddingVertical: 18 },
   langIcon: { fontSize: 20 },
   link: { fontSize: 14, fontWeight: '600', color: colors.emerald700, paddingVertical: 8 },
+  dangerCard: { borderWidth: 1, borderColor: colors.red400 },
+  dangerTitle: { fontSize: 16, fontWeight: '800', color: colors.red500 },
+  dangerSubtitle: { fontSize: 12, color: colors.ink500, marginTop: 2, marginBottom: 10 },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(15,46,29,0.5)', alignItems: 'center', justifyContent: 'center', padding: 20 },
+  modalCard: { width: '100%', maxWidth: 360, backgroundColor: colors.white, borderRadius: 24, padding: 20, alignItems: 'center' },
+  modalBody: { fontSize: 13, color: colors.ink700, textAlign: 'center', marginTop: 8 },
 });

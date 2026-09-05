@@ -141,6 +141,15 @@ export interface AppDictionary {
     privacyPolicyLink: string;
     termsLink: string;
     moreAppsLink: string;
+    deleteAccountTitle: string;
+    deleteAccountSubtitle: string;
+    deleteAccountButton: string;
+    deleteAccountConfirmTitle: string;
+    deleteAccountConfirmBody: string;
+    deleteAccountPasswordLabel: string;
+    deleteAccountCancel: string;
+    deleteAccountConfirm: string;
+    deleteAccountErrorWrongPassword: string;
   };
   store: {
     title: string;
@@ -351,6 +360,15 @@ const ar: AppDictionary = {
     privacyPolicyLink: 'سياسة الخصوصية',
     termsLink: 'الشروط والأحكام',
     moreAppsLink: 'تطبيقات أخرى',
+    deleteAccountTitle: 'حذف الحساب',
+    deleteAccountSubtitle: 'حذف نهائي لحسابك وجميع بياناتك. هذا الإجراء لا يمكن التراجع عنه.',
+    deleteAccountButton: 'حذف حسابي نهائياً',
+    deleteAccountConfirmTitle: 'تأكيد حذف الحساب',
+    deleteAccountConfirmBody: 'سيتم حذف حسابك ومحادثاتك وجميع بياناتك بشكل نهائي. أدخل كلمة المرور للتأكيد.',
+    deleteAccountPasswordLabel: 'كلمة المرور',
+    deleteAccountCancel: 'إلغاء',
+    deleteAccountConfirm: 'تأكيد الحذف',
+    deleteAccountErrorWrongPassword: 'كلمة المرور غير صحيحة',
   },
   store: {
     title: 'المتجر والباقات',
@@ -562,6 +580,15 @@ const fr: AppDictionary = {
     privacyPolicyLink: 'Politique de confidentialité',
     termsLink: 'Conditions générales',
     moreAppsLink: 'Autres applications',
+    deleteAccountTitle: 'Supprimer le compte',
+    deleteAccountSubtitle: 'Suppression définitive de votre compte et de toutes vos données. Cette action est irréversible.',
+    deleteAccountButton: 'Supprimer définitivement mon compte',
+    deleteAccountConfirmTitle: 'Confirmer la suppression du compte',
+    deleteAccountConfirmBody: 'Votre compte, vos conversations et toutes vos données seront définitivement supprimés. Entrez votre mot de passe pour confirmer.',
+    deleteAccountPasswordLabel: 'Mot de passe',
+    deleteAccountCancel: 'Annuler',
+    deleteAccountConfirm: 'Confirmer la suppression',
+    deleteAccountErrorWrongPassword: 'Mot de passe incorrect',
   },
   store: {
     title: 'Boutique et forfaits',
@@ -774,6 +801,15 @@ const en: AppDictionary = {
     privacyPolicyLink: 'Privacy policy',
     termsLink: 'Terms & conditions',
     moreAppsLink: 'More apps',
+    deleteAccountTitle: 'Delete account',
+    deleteAccountSubtitle: 'Permanently delete your account and all your data. This cannot be undone.',
+    deleteAccountButton: 'Permanently delete my account',
+    deleteAccountConfirmTitle: 'Confirm account deletion',
+    deleteAccountConfirmBody: 'Your account, conversations and all your data will be permanently deleted. Enter your password to confirm.',
+    deleteAccountPasswordLabel: 'Password',
+    deleteAccountCancel: 'Cancel',
+    deleteAccountConfirm: 'Confirm deletion',
+    deleteAccountErrorWrongPassword: 'Incorrect password',
   },
   store: {
     title: 'Store & plans',
@@ -985,6 +1021,15 @@ const es: AppDictionary = {
     privacyPolicyLink: 'Política de privacidad',
     termsLink: 'Términos y condiciones',
     moreAppsLink: 'Más aplicaciones',
+    deleteAccountTitle: 'Eliminar cuenta',
+    deleteAccountSubtitle: 'Eliminación permanente de tu cuenta y todos tus datos. Esta acción no se puede deshacer.',
+    deleteAccountButton: 'Eliminar mi cuenta permanentemente',
+    deleteAccountConfirmTitle: 'Confirmar eliminación de cuenta',
+    deleteAccountConfirmBody: 'Tu cuenta, conversaciones y todos tus datos se eliminarán permanentemente. Introduce tu contraseña para confirmar.',
+    deleteAccountPasswordLabel: 'Contraseña',
+    deleteAccountCancel: 'Cancelar',
+    deleteAccountConfirm: 'Confirmar eliminación',
+    deleteAccountErrorWrongPassword: 'Contraseña incorrecta',
   },
   store: {
     title: 'Tienda y planes',

@@ -2,7 +2,7 @@ import { ActivityIndicator, Pressable, PressableProps, StyleSheet, Text } from '
 import { colors } from '@/theme/colors';
 
 interface ButtonProps extends PressableProps {
-  variant?: 'primary' | 'gold' | 'ghost';
+  variant?: 'primary' | 'gold' | 'ghost' | 'danger';
   loading?: boolean;
   children: string;
 }
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   primary: { backgroundColor: colors.emerald600 },
   gold: { backgroundColor: colors.gold500 },
   ghost: { backgroundColor: 'transparent' },
+  danger: { backgroundColor: colors.red500 },
   primaryText: { color: colors.white, fontWeight: '600', fontSize: 15 },
   goldText: { color: colors.emerald900, fontWeight: '600', fontSize: 15 },
   ghostText: { color: colors.emerald700, fontWeight: '600', fontSize: 15 },

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { isAxiosError } from 'axios';
 import { useAuthStore } from '@/store/auth.store';
-import { changePassword } from '@/services/users.service';
+import { changePassword, deleteAccount } from '@/services/users.service';
 import { changePasswordSchema, ChangePasswordInput } from '@/utils/validation';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -20,10 +20,33 @@ import { useAppDict, withLocale } from '@/hooks/useLocale';
 export default function SettingsPage() {
   const router = useRouter();
   const { locale, dict } = useAppDict();
-  const { token, hasHydrated } = useAuthStore();
+  const { token, hasHydrated, logout } = useAuthStore();
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deletePassword, setDeletePassword] = useState('');
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  async function onConfirmDelete() {
+    setDeleteError(null);
+    setDeleteLoading(true);
+    try {
+      await deleteAccount({ password: deletePassword });
+      logout();
+      router.replace(withLocale(locale, '/'));
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.status === 401) {
+        setDeleteError(dict.settings.deleteAccountErrorWrongPassword);
+      } else {
+        setDeleteError(dict.common.errorGeneric);
+      }
+    } finally {
+      setDeleteLoading(false);
+    }
+  }
 
   const {
     register,
@@ -128,8 +151,61 @@ export default function SettingsPage() {
           <div className="relative mt-4">
             <ReferralShareCard />
           </div>
+
+          <div className="relative mt-4 rounded-2xl border border-red-200 bg-red-50/50 p-5">
+            <h2 className="font-display font-bold text-red-700">{dict.settings.deleteAccountTitle}</h2>
+            <p className="mt-1 text-xs text-red-600/80">{dict.settings.deleteAccountSubtitle}</p>
+            <Button
+              type="button"
+              onClick={() => {
+                setDeleteError(null);
+                setDeletePassword('');
+                setDeleteModalOpen(true);
+              }}
+              className="mt-3 !bg-red-600 hover:!bg-red-700"
+            >
+              {dict.settings.deleteAccountButton}
+            </Button>
+          </div>
         </div>
       </div>
+
+      {deleteModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-sm rounded-2xl bg-surface p-6 shadow-xl">
+            <h3 className="font-display font-bold text-red-700">{dict.settings.deleteAccountConfirmTitle}</h3>
+            <p className="mt-2 text-sm text-ink-700">{dict.settings.deleteAccountConfirmBody}</p>
+            <div className="mt-4">
+              <Input
+                id="deletePassword"
+                label={dict.settings.deleteAccountPasswordLabel}
+                type="password"
+                value={deletePassword}
+                onChange={(e) => setDeletePassword(e.target.value)}
+              />
+            </div>
+            {deleteError && <p className="mt-2 text-sm text-red-500">{deleteError}</p>}
+            <div className="mt-4 flex gap-2">
+              <Button
+                type="button"
+                onClick={() => setDeleteModalOpen(false)}
+                className="flex-1 !bg-ink-100 !text-ink-700 hover:!bg-ink-200"
+              >
+                {dict.settings.deleteAccountCancel}
+              </Button>
+              <Button
+                type="button"
+                onClick={onConfirmDelete}
+                loading={deleteLoading}
+                disabled={!deletePassword}
+                className="flex-1 !bg-red-600 hover:!bg-red-700"
+              >
+                {dict.settings.deleteAccountConfirm}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

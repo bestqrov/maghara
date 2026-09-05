@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { UsersService } from './users.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { DeleteAccountDto } from './dto/delete-account.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('users')
@@ -23,5 +24,10 @@ export class UsersController {
   @Patch('me/password')
   changePassword(@CurrentUser() user: { userId: string }, @Body() dto: ChangePasswordDto) {
     return this.usersService.changePassword(user.userId, dto);
+  }
+
+  @Delete('me')
+  deleteAccount(@CurrentUser() user: { userId: string }, @Body() dto: DeleteAccountDto) {
+    return this.usersService.deleteAccount(user.userId, dto);
   }
 }

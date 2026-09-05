@@ -38,3 +38,8 @@ export async function changePassword(payload: { currentPassword: string; newPass
   const { data } = await api.patch<{ message: string }>('/users/me/password', payload);
   return data;
 }
+
+export async function deleteAccount(payload: { password: string }) {
+  const { data } = await api.delete<{ message: string }>('/users/me', { data: payload });
+  return data;
+}

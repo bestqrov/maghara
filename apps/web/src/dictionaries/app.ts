@@ -148,6 +148,15 @@ export interface AppDictionary {
     save: string;
     success: string;
     errorWrongPassword: string;
+    deleteAccountTitle: string;
+    deleteAccountSubtitle: string;
+    deleteAccountButton: string;
+    deleteAccountConfirmTitle: string;
+    deleteAccountConfirmBody: string;
+    deleteAccountPasswordLabel: string;
+    deleteAccountCancel: string;
+    deleteAccountConfirm: string;
+    deleteAccountErrorWrongPassword: string;
   };
   profile: {
     title: string;
@@ -412,6 +421,15 @@ const ar: AppDictionary = {
     save: 'حفظ',
     success: 'تم تغيير كلمة المرور بنجاح',
     errorWrongPassword: 'كلمة المرور الحالية غير صحيحة',
+    deleteAccountTitle: 'حذف الحساب',
+    deleteAccountSubtitle: 'حذف نهائي لحسابك وجميع بياناتك من المنصة. هذا الإجراء لا يمكن التراجع عنه.',
+    deleteAccountButton: 'حذف حسابي نهائياً',
+    deleteAccountConfirmTitle: 'تأكيد حذف الحساب',
+    deleteAccountConfirmBody: 'سيتم حذف حسابك، محادثاتك، تفاعلاتك وجميع بياناتك بشكل نهائي. أدخل كلمة المرور للتأكيد.',
+    deleteAccountPasswordLabel: 'كلمة المرور',
+    deleteAccountCancel: 'إلغاء',
+    deleteAccountConfirm: 'تأكيد الحذف',
+    deleteAccountErrorWrongPassword: 'كلمة المرور غير صحيحة',
   },
   profile: {
     title: 'ملفي الشخصي',
@@ -677,6 +695,15 @@ const fr: AppDictionary = {
     save: 'Enregistrer',
     success: 'Mot de passe modifié avec succès',
     errorWrongPassword: 'Le mot de passe actuel est incorrect',
+    deleteAccountTitle: 'Supprimer le compte',
+    deleteAccountSubtitle: 'Suppression définitive de votre compte et de toutes vos données. Cette action est irréversible.',
+    deleteAccountButton: 'Supprimer définitivement mon compte',
+    deleteAccountConfirmTitle: 'Confirmer la suppression du compte',
+    deleteAccountConfirmBody: 'Votre compte, vos conversations, vos interactions et toutes vos données seront définitivement supprimés. Entrez votre mot de passe pour confirmer.',
+    deleteAccountPasswordLabel: 'Mot de passe',
+    deleteAccountCancel: 'Annuler',
+    deleteAccountConfirm: 'Confirmer la suppression',
+    deleteAccountErrorWrongPassword: 'Mot de passe incorrect',
   },
   profile: {
     title: 'Mon profil',
@@ -944,6 +971,15 @@ const en: AppDictionary = {
     save: 'Save',
     success: 'Password changed successfully',
     errorWrongPassword: 'Current password is incorrect',
+    deleteAccountTitle: 'Delete account',
+    deleteAccountSubtitle: 'Permanently delete your account and all your data from the platform. This cannot be undone.',
+    deleteAccountButton: 'Permanently delete my account',
+    deleteAccountConfirmTitle: 'Confirm account deletion',
+    deleteAccountConfirmBody: 'Your account, conversations, interactions and all your data will be permanently deleted. Enter your password to confirm.',
+    deleteAccountPasswordLabel: 'Password',
+    deleteAccountCancel: 'Cancel',
+    deleteAccountConfirm: 'Confirm deletion',
+    deleteAccountErrorWrongPassword: 'Incorrect password',
   },
   profile: {
     title: 'My profile',
@@ -1211,6 +1247,15 @@ const es: AppDictionary = {
     save: 'Guardar',
     success: 'Contraseña cambiada con éxito',
     errorWrongPassword: 'La contraseña actual es incorrecta',
+    deleteAccountTitle: 'Eliminar cuenta',
+    deleteAccountSubtitle: 'Eliminación permanente de tu cuenta y todos tus datos de la plataforma. Esta acción no se puede deshacer.',
+    deleteAccountButton: 'Eliminar mi cuenta permanentemente',
+    deleteAccountConfirmTitle: 'Confirmar eliminación de cuenta',
+    deleteAccountConfirmBody: 'Tu cuenta, conversaciones, interacciones y todos tus datos se eliminarán permanentemente. Introduce tu contraseña para confirmar.',
+    deleteAccountPasswordLabel: 'Contraseña',
+    deleteAccountCancel: 'Cancelar',
+    deleteAccountConfirm: 'Confirmar eliminación',
+    deleteAccountErrorWrongPassword: 'Contraseña incorrecta',
   },
   profile: {
     title: 'Mi perfil',
