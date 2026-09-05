@@ -27,7 +27,28 @@ export interface AdminDictionary {
     tabPromos: string;
     tabReferrals: string;
     tabSignupCampaign: string;
+    tabMembers: string;
     tabSettings: string;
+  };
+  members: {
+    searchPlaceholder: string;
+    search: string;
+    export: string;
+    errorFetch: string;
+    empty: string;
+    columnName: string;
+    columnPhone: string;
+    columnEmail: string;
+    columnCity: string;
+    columnCountry: string;
+    columnVerification: string;
+    columnTier: string;
+    columnCoins: string;
+    columnJoined: string;
+    prev: string;
+    next: string;
+    pageOf: (page: number, totalPages: number) => string;
+    totalCount: (count: number) => string;
   };
   signupCampaign: {
     intro: string;
@@ -180,7 +201,28 @@ const ar: AdminDictionary = {
     tabPromos: 'الأكواد الترويجية',
     tabReferrals: 'الإحالات',
     tabSignupCampaign: 'حملة التسجيل',
+    tabMembers: 'الأعضاء',
     tabSettings: 'الإعدادات',
+  },
+  members: {
+    searchPlaceholder: 'ابحث بالاسم، الهاتف، أو البريد الإلكتروني',
+    search: 'بحث',
+    export: 'تصدير CSV',
+    errorFetch: 'تعذّر جلب قائمة الأعضاء',
+    empty: 'لا يوجد أعضاء',
+    columnName: 'الاسم',
+    columnPhone: 'الهاتف',
+    columnEmail: 'البريد الإلكتروني',
+    columnCity: 'المدينة',
+    columnCountry: 'البلد',
+    columnVerification: 'التوثيق',
+    columnTier: 'الاشتراك',
+    columnCoins: 'النقاط',
+    columnJoined: 'تاريخ التسجيل',
+    prev: 'السابق',
+    next: 'التالي',
+    pageOf: (page, totalPages) => `صفحة ${page} من ${totalPages}`,
+    totalCount: (count) => `${count} عضو`,
   },
   signupCampaign: {
     intro: 'ملي تكون هاد الحملة فعّالة، كل عضو جديد يسجل خلال الفترة المحددة يربح اشتراك VIP مجاني تلقائياً بلا ما يدخل أي كود.',
@@ -334,7 +376,28 @@ const en: AdminDictionary = {
     tabPromos: 'Promo codes',
     tabReferrals: 'Referrals',
     tabSignupCampaign: 'Signup campaign',
+    tabMembers: 'Members',
     tabSettings: 'Settings',
+  },
+  members: {
+    searchPlaceholder: 'Search by name, phone, or email',
+    search: 'Search',
+    export: 'Export CSV',
+    errorFetch: 'Could not fetch the member list',
+    empty: 'No members found',
+    columnName: 'Name',
+    columnPhone: 'Phone',
+    columnEmail: 'Email',
+    columnCity: 'City',
+    columnCountry: 'Country',
+    columnVerification: 'Verification',
+    columnTier: 'Tier',
+    columnCoins: 'Coins',
+    columnJoined: 'Joined',
+    prev: 'Previous',
+    next: 'Next',
+    pageOf: (page, totalPages) => `Page ${page} of ${totalPages}`,
+    totalCount: (count) => `${count} members`,
   },
   signupCampaign: {
     intro:

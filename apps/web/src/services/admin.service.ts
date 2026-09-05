@@ -16,6 +16,32 @@ export interface UpdateSignupCampaignPayload {
   vipDays?: number;
 }
 
+export interface MemberListItem {
+  _id: string;
+  phoneNumber: string;
+  email?: string;
+  verificationStatus: string;
+  subscriptionTier: string;
+  coinBalance: number;
+  referralCode?: string;
+  createdAt: string;
+  profile: {
+    firstName: string;
+    gender: 'MALE' | 'FEMALE';
+    birthDate: string;
+    currentCity: string;
+    residenceCountry: string;
+    originCountry: string;
+  };
+}
+
+export interface MemberListResponse {
+  items: MemberListItem[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
 export interface AnalyticsOverview {
   users: { total: number; verified: number; vip: number; newThisMonth: number };
   revenue: {
@@ -155,6 +181,24 @@ export async function getSignupCampaign() {
 export async function updateSignupCampaign(payload: UpdateSignupCampaignPayload) {
   const { data } = await adminApi.patch<SignupCampaign>('/signup-campaign', payload);
   return data;
+}
+
+export async function listMembers(search: string, page: number, limit: number) {
+  const { data } = await adminApi.get<MemberListResponse>('/admin-users', { params: { search, page, limit } });
+  return data;
+}
+
+export async function downloadMembersCsv() {
+  const { data } = await adminApi.get<string>('/admin-users/export', { responseType: 'text' });
+  const blob = new Blob([data], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'members.csv';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 export async function getAnalyticsOverview() {

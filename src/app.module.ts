@@ -19,6 +19,7 @@ import { PaymentSettingsModule } from './modules/payment-settings/payment-settin
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { SignupCampaignModule } from './modules/signup-campaign/signup-campaign.module';
 import { PushModule } from './modules/push/push.module';
+import { AdminUsersModule } from './modules/admin-users/admin-users.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { PushModule } from './modules/push/push.module';
     AnalyticsModule,
     SignupCampaignModule,
     PushModule,
+    AdminUsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
