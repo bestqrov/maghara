@@ -21,6 +21,7 @@ import { SignupCampaignModule } from './modules/signup-campaign/signup-campaign.
 import { PushModule } from './modules/push/push.module';
 import { AdminUsersModule } from './modules/admin-users/admin-users.module';
 import { AdSettingsModule } from './modules/ad-settings/ad-settings.module';
+import { AppConfigModule } from './modules/app-config/app-config.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { AdSettingsModule } from './modules/ad-settings/ad-settings.module';
     PushModule,
     AdminUsersModule,
     AdSettingsModule,
+    AppConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService],

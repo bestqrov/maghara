@@ -60,6 +60,40 @@ export interface AdSettings {
 
 export type UpdateAdSettingsPayload = Partial<Omit<AdSettings, 'placements'>> & { placements?: Partial<AdPlacements> };
 
+export interface AppConfig {
+  general: {
+    email?: string;
+    author?: string;
+    contact?: string;
+    website?: string;
+    developedBy?: string;
+    description?: string;
+  };
+  appSettings: {
+    maintenanceMode: boolean;
+    maintenanceMessage?: string;
+    screenshotBlock: boolean;
+  };
+  privacyPolicy: { url?: string; content?: string };
+  termsConditions: { url?: string; content?: string };
+  appUpdate: {
+    enabled: boolean;
+    requiredVersionCode: number;
+    description?: string;
+    appLink?: string;
+  };
+  moreAppsLink?: string;
+}
+
+export type UpdateAppConfigPayload = {
+  general?: Partial<AppConfig['general']>;
+  appSettings?: Partial<AppConfig['appSettings']>;
+  privacyPolicy?: Partial<AppConfig['privacyPolicy']>;
+  termsConditions?: Partial<AppConfig['termsConditions']>;
+  appUpdate?: Partial<AppConfig['appUpdate']>;
+  moreAppsLink?: string;
+};
+
 export interface MemberListResponse {
   items: MemberListItem[];
   total: number;
@@ -205,6 +239,16 @@ export async function getSignupCampaign() {
 
 export async function updateSignupCampaign(payload: UpdateSignupCampaignPayload) {
   const { data } = await adminApi.patch<SignupCampaign>('/signup-campaign', payload);
+  return data;
+}
+
+export async function getAppConfig() {
+  const { data } = await adminApi.get<AppConfig>('/app-config');
+  return data;
+}
+
+export async function updateAppConfig(payload: UpdateAppConfigPayload) {
+  const { data } = await adminApi.patch<AppConfig>('/app-config', payload);
   return data;
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { isAxiosError } from 'axios';
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useAuthStore } from '@/store/auth.store';
 import { changePassword } from '@/services/users.service';
 import { Input } from '@/components/Input';
@@ -10,11 +10,13 @@ import { NavBar } from '@/components/NavBar';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { colors } from '@/theme/colors';
 import { useAppDict } from '@/hooks/useLocale';
+import { useAppConfigStore } from '@/store/appConfig.store';
 
 export default function SettingsScreen() {
   const router = useRouter();
   const { dict, textAlign, row } = useAppDict();
   const { token, hasHydrated } = useAuthStore();
+  const { config } = useAppConfigStore();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -90,6 +92,26 @@ export default function SettingsScreen() {
         </Pressable>
 
         <LanguageSelector visible={langOpen} onClose={() => setLangOpen(false)} />
+
+        {(config?.privacyPolicy.url || config?.termsConditions.url || config?.moreAppsLink) && (
+          <View style={styles.card}>
+            {!!config?.privacyPolicy.url && (
+              <Pressable onPress={() => Linking.openURL(config.privacyPolicy.url!)}>
+                <Text style={[styles.link, { textAlign }]}>{dict.settings.privacyPolicyLink}</Text>
+              </Pressable>
+            )}
+            {!!config?.termsConditions.url && (
+              <Pressable onPress={() => Linking.openURL(config.termsConditions.url!)}>
+                <Text style={[styles.link, { textAlign }]}>{dict.settings.termsLink}</Text>
+              </Pressable>
+            )}
+            {!!config?.moreAppsLink && (
+              <Pressable onPress={() => Linking.openURL(config.moreAppsLink!)}>
+                <Text style={[styles.link, { textAlign }]}>{dict.settings.moreAppsLink}</Text>
+              </Pressable>
+            )}
+          </View>
+        )}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -107,4 +129,5 @@ const styles = StyleSheet.create({
   success: { fontSize: 13, color: colors.emerald600, textAlign: 'center' },
   langRow: { alignItems: 'center', justifyContent: 'space-between', paddingVertical: 18 },
   langIcon: { fontSize: 20 },
+  link: { fontSize: 14, fontWeight: '600', color: colors.emerald700, paddingVertical: 8 },
 });

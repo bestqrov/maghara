@@ -29,7 +29,36 @@ export interface AdminDictionary {
     tabSignupCampaign: string;
     tabMembers: string;
     tabAds: string;
+    tabAppConfig: string;
     tabSettings: string;
+  };
+  appConfig: {
+    errorFetch: string;
+    errorSave: string;
+    success: string;
+    save: string;
+    generalTitle: string;
+    emailLabel: string;
+    authorLabel: string;
+    contactLabel: string;
+    websiteLabel: string;
+    developedByLabel: string;
+    descriptionLabel: string;
+    settingsTitle: string;
+    maintenanceModeLabel: string;
+    maintenanceMessageLabel: string;
+    screenshotBlockLabel: string;
+    privacyPolicyTitle: string;
+    termsTitle: string;
+    urlLabel: string;
+    contentLabel: string;
+    appUpdateTitle: string;
+    appUpdateEnabledLabel: string;
+    requiredVersionCodeLabel: string;
+    appUpdateDescriptionLabel: string;
+    appLinkLabel: string;
+    moreAppsTitle: string;
+    moreAppsLinkLabel: string;
   };
   ads: {
     errorFetch: string;
@@ -230,7 +259,36 @@ const ar: AdminDictionary = {
     tabSignupCampaign: 'حملة التسجيل',
     tabMembers: 'الأعضاء',
     tabAds: 'الإعلانات',
+    tabAppConfig: 'إعدادات التطبيق',
     tabSettings: 'الإعدادات',
+  },
+  appConfig: {
+    errorFetch: 'تعذّر جلب إعدادات التطبيق',
+    errorSave: 'تعذّر حفظ إعدادات التطبيق',
+    success: 'تم حفظ إعدادات التطبيق بنجاح',
+    save: 'حفظ الإعدادات',
+    generalTitle: 'معلومات عامة',
+    emailLabel: 'البريد الإلكتروني',
+    authorLabel: 'المطوّر (Author)',
+    contactLabel: 'رقم التواصل',
+    websiteLabel: 'الموقع الإلكتروني',
+    developedByLabel: 'تطوير بواسطة',
+    descriptionLabel: 'وصف التطبيق',
+    settingsTitle: 'إعدادات التطبيق',
+    maintenanceModeLabel: 'وضع الصيانة (يوقف التطبيق مؤقتاً)',
+    maintenanceMessageLabel: 'رسالة الصيانة',
+    screenshotBlockLabel: 'منع لقطة الشاشة داخل التطبيق',
+    privacyPolicyTitle: 'سياسة الخصوصية',
+    termsTitle: 'الشروط والأحكام',
+    urlLabel: 'الرابط',
+    contentLabel: 'النص',
+    appUpdateTitle: 'تحديث التطبيق الإجباري',
+    appUpdateEnabledLabel: 'إجبار التحديث فعّال',
+    requiredVersionCodeLabel: 'رقم النسخة المطلوبة (Version Code)',
+    appUpdateDescriptionLabel: 'وصف التحديث',
+    appLinkLabel: 'رابط المتجر',
+    moreAppsTitle: 'تطبيقات أخرى',
+    moreAppsLinkLabel: 'رابط',
   },
   ads: {
     errorFetch: 'تعذّر جلب إعدادات الإعلانات',
@@ -432,7 +490,36 @@ const en: AdminDictionary = {
     tabSignupCampaign: 'Signup campaign',
     tabMembers: 'Members',
     tabAds: 'Ads',
+    tabAppConfig: 'App settings',
     tabSettings: 'Settings',
+  },
+  appConfig: {
+    errorFetch: 'Could not fetch app settings',
+    errorSave: 'Could not save app settings',
+    success: 'App settings saved successfully',
+    save: 'Save settings',
+    generalTitle: 'General info',
+    emailLabel: 'Email',
+    authorLabel: 'Author',
+    contactLabel: 'Contact',
+    websiteLabel: 'Website',
+    developedByLabel: 'Developed by',
+    descriptionLabel: 'App description',
+    settingsTitle: 'App settings',
+    maintenanceModeLabel: 'Maintenance mode (blocks the app temporarily)',
+    maintenanceMessageLabel: 'Maintenance message',
+    screenshotBlockLabel: 'Block screenshots inside the app',
+    privacyPolicyTitle: 'Privacy policy',
+    termsTitle: 'Terms & conditions',
+    urlLabel: 'URL',
+    contentLabel: 'Text',
+    appUpdateTitle: 'Forced app update',
+    appUpdateEnabledLabel: 'Forced update active',
+    requiredVersionCodeLabel: 'Required version code',
+    appUpdateDescriptionLabel: 'Update description',
+    appLinkLabel: 'Store link',
+    moreAppsTitle: 'More apps',
+    moreAppsLinkLabel: 'Link',
   },
   ads: {
     errorFetch: 'Could not fetch ad settings',

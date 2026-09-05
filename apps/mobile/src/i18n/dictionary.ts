@@ -1,6 +1,13 @@
 import type { Locale } from '@/store/locale.store';
 
 export interface AppDictionary {
+  appGate: {
+    maintenanceTitle: string;
+    maintenanceDefaultMessage: string;
+    updateTitle: string;
+    updateDefaultMessage: string;
+    updateButton: string;
+  };
   common: {
     errorGeneric: string;
     logout: string;
@@ -132,6 +139,9 @@ export interface AppDictionary {
     errorPasswordMismatch: string;
     errorWrongPassword: string;
     languageTitle: string;
+    privacyPolicyLink: string;
+    termsLink: string;
+    moreAppsLink: string;
   };
   store: {
     title: string;
@@ -201,6 +211,13 @@ export interface AppDictionary {
 }
 
 const ar: AppDictionary = {
+  appGate: {
+    maintenanceTitle: 'الموقع تحت الصيانة 🛠️',
+    maintenanceDefaultMessage: 'نعتذر، التطبيق تحت الصيانة حالياً. عاود المحاولة بعد قليل.',
+    updateTitle: 'تحديث جديد متوفر ⬆️',
+    updateDefaultMessage: 'خاصك تحدّث التطبيق باش تكمل تستعملو.',
+    updateButton: 'تحديث الآن',
+  },
   common: {
     errorGeneric: 'كاين مشكل، حاول مرة أخرى',
     logout: 'خروج',
@@ -332,6 +349,9 @@ const ar: AppDictionary = {
     errorPasswordMismatch: 'الپاسوورد الجديد ماشي متطابق مع التأكيد',
     errorWrongPassword: 'الپاسوورد الحالي غير صحيح',
     languageTitle: 'اللغة',
+    privacyPolicyLink: 'سياسة الخصوصية',
+    termsLink: 'الشروط والأحكام',
+    moreAppsLink: 'تطبيقات أخرى',
   },
   store: {
     title: 'المتجر والباقات',
@@ -401,6 +421,13 @@ const ar: AppDictionary = {
 };
 
 const fr: AppDictionary = {
+  appGate: {
+    maintenanceTitle: 'Application en maintenance 🛠️',
+    maintenanceDefaultMessage: "Désolé, l'application est actuellement en maintenance. Réessayez bientôt.",
+    updateTitle: 'Nouvelle mise à jour disponible ⬆️',
+    updateDefaultMessage: "Vous devez mettre à jour l'application pour continuer à l'utiliser.",
+    updateButton: 'Mettre à jour',
+  },
   common: {
     errorGeneric: 'Un problème est survenu, réessayez',
     logout: 'Déconnexion',
@@ -533,6 +560,9 @@ const fr: AppDictionary = {
     errorPasswordMismatch: 'Le nouveau mot de passe ne correspond pas à la confirmation',
     errorWrongPassword: 'Le mot de passe actuel est incorrect',
     languageTitle: 'Langue',
+    privacyPolicyLink: 'Politique de confidentialité',
+    termsLink: 'Conditions générales',
+    moreAppsLink: 'Autres applications',
   },
   store: {
     title: 'Boutique et forfaits',
@@ -604,6 +634,13 @@ const fr: AppDictionary = {
 };
 
 const en: AppDictionary = {
+  appGate: {
+    maintenanceTitle: 'App under maintenance 🛠️',
+    maintenanceDefaultMessage: 'Sorry, the app is currently under maintenance. Please try again soon.',
+    updateTitle: 'New update available ⬆️',
+    updateDefaultMessage: 'You need to update the app to keep using it.',
+    updateButton: 'Update now',
+  },
   common: {
     errorGeneric: 'Something went wrong, please try again',
     logout: 'Log out',
@@ -735,6 +772,9 @@ const en: AppDictionary = {
     errorPasswordMismatch: "New password doesn't match the confirmation",
     errorWrongPassword: 'Current password is incorrect',
     languageTitle: 'Language',
+    privacyPolicyLink: 'Privacy policy',
+    termsLink: 'Terms & conditions',
+    moreAppsLink: 'More apps',
   },
   store: {
     title: 'Store & plans',
@@ -804,6 +844,13 @@ const en: AppDictionary = {
 };
 
 const es: AppDictionary = {
+  appGate: {
+    maintenanceTitle: 'Aplicación en mantenimiento 🛠️',
+    maintenanceDefaultMessage: 'Lo sentimos, la aplicación está en mantenimiento. Inténtalo de nuevo pronto.',
+    updateTitle: 'Nueva actualización disponible ⬆️',
+    updateDefaultMessage: 'Debes actualizar la aplicación para seguir usándola.',
+    updateButton: 'Actualizar ahora',
+  },
   common: {
     errorGeneric: 'Ocurrió un problema, inténtalo de nuevo',
     logout: 'Cerrar sesión',
@@ -936,6 +983,9 @@ const es: AppDictionary = {
     errorPasswordMismatch: 'La nueva contraseña no coincide con la confirmación',
     errorWrongPassword: 'La contraseña actual es incorrecta',
     languageTitle: 'Idioma',
+    privacyPolicyLink: 'Política de privacidad',
+    termsLink: 'Términos y condiciones',
+    moreAppsLink: 'Más aplicaciones',
   },
   store: {
     title: 'Tienda y planes',

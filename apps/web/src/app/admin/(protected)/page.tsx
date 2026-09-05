@@ -14,6 +14,7 @@ import { AnalyticsPanel } from '@/components/admin/AnalyticsPanel';
 import { SignupCampaignPanel } from '@/components/admin/SignupCampaignPanel';
 import { MembersPanel } from '@/components/admin/MembersPanel';
 import { AdSettingsPanel } from '@/components/admin/AdSettingsPanel';
+import { AppConfigPanel } from '@/components/admin/AppConfigPanel';
 import { AdminLocaleToggle } from '@/components/admin/AdminLocaleToggle';
 
 type Tab =
@@ -26,6 +27,7 @@ type Tab =
   | 'signupCampaign'
   | 'members'
   | 'ads'
+  | 'appConfig'
   | 'settings';
 
 export default function AdminDashboardPage() {
@@ -44,6 +46,7 @@ export default function AdminDashboardPage() {
     { id: 'signupCampaign', label: dict.dashboard.tabSignupCampaign },
     { id: 'members', label: dict.dashboard.tabMembers },
     { id: 'ads', label: dict.dashboard.tabAds },
+    { id: 'appConfig', label: dict.dashboard.tabAppConfig },
     { id: 'settings', label: dict.dashboard.tabSettings },
   ];
 
@@ -97,6 +100,7 @@ export default function AdminDashboardPage() {
         {tab === 'signupCampaign' && <SignupCampaignPanel />}
         {tab === 'members' && <MembersPanel />}
         {tab === 'ads' && <AdSettingsPanel />}
+        {tab === 'appConfig' && <AppConfigPanel />}
         {tab === 'settings' && <SettingsPanel />}
       </div>
     </main>
