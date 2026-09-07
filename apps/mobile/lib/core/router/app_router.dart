@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/login_screen.dart';
 import '../../features/auth/register_screen.dart';
 import '../../features/auth/verification_screen.dart';
-import '../../features/home/home_screen.dart';
+import '../../features/chat/chat_screen.dart';
+import '../../features/discover/discover_screen.dart';
+import '../../features/matches/matches_screen.dart';
 import '../storage/auth_store.dart';
 
 /// Adapts Riverpod's [authStoreProvider] state changes to a [Listenable] so
@@ -52,7 +54,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
       GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
       GoRoute(path: '/verification', builder: (context, state) => const VerificationScreen()),
-      GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+      GoRoute(path: '/', builder: (context, state) => const DiscoverScreen()),
+      GoRoute(path: '/matches', builder: (context, state) => const MatchesScreen()),
+      GoRoute(
+        path: '/chat/:conversationId',
+        builder: (context, state) => ChatScreen(
+          conversationId: state.pathParameters['conversationId']!,
+          matchId: state.uri.queryParameters['matchId'],
+        ),
+      ),
     ],
   );
 });
