@@ -45,7 +45,9 @@ android {
         applicationId "com.qismawanasib.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        // screen_protector's Android implementation requires API 21+; bumped
+        // from flutter.minSdkVersion (19) accordingly.
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
