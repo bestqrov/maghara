@@ -24,6 +24,17 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.qismawanasib.app"
+    // NOTE: screen_protector declares a compileSdkVersion of 36, which
+    // produces a "requires Android SDK version 36 or higher" build warning
+    // here. Bumping compileSdk to 36 was tried and reverted: this Flutter
+    // SDK's bundled aapt2 cannot parse the API 36 android.jar's resource
+    // table format ("RES_TABLE_TYPE_TYPE entry offsets overlap actual entry
+    // data"), which is an aapt2/platform-tools version mismatch, not a real
+    // code incompatibility. screen_protector only wraps a screenshot-block
+    // platform channel (FLAG_SECURE on Android) that doesn't need API 36
+    // features, so compiling against the default SDK (34) here is safe;
+    // the warning is expected and can be ignored unless a future upgrade
+    // of the Flutter SDK / Android build-tools resolves the aapt2 issue.
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
