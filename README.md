@@ -62,7 +62,7 @@
 * **Database:** MongoDB Atlas (Mongoose ORM).
 * **Caching & Rate Limiting:** Redis (for chat message counters, Socket sessions, and visitor limiters).
 * **Media Storage:** Cloudinary / AWS S3 (handling original & blurred photo processing) — *not yet integrated*.
-* **Frontend:** React Native (Expo) for mobile + Next.js for the Web App, in a monorepo.
+* **Frontend:** Flutter for mobile + Next.js for the Web App, in a monorepo.
 
 ---
 
