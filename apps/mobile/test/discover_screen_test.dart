@@ -13,12 +13,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:app/features/discover/discover_screen.dart';
 import 'package:app/features/discover/widgets/profile_card.dart';
+import 'package:app/models/ad_settings.dart';
 import 'package:app/models/auth_user.dart';
 import 'package:app/models/enums.dart';
 import 'package:app/models/match_entry.dart';
 import 'package:app/models/search_result_profile.dart';
 import 'package:app/models/verification_status.dart';
 import 'package:app/models/visitor_entry.dart';
+import 'package:app/services/ad_settings_service.dart';
 import 'package:app/services/matching_service.dart';
 import 'package:app/services/users_service.dart';
 import 'package:app/services/verification_service.dart';
@@ -126,6 +128,27 @@ class _FakeVisitorsService extends VisitorsService {
   Future<List<VisitorEntry>> getMyVisitors() async => const [];
 }
 
+/// Ads switched off entirely, so the banner slot and native-ad row injection
+/// both render nothing — no real AdMob call is ever attempted in this test.
+class _AllAdsOffSettingsService extends AdSettingsService {
+  _AllAdsOffSettingsService() : super(Dio());
+
+  @override
+  Future<AdSettings> getAdSettings() async => const AdSettings(
+        active: false,
+        interstitialAdInterval: 5,
+        nativeAdIndex: 5,
+        placements: AdPlacements(
+          bannerHome: false,
+          bannerMatches: false,
+          bannerVisitors: false,
+          interstitialFeed: false,
+          nativeFeed: false,
+          appOpenAd: false,
+        ),
+      );
+}
+
 void main() {
   setUp(() async {
     SharedPreferences.setMockInitialValues({
@@ -148,6 +171,7 @@ void main() {
           usersServiceProvider.overrideWithValue(_FakeUsersService()),
           verificationServiceProvider.overrideWithValue(_FakeVerificationService()),
           visitorsServiceProvider.overrideWithValue(_FakeVisitorsService()),
+          adSettingsServiceProvider.overrideWithValue(_AllAdsOffSettingsService()),
         ],
         child: MaterialApp.router(routerConfig: router),
       ),

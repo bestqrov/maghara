@@ -3,7 +3,9 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import 'core/ads/app_open_ad_controller.dart';
 import 'core/app_gate.dart';
 import 'core/i18n/locale_provider.dart';
 import 'core/router/app_router.dart';
@@ -12,6 +14,12 @@ import 'core/theme/app_theme.dart';
 import 'core/theme/colors.dart';
 
 void main() {
+  // Mirrors the old Expo app's `mobileAds().initialize()` call in
+  // `_layout.tsx`: initialize the Google Mobile Ads SDK once at startup,
+  // before any ad widget tries to load. Individual ad placements still each
+  // check the remote ad-settings config before actually requesting an ad.
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -65,6 +73,12 @@ class _RouterApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(goRouterProvider);
+
+    // Reading this once the real app is about to render instantiates the
+    // controller (see `core/ads/app_open_ad_controller.dart`), which then
+    // drives itself off the cached `adSettingsProvider` fetch and the app's
+    // lifecycle state — no further wiring needed here.
+    ref.watch(appOpenAdControllerProvider);
 
     return MaterialApp.router(
       title: 'قسمة و نصيب',

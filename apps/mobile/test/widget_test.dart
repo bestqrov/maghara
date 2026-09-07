@@ -10,7 +10,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:app/main.dart';
+import 'package:app/models/ad_settings.dart';
 import 'package:app/models/app_config.dart';
+import 'package:app/services/ad_settings_service.dart';
 import 'package:app/services/app_config_service.dart';
 
 /// Always fails instantly, so [AppGate]'s fail-open path resolves quickly
@@ -22,6 +24,19 @@ class _FailingAppConfigService extends AppConfigService {
   @override
   Future<AppConfigData> getAppConfig() {
     return Future.error(DioException(requestOptions: RequestOptions(path: '/app-config')));
+  }
+}
+
+/// Always fails instantly, so the app-open ad controller's cached
+/// `adSettingsProvider` fetch resolves quickly and deterministically
+/// (to "ads off") instead of attempting a real network call in the test
+/// environment.
+class _FailingAdSettingsService extends AdSettingsService {
+  _FailingAdSettingsService() : super(Dio());
+
+  @override
+  Future<AdSettings> getAdSettings() {
+    return Future.error(DioException(requestOptions: RequestOptions(path: '/ad-settings')));
   }
 }
 
@@ -56,7 +71,10 @@ void main() {
   testWidgets('redirects an unauthenticated user to the login screen', (WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appConfigServiceProvider.overrideWithValue(_FailingAppConfigService())],
+        overrides: [
+          appConfigServiceProvider.overrideWithValue(_FailingAppConfigService()),
+          adSettingsServiceProvider.overrideWithValue(_FailingAdSettingsService()),
+        ],
         child: const MyApp(),
       ),
     );

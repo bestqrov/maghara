@@ -8,6 +8,9 @@ import '../../features/auth/verification_screen.dart';
 import '../../features/chat/chat_screen.dart';
 import '../../features/discover/discover_screen.dart';
 import '../../features/matches/matches_screen.dart';
+import '../../features/settings/settings_screen.dart';
+import '../../features/store/store_screen.dart';
+import '../../features/visitors/visitors_screen.dart';
 import '../storage/auth_store.dart';
 
 /// Adapts Riverpod's [authStoreProvider] state changes to a [Listenable] so
@@ -56,6 +59,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/verification', builder: (context, state) => const VerificationScreen()),
       GoRoute(path: '/', builder: (context, state) => const DiscoverScreen()),
       GoRoute(path: '/matches', builder: (context, state) => const MatchesScreen()),
+      GoRoute(path: '/visitors', builder: (context, state) => const VisitorsScreen()),
+      GoRoute(path: '/store', builder: (context, state) => const StoreScreen()),
+      GoRoute(path: '/settings', builder: (context, state) => const SettingsScreen()),
       GoRoute(
         path: '/chat/:conversationId',
         builder: (context, state) => ChatScreen(

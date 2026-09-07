@@ -9,6 +9,7 @@ import '../../models/enums.dart';
 import '../../models/match_entry.dart';
 import '../../services/chat_service.dart';
 import '../../services/matching_service.dart';
+import '../../widgets/ads/banner_ad_slot.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/nav_bar.dart';
 
@@ -110,8 +111,7 @@ class _MatchesScreenState extends ConsumerState<MatchesScreen> {
             const SizedBox(height: 14),
             Text(dict.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.emerald700)),
             const SizedBox(height: 14),
-            // TODO: ad slot, wired in a later task
-            const SizedBox.shrink(),
+            const BannerAdSlot(placement: BannerPlacement.bannerMatches),
             const SizedBox(height: 10),
             if (!_loading && _matches.isEmpty)
               Padding(

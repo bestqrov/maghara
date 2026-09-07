@@ -4,26 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../core/i18n/locale_provider.dart';
 import '../core/theme/colors.dart';
+import '../features/settings/widgets/language_selector.dart';
 
 /// Port of the previous Expo app's `src/components/NavBar.tsx`.
-///
-/// `/visitors`, `/store` and `/settings` aren't built yet (later tasks), so
-/// tapping those tabs shows a "coming soon" snackbar instead of navigating
-/// to a route that doesn't exist yet. The language-globe icon is likewise a
-/// placeholder until the language selector modal is built.
 class NavBar extends ConsumerWidget {
   const NavBar({super.key});
 
-  static const _implementedRoutes = {'/', '/matches'};
-
   void _go(BuildContext context, String href) {
-    if (_implementedRoutes.contains(href)) {
-      context.go(href);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Coming soon')),
-      );
-    }
+    context.go(href);
   }
 
   @override
@@ -59,11 +47,7 @@ class NavBar extends ConsumerWidget {
           _NavIconTab(
             icon: '🌐',
             active: false,
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Coming soon')),
-              );
-            },
+            onTap: () => showLanguageSelector(context),
           ),
         ],
       ),

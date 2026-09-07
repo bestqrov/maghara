@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/ad_settings_provider.dart';
+import '../../core/ads/interstitial_ad_controller.dart';
 import '../../core/i18n/locale_provider.dart';
 import '../../core/storage/auth_store.dart';
 import '../../core/theme/colors.dart';
@@ -11,16 +13,47 @@ import '../../services/matching_service.dart';
 import '../../services/users_service.dart';
 import '../../services/verification_service.dart';
 import '../../services/visitors_service.dart';
+import '../../widgets/ads/banner_ad_slot.dart';
+import '../../widgets/ads/native_ad_card.dart';
 import '../../widgets/nav_bar.dart';
 import '../../widgets/verification_banner.dart';
 import 'widgets/profile_card.dart';
 import 'widgets/search_filters_bar.dart';
 
+/// One row of the discover feed: either a pair of profiles or an injected
+/// native ad card, matching the old `buildRows()` logic from
+/// `app/index.tsx`.
+sealed class _FeedRow {
+  const _FeedRow();
+}
+
+class _ProfilesRow extends _FeedRow {
+  const _ProfilesRow(this.items);
+  final List<SearchResultProfile> items;
+}
+
+class _AdRow extends _FeedRow {
+  const _AdRow();
+}
+
+/// Groups [results] into rows of 2, injecting an [_AdRow] every [adEvery]
+/// profiles when [adEnabled] — a direct port of the old app's `buildRows()`.
+List<_FeedRow> _buildRows(List<SearchResultProfile> results, int adEvery, bool adEnabled) {
+  final rows = <_FeedRow>[];
+  var profilesSinceAd = 0;
+  for (var i = 0; i < results.length; i += 2) {
+    final items = results.sublist(i, i + 2 > results.length ? results.length : i + 2);
+    rows.add(_ProfilesRow(items));
+    profilesSinceAd += items.length;
+    if (adEnabled && adEvery > 0 && profilesSinceAd >= adEvery) {
+      rows.add(const _AdRow());
+      profilesSinceAd = 0;
+    }
+  }
+  return rows;
+}
+
 /// Discover/home screen: port of the previous Expo app's `app/index.tsx`.
-///
-/// Ad injection (native ad cards mixed into the feed every N rows) is
-/// intentionally NOT ported here — that's wired up end-to-end in a later
-/// task. The ad-slot placeholder below the header is a plain seam for it.
 class DiscoverScreen extends ConsumerStatefulWidget {
   const DiscoverScreen({super.key});
 
@@ -87,6 +120,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
 
   void _handleView(String id) {
     ref.read(visitorsServiceProvider).recordVisit(id);
+    ref.read(interstitialAdControllerProvider).notifyAction();
   }
 
   @override
@@ -98,11 +132,14 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
 
     final isVip = user.subscriptionTier == SubscriptionTier.vip || user.subscriptionTier == SubscriptionTier.crossBorderVip;
 
-    // Build rows of 2 profiles each, matching the old app's grid layout.
-    final rows = <List<SearchResultProfile>>[];
-    for (var i = 0; i < _results.length; i += 2) {
-      rows.add(_results.sublist(i, i + 2 > _results.length ? _results.length : i + 2));
-    }
+    final adSettings = ref.watch(adSettingsProvider).valueOrNull;
+    final nativeAdUnitId = adSettings?.admobNativeAdUnitId;
+    final nativeAdEnabled = adSettings != null &&
+        adSettings.active &&
+        adSettings.placements.nativeFeed &&
+        nativeAdUnitId != null &&
+        nativeAdUnitId.isNotEmpty;
+    final rows = _buildRows(_results, adSettings?.nativeAdIndex ?? 5, nativeAdEnabled);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -147,8 +184,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
               VerificationBanner(status: _verification!.verificationStatus),
               const SizedBox(height: 14),
             ],
-            // TODO: ad slot, wired in a later task
-            const SizedBox.shrink(),
+            const BannerAdSlot(placement: BannerPlacement.bannerHome),
             const SizedBox(height: 14),
             SearchFiltersBar(onSearch: _runSearch, loading: _loading),
             const SizedBox(height: 14),
@@ -165,24 +201,27 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
             for (final row in rows)
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final profile in row) ...[
-                      Expanded(
-                        child: ProfileCard(
-                          key: ValueKey(profile.id),
-                          result: profile,
-                          onSendInterest: _handleSendInterest,
-                          onView: _handleView,
-                          sent: _sentIds.contains(profile.id),
-                        ),
-                      ),
-                      if (profile != row.last) const SizedBox(width: 12),
-                    ],
-                    if (row.length == 1) const Expanded(child: SizedBox.shrink()),
-                  ],
-                ),
+                child: switch (row) {
+                  _AdRow() => NativeAdCard(unitId: nativeAdUnitId!),
+                  _ProfilesRow(:final items) => Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final profile in items) ...[
+                          Expanded(
+                            child: ProfileCard(
+                              key: ValueKey(profile.id),
+                              result: profile,
+                              onSendInterest: _handleSendInterest,
+                              onView: _handleView,
+                              sent: _sentIds.contains(profile.id),
+                            ),
+                          ),
+                          if (profile != items.last) const SizedBox(width: 12),
+                        ],
+                        if (items.length == 1) const Expanded(child: SizedBox.shrink()),
+                      ],
+                    ),
+                },
               ),
           ],
         ),
