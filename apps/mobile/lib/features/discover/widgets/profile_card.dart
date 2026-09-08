@@ -37,77 +37,98 @@ class ProfileCard extends ConsumerWidget {
         : 'https://placehold.co/400x500/eef6f0/2f7a52?text=Zawaj';
     final disabled = result.blurred || sent;
 
-    return Material(
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(22),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: result.blurred ? null : () => onView?.call(result.id),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AspectRatio(
-              aspectRatio: 4 / 5,
-              child: BlurredImage(
-                imageUrl: photoUri,
-                isBlurred: result.blurred,
-                lockLabel: dict.lockLabel,
-                borderRadius: 0,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+              color: AppColors.emerald900.withOpacity(0.08),
+              blurRadius: 16,
+              offset: const Offset(0, 6)),
+        ],
+      ),
+      child: Material(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(22),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: result.blurred ? null : () => onView?.call(result.id),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AspectRatio(
+                aspectRatio: 4 / 5,
+                child: BlurredImage(
+                  imageUrl: photoUri,
+                  isBlurred: result.blurred,
+                  lockLabel: dict.lockLabel,
+                  borderRadius: 0,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Text(
-                          result.blurred
-                              ? '••••••, ${_calculateAge(profile.birthDate)}'
-                              : '${profile.firstName}, ${_calculateAge(profile.birthDate)}',
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.emerald900),
-                          overflow: TextOverflow.ellipsis,
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            result.blurred
+                                ? '••••••, ${_calculateAge(profile.birthDate)}'
+                                : '${profile.firstName}, ${_calculateAge(profile.birthDate)}',
+                            style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.emerald900),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                      if (result.isVerified) ...[
-                        const SizedBox(width: 6),
-                        const Text('🛡️', style: TextStyle(fontSize: 12)),
+                        if (result.isVerified) ...[
+                          const SizedBox(width: 6),
+                          const Icon(Icons.verified_user_rounded,
+                              size: 14, color: AppColors.gold600),
+                        ],
                       ],
-                    ],
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '${profile.currentCity} · ${profile.residenceCountry}',
-                    style: const TextStyle(fontSize: 12, color: AppColors.ink500),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Material(
-                    color: disabled ? AppColors.emerald100 : AppColors.emerald600,
-                    borderRadius: BorderRadius.circular(12),
-                    child: InkWell(
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '${profile.currentCity} · ${profile.residenceCountry}',
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.ink500),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Material(
+                      color: disabled
+                          ? AppColors.emerald100
+                          : AppColors.emerald600,
                       borderRadius: BorderRadius.circular(12),
-                      onTap: disabled ? null : () => onSendInterest(result.id),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Text(
-                          sent ? dict.sent : dict.sendInterest,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                            color: disabled ? AppColors.emerald500 : AppColors.white,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap:
+                            disabled ? null : () => onSendInterest(result.id),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            sent ? dict.sent : dict.sendInterest,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                              color: disabled
+                                  ? AppColors.emerald500
+                                  : AppColors.white,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -7,9 +7,11 @@ import '../../models/visitor_entry.dart';
 import '../../services/visitors_service.dart';
 import '../../widgets/ads/banner_ad_slot.dart';
 import '../../widgets/blurred_image.dart';
+import '../../widgets/icon_badge.dart';
 import '../../widgets/nav_bar.dart';
 
-const String _placeholderPhoto = 'https://placehold.co/300x300/eef6f0/2f7a52?text=Zawaj';
+const String _placeholderPhoto =
+    'https://placehold.co/300x300/eef6f0/2f7a52?text=Zawaj';
 
 /// Port of the previous Expo app's `app/visitors.tsx`.
 class VisitorsScreen extends ConsumerStatefulWidget {
@@ -46,7 +48,8 @@ class _VisitorsScreenState extends ConsumerState<VisitorsScreen> {
     // Build rows of 2 visitor cards each, matching the old app's grid.
     final rows = <List<VisitorEntry>>[];
     for (var i = 0; i < _visitors.length; i += 2) {
-      rows.add(_visitors.sublist(i, i + 2 > _visitors.length ? _visitors.length : i + 2));
+      rows.add(_visitors.sublist(
+          i, i + 2 > _visitors.length ? _visitors.length : i + 2));
     }
 
     return Scaffold(
@@ -57,9 +60,14 @@ class _VisitorsScreenState extends ConsumerState<VisitorsScreen> {
           children: [
             const NavBar(),
             const SizedBox(height: 14),
-            Text(dict.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.emerald700)),
+            Text(dict.title,
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.emerald700)),
             const SizedBox(height: 2),
-            Text(dict.subtitle, style: const TextStyle(fontSize: 13, color: AppColors.ink500)),
+            Text(dict.subtitle,
+                style: const TextStyle(fontSize: 13, color: AppColors.ink500)),
             const SizedBox(height: 12),
             const BannerAdSlot(placement: BannerPlacement.bannerVisitors),
             if (lockedCount > 0) ...[
@@ -67,17 +75,39 @@ class _VisitorsScreenState extends ConsumerState<VisitorsScreen> {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(color: AppColors.gold100, borderRadius: BorderRadius.circular(16)),
-                child: Text(
-                  dict.lockedBanner(lockedCount),
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.emerald900),
+                decoration: BoxDecoration(
+                    color: AppColors.gold100,
+                    borderRadius: BorderRadius.circular(16)),
+                child: Row(
+                  children: [
+                    const IconBadge(
+                      background: AppColors.gold500,
+                      size: 32,
+                      borderWidth: 0,
+                      icon: Icon(Icons.lock_rounded,
+                          color: AppColors.white, size: 16),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        dict.lockedBanner(lockedCount),
+                        style: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.emerald900),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
             if (!_loading && _visitors.isEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(dict.empty, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.ink500)),
+                child: Text(dict.empty,
+                    textAlign: TextAlign.center,
+                    style:
+                        const TextStyle(fontSize: 13, color: AppColors.ink500)),
               ),
             const SizedBox(height: 12),
             for (final row in rows)
@@ -87,10 +117,15 @@ class _VisitorsScreenState extends ConsumerState<VisitorsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     for (final entry in row) ...[
-                      Expanded(child: _VisitorCard(entry: entry, lockLabel: dict.lockLabel, lockedName: dict.lockedName)),
+                      Expanded(
+                          child: _VisitorCard(
+                              entry: entry,
+                              lockLabel: dict.lockLabel,
+                              lockedName: dict.lockedName)),
                       if (entry != row.last) const SizedBox(width: 12),
                     ],
-                    if (row.length == 1) const Expanded(child: SizedBox.shrink()),
+                    if (row.length == 1)
+                      const Expanded(child: SizedBox.shrink()),
                   ],
                 ),
               ),
@@ -102,7 +137,8 @@ class _VisitorsScreenState extends ConsumerState<VisitorsScreen> {
 }
 
 class _VisitorCard extends StatelessWidget {
-  const _VisitorCard({required this.entry, required this.lockLabel, required this.lockedName});
+  const _VisitorCard(
+      {required this.entry, required this.lockLabel, required this.lockedName});
 
   final VisitorEntry entry;
   final String lockLabel;
@@ -112,16 +148,24 @@ class _VisitorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final photos = entry.visitor?.profile.photos ?? const [];
     final photoUri = photos.isNotEmpty ? photos.first : _placeholderPhoto;
-    final name = entry.locked ? lockedName : (entry.visitor?.profile.firstName ?? '');
+    final name =
+        entry.locked ? lockedName : (entry.visitor?.profile.firstName ?? '');
 
     return Column(
       children: [
         AspectRatio(
           aspectRatio: 1,
-          child: BlurredImage(imageUrl: photoUri, isBlurred: entry.locked, lockLabel: lockLabel),
+          child: BlurredImage(
+              imageUrl: photoUri,
+              isBlurred: entry.locked,
+              lockLabel: lockLabel),
         ),
         const SizedBox(height: 6),
-        Text(name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.ink700)),
+        Text(name,
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: AppColors.ink700)),
       ],
     );
   }

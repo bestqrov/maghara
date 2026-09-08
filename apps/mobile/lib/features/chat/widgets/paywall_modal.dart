@@ -5,6 +5,7 @@ import '../../../core/i18n/locale_provider.dart';
 import '../../../core/theme/colors.dart';
 import '../../../services/chat_service.dart';
 import '../../../widgets/app_button.dart';
+import '../../../widgets/icon_badge.dart';
 
 /// Port of the previous Expo app's `src/components/PaywallModal.tsx`.
 class PaywallModal extends ConsumerWidget {
@@ -32,22 +33,34 @@ class PaywallModal extends ConsumerWidget {
         constraints: const BoxConstraints(maxWidth: 340),
         child: Container(
           padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(28)),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: [
+              BoxShadow(
+                  color: AppColors.emerald900.withOpacity(0.18),
+                  blurRadius: 28,
+                  offset: const Offset(0, 14)),
+            ],
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: const BoxDecoration(color: AppColors.gold100, shape: BoxShape.circle),
-                alignment: Alignment.center,
-                child: const Text('💬', style: TextStyle(fontSize: 24)),
+              const IconBadge(
+                background: AppColors.gold100,
+                size: 56,
+                borderWidth: 0,
+                icon: Icon(Icons.lock_rounded,
+                    color: AppColors.gold600, size: 26),
               ),
               const SizedBox(height: 12),
               Text(
                 dict.title,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.emerald700),
+                style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.emerald700),
               ),
               const SizedBox(height: 6),
               Text(
@@ -58,7 +71,10 @@ class PaywallModal extends ConsumerWidget {
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
-                child: AppButton(label: dict.upgradeVip, variant: AppButtonVariant.gold, onPressed: loading ? null : onUpgradeVip),
+                child: AppButton(
+                    label: dict.upgradeVip,
+                    variant: AppButtonVariant.gold,
+                    onPressed: loading ? null : onUpgradeVip),
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -72,7 +88,10 @@ class PaywallModal extends ConsumerWidget {
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
-                child: AppButton(label: dict.close, variant: AppButtonVariant.ghost, onPressed: loading ? null : onClose),
+                child: AppButton(
+                    label: dict.close,
+                    variant: AppButtonVariant.ghost,
+                    onPressed: loading ? null : onClose),
               ),
             ],
           ),

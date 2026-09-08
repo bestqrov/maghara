@@ -16,6 +16,7 @@ import '../../services/visitors_service.dart';
 import '../../widgets/ads/banner_ad_slot.dart';
 import '../../widgets/ads/native_ad_card.dart';
 import '../../widgets/nav_bar.dart';
+import '../../widgets/stat_pill.dart';
 import '../../widgets/verification_banner.dart';
 import 'widgets/profile_card.dart';
 import 'widgets/search_filters_bar.dart';
@@ -38,11 +39,13 @@ class _AdRow extends _FeedRow {
 
 /// Groups [results] into rows of 2, injecting an [_AdRow] every [adEvery]
 /// profiles when [adEnabled] — a direct port of the old app's `buildRows()`.
-List<_FeedRow> _buildRows(List<SearchResultProfile> results, int adEvery, bool adEnabled) {
+List<_FeedRow> _buildRows(
+    List<SearchResultProfile> results, int adEvery, bool adEnabled) {
   final rows = <_FeedRow>[];
   var profilesSinceAd = 0;
   for (var i = 0; i < results.length; i += 2) {
-    final items = results.sublist(i, i + 2 > results.length ? results.length : i + 2);
+    final items =
+        results.sublist(i, i + 2 > results.length ? results.length : i + 2);
     rows.add(_ProfilesRow(items));
     profilesSinceAd += items.length;
     if (adEnabled && adEvery > 0 && profilesSinceAd >= adEvery) {
@@ -76,7 +79,10 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   }
 
   Future<void> _init() async {
-    ref.read(verificationServiceProvider).getMyVerificationStatus().then((status) {
+    ref
+        .read(verificationServiceProvider)
+        .getMyVerificationStatus()
+        .then((status) {
       if (mounted) setState(() => _verification = status);
     }).catchError((_) {
       if (mounted) setState(() => _verification = null);
@@ -130,7 +136,8 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
 
     if (user == null) return const SizedBox.shrink();
 
-    final isVip = user.subscriptionTier == SubscriptionTier.vip || user.subscriptionTier == SubscriptionTier.crossBorderVip;
+    final isVip = user.subscriptionTier == SubscriptionTier.vip ||
+        user.subscriptionTier == SubscriptionTier.crossBorderVip;
 
     final adSettings = ref.watch(adSettingsProvider).valueOrNull;
     final nativeAdUnitId = adSettings?.admobNativeAdUnitId;
@@ -139,7 +146,8 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
         adSettings.placements.nativeFeed &&
         nativeAdUnitId != null &&
         nativeAdUnitId.isNotEmpty;
-    final rows = _buildRows(_results, adSettings?.nativeAdIndex ?? 5, nativeAdEnabled);
+    final rows =
+        _buildRows(_results, adSettings?.nativeAdIndex ?? 5, nativeAdEnabled);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -158,24 +166,25 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                     children: [
                       Text(
                         dict.feed.greeting(user.profile.firstName),
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.emerald700),
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.emerald700),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         '${user.profile.currentCity} · ${user.profile.residenceCountry}',
-                        style: const TextStyle(fontSize: 13, color: AppColors.ink500),
+                        style: const TextStyle(
+                            fontSize: 13, color: AppColors.ink500),
                       ),
                     ],
                   ),
                 ),
                 if (!isVip)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(color: AppColors.emerald50, borderRadius: BorderRadius.circular(999)),
-                    child: Text(
-                      dict.feed.interestsToday(_dailyInterestsSent, MatchingService.dailyFreeInterests),
-                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.emerald700),
-                    ),
+                  StatPill(
+                    icon: Icons.favorite_rounded,
+                    label: dict.feed.interestsToday(_dailyInterestsSent,
+                        MatchingService.dailyFreeInterests),
                   ),
               ],
             ),
@@ -191,12 +200,18 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
             if (_error != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 12),
-                child: Text(_error!, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.red500)),
+                child: Text(_error!,
+                    textAlign: TextAlign.center,
+                    style:
+                        const TextStyle(fontSize: 13, color: AppColors.red500)),
               ),
             if (_results.isEmpty && !_loading)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(dict.feed.noResults, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.ink500)),
+                child: Text(dict.feed.noResults,
+                    textAlign: TextAlign.center,
+                    style:
+                        const TextStyle(fontSize: 13, color: AppColors.ink500)),
               ),
             for (final row in rows)
               Padding(
@@ -218,7 +233,8 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                           ),
                           if (profile != items.last) const SizedBox(width: 12),
                         ],
-                        if (items.length == 1) const Expanded(child: SizedBox.shrink()),
+                        if (items.length == 1)
+                          const Expanded(child: SizedBox.shrink()),
                       ],
                     ),
                 },

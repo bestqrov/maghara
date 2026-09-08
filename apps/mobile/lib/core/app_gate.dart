@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../models/app_config.dart';
 import '../services/app_config_service.dart';
+import '../widgets/icon_badge.dart';
 import 'i18n/locale_provider.dart';
 import 'theme/app_theme.dart';
 import 'theme/colors.dart';
@@ -72,7 +73,8 @@ class _AppGateState extends ConsumerState<AppGate> {
       // missing or misbehaving platform-channel implementation can leave
       // this call pending forever, which would otherwise wedge the app on
       // the splash/loading state indefinitely.
-      final info = await PackageInfo.fromPlatform().timeout(const Duration(seconds: 5));
+      final info =
+          await PackageInfo.fromPlatform().timeout(const Duration(seconds: 5));
       versionCode = int.tryParse(info.buildNumber) ?? 0;
     } catch (_) {
       versionCode = 0;
@@ -118,7 +120,9 @@ class _AppGateState extends ConsumerState<AppGate> {
     if (config != null && config.appSettings.maintenanceMode) {
       return _GateScaffold(
         child: _GateMessage(
-          emoji: '🛠️',
+          icon: Icons.build_rounded,
+          badgeBackground: AppColors.gold100,
+          badgeIconColor: AppColors.gold600,
           title: dict.maintenanceTitle,
           message: config.appSettings.maintenanceMessage?.isNotEmpty == true
               ? config.appSettings.maintenanceMessage!
@@ -133,14 +137,18 @@ class _AppGateState extends ConsumerState<AppGate> {
       final appLink = config.appUpdate.appLink;
       return _GateScaffold(
         child: _GateMessage(
-          emoji: '⬆️',
+          icon: Icons.system_update_rounded,
+          badgeBackground: AppColors.emerald100,
+          badgeIconColor: AppColors.emerald600,
           title: dict.updateTitle,
           message: config.appUpdate.description?.isNotEmpty == true
               ? config.appUpdate.description!
               : dict.updateDefaultMessage,
-          buttonLabel: appLink != null && appLink.isNotEmpty ? dict.updateButton : null,
+          buttonLabel:
+              appLink != null && appLink.isNotEmpty ? dict.updateButton : null,
           onButtonPressed: appLink != null && appLink.isNotEmpty
-              ? () => launchUrl(Uri.parse(appLink), mode: LaunchMode.externalApplication)
+              ? () => launchUrl(Uri.parse(appLink),
+                  mode: LaunchMode.externalApplication)
               : null,
         ),
       );
@@ -168,27 +176,37 @@ class _GateScaffold extends ConsumerWidget {
       color: AppColors.background,
       theme: AppTheme.light,
       locale: locale,
-      supportedLocales: const [ui.Locale('ar'), ui.Locale('fr'), ui.Locale('en'), ui.Locale('es')],
+      supportedLocales: const [
+        ui.Locale('ar'),
+        ui.Locale('fr'),
+        ui.Locale('en'),
+        ui.Locale('es')
+      ],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: Scaffold(backgroundColor: AppColors.background, body: SafeArea(child: child)),
+      home: Scaffold(
+          backgroundColor: AppColors.background, body: SafeArea(child: child)),
     );
   }
 }
 
 class _GateMessage extends StatelessWidget {
   const _GateMessage({
-    required this.emoji,
+    required this.icon,
+    required this.badgeBackground,
+    required this.badgeIconColor,
     required this.title,
     required this.message,
     this.buttonLabel,
     this.onButtonPressed,
   });
 
-  final String emoji;
+  final IconData icon;
+  final Color badgeBackground;
+  final Color badgeIconColor;
   final String title;
   final String message;
   final String? buttonLabel;
@@ -202,12 +220,19 @@ class _GateMessage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 48)),
+            IconBadge(
+              background: badgeBackground,
+              size: 72,
+              icon: Icon(icon, color: badgeIconColor, size: 34),
+            ),
             const SizedBox(height: 10),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.emerald700),
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.emerald700),
             ),
             const SizedBox(height: 10),
             Text(
@@ -217,7 +242,8 @@ class _GateMessage extends StatelessWidget {
             ),
             if (buttonLabel != null) ...[
               const SizedBox(height: 12),
-              ElevatedButton(onPressed: onButtonPressed, child: Text(buttonLabel!)),
+              ElevatedButton(
+                  onPressed: onButtonPressed, child: Text(buttonLabel!)),
             ],
           ],
         ),

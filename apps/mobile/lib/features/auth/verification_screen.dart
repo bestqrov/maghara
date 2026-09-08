@@ -8,6 +8,7 @@ import '../../models/enums.dart';
 import '../../models/verification_status.dart';
 import '../../services/verification_service.dart';
 import '../../widgets/app_button.dart';
+import '../../widgets/icon_badge.dart';
 import 'widgets/image_uploader.dart';
 
 /// Port of the old Expo `app/verification.tsx`.
@@ -41,7 +42,8 @@ class _VerificationScreenState extends ConsumerState<VerificationScreen> {
   Future<void> _fetchStatus() async {
     setState(() => _loadingStatus = true);
     try {
-      final status = await ref.read(verificationServiceProvider).getMyVerificationStatus();
+      final status =
+          await ref.read(verificationServiceProvider).getMyVerificationStatus();
       if (mounted) setState(() => _status = status);
     } catch (_) {
       // See class doc: a 401 here is handled by the API client's
@@ -94,66 +96,83 @@ class _VerificationScreenState extends ConsumerState<VerificationScreen> {
                   color: AppColors.white,
                   borderRadius: BorderRadius.circular(28),
                   boxShadow: [
-                    BoxShadow(color: AppColors.emerald900.withOpacity(0.12), blurRadius: 24, offset: const Offset(0, 12)),
+                    BoxShadow(
+                        color: AppColors.emerald900.withOpacity(0.12),
+                        blurRadius: 24,
+                        offset: const Offset(0, 12)),
                   ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 56,
-                      height: 56,
-                      decoration: const BoxDecoration(color: AppColors.gold100, shape: BoxShape.circle),
-                      alignment: Alignment.center,
-                      child: const Text('🛡️', style: TextStyle(fontSize: 26)),
+                    const IconBadge(
+                      background: AppColors.gold100,
+                      size: 56,
+                      borderWidth: 0,
+                      icon: Icon(Icons.verified_user_rounded,
+                          color: AppColors.gold600, size: 26),
                     ),
                     const SizedBox(height: 14),
                     Text(
                       dict.title,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.emerald700),
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.emerald700),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       dict.subtitle,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 13, color: AppColors.ink500),
+                      style: const TextStyle(
+                          fontSize: 13, color: AppColors.ink500),
                     ),
                     const SizedBox(height: 18),
                     if (_loadingStatus)
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 24),
-                        child: CircularProgressIndicator(color: AppColors.emerald600),
+                        child: CircularProgressIndicator(
+                            color: AppColors.emerald600),
                       )
                     else if (alreadySubmitted)
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(color: AppColors.emerald50, borderRadius: BorderRadius.circular(14)),
+                        decoration: BoxDecoration(
+                            color: AppColors.emerald50,
+                            borderRadius: BorderRadius.circular(14)),
                         child: Text(
-                          _status?.verificationStatus == VerificationStatusValue.verified
+                          _status?.verificationStatus ==
+                                  VerificationStatusValue.verified
                               ? dict.alreadyVerified
                               : dict.alreadyPending,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 13, color: AppColors.emerald700),
+                          style: const TextStyle(
+                              fontSize: 13, color: AppColors.emerald700),
                         ),
                       )
                     else ...[
                       ImageUploader(
                         label: dict.idLabel,
                         folder: 'zawaj/verification',
-                        onUploaded: (url) => setState(() => _idDocumentUrl = url),
+                        onUploaded: (url) =>
+                            setState(() => _idDocumentUrl = url),
                       ),
                       const SizedBox(height: 14),
                       ImageUploader(
                         label: dict.residencyLabel,
                         folder: 'zawaj/verification',
-                        onUploaded: (url) => setState(() => _residencyDocumentUrl = url),
+                        onUploaded: (url) =>
+                            setState(() => _residencyDocumentUrl = url),
                       ),
                       if (_error != null) ...[
                         const SizedBox(height: 14),
-                        Text(_error!, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.red500)),
+                        Text(_error!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 13, color: AppColors.red500)),
                       ],
                       const SizedBox(height: 18),
                       SizedBox(
@@ -161,7 +180,9 @@ class _VerificationScreenState extends ConsumerState<VerificationScreen> {
                         child: AppButton(
                           label: dict.submit,
                           loading: _submitting,
-                          onPressed: (_idDocumentUrl == null || _submitting) ? null : _onSubmit,
+                          onPressed: (_idDocumentUrl == null || _submitting)
+                              ? null
+                              : _onSubmit,
                         ),
                       ),
                     ],

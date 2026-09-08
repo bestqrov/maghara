@@ -10,7 +10,10 @@ import '../../models/transaction.dart';
 import '../../services/payments_service.dart';
 import '../../services/website_links.dart';
 import '../../widgets/app_button.dart';
+import '../../widgets/chip_card.dart';
+import '../../widgets/icon_badge.dart';
 import '../../widgets/nav_bar.dart';
+import '../../widgets/stat_pill.dart';
 
 /// Port of the previous Expo app's `app/store.tsx`.
 ///
@@ -36,7 +39,8 @@ class _StoreScreenState extends ConsumerState<StoreScreen> {
 
   Future<void> _load() async {
     try {
-      final transactions = await ref.read(paymentsServiceProvider).getMyTransactions();
+      final transactions =
+          await ref.read(paymentsServiceProvider).getMyTransactions();
       if (mounted) setState(() => _transactions = transactions);
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -61,17 +65,35 @@ class _StoreScreenState extends ConsumerState<StoreScreen> {
           children: [
             const NavBar(),
             const SizedBox(height: 14),
-            Text(dict.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AppColors.emerald700)),
+            Text(dict.title,
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.emerald700)),
             const SizedBox(height: 4),
-            Text(dict.websiteNotice, style: const TextStyle(fontSize: 12, color: AppColors.ink500)),
+            Text(dict.websiteNotice,
+                style: const TextStyle(fontSize: 12, color: AppColors.ink500)),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(22)),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(22),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.emerald900.withOpacity(0.08),
+                      blurRadius: 16,
+                      offset: const Offset(0, 6)),
+                ],
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(dict.coinPackagesTitle, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.emerald900)),
+                  Text(dict.coinPackagesTitle,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.emerald900)),
                   const SizedBox(height: 10),
                   Row(
                     children: [
@@ -79,41 +101,92 @@ class _StoreScreenState extends ConsumerState<StoreScreen> {
                         Expanded(
                           child: _CoinPackageTile(
                             coins: coinPackages[i].coins,
-                            priceLabel: i < dict.coinPriceLabels.length ? dict.coinPriceLabels[i] : coinPackages[i].priceLabel,
+                            priceLabel: i < dict.coinPriceLabels.length
+                                ? dict.coinPriceLabels[i]
+                                : coinPackages[i].priceLabel,
                           ),
                         ),
-                        if (i != coinPackages.length - 1) const SizedBox(width: 8),
+                        if (i != coinPackages.length - 1)
+                          const SizedBox(width: 8),
                       ],
                     ],
                   ),
                   const SizedBox(height: 10),
-                  AppButton(label: dict.topUp, variant: AppButtonVariant.gold, onPressed: _openStoreOnWebsite),
+                  AppButton(
+                      label: dict.topUp,
+                      variant: AppButtonVariant.gold,
+                      onPressed: _openStoreOnWebsite),
                 ],
               ),
             ),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(color: AppColors.emerald900, borderRadius: BorderRadius.circular(22)),
+              decoration: BoxDecoration(
+                color: AppColors.emerald900,
+                borderRadius: BorderRadius.circular(22),
+                boxShadow: [
+                  BoxShadow(
+                      color: AppColors.emerald900.withOpacity(0.25),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10)),
+                ],
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${dict.vipPlanLabel} 👑', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.white)),
+                  Row(
+                    children: [
+                      const IconBadge(
+                        background: AppColors.gold500,
+                        size: 36,
+                        borderWidth: 0,
+                        icon: Icon(Icons.workspace_premium_rounded,
+                            color: AppColors.emerald900, size: 20),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          dict.vipPlanLabel,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.white),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 4),
-                  Text(dict.vipPerks, style: const TextStyle(fontSize: 12, color: AppColors.emerald100)),
+                  Text(dict.vipPerks,
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.emerald100)),
                   const SizedBox(height: 6),
-                  Text(dict.vipPricePerMonth, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: AppColors.gold300)),
+                  Text(dict.vipPricePerMonth,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.gold300)),
                   const SizedBox(height: 6),
-                  AppButton(label: dict.upgradeNow, variant: AppButtonVariant.gold, onPressed: _openStoreOnWebsite),
+                  AppButton(
+                      label: dict.upgradeNow,
+                      variant: AppButtonVariant.gold,
+                      onPressed: _openStoreOnWebsite),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            Text(dict.historyTitle, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.emerald900)),
+            Text(dict.historyTitle,
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.emerald900)),
             if (!_loading && _transactions.isEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(dict.historyEmpty, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.ink500)),
+                child: Text(dict.historyEmpty,
+                    textAlign: TextAlign.center,
+                    style:
+                        const TextStyle(fontSize: 13, color: AppColors.ink500)),
               ),
             const SizedBox(height: 8),
             for (final transaction in _transactions) ...[
@@ -135,39 +208,31 @@ class _CoinPackageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.emerald100),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          Text('🪙 $coins', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.emerald700)),
-          const SizedBox(height: 6),
-          Text(priceLabel, style: const TextStyle(fontSize: 11, color: AppColors.ink500)),
-        ],
-      ),
+    return ChipCard(
+      icon: Icons.monetization_on_rounded,
+      label: '$coins',
+      subtitle: priceLabel,
+      iconBackground: AppColors.gold100,
+      iconColor: AppColors.gold600,
     );
   }
 }
 
 class _StatusStyle {
-  const _StatusStyle(this.label, this.bg, this.fg);
+  const _StatusStyle(this.label, this.variant);
   final String label;
-  final Color bg;
-  final Color fg;
+  final StatPillVariant variant;
 }
 
 _StatusStyle _statusStyle(TransactionStatus status, StoreDict dict) {
   switch (status) {
     case TransactionStatus.pending:
-      return _StatusStyle(dict.statusPending, AppColors.gold100, AppColors.emerald900);
+      return _StatusStyle(dict.statusPending, StatPillVariant.gold);
     case TransactionStatus.success:
-      return _StatusStyle(dict.statusSuccess, AppColors.emerald50, AppColors.emerald700);
+      return _StatusStyle(dict.statusSuccess, StatPillVariant.emerald);
     case TransactionStatus.failed:
     case TransactionStatus.unknown:
-      return _StatusStyle(dict.statusFailed, AppColors.rose100, const Color(0xFFDC2626));
+      return _StatusStyle(dict.statusFailed, StatPillVariant.rose);
   }
 }
 
@@ -196,23 +261,35 @@ class _TransactionRow extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+              color: AppColors.emerald900.withOpacity(0.06),
+              blurRadius: 10,
+              offset: const Offset(0, 4)),
+        ],
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(_typeLabel(transaction.type, dict), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.ink700)),
+              Text(_typeLabel(transaction.type, dict),
+                  style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.ink700)),
               const SizedBox(height: 2),
-              Text('${transaction.amount} ${transaction.currency}', style: const TextStyle(fontSize: 12, color: AppColors.ink500)),
+              Text('${transaction.amount} ${transaction.currency}',
+                  style:
+                      const TextStyle(fontSize: 12, color: AppColors.ink500)),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(color: status.bg, borderRadius: BorderRadius.circular(999)),
-            child: Text(status.label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: status.fg)),
-          ),
+          StatPill(
+              icon: Icons.circle, label: status.label, variant: status.variant),
         ],
       ),
     );
