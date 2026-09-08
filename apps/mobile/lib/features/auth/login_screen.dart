@@ -9,6 +9,7 @@ import '../../core/theme/colors.dart';
 import '../../services/auth_service.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_input.dart';
+import '../../widgets/icon_badge.dart';
 
 /// Port of the old Expo `app/(auth)/login.tsx`.
 ///
@@ -144,7 +145,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ],
                         ),
                       ),
-                      const _RingsBadge(),
+                      const RingsBadge(),
                     ],
                   ),
                 ],
@@ -155,53 +156,4 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       ),
     );
   }
-}
-
-/// Circular emerald badge with two overlapping wedding-ring outlines (gold +
-/// white), floating above and overlapping the login card's top edge.
-class _RingsBadge extends StatelessWidget {
-  const _RingsBadge();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 64,
-      height: 64,
-      decoration: BoxDecoration(
-        color: AppColors.emerald600,
-        shape: BoxShape.circle,
-        border: Border.all(color: AppColors.white, width: 3),
-        boxShadow: [
-          BoxShadow(color: AppColors.emerald900.withOpacity(0.25), blurRadius: 12, offset: const Offset(0, 4)),
-        ],
-      ),
-      child: CustomPaint(painter: _RingsPainter()),
-    );
-  }
-}
-
-class _RingsPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = size.center(Offset.zero);
-    final ringRadius = size.width * 0.19;
-
-    final goldPaint = Paint()
-      ..color = AppColors.gold300
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.6;
-    final whitePaint = Paint()
-      ..color = AppColors.white
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.6;
-
-    final leftCenter = center.translate(-ringRadius * 0.6, ringRadius * 0.2);
-    final rightCenter = center.translate(ringRadius * 0.6, -ringRadius * 0.2);
-
-    canvas.drawCircle(leftCenter, ringRadius, goldPaint);
-    canvas.drawCircle(rightCenter, ringRadius, whitePaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

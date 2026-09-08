@@ -52,12 +52,12 @@ class AppButton extends StatelessWidget {
       opacity: _disabled ? 0.5 : 1,
       child: Material(
         color: _backgroundColor,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(18),
         child: InkWell(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(18),
           onTap: _disabled ? null : onPressed,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 22),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
