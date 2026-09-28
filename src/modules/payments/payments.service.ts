@@ -7,6 +7,10 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 
 const CRYPTO_METHODS = new Set(['CRYPTO_TRC20', 'CRYPTO_POLYGON', 'CRYPTO_SOLANA']);
 
+// Crypto payments are hidden in the clients until automatic verification is
+// built; flip this back on to accept them again.
+const CRYPTO_PAYMENTS_ENABLED = false;
+
 @Injectable()
 export class PaymentsService {
   constructor(
@@ -15,6 +19,9 @@ export class PaymentsService {
   ) {}
 
   async createTransaction(userId: string, dto: CreateTransactionDto) {
+    if (CRYPTO_METHODS.has(dto.paymentMethod) && !CRYPTO_PAYMENTS_ENABLED) {
+      throw new BadRequestException('Crypto payments are temporarily unavailable');
+    }
     if (CRYPTO_METHODS.has(dto.paymentMethod) && !dto.txHashOrReceipt) {
       throw new BadRequestException('txHash is required for crypto payments');
     }

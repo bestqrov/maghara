@@ -8,6 +8,10 @@ import { Input } from './ui/Input';
 import { ImageUploader } from './ImageUploader';
 import { useAppDict } from '@/hooks/useLocale';
 
+// Crypto is shown as "unavailable" until automatic verification is built
+// (the backend rejects crypto transactions meanwhile).
+const CRYPTO_ENABLED = false;
+
 interface PaymentModalProps {
   amount: number;
   type: TransactionType;
@@ -108,22 +112,33 @@ export function PaymentModal({ amount, type, title, onClose, onSuccess }: Paymen
             <p className="mt-1 text-sm text-ink-500">{dict.paymentModal.choosePaymentMethod}</p>
 
             <div className="mt-4 grid grid-cols-1 gap-2">
-              {METHODS.map((m) => (
-                <button
-                  key={m.value}
-                  onClick={() => {
-                    setMethod(m.value);
-                    setReference('');
-                  }}
-                  className={`rounded-xl border px-4 py-2.5 text-right text-sm font-medium transition ${
-                    method === m.value
-                      ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
-                      : 'border-emerald-100 text-ink-700 hover:bg-emerald-50'
-                  }`}
-                >
-                  {m.label}
-                </button>
-              ))}
+              {METHODS.map((m) => {
+                const unavailable = m.kind === 'crypto' && !CRYPTO_ENABLED;
+                return (
+                  <button
+                    key={m.value}
+                    disabled={unavailable}
+                    onClick={() => {
+                      setMethod(m.value);
+                      setReference('');
+                    }}
+                    className={`flex items-center justify-between gap-2 rounded-xl border px-4 py-2.5 text-right text-sm font-medium transition ${
+                      unavailable
+                        ? 'cursor-not-allowed border-emerald-100 text-ink-500 opacity-50'
+                        : method === m.value
+                          ? 'border-emerald-500 bg-emerald-50 text-emerald-700'
+                          : 'border-emerald-100 text-ink-700 hover:bg-emerald-50'
+                    }`}
+                  >
+                    <span>{m.label}</span>
+                    {unavailable && (
+                      <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] text-ink-500">
+                        {dict.paymentModal.serviceUnavailable}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
             {selected && (

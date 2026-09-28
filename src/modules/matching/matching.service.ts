@@ -8,6 +8,7 @@ import { resolveIsVip } from '../../common/utils/subscription.util';
 import { isUserOnline } from '../../common/utils/online-status.util';
 import { PushService } from '../push/push.service';
 import { omitWaliInfo } from '../../common/utils/sanitize-profile.util';
+import { toTeaserProfile } from '../../common/utils/photo-blur.util';
 
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
@@ -155,12 +156,13 @@ export class MatchingService {
 
     return results.map((r, index) => {
       const { lastActiveAt, profile, ...rest } = r.toObject();
+      const blurred = index >= FREE_UNBLURRED_RESULTS;
       return {
         ...rest,
-        profile: omitWaliInfo(profile),
-        blurred: index >= FREE_UNBLURRED_RESULTS,
+        profile: blurred ? toTeaserProfile(profile) : omitWaliInfo(profile),
+        blurred,
         compatibilityScore: computeCompatibility(me, r),
-        isOnline: isUserOnline(lastActiveAt),
+        isOnline: blurred ? false : isUserOnline(lastActiveAt),
       };
     });
   }

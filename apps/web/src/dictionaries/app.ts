@@ -206,6 +206,7 @@ export interface AppDictionary {
     sendCryptoTo: (amount: number) => string;
     transferTo: (amount: number) => string;
     notConfigured: string;
+    serviceUnavailable: string;
     txHashLabel: string;
     receiptLabel: string;
     close: string;
@@ -479,6 +480,7 @@ const ar: AppDictionary = {
     sendCryptoTo: (amount) => `أرسل ${amount} MAD (USDT) إلى هذا العنوان:`,
     transferTo: (amount) => `حوّل ${amount} MAD إلى:`,
     notConfigured: 'هذه الطريقة غير مفعّلة حالياً، اختر طريقة أخرى أو تواصل مع الدعم',
+    serviceUnavailable: 'غير متوفر حالياً',
     txHashLabel: 'TxHash',
     receiptLabel: 'صورة الوصل',
     close: 'إغلاق',
@@ -754,6 +756,7 @@ const fr: AppDictionary = {
     sendCryptoTo: (amount) => `Envoyez ${amount} MAD (USDT) à cette adresse :`,
     transferTo: (amount) => `Virez ${amount} MAD à :`,
     notConfigured: "Ce moyen n'est pas encore activé, choisissez-en un autre ou contactez le support",
+    serviceUnavailable: 'Service indisponible',
     txHashLabel: 'TxHash',
     receiptLabel: 'Photo du reçu',
     close: 'Fermer',
@@ -1030,6 +1033,7 @@ const en: AppDictionary = {
     sendCryptoTo: (amount) => `Send ${amount} MAD (USDT) to this address:`,
     transferTo: (amount) => `Transfer ${amount} MAD to:`,
     notConfigured: 'This method is not enabled yet, pick another one or contact support',
+    serviceUnavailable: 'Service not available',
     txHashLabel: 'TxHash',
     receiptLabel: 'Receipt photo',
     close: 'Close',
@@ -1306,6 +1310,7 @@ const es: AppDictionary = {
     sendCryptoTo: (amount) => `Envía ${amount} MAD (USDT) a esta dirección:`,
     transferTo: (amount) => `Transfiere ${amount} MAD a:`,
     notConfigured: 'Este método aún no está activado, elige otro o contacta con soporte',
+    serviceUnavailable: 'Servicio no disponible',
     txHashLabel: 'TxHash',
     receiptLabel: 'Foto del recibo',
     close: 'Cerrar',
