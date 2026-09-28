@@ -113,7 +113,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               label: dict.phoneLabel,
                               placeholder: dict.phonePlaceholder,
                               controller: _phoneController,
-                              keyboardType: TextInputType.phone,
+                              keyboardType: TextInputType.emailAddress,
                             ),
                             const SizedBox(height: 14),
                             AppInput(label: dict.passwordLabel, controller: _passwordController, obscureText: true),

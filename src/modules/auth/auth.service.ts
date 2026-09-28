@@ -71,7 +71,12 @@ export class AuthService {
   }
 
   async login(dto: LoginDto) {
-    const user = await this.userModel.findOne({ phoneNumber: dto.phoneNumber });
+    // The login field accepts a phone number or an email (the field keeps its
+    // old name so already-installed app versions keep working).
+    const identifier = dto.phoneNumber.trim();
+    const user = await this.userModel.findOne(
+      identifier.includes('@') ? { email: identifier.toLowerCase() } : { phoneNumber: identifier },
+    );
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }

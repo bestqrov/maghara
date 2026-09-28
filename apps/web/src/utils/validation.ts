@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const loginSchema = z.object({
-  phoneNumber: z.string().min(8, 'رقم الهاتف قصير جداً'),
+  // Phone number or email — the backend accepts either.
+  phoneNumber: z.string().trim().min(5, 'أدخل رقم الهاتف أو البريد الإلكتروني'),
   password: z.string().min(1, 'يجب إدخال كلمة المرور'),
 });
 
