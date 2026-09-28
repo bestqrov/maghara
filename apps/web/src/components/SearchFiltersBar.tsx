@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Input } from './ui/Input';
 import { Button } from './ui/Button';
+import { CountrySelect } from './CountrySelect';
 import { SearchFilters } from '@/services/matching.service';
 import { useAppDict } from '@/hooks/useLocale';
 
@@ -12,7 +13,7 @@ interface SearchFiltersBarProps {
 }
 
 export function SearchFiltersBar({ onSearch, loading }: SearchFiltersBarProps) {
-  const { dict } = useAppDict();
+  const { locale, dict } = useAppDict();
   const [tab, setTab] = useState<'local' | 'diaspora'>('local');
   const [minAge, setMinAge] = useState('');
   const [maxAge, setMaxAge] = useState('');
@@ -70,8 +71,10 @@ export function SearchFiltersBar({ onSearch, loading }: SearchFiltersBarProps) {
           value={maxAge}
           onChange={(e) => setMaxAge(e.target.value)}
         />
-        <Input
-          placeholder={dict.searchFilters.country}
+        <CountrySelect
+          locale={locale}
+          aria-label={dict.searchFilters.country}
+          placeholder={dict.searchFilters.allCountries}
           value={targetCountry}
           onChange={(e) => setTargetCountry(e.target.value)}
         />

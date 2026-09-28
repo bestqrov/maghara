@@ -8,6 +8,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { getMe, updateProfile, UpdateProfilePayload } from '@/services/users.service';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
+import { CountrySelect } from '@/components/CountrySelect';
 import { Button } from '@/components/ui/Button';
 import { ImageUploader } from '@/components/ImageUploader';
 import { NavBar } from '@/components/NavBar';
@@ -34,6 +35,7 @@ export default function ProfilePage() {
   const { locale, dict } = useAppDict();
   const { token, user, hasHydrated, updateUser } = useAuthStore();
   const [photoUrl, setPhotoUrl] = useState('');
+  const [savedCountries, setSavedCountries] = useState({ residence: '', origin: '' });
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -66,6 +68,7 @@ export default function ProfilePage() {
           waliPhone: me.profile.waliPhone,
           waliRelationship: me.profile.waliRelationship,
         });
+        setSavedCountries({ residence: me.profile.residenceCountry, origin: me.profile.originCountry });
         setPhotoUrl(me.profile.photos[0] ?? '');
         setReady(true);
       })
@@ -142,8 +145,11 @@ export default function ProfilePage() {
                   label={dict.profile.jobTitleLabel}
                   {...register('jobTitle')}
                 />
-                <Input
+                <CountrySelect
                   id="residenceCountry"
+                  locale={locale}
+                  placeholder={dict.common.chooseCountry}
+                  currentValue={savedCountries.residence}
                   label={dict.profile.residenceCountryLabel}
                   {...register('residenceCountry', { required: true })}
                   error={errors.residenceCountry ? dict.common.errorGeneric : undefined}
@@ -154,8 +160,11 @@ export default function ProfilePage() {
                   {...register('currentCity', { required: true })}
                   error={errors.currentCity ? dict.common.errorGeneric : undefined}
                 />
-                <Input
+                <CountrySelect
                   id="originCountry"
+                  locale={locale}
+                  placeholder={dict.common.chooseCountry}
+                  currentValue={savedCountries.origin}
                   label={dict.profile.originCountryLabel}
                   {...register('originCountry', { required: true })}
                   error={errors.originCountry ? dict.common.errorGeneric : undefined}

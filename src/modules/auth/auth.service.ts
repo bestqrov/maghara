@@ -8,6 +8,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { generateUniqueReferralCode } from '../../common/utils/referral-code.util';
 import { SignupCampaignService } from '../signup-campaign/signup-campaign.service';
+import { normalizeCountryInput } from '../../common/utils/country.util';
 
 const BCRYPT_ROUNDS = 12;
 
@@ -60,9 +61,9 @@ export class AuthService {
         firstName: dto.firstName,
         gender: dto.gender,
         birthDate: dto.birthDate,
-        residenceCountry: dto.residenceCountry,
+        residenceCountry: normalizeCountryInput(dto.residenceCountry),
         currentCity: dto.currentCity,
-        originCountry: dto.originCountry,
+        originCountry: normalizeCountryInput(dto.originCountry),
       },
     });
 

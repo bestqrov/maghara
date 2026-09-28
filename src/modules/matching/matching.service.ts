@@ -9,6 +9,7 @@ import { isUserOnline } from '../../common/utils/online-status.util';
 import { PushService } from '../push/push.service';
 import { omitWaliInfo } from '../../common/utils/sanitize-profile.util';
 import { toTeaserProfile } from '../../common/utils/photo-blur.util';
+import { countryFilter } from '../../common/utils/country.util';
 
 const FREE_UNBLURRED_RESULTS = 2;
 const DAILY_FREE_INTERESTS = 5;
@@ -117,7 +118,7 @@ export class MatchingService {
     const relocationPreference =
       dto.relocationPreference || (dto.scope === 'DIASPORA' ? 'LOOKING_FOR_EXPAT' : undefined);
 
-    if (targetCountry) filter['profile.residenceCountry'] = exactCaseInsensitive(targetCountry);
+    if (targetCountry) filter['profile.residenceCountry'] = countryFilter(targetCountry);
     if (dto.targetCity) filter['profile.currentCity'] = exactCaseInsensitive(dto.targetCity);
     if (relocationPreference) filter['profile.relocationPreference'] = relocationPreference;
     if (dto.minAge || dto.maxAge) {

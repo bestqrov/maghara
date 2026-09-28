@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from '../../schemas/user.schema';
 import { PublicProfilesQueryDto } from './dto/public-profiles-query.dto';
+import { countryFilter } from '../../common/utils/country.util';
 
 const PREVIEW_FIELDS =
   'profile.firstName profile.gender profile.birthDate profile.currentCity profile.residenceCountry verificationStatus';
@@ -38,7 +39,7 @@ export class PublicService {
   async getVerifiedPreviewProfiles(dto: PublicProfilesQueryDto) {
     const filter: Record<string, unknown> = { verificationStatus: 'VERIFIED', isSeed: { $ne: true } };
     if (dto.city) filter['profile.currentCity'] = exactCaseInsensitive(dto.city);
-    if (dto.country) filter['profile.residenceCountry'] = exactCaseInsensitive(dto.country);
+    if (dto.country) filter['profile.residenceCountry'] = countryFilter(dto.country);
 
     const limit = dto.limit ?? 6;
 

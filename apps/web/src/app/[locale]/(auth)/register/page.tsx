@@ -9,6 +9,7 @@ import { updateProfile } from '@/services/users.service';
 import { useAuthStore } from '@/store/auth.store';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
+import { CountrySelect } from '@/components/CountrySelect';
 import { Button } from '@/components/ui/Button';
 import { StepIndicator } from '@/components/StepIndicator';
 import { ImageUploader } from '@/components/ImageUploader';
@@ -222,10 +223,11 @@ function RegisterForm() {
 
           {step === 2 && (
             <>
-              <Input
+              <CountrySelect
                 id="residenceCountry"
+                locale={locale}
                 label={dict.register.residenceCountryLabel}
-                placeholder={dict.register.residenceCountryPlaceholder}
+                placeholder={dict.common.chooseCountry}
                 {...register('residenceCountry', { required: dict.register.residenceCountryRequired })}
                 error={errors.residenceCountry?.message}
               />
@@ -235,9 +237,11 @@ function RegisterForm() {
                 {...register('currentCity', { required: dict.register.currentCityRequired })}
                 error={errors.currentCity?.message}
               />
-              <Input
+              <CountrySelect
                 id="originCountry"
+                locale={locale}
                 label={dict.register.originCountryLabel}
+                placeholder={dict.common.chooseCountry}
                 {...register('originCountry', { required: dict.register.originCountryRequired })}
                 error={errors.originCountry?.message}
               />

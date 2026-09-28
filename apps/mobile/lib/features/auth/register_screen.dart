@@ -11,6 +11,7 @@ import '../../services/auth_service.dart';
 import '../../services/users_service.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/app_input.dart';
+import '../../widgets/country_field.dart';
 import '../../widgets/option_picker.dart';
 import '../../widgets/step_indicator.dart';
 import 'widgets/image_uploader.dart';
@@ -290,7 +291,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       case 2:
         return Column(
           children: [
-            AppInput(
+            CountryField(
               label: dict.residenceCountryLabel,
               placeholder: dict.residenceCountryPlaceholder,
               controller: _residenceCountryController,
@@ -298,7 +299,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             const SizedBox(height: 14),
             AppInput(label: dict.currentCityLabel, controller: _currentCityController),
             const SizedBox(height: 14),
-            AppInput(label: dict.originCountryLabel, controller: _originCountryController),
+            CountryField(label: dict.originCountryLabel, controller: _originCountryController),
           ],
         );
       case 3:

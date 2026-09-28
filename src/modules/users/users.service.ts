@@ -11,6 +11,7 @@ import { PushSubscription } from '../../schemas/push-subscription.schema';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { DeleteAccountDto } from './dto/delete-account.dto';
+import { normalizeCountryInput } from '../../common/utils/country.util';
 
 const BCRYPT_ROUNDS = 12;
 
@@ -35,7 +36,10 @@ export class UsersService {
     const user = await this.userModel.findById(userId);
     if (!user) throw new NotFoundException('User not found');
 
-    const { minAge, maxAge, targetCountries, targetCities, ...profileFields } = dto;
+    const { minAge, maxAge, targetCountries: rawTargetCountries, targetCities, ...profileFields } = dto;
+    if (profileFields.residenceCountry) profileFields.residenceCountry = normalizeCountryInput(profileFields.residenceCountry);
+    if (profileFields.originCountry) profileFields.originCountry = normalizeCountryInput(profileFields.originCountry);
+    const targetCountries = rawTargetCountries?.map(normalizeCountryInput);
     for (const [key, value] of Object.entries(profileFields)) {
       if (value !== undefined) {
         (user.profile as unknown as Record<string, unknown>)[key] = value;

@@ -5,6 +5,7 @@ export interface AppDictionary {
     brand: string;
     errorGeneric: string;
     loading: string;
+    chooseCountry: string;
     logout: string;
     close: string;
     confirm: string;
@@ -87,6 +88,7 @@ export interface AppDictionary {
     ageTo: string;
     country: string;
     city: string;
+    allCountries: string;
     submit: string;
   };
   profileCard: {
@@ -279,6 +281,7 @@ const ar: AppDictionary = {
     brand: 'قسمة و نصيب',
     errorGeneric: 'حدث خطأ ما، حاول مرة أخرى',
     loading: 'جارٍ التحميل...',
+    chooseCountry: 'اختر البلد',
     logout: 'خروج',
     close: 'إغلاق',
     confirm: 'تأكيد',
@@ -361,6 +364,7 @@ const ar: AppDictionary = {
     ageTo: 'السن إلى',
     country: 'البلد',
     city: 'المدينة',
+    allCountries: 'كل البلدان',
     submit: 'بحث',
   },
   profileCard: {
@@ -553,6 +557,7 @@ const fr: AppDictionary = {
     brand: 'Qisma W Nasib',
     errorGeneric: "Un problème est survenu, réessayez",
     loading: 'Chargement...',
+    chooseCountry: 'Choisissez un pays',
     logout: 'Déconnexion',
     close: 'Fermer',
     confirm: 'Confirmer',
@@ -635,6 +640,7 @@ const fr: AppDictionary = {
     ageTo: 'Âge max',
     country: 'Pays',
     city: 'Ville',
+    allCountries: 'Tous les pays',
     submit: 'Rechercher',
   },
   profileCard: {
@@ -830,6 +836,7 @@ const en: AppDictionary = {
     brand: 'Qisma W Nasib',
     errorGeneric: 'Something went wrong, please try again',
     loading: 'Loading...',
+    chooseCountry: 'Choose a country',
     logout: 'Log out',
     close: 'Close',
     confirm: 'Confirm',
@@ -912,6 +919,7 @@ const en: AppDictionary = {
     ageTo: 'Age to',
     country: 'Country',
     city: 'City',
+    allCountries: 'All countries',
     submit: 'Search',
   },
   profileCard: {
@@ -1107,6 +1115,7 @@ const es: AppDictionary = {
     brand: 'Qisma W Nasib',
     errorGeneric: 'Ocurrió un problema, inténtalo de nuevo',
     loading: 'Cargando...',
+    chooseCountry: 'Elige un país',
     logout: 'Cerrar sesión',
     close: 'Cerrar',
     confirm: 'Confirmar',
@@ -1189,6 +1198,7 @@ const es: AppDictionary = {
     ageTo: 'Edad hasta',
     country: 'País',
     city: 'Ciudad',
+    allCountries: 'Todos los países',
     submit: 'Buscar',
   },
   profileCard: {

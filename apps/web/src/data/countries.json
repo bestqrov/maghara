@@ -1,0 +1,471 @@
+[
+ {
+  "code": "MA",
+  "ar": "المغرب",
+  "en": "Morocco",
+  "fr": "Maroc",
+  "es": "Marruecos"
+ },
+ {
+  "code": "DZ",
+  "ar": "الجزائر",
+  "en": "Algeria",
+  "fr": "Algérie",
+  "es": "Argelia"
+ },
+ {
+  "code": "TN",
+  "ar": "تونس",
+  "en": "Tunisia",
+  "fr": "Tunisie",
+  "es": "Túnez"
+ },
+ {
+  "code": "LY",
+  "ar": "ليبيا",
+  "en": "Libya",
+  "fr": "Libye",
+  "es": "Libia"
+ },
+ {
+  "code": "EG",
+  "ar": "مصر",
+  "en": "Egypt",
+  "fr": "Égypte",
+  "es": "Egipto"
+ },
+ {
+  "code": "MR",
+  "ar": "موريتانيا",
+  "en": "Mauritania",
+  "fr": "Mauritanie",
+  "es": "Mauritania"
+ },
+ {
+  "code": "SD",
+  "ar": "السودان",
+  "en": "Sudan",
+  "fr": "Soudan",
+  "es": "Sudán"
+ },
+ {
+  "code": "SA",
+  "ar": "السعودية",
+  "en": "Saudi Arabia",
+  "fr": "Arabie saoudite",
+  "es": "Arabia Saudí"
+ },
+ {
+  "code": "AE",
+  "ar": "الإمارات",
+  "en": "United Arab Emirates",
+  "fr": "Émirats arabes unis",
+  "es": "Emiratos Árabes Unidos"
+ },
+ {
+  "code": "QA",
+  "ar": "قطر",
+  "en": "Qatar",
+  "fr": "Qatar",
+  "es": "Catar"
+ },
+ {
+  "code": "KW",
+  "ar": "الكويت",
+  "en": "Kuwait",
+  "fr": "Koweït",
+  "es": "Kuwait"
+ },
+ {
+  "code": "BH",
+  "ar": "البحرين",
+  "en": "Bahrain",
+  "fr": "Bahreïn",
+  "es": "Baréin"
+ },
+ {
+  "code": "OM",
+  "ar": "عمان",
+  "en": "Oman",
+  "fr": "Oman",
+  "es": "Omán"
+ },
+ {
+  "code": "YE",
+  "ar": "اليمن",
+  "en": "Yemen",
+  "fr": "Yémen",
+  "es": "Yemen"
+ },
+ {
+  "code": "JO",
+  "ar": "الأردن",
+  "en": "Jordan",
+  "fr": "Jordanie",
+  "es": "Jordania"
+ },
+ {
+  "code": "PS",
+  "ar": "فلسطين",
+  "en": "Palestine",
+  "fr": "Palestine",
+  "es": "Palestina"
+ },
+ {
+  "code": "LB",
+  "ar": "لبنان",
+  "en": "Lebanon",
+  "fr": "Liban",
+  "es": "Líbano"
+ },
+ {
+  "code": "SY",
+  "ar": "سوريا",
+  "en": "Syria",
+  "fr": "Syrie",
+  "es": "Siria"
+ },
+ {
+  "code": "IQ",
+  "ar": "العراق",
+  "en": "Iraq",
+  "fr": "Irak",
+  "es": "Irak"
+ },
+ {
+  "code": "TR",
+  "ar": "تركيا",
+  "en": "Turkey",
+  "fr": "Turquie",
+  "es": "Turquía"
+ },
+ {
+  "code": "FR",
+  "ar": "فرنسا",
+  "en": "France",
+  "fr": "France",
+  "es": "Francia"
+ },
+ {
+  "code": "ES",
+  "ar": "إسبانيا",
+  "en": "Spain",
+  "fr": "Espagne",
+  "es": "España"
+ },
+ {
+  "code": "BE",
+  "ar": "بلجيكا",
+  "en": "Belgium",
+  "fr": "Belgique",
+  "es": "Bélgica"
+ },
+ {
+  "code": "NL",
+  "ar": "هولندا",
+  "en": "Netherlands",
+  "fr": "Pays-Bas",
+  "es": "Países Bajos"
+ },
+ {
+  "code": "DE",
+  "ar": "ألمانيا",
+  "en": "Germany",
+  "fr": "Allemagne",
+  "es": "Alemania"
+ },
+ {
+  "code": "IT",
+  "ar": "إيطاليا",
+  "en": "Italy",
+  "fr": "Italie",
+  "es": "Italia"
+ },
+ {
+  "code": "GB",
+  "ar": "بريطانيا",
+  "en": "United Kingdom",
+  "fr": "Royaume-Uni",
+  "es": "Reino Unido"
+ },
+ {
+  "code": "IE",
+  "ar": "إيرلندا",
+  "en": "Ireland",
+  "fr": "Irlande",
+  "es": "Irlanda"
+ },
+ {
+  "code": "CH",
+  "ar": "سويسرا",
+  "en": "Switzerland",
+  "fr": "Suisse",
+  "es": "Suiza"
+ },
+ {
+  "code": "AT",
+  "ar": "النمسا",
+  "en": "Austria",
+  "fr": "Autriche",
+  "es": "Austria"
+ },
+ {
+  "code": "PT",
+  "ar": "البرتغال",
+  "en": "Portugal",
+  "fr": "Portugal",
+  "es": "Portugal"
+ },
+ {
+  "code": "LU",
+  "ar": "لوكسمبورغ",
+  "en": "Luxembourg",
+  "fr": "Luxembourg",
+  "es": "Luxemburgo"
+ },
+ {
+  "code": "SE",
+  "ar": "السويد",
+  "en": "Sweden",
+  "fr": "Suède",
+  "es": "Suecia"
+ },
+ {
+  "code": "NO",
+  "ar": "النرويج",
+  "en": "Norway",
+  "fr": "Norvège",
+  "es": "Noruega"
+ },
+ {
+  "code": "DK",
+  "ar": "الدنمارك",
+  "en": "Denmark",
+  "fr": "Danemark",
+  "es": "Dinamarca"
+ },
+ {
+  "code": "FI",
+  "ar": "فنلندا",
+  "en": "Finland",
+  "fr": "Finlande",
+  "es": "Finlandia"
+ },
+ {
+  "code": "PL",
+  "ar": "بولندا",
+  "en": "Poland",
+  "fr": "Pologne",
+  "es": "Polonia"
+ },
+ {
+  "code": "GR",
+  "ar": "اليونان",
+  "en": "Greece",
+  "fr": "Grèce",
+  "es": "Grecia"
+ },
+ {
+  "code": "RU",
+  "ar": "روسيا",
+  "en": "Russia",
+  "fr": "Russie",
+  "es": "Rusia"
+ },
+ {
+  "code": "US",
+  "ar": "الولايات المتحدة",
+  "en": "United States",
+  "fr": "États-Unis",
+  "es": "Estados Unidos"
+ },
+ {
+  "code": "CA",
+  "ar": "كندا",
+  "en": "Canada",
+  "fr": "Canada",
+  "es": "Canadá"
+ },
+ {
+  "code": "MX",
+  "ar": "المكسيك",
+  "en": "Mexico",
+  "fr": "Mexique",
+  "es": "México"
+ },
+ {
+  "code": "BR",
+  "ar": "البرازيل",
+  "en": "Brazil",
+  "fr": "Brésil",
+  "es": "Brasil"
+ },
+ {
+  "code": "AU",
+  "ar": "أستراليا",
+  "en": "Australia",
+  "fr": "Australie",
+  "es": "Australia"
+ },
+ {
+  "code": "NZ",
+  "ar": "نيوزيلندا",
+  "en": "New Zealand",
+  "fr": "Nouvelle-Zélande",
+  "es": "Nueva Zelanda"
+ },
+ {
+  "code": "MY",
+  "ar": "ماليزيا",
+  "en": "Malaysia",
+  "fr": "Malaisie",
+  "es": "Malasia"
+ },
+ {
+  "code": "ID",
+  "ar": "إندونيسيا",
+  "en": "Indonesia",
+  "fr": "Indonésie",
+  "es": "Indonesia"
+ },
+ {
+  "code": "SG",
+  "ar": "سنغافورة",
+  "en": "Singapore",
+  "fr": "Singapour",
+  "es": "Singapur"
+ },
+ {
+  "code": "PK",
+  "ar": "باكستان",
+  "en": "Pakistan",
+  "fr": "Pakistan",
+  "es": "Pakistán"
+ },
+ {
+  "code": "IN",
+  "ar": "الهند",
+  "en": "India",
+  "fr": "Inde",
+  "es": "India"
+ },
+ {
+  "code": "CN",
+  "ar": "الصين",
+  "en": "China",
+  "fr": "Chine",
+  "es": "China"
+ },
+ {
+  "code": "JP",
+  "ar": "اليابان",
+  "en": "Japan",
+  "fr": "Japon",
+  "es": "Japón"
+ },
+ {
+  "code": "IR",
+  "ar": "إيران",
+  "en": "Iran",
+  "fr": "Iran",
+  "es": "Irán"
+ },
+ {
+  "code": "AF",
+  "ar": "أفغانستان",
+  "en": "Afghanistan",
+  "fr": "Afghanistan",
+  "es": "Afganistán"
+ },
+ {
+  "code": "AZ",
+  "ar": "أذربيجان",
+  "en": "Azerbaijan",
+  "fr": "Azerbaïdjan",
+  "es": "Azerbaiyán"
+ },
+ {
+  "code": "KZ",
+  "ar": "كازاخستان",
+  "en": "Kazakhstan",
+  "fr": "Kazakhstan",
+  "es": "Kazajistán"
+ },
+ {
+  "code": "BA",
+  "ar": "البوسنة والهرسك",
+  "en": "Bosnia and Herzegovina",
+  "fr": "Bosnie-Herzégovine",
+  "es": "Bosnia y Herzegovina"
+ },
+ {
+  "code": "AL",
+  "ar": "ألبانيا",
+  "en": "Albania",
+  "fr": "Albanie",
+  "es": "Albania"
+ },
+ {
+  "code": "SN",
+  "ar": "السنغال",
+  "en": "Senegal",
+  "fr": "Sénégal",
+  "es": "Senegal"
+ },
+ {
+  "code": "ML",
+  "ar": "مالي",
+  "en": "Mali",
+  "fr": "Mali",
+  "es": "Malí"
+ },
+ {
+  "code": "NE",
+  "ar": "النيجر",
+  "en": "Niger",
+  "fr": "Niger",
+  "es": "Níger"
+ },
+ {
+  "code": "NG",
+  "ar": "نيجيريا",
+  "en": "Nigeria",
+  "fr": "Nigeria",
+  "es": "Nigeria"
+ },
+ {
+  "code": "CI",
+  "ar": "ساحل العاج",
+  "en": "Côte d'Ivoire",
+  "fr": "Côte d'Ivoire",
+  "es": "Costa de Marfil"
+ },
+ {
+  "code": "SO",
+  "ar": "الصومال",
+  "en": "Somalia",
+  "fr": "Somalie",
+  "es": "Somalia"
+ },
+ {
+  "code": "DJ",
+  "ar": "جيبوتي",
+  "en": "Djibouti",
+  "fr": "Djibouti",
+  "es": "Yibuti"
+ },
+ {
+  "code": "KM",
+  "ar": "جزر القمر",
+  "en": "Comoros",
+  "fr": "Comores",
+  "es": "Comoras"
+ },
+ {
+  "code": "ZA",
+  "ar": "جنوب أفريقيا",
+  "en": "South Africa",
+  "fr": "Afrique du Sud",
+  "es": "Sudáfrica"
+ }
+]

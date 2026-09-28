@@ -6,6 +6,7 @@ import '../../../core/theme/colors.dart';
 import '../../../services/matching_service.dart';
 import '../../../widgets/app_button.dart';
 import '../../../widgets/app_input.dart';
+import '../../../widgets/country_field.dart';
 
 /// Port of the previous Expo app's `src/components/SearchFiltersBar.tsx`.
 ///
@@ -112,7 +113,9 @@ class _SearchFiltersBarState extends ConsumerState<SearchFiltersBar> {
           const SizedBox(height: 10),
           Row(
             children: [
-              Expanded(child: AppInput(placeholder: dict.country, controller: _targetCountryController)),
+              Expanded(
+                child: CountryField(placeholder: dict.country, controller: _targetCountryController, clearable: true),
+              ),
               const SizedBox(width: 10),
               Expanded(child: AppInput(placeholder: dict.city, controller: _targetCityController)),
             ],
