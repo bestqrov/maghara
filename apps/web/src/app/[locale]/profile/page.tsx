@@ -112,7 +112,7 @@ export default function ProfilePage() {
       <div className="relative mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-8">
         <NavBar />
 
-        <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-white/90 p-6 shadow-sm backdrop-blur-sm sm:p-10">
+        <div className="relative overflow-hidden rounded-3xl border border-blue-100 bg-surface/90 p-6 shadow-sm backdrop-blur-sm sm:p-10">
           <WeddingEmblem className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 text-rose-500 opacity-[0.06] sm:h-56 sm:w-56" />
 
           <div className="relative flex flex-col items-center gap-3 text-center">
