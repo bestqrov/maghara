@@ -115,12 +115,20 @@ export class MatchingService {
     };
 
     const targetCountry = dto.targetCountry || (dto.scope === 'LOCAL' ? me.profile.residenceCountry : undefined);
-    const relocationPreference =
-      dto.relocationPreference || (dto.scope === 'DIASPORA' ? 'LOOKING_FOR_EXPAT' : undefined);
 
-    if (targetCountry) filter['profile.residenceCountry'] = countryFilter(targetCountry);
+    if (targetCountry) {
+      filter['profile.residenceCountry'] = countryFilter(targetCountry);
+    } else if (dto.scope === 'DIASPORA') {
+      // Diaspora = people living in a different country than me, whatever
+      // their own relocation preference (minus those who only want locals).
+      filter['profile.residenceCountry'] = { $nin: countryFilter(me.profile.residenceCountry).$in };
+    }
     if (dto.targetCity) filter['profile.currentCity'] = exactCaseInsensitive(dto.targetCity);
-    if (relocationPreference) filter['profile.relocationPreference'] = relocationPreference;
+    if (dto.relocationPreference) {
+      filter['profile.relocationPreference'] = dto.relocationPreference;
+    } else if (dto.scope === 'DIASPORA') {
+      filter['profile.relocationPreference'] = { $ne: 'LOCAL_ONLY' };
+    }
     if (dto.minAge || dto.maxAge) {
       const now = new Date();
       filter['profile.birthDate'] = {};
