@@ -355,7 +355,7 @@ const ar: AppDictionary = {
     interestsToday: (sent, limit) => `${sent}/${limit} اهتمامات اليوم`,
     errorSearchFailed: 'تعذّر جلب النتائج، حاول مرة أخرى',
     errorSendInterestFailed: 'تعذّر إرسال الاهتمام',
-    noResults: 'لا توجد نتائج حالياً، حاول تغيير عوامل التصفية',
+    noResults: 'لا توجد ملفات مطابقة حالياً. ينضم أعضاء جدد كل يوم، جرّب توسيع البحث (مثلاً تبويب «الجالية» أو دولة أخرى) أو عُد لاحقاً',
   },
   searchFilters: {
     local: 'البحث المحلي',
@@ -631,7 +631,7 @@ const fr: AppDictionary = {
     interestsToday: (sent, limit) => `${sent}/${limit} intérêts aujourd'hui`,
     errorSearchFailed: "Impossible de charger les résultats, réessayez",
     errorSendInterestFailed: "Impossible d'envoyer l'intérêt",
-    noResults: 'Aucun résultat pour le moment, essayez de changer les filtres',
+    noResults: 'Aucun profil correspondant pour le moment. De nouveaux membres s’inscrivent chaque jour : élargissez votre recherche (onglet diaspora ou autre pays) ou revenez plus tard',
   },
   searchFilters: {
     local: 'Recherche locale',
@@ -910,7 +910,7 @@ const en: AppDictionary = {
     interestsToday: (sent, limit) => `${sent}/${limit} interests today`,
     errorSearchFailed: 'Could not load results, please try again',
     errorSendInterestFailed: 'Could not send interest',
-    noResults: 'No results yet, try changing the filters',
+    noResults: 'No matching profiles yet. New members join every day: try widening your search (the diaspora tab or another country) or check back later',
   },
   searchFilters: {
     local: 'Local search',
@@ -1189,7 +1189,7 @@ const es: AppDictionary = {
     interestsToday: (sent, limit) => `${sent}/${limit} intereses hoy`,
     errorSearchFailed: 'No se pudieron cargar los resultados, inténtalo de nuevo',
     errorSendInterestFailed: 'No se pudo enviar el interés',
-    noResults: 'Aún no hay resultados, intenta cambiar los filtros',
+    noResults: 'Aún no hay perfiles que coincidan. Cada día se unen nuevos miembros: amplía tu búsqueda (pestaña diáspora u otro país) o vuelve más tarde',
   },
   searchFilters: {
     local: 'Búsqueda local',
