@@ -38,7 +38,7 @@ export function SeoLandingContent({
   const loginHref = withLocale(locale, '/login');
 
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="theme-light flex min-h-screen flex-col">
       <SeoHeader locale={locale} hrefByLocale={hrefByLocale} dict={dict} />
 
       <section

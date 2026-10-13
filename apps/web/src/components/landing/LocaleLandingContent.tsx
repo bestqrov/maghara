@@ -50,7 +50,7 @@ export function LocaleLandingContent({ locale }: { locale: Locale }) {
   const heroSrc = locale === 'ar' ? '/hero.png?v=6' : `/hero-${locale}.png?v=3`;
 
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="theme-light flex min-h-screen flex-col">
       <LandingHeader />
 
       {/* Hero banner */}

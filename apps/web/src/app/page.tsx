@@ -72,7 +72,7 @@ export default function LandingPage() {
   if (!hasHydrated || token) return null;
 
   return (
-    <main className="flex min-h-screen flex-col font-arabic">
+    <main className="theme-light flex min-h-screen flex-col font-arabic">
       <LandingHeader />
 
       {/* Hero banner */}
