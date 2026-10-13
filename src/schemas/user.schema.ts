@@ -16,9 +16,20 @@ export class MatchCriteria {
 export const MatchCriteriaSchema = SchemaFactory.createForClass(MatchCriteria);
 
 @Schema({ _id: false })
+export class PrivateDocumentRef {
+  @Prop({ required: true }) publicId: string;
+  @Prop({ required: true }) format: string;
+}
+export const PrivateDocumentRefSchema = SchemaFactory.createForClass(PrivateDocumentRef);
+
+@Schema({ _id: false })
 export class VerificationDocuments {
+  /** Legacy: public Cloudinary URL, only set when the document could not be made private. */
   @Prop() idDocumentUrl?: string;
   @Prop() residencyDocumentUrl?: string;
+  /** Private ("authenticated") Cloudinary assets — viewable by admins only, through the API. */
+  @Prop({ type: PrivateDocumentRefSchema }) idDocument?: PrivateDocumentRef;
+  @Prop({ type: PrivateDocumentRefSchema }) residencyDocument?: PrivateDocumentRef;
   @Prop() rejectionReason?: string;
   @Prop() submittedAt?: Date;
 }

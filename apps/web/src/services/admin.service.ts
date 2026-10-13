@@ -130,8 +130,8 @@ export interface PendingVerification {
   phoneNumber: string;
   profile: { firstName: string };
   verificationDocuments?: {
-    idDocumentUrl?: string;
-    residencyDocumentUrl?: string;
+    hasIdDocument: boolean;
+    hasResidencyDocument: boolean;
     submittedAt?: string;
   };
 }
@@ -176,6 +176,12 @@ export interface CreatePromoPayload {
 export async function listPendingVerifications() {
   const { data } = await adminApi.get<PendingVerification[]>('/verification/admin/pending');
   return data;
+}
+
+/** Verification documents are private: fetched with the admin token and shown as a local blob URL. */
+export async function fetchVerificationDocument(userId: string, kind: 'id' | 'residency') {
+  const { data } = await adminApi.get<Blob>(`/verification/admin/${userId}/documents/${kind}`, { responseType: 'blob' });
+  return URL.createObjectURL(data);
 }
 
 export async function approveVerification(userId: string) {

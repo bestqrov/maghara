@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   PendingVerification,
   approveVerification,
+  fetchVerificationDocument,
   listPendingVerifications,
   rejectVerification,
 } from '@/services/admin.service';
@@ -37,6 +38,18 @@ export function VerificationsPanel() {
     refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  async function openDocument(userId: string, kind: 'id' | 'residency') {
+    // Open the tab synchronously (inside the click) so popup blockers allow it, then fill it.
+    const tab = window.open('', '_blank');
+    try {
+      const url = await fetchVerificationDocument(userId, kind);
+      if (tab) tab.location.href = url;
+    } catch {
+      tab?.close();
+      setError(dict.verifications.errorFetch);
+    }
+  }
 
   async function handleApprove(userId: string) {
     setBusyId(userId);
@@ -78,25 +91,23 @@ export function VerificationsPanel() {
               <p className="text-sm text-ink-500">{item.phoneNumber}</p>
             </div>
             <div className="flex gap-2 text-sm">
-              {item.verificationDocuments?.idDocumentUrl && (
-                <a
-                  href={item.verificationDocuments.idDocumentUrl}
-                  target="_blank"
-                  rel="noreferrer"
+              {item.verificationDocuments?.hasIdDocument && (
+                <button
+                  type="button"
+                  onClick={() => openDocument(item._id, 'id')}
                   className="rounded-lg border border-blue-100 px-3 py-1.5 text-blue-700 hover:bg-blue-50"
                 >
                   {dict.verifications.idDocument}
-                </a>
+                </button>
               )}
-              {item.verificationDocuments?.residencyDocumentUrl && (
-                <a
-                  href={item.verificationDocuments.residencyDocumentUrl}
-                  target="_blank"
-                  rel="noreferrer"
+              {item.verificationDocuments?.hasResidencyDocument && (
+                <button
+                  type="button"
+                  onClick={() => openDocument(item._id, 'residency')}
                   className="rounded-lg border border-blue-100 px-3 py-1.5 text-blue-700 hover:bg-blue-50"
                 >
                   {dict.verifications.residencyDocument}
-                </a>
+                </button>
               )}
             </div>
           </div>

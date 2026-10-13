@@ -4,8 +4,6 @@ export interface VerificationStatusResponse {
   isVerified: boolean;
   verificationStatus: 'UNVERIFIED' | 'PENDING' | 'VERIFIED' | 'REJECTED';
   verificationDocuments?: {
-    idDocumentUrl?: string;
-    residencyDocumentUrl?: string;
     rejectionReason?: string;
     submittedAt?: string;
   };
