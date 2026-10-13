@@ -40,3 +40,11 @@ export async function checkPhoneAvailability(phoneNumber: string) {
   });
   return data.available;
 }
+
+export async function requestPasswordReset(email: string, locale: string) {
+  await api.post('/auth/forgot-password', { email, locale });
+}
+
+export async function resetPassword(token: string, password: string) {
+  await api.post('/auth/reset-password', { token, password });
+}

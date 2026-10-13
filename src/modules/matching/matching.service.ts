@@ -101,7 +101,7 @@ export class MatchingService {
     private readonly pushService: PushService,
   ) {}
 
-  async search(userId: string, dto: SearchProfilesDto) {
+  async search(userId: string, dto: SearchProfilesDto, apiBaseUrl: string) {
     const me = await this.userModel.findById(userId);
     if (!me) throw new NotFoundException('User not found');
 
@@ -165,10 +165,12 @@ export class MatchingService {
 
     return results.map((r, index) => {
       const { lastActiveAt, profile, ...rest } = r.toObject();
-      const blurred = index >= FREE_UNBLURRED_RESULTS;
+      // Position across the whole result set, not within this page — otherwise
+      // a free user could page through with limit=1 and see everyone unblurred.
+      const blurred = (page - 1) * limit + index >= FREE_UNBLURRED_RESULTS;
       return {
         ...rest,
-        profile: blurred ? toTeaserProfile(profile) : omitWaliInfo(profile),
+        profile: blurred ? toTeaserProfile(profile, apiBaseUrl) : omitWaliInfo(profile),
         blurred,
         compatibilityScore: computeCompatibility(me, r),
         isOnline: blurred ? false : isUserOnline(lastActiveAt),

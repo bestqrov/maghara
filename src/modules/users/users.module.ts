@@ -8,6 +8,7 @@ import { ProfileVisitor, ProfileVisitorSchema } from '../../schemas/profile-visi
 import { PushSubscription, PushSubscriptionSchema } from '../../schemas/push-subscription.schema';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
+import { SignupCampaignModule } from '../signup-campaign/signup-campaign.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersService } from './users.service';
       { name: ProfileVisitor.name, schema: ProfileVisitorSchema },
       { name: PushSubscription.name, schema: PushSubscriptionSchema },
     ]),
+    SignupCampaignModule,
   ],
   controllers: [UsersController],
   providers: [UsersService],

@@ -65,6 +65,7 @@ class LoginDict {
   final String errorInvalid;
   final String noAccount;
   final String registerLink;
+  final String forgotLink;
 
   const LoginDict({
     required this.title,
@@ -76,6 +77,7 @@ class LoginDict {
     required this.errorInvalid,
     required this.noAccount,
     required this.registerLink,
+    required this.forgotLink,
   });
 }
 
@@ -556,6 +558,7 @@ final AppDictionary arDictionary = AppDictionary(
     errorInvalid: 'رقم الهاتف/البريد الإلكتروني أو الپاسوورد غير صحيحين',
     noAccount: 'ماعندكش حساب؟ ',
     registerLink: 'سجل دابا',
+    forgotLink: 'نسيتي الپاسوورد؟',
   ),
   register: RegisterDict(
     title: 'إنشاء حساب جديد',
@@ -777,6 +780,7 @@ final AppDictionary frDictionary = AppDictionary(
     errorInvalid: 'Téléphone/e-mail ou mot de passe incorrect',
     noAccount: "Vous n'avez pas de compte ? ",
     registerLink: "S'inscrire",
+    forgotLink: 'Mot de passe oublié ?',
   ),
   register: RegisterDict(
     title: 'Créer un nouveau compte',
@@ -1002,6 +1006,7 @@ final AppDictionary enDictionary = AppDictionary(
     errorInvalid: 'Incorrect phone/email or password',
     noAccount: "Don't have an account? ",
     registerLink: 'Sign up now',
+    forgotLink: 'Forgot your password?',
   ),
   register: RegisterDict(
     title: 'Create a new account',
@@ -1224,6 +1229,7 @@ final AppDictionary esDictionary = AppDictionary(
     errorInvalid: 'Teléfono/correo o contraseña incorrectos',
     noAccount: '¿No tienes una cuenta? ',
     registerLink: 'Regístrate ahora',
+    forgotLink: '¿Olvidaste tu contraseña?',
   ),
   register: RegisterDict(
     title: 'Crear una cuenta nueva',

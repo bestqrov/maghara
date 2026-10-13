@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/config.dart';
 import '../../core/i18n/locale_provider.dart';
 import '../../core/storage/auth_store.dart';
 import '../../core/theme/colors.dart';
@@ -57,6 +59,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     } finally {
       if (mounted) setState(() => _loading = false);
     }
+  }
+
+  /// Password reset lives on the website: it emails a link that opens there.
+  Future<void> _openForgotPassword() async {
+    final locale = ref.read(localeControllerProvider).languageCode;
+    await launchUrl(
+      Uri.parse('${AppConfig.websiteUrl}/$locale/forgot-password'),
+      mode: LaunchMode.externalApplication,
+    );
   }
 
   @override
@@ -117,6 +128,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             ),
                             const SizedBox(height: 14),
                             AppInput(label: dict.passwordLabel, controller: _passwordController, obscureText: true),
+                            Align(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: TextButton(
+                                onPressed: _openForgotPassword,
+                                child: Text(
+                                  dict.forgotLink,
+                                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.emerald600),
+                                ),
+                              ),
+                            ),
                             if (_error != null) ...[
                               const SizedBox(height: 14),
                               Text(

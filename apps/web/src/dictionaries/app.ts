@@ -31,6 +31,24 @@ export interface AppDictionary {
     errorInvalid: string;
     noAccount: string;
     registerLink: string;
+    forgotLink: string;
+  };
+  forgotPassword: {
+    title: string;
+    subtitle: string;
+    emailLabel: string;
+    submit: string;
+    sent: string;
+    backToLogin: string;
+    resetTitle: string;
+    resetSubtitle: string;
+    newPasswordLabel: string;
+    confirmPasswordLabel: string;
+    passwordMismatch: string;
+    resetSubmit: string;
+    resetDone: string;
+    invalidLink: string;
+    requestNewLink: string;
   };
   register: {
     title: string;
@@ -174,6 +192,7 @@ export interface AppDictionary {
     jobTitleLabel: string;
     bioLabel: string;
     photoLabel: string;
+    campaignPhotoNotice: string;
     save: string;
     success: string;
     errorGeneric: string;
@@ -307,6 +326,24 @@ const ar: AppDictionary = {
     errorInvalid: 'رقم الهاتف/البريد الإلكتروني أو كلمة المرور غير صحيحة',
     noAccount: 'ليس لديك حساب؟',
     registerLink: 'سجّل الآن',
+    forgotLink: "نسيت كلمة المرور؟",
+  },
+  forgotPassword: {
+    title: "نسيت كلمة المرور؟",
+    subtitle: "أدخل البريد الإلكتروني ديال حسابك وغادي نصيفطو ليك رابط باش تختار كلمة مرور جديدة.",
+    emailLabel: "البريد الإلكتروني",
+    submit: "إرسال الرابط",
+    sent: "إذا كان هاد البريد مسجّل عندنا، غادي توصلك رسالة فيها رابط إعادة التعيين خلال دقائق. شوف حتى فـ Spam.",
+    backToLogin: "الرجوع لتسجيل الدخول",
+    resetTitle: "اختر كلمة مرور جديدة",
+    resetSubtitle: "كتب كلمة المرور الجديدة ديالك (8 أحرف على الأقل).",
+    newPasswordLabel: "كلمة المرور الجديدة",
+    confirmPasswordLabel: "تأكيد كلمة المرور",
+    passwordMismatch: "كلمتا المرور غير متطابقتين",
+    resetSubmit: "حفظ كلمة المرور",
+    resetDone: "تبدّلات كلمة المرور بنجاح. تقدر تدخل دابا بكلمة المرور الجديدة.",
+    invalidLink: "هاد الرابط غير صالح أو انتهت صلاحيته.",
+    requestNewLink: "طلب رابط جديد",
   },
   register: {
     title: 'إنشاء حساب جديد',
@@ -450,6 +487,7 @@ const ar: AppDictionary = {
     jobTitleLabel: 'المهنة (اختياري)',
     bioLabel: 'نبذة عنك (اختياري)',
     photoLabel: 'صورة الملف الشخصي',
+    campaignPhotoNotice: "🎉 مبروك! حصلت على اشتراك VIP مجاني بفضل حملة التسجيل. لإكمال ملفك الشخصي يجب عليك إضافة صورك الآن.",
     save: 'حفظ التغييرات',
     success: 'تم تحديث معلوماتك بنجاح',
     errorGeneric: 'حدث خطأ ما، حاول مرة أخرى',
@@ -583,6 +621,24 @@ const fr: AppDictionary = {
     errorInvalid: 'Téléphone/e-mail ou mot de passe incorrect',
     noAccount: "Vous n'avez pas de compte ?",
     registerLink: "S'inscrire",
+    forgotLink: "Mot de passe oublié ?",
+  },
+  forgotPassword: {
+    title: "Mot de passe oublié ?",
+    subtitle: "Entrez l'e-mail de votre compte et nous vous enverrons un lien pour choisir un nouveau mot de passe.",
+    emailLabel: "E-mail",
+    submit: "Envoyer le lien",
+    sent: "Si cet e-mail est enregistré chez nous, vous recevrez un lien de réinitialisation dans quelques minutes. Pensez à vérifier vos spams.",
+    backToLogin: "Retour à la connexion",
+    resetTitle: "Choisissez un nouveau mot de passe",
+    resetSubtitle: "Saisissez votre nouveau mot de passe (8 caractères minimum).",
+    newPasswordLabel: "Nouveau mot de passe",
+    confirmPasswordLabel: "Confirmer le mot de passe",
+    passwordMismatch: "Les mots de passe ne correspondent pas",
+    resetSubmit: "Enregistrer le mot de passe",
+    resetDone: "Votre mot de passe a été modifié. Vous pouvez maintenant vous connecter.",
+    invalidLink: "Ce lien est invalide ou a expiré.",
+    requestNewLink: "Demander un nouveau lien",
   },
   register: {
     title: 'Créer un nouveau compte',
@@ -727,6 +783,7 @@ const fr: AppDictionary = {
     jobTitleLabel: 'Profession (optionnel)',
     bioLabel: 'À propos de vous (optionnel)',
     photoLabel: 'Photo de profil',
+    campaignPhotoNotice: "🎉 Félicitations ! Vous avez reçu un abonnement VIP gratuit grâce à la campagne d'inscription. Pour compléter votre profil, vous devez ajouter vos photos dès maintenant.",
     save: 'Enregistrer les modifications',
     success: 'Vos informations ont été mises à jour avec succès',
     errorGeneric: 'Un problème est survenu, réessayez',
@@ -862,6 +919,24 @@ const en: AppDictionary = {
     errorInvalid: 'Incorrect phone/email or password',
     noAccount: "Don't have an account?",
     registerLink: 'Sign up now',
+    forgotLink: "Forgot your password?",
+  },
+  forgotPassword: {
+    title: "Forgot your password?",
+    subtitle: "Enter your account email and we'll send you a link to choose a new password.",
+    emailLabel: "Email",
+    submit: "Send link",
+    sent: "If this email is registered with us, you'll receive a reset link within a few minutes. Check your spam folder too.",
+    backToLogin: "Back to login",
+    resetTitle: "Choose a new password",
+    resetSubtitle: "Enter your new password (at least 8 characters).",
+    newPasswordLabel: "New password",
+    confirmPasswordLabel: "Confirm password",
+    passwordMismatch: "Passwords do not match",
+    resetSubmit: "Save password",
+    resetDone: "Your password has been changed. You can now log in with it.",
+    invalidLink: "This link is invalid or has expired.",
+    requestNewLink: "Request a new link",
   },
   register: {
     title: 'Create a new account',
@@ -1006,6 +1081,7 @@ const en: AppDictionary = {
     jobTitleLabel: 'Job title (optional)',
     bioLabel: 'About you (optional)',
     photoLabel: 'Profile photo',
+    campaignPhotoNotice: "🎉 Congratulations! You got a free VIP subscription from our signup campaign. To complete your profile, you need to add your photos now.",
     save: 'Save changes',
     success: 'Your information was updated successfully',
     errorGeneric: 'Something went wrong, please try again',
@@ -1141,6 +1217,24 @@ const es: AppDictionary = {
     errorInvalid: 'Teléfono/correo o contraseña incorrectos',
     noAccount: '¿No tienes una cuenta?',
     registerLink: 'Regístrate ahora',
+    forgotLink: "¿Olvidaste tu contraseña?",
+  },
+  forgotPassword: {
+    title: "¿Olvidaste tu contraseña?",
+    subtitle: "Introduce el correo de tu cuenta y te enviaremos un enlace para elegir una nueva contraseña.",
+    emailLabel: "Correo electrónico",
+    submit: "Enviar enlace",
+    sent: "Si este correo está registrado, recibirás un enlace en unos minutos. Revisa también la carpeta de spam.",
+    backToLogin: "Volver al inicio de sesión",
+    resetTitle: "Elige una nueva contraseña",
+    resetSubtitle: "Introduce tu nueva contraseña (mínimo 8 caracteres).",
+    newPasswordLabel: "Nueva contraseña",
+    confirmPasswordLabel: "Confirmar contraseña",
+    passwordMismatch: "Las contraseñas no coinciden",
+    resetSubmit: "Guardar contraseña",
+    resetDone: "Tu contraseña ha sido cambiada. Ya puedes iniciar sesión.",
+    invalidLink: "Este enlace no es válido o ha caducado.",
+    requestNewLink: "Solicitar un nuevo enlace",
   },
   register: {
     title: 'Crear una cuenta nueva',
@@ -1285,6 +1379,7 @@ const es: AppDictionary = {
     jobTitleLabel: 'Profesión (opcional)',
     bioLabel: 'Sobre ti (opcional)',
     photoLabel: 'Foto de perfil',
+    campaignPhotoNotice: "🎉 ¡Enhorabuena! Has recibido una suscripción VIP gratuita gracias a la campaña de registro. Para completar tu perfil, debes añadir tus fotos ahora.",
     save: 'Guardar cambios',
     success: 'Tu información se actualizó con éxito',
     errorGeneric: 'Ocurrió un problema, inténtalo de nuevo',

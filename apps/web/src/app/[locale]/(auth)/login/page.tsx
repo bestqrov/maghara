@@ -75,6 +75,9 @@ export default function LoginPage() {
             {...register('password')}
             error={errors.password?.message}
           />
+          <LocaleLink href="/forgot-password" className="-mt-2 self-end text-sm font-medium text-blue-700 hover:underline">
+            {dict.login.forgotLink}
+          </LocaleLink>
 
           {serverError && <p className="text-sm text-red-500">{serverError}</p>}
 

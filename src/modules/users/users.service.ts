@@ -12,6 +12,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { DeleteAccountDto } from './dto/delete-account.dto';
 import { normalizeCountryInput } from '../../common/utils/country.util';
+import { SignupCampaignService } from '../signup-campaign/signup-campaign.service';
 
 const BCRYPT_ROUNDS = 12;
 
@@ -24,12 +25,29 @@ export class UsersService {
     @InjectModel(Message.name) private readonly messageModel: Model<Message>,
     @InjectModel(ProfileVisitor.name) private readonly profileVisitorModel: Model<ProfileVisitor>,
     @InjectModel(PushSubscription.name) private readonly pushSubscriptionModel: Model<PushSubscription>,
+    private readonly signupCampaignService: SignupCampaignService,
   ) {}
 
   async findById(userId: string) {
-    const user = await this.userModel.findById(userId).select('-passwordHash');
+    const user = await this.userModel
+      .findById(userId)
+      .select('-passwordHash -passwordResetTokenHash -passwordResetExpiresAt');
     if (!user) throw new NotFoundException('User not found');
     return user;
+  }
+
+  /**
+   * The signed-in user, plus whether to remind them to add photos: shown to
+   * members who joined through the free-VIP signup campaign, only while that
+   * campaign is still running and until they have uploaded a photo.
+   */
+  async getMe(userId: string) {
+    const user = await this.findById(userId);
+    const campaignPhotoNotice =
+      user.joinedViaSignupCampaign &&
+      user.profile.photos.length === 0 &&
+      (await this.signupCampaignService.getActiveVipDays()) !== null;
+    return { ...user.toObject(), campaignPhotoNotice };
   }
 
   async updateProfile(userId: string, dto: UpdateProfileDto) {

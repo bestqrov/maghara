@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
+import type { Request } from 'express';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { MatchingService } from './matching.service';
 import { SearchProfilesDto } from './dto/search-profiles.dto';
+import { publicBaseUrl } from '../../common/utils/public-base-url.util';
 
 @UseGuards(JwtAuthGuard)
 @Controller('matching')
@@ -10,8 +12,8 @@ export class MatchingController {
   constructor(private readonly matchingService: MatchingService) {}
 
   @Get('search')
-  search(@CurrentUser() user: { userId: string }, @Query() dto: SearchProfilesDto) {
-    return this.matchingService.search(user.userId, dto);
+  search(@CurrentUser() user: { userId: string }, @Query() dto: SearchProfilesDto, @Req() req: Request) {
+    return this.matchingService.search(user.userId, dto, publicBaseUrl(req));
   }
 
   @Get('my-matches')

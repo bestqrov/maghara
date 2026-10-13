@@ -6,6 +6,8 @@ export interface FullUser extends AuthUser {
   dailyInterestsSent: number;
   isVerified: boolean;
   verificationStatus: string;
+  /** Joined via the free-VIP signup campaign, campaign still running, and no photo yet. */
+  campaignPhotoNotice?: boolean;
 }
 
 export interface UpdateProfilePayload {

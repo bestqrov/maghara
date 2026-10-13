@@ -75,6 +75,8 @@ export class User extends Document {
   @Prop({ default: 0 }) dailyInterestsSent: number;
   @Prop({ default: () => new Date() }) lastInterestReset: Date;
   @Prop() lastActiveAt?: Date;
+  /** Registered while the signup campaign (free VIP) was running. */
+  @Prop({ default: false }) joinedViaSignupCampaign: boolean;
 
   // sparse (not required at the schema/index level): the 46 pre-existing seeded
   // users predate this field, and a non-sparse unique index would fail to build
@@ -90,6 +92,11 @@ export class User extends Document {
   // "verified member" — and never inflates our own growth numbers.
   @Prop({ default: false }) isSeed: boolean;
 
+  // Forgot-password flow: only the SHA-256 of the emailed token is stored, so
+  // a database leak cannot be used to reset anyone's password.
+  @Prop() passwordResetTokenHash?: string;
+  @Prop() passwordResetExpiresAt?: Date;
+
   @Prop({ type: ProfileSchema, required: true }) profile: Profile;
 }
 
@@ -97,3 +104,4 @@ export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.index({ 'profile.currentCity': 1 });
 UserSchema.index({ 'profile.residenceCountry': 1 });
 UserSchema.index({ referredBy: 1 });
+UserSchema.index({ passwordResetTokenHash: 1 }, { sparse: true });

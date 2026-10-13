@@ -35,6 +35,7 @@ export default function ProfilePage() {
   const { locale, dict } = useAppDict();
   const { token, user, hasHydrated, updateUser } = useAuthStore();
   const [photoUrl, setPhotoUrl] = useState('');
+  const [campaignPhotoNotice, setCampaignPhotoNotice] = useState(false);
   const [savedCountries, setSavedCountries] = useState({ residence: '', origin: '' });
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -70,6 +71,7 @@ export default function ProfilePage() {
         });
         setSavedCountries({ residence: me.profile.residenceCountry, origin: me.profile.originCountry });
         setPhotoUrl(me.profile.photos[0] ?? '');
+        setCampaignPhotoNotice(!!me.campaignPhotoNotice);
         setReady(true);
       })
       .catch(() => setReady(true));
@@ -121,6 +123,12 @@ export default function ProfilePage() {
             <h1 className="font-display text-2xl font-bold text-blue-900">{dict.profile.title}</h1>
             <p className="max-w-sm text-sm text-ink-500">{dict.profile.subtitle}</p>
           </div>
+
+          {ready && campaignPhotoNotice && !photoUrl && (
+            <p className="relative mt-6 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-center text-sm font-medium text-rose-700">
+              {dict.profile.campaignPhotoNotice}
+            </p>
+          )}
 
           {ready && (
             <form onSubmit={handleSubmit(onSubmit)} className="relative mt-8 flex flex-col gap-5">

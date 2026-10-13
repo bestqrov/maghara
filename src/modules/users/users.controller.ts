@@ -13,7 +13,7 @@ export class UsersController {
 
   @Get('me')
   getMe(@CurrentUser() user: { userId: string }) {
-    return this.usersService.findById(user.userId);
+    return this.usersService.getMe(user.userId);
   }
 
   @Patch('me/profile')

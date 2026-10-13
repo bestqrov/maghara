@@ -22,6 +22,7 @@
     "seed:promos": "ts-node -r tsconfig-paths/register seedPromos.ts",
     "seed:interactions": "ts-node -r tsconfig-paths/register seedInteractions.ts",
     "backfill:referrals": "ts-node -r tsconfig-paths/register backfillReferralCodes.ts",
+    "backfill:campaign-signups": "ts-node -r tsconfig-paths/register backfillCampaignSignups.ts",
     "normalize:countries": "ts-node -r tsconfig-paths/register normalizeCountries.ts"
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "class-validator": "^0.15.1",
     "ioredis": "^6.0.0",
     "mongoose": "^9.9.2",
+    "nodemailer": "^6.10.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
@@ -56,6 +58,7 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.0",
+    "@types/nodemailer": "^6.4.24",
     "@types/supertest": "^7.0.0",
     "@types/web-push": "^3.6.4",
     "eslint": "^9.18.0",
