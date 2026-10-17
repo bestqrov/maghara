@@ -37,6 +37,9 @@
     "@nestjs/platform-socket.io": "^11.1.29",
     "@nestjs/throttler": "^6.5.0",
     "@nestjs/websockets": "^11.1.29",
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-backend-wasm": "^4.22.0",
+    "@vladmandic/face-api": "^1.7.15",
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
@@ -48,6 +51,7 @@
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "sharp": "^0.35.5",
     "socket.io": "^4.8.3",
     "web-push": "^3.6.7"
   },

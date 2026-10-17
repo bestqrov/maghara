@@ -4,10 +4,11 @@ import { User, UserSchema } from '../../schemas/user.schema';
 import { VerificationController } from './verification.controller';
 import { VerificationService } from './verification.service';
 import { PrivateDocumentsService } from './private-documents.service';
+import { FaceMatchService } from './face-match.service';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
   controllers: [VerificationController],
-  providers: [VerificationService, PrivateDocumentsService],
+  providers: [VerificationService, PrivateDocumentsService, FaceMatchService],
 })
 export class VerificationModule {}

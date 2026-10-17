@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../core/i18n/locale_provider.dart';
 import '../../core/theme/colors.dart';
@@ -27,7 +28,9 @@ class VerificationScreen extends ConsumerStatefulWidget {
 class _VerificationScreenState extends ConsumerState<VerificationScreen> {
   VerificationStatusResponse? _status;
   bool _loadingStatus = true;
+  String _documentType = 'ID_CARD';
   String? _idDocumentUrl;
+  String? _selfieUrl;
   String? _residencyDocumentUrl;
   String? _error;
   bool _submitting = false;
@@ -60,7 +63,9 @@ class _VerificationScreenState extends ConsumerState<VerificationScreen> {
     });
     try {
       await ref.read(verificationServiceProvider).submitVerification(
+            documentType: _documentType,
             idDocumentUrl: _idDocumentUrl!,
+            selfieUrl: _selfieUrl!,
             residencyDocumentUrl: _residencyDocumentUrl,
           );
       await _fetchStatus();
@@ -140,11 +145,60 @@ class _VerificationScreenState extends ConsumerState<VerificationScreen> {
                         ),
                       )
                     else ...[
+                      if (_status?.verificationStatus == VerificationStatusValue.rejected) ...[
+                        Text(dict.rejected, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.red500)),
+                        const SizedBox(height: 14),
+                      ],
+                      for (var i = 0; i < dict.steps.length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 24,
+                                height: 24,
+                                alignment: Alignment.center,
+                                decoration: const BoxDecoration(color: AppColors.emerald50, shape: BoxShape.circle),
+                                child: Text('${i + 1}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.emerald700)),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(child: Text(dict.steps[i], style: const TextStyle(fontSize: 13, color: AppColors.ink700))),
+                            ],
+                          ),
+                        ),
+                      const SizedBox(height: 4),
+                      Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(dict.docTypeLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.ink700)),
+                      ),
+                      const SizedBox(height: 6),
+                      SegmentedButton<String>(
+                        segments: [
+                          ButtonSegment(value: 'ID_CARD', label: Text(dict.idCard)),
+                          ButtonSegment(value: 'PASSPORT', label: Text(dict.passport)),
+                        ],
+                        selected: {_documentType},
+                        showSelectedIcon: false,
+                        onSelectionChanged: (selection) => setState(() => _documentType = selection.first),
+                      ),
+                      const SizedBox(height: 14),
                       ImageUploader(
                         label: dict.idLabel,
                         folder: 'zawaj/verification',
                         onUploaded: (url) => setState(() => _idDocumentUrl = url),
                       ),
+                      const SizedBox(height: 14),
+                      // Camera only (front), so a saved photo of someone else can't be chosen.
+                      ImageUploader(
+                        label: dict.selfieLabel,
+                        folder: 'zawaj/verification',
+                        source: ImageSource.camera,
+                        preferFrontCamera: true,
+                        onUploaded: (url) => setState(() => _selfieUrl = url),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(dict.selfieHint, textAlign: TextAlign.center, style: const TextStyle(fontSize: 11, color: AppColors.ink500)),
                       const SizedBox(height: 14),
                       ImageUploader(
                         label: dict.residencyLabel,
@@ -161,9 +215,11 @@ class _VerificationScreenState extends ConsumerState<VerificationScreen> {
                         child: AppButton(
                           label: dict.submit,
                           loading: _submitting,
-                          onPressed: (_idDocumentUrl == null || _submitting) ? null : _onSubmit,
+                          onPressed: (_idDocumentUrl == null || _selfieUrl == null || _submitting) ? null : _onSubmit,
                         ),
                       ),
+                      const SizedBox(height: 10),
+                      Text(dict.privacy, textAlign: TextAlign.center, style: const TextStyle(fontSize: 11, color: AppColors.ink500)),
                     ],
                     const SizedBox(height: 12),
                     SizedBox(

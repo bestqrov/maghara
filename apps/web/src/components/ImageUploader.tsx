@@ -9,9 +9,11 @@ interface ImageUploaderProps {
   value?: string;
   onUploaded: (url: string) => void;
   folder?: string;
+  /** On phones, opens the camera directly ('environment' = back camera) instead of the gallery. */
+  capture?: 'user' | 'environment';
 }
 
-export function ImageUploader({ label, value, onUploaded, folder }: ImageUploaderProps) {
+export function ImageUploader({ label, value, onUploaded, folder, capture }: ImageUploaderProps) {
   const { dict } = useAppDict();
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -39,6 +41,7 @@ export function ImageUploader({ label, value, onUploaded, folder }: ImageUploade
         ref={inputRef}
         type="file"
         accept="image/*"
+        capture={capture}
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];

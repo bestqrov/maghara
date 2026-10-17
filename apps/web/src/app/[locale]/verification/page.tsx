@@ -4,9 +4,16 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { isAxiosError } from 'axios';
 import { useAuthStore } from '@/store/auth.store';
-import { getMyVerificationStatus, submitVerification, VerificationStatusResponse } from '@/services/verification.service';
+import {
+  getMyVerificationStatus,
+  IdentityDocumentType,
+  submitVerification,
+  VerificationStatusResponse,
+} from '@/services/verification.service';
 import { Button } from '@/components/ui/Button';
+import { Select } from '@/components/ui/Select';
 import { ImageUploader } from '@/components/ImageUploader';
+import { SelfieCamera } from '@/components/SelfieCamera';
 import { ShieldCheckIcon } from '@/components/icons';
 import { useAppDict, withLocale } from '@/hooks/useLocale';
 
@@ -15,7 +22,9 @@ export default function VerificationPage() {
   const { locale, dict } = useAppDict();
   const { token, hasHydrated } = useAuthStore();
   const [status, setStatus] = useState<VerificationStatusResponse | null>(null);
+  const [documentType, setDocumentType] = useState<IdentityDocumentType>('ID_CARD');
   const [idDocumentUrl, setIdDocumentUrl] = useState('');
+  const [selfieUrl, setSelfieUrl] = useState('');
   const [residencyDocumentUrl, setResidencyDocumentUrl] = useState('');
   const [serverError, setServerError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -36,7 +45,9 @@ export default function VerificationPage() {
     setLoading(true);
     try {
       await submitVerification({
+        documentType,
         idDocumentUrl,
+        selfieUrl,
         residencyDocumentUrl: residencyDocumentUrl || undefined,
       });
       const updated = await getMyVerificationStatus();
@@ -69,7 +80,38 @@ export default function VerificationPage() {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-4">
-            <ImageUploader label={dict.verification.idLabel} onUploaded={setIdDocumentUrl} folder="zawaj/verification" />
+            {status?.verificationStatus === 'REJECTED' && (
+              <p className="rounded-xl bg-red-50 p-3 text-sm text-red-600">{dict.verification.rejected}</p>
+            )}
+
+            <ol className="flex flex-col gap-2 text-sm text-ink-700">
+              {dict.verification.steps.map((step, i) => (
+                <li key={step} className="flex items-start gap-3">
+                  <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-emerald-50 text-xs font-bold text-emerald-700">
+                    {i + 1}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+
+            <Select
+              id="documentType"
+              label={dict.verification.docTypeLabel}
+              value={documentType}
+              onChange={(e) => setDocumentType(e.target.value as IdentityDocumentType)}
+              options={[
+                { value: 'ID_CARD', label: dict.verification.idCard },
+                { value: 'PASSPORT', label: dict.verification.passport },
+              ]}
+            />
+            <ImageUploader
+              label={dict.verification.idLabel}
+              onUploaded={setIdDocumentUrl}
+              folder="zawaj/verification"
+              capture="environment"
+            />
+            <SelfieCamera label={dict.verification.selfieLabel} onUploaded={setSelfieUrl} folder="zawaj/verification" />
             <ImageUploader
               label={dict.verification.residencyLabel}
               onUploaded={setResidencyDocumentUrl}
@@ -78,9 +120,10 @@ export default function VerificationPage() {
 
             {serverError && <p className="text-sm text-red-500">{serverError}</p>}
 
-            <Button type="submit" loading={loading} disabled={!idDocumentUrl} className="mt-2 w-full">
+            <Button type="submit" loading={loading} disabled={!idDocumentUrl || !selfieUrl} className="mt-2 w-full">
               {dict.verification.submit}
             </Button>
+            <p className="text-center text-xs text-ink-500">{dict.verification.privacy}</p>
           </form>
         )}
 

@@ -157,6 +157,19 @@ export interface AdminDictionary {
     cancel: string;
     approve: string;
     reject: string;
+    selfie: string;
+    compare: string;
+    hideCompare: string;
+    idCard: string;
+    passport: string;
+    faceChecking: string;
+    faceStrong: string;
+    faceMatch: string;
+    faceNoMatch: string;
+    faceError: string;
+    profileMatch: string;
+    profileNoMatch: string;
+    similarity: (percent: number) => string;
   };
   payments: {
     errorFetch: string;
@@ -411,6 +424,19 @@ const ar: AdminDictionary = {
     cancel: 'إلغاء',
     approve: 'موافقة',
     reject: 'رفض',
+    selfie: 'السيلفي',
+    compare: 'قارن الوثيقة والسيلفي',
+    hideCompare: 'إخفاء المقارنة',
+    idCard: 'بطاقة تعريف',
+    passport: 'جواز سفر',
+    faceChecking: 'جاري مقارنة الوجه…',
+    faceStrong: 'الوجه مطابق بقوة',
+    faceMatch: 'الوجه مطابق',
+    faceNoMatch: 'الوجه غير مطابق — تحقق بعناية',
+    faceError: 'تعذّرت المقارنة الآلية — قارن يدوياً',
+    profileMatch: 'صور البروفايل لنفس الشخص',
+    profileNoMatch: 'صور البروفايل لا تطابق السيلفي',
+    similarity: (percent) => `تشابه ${percent}%`,
   },
   payments: {
     errorFetch: 'تعذّر جلب المعاملات',
@@ -667,6 +693,19 @@ const en: AdminDictionary = {
     cancel: 'Cancel',
     approve: 'Approve',
     reject: 'Reject',
+    selfie: 'Selfie',
+    compare: 'Compare document and selfie',
+    hideCompare: 'Hide comparison',
+    idCard: 'ID card',
+    passport: 'Passport',
+    faceChecking: 'Comparing faces…',
+    faceStrong: 'Strong face match',
+    faceMatch: 'Face matches',
+    faceNoMatch: 'Face does not match — check carefully',
+    faceError: 'Automatic comparison failed — compare by eye',
+    profileMatch: 'Profile photos show the same person',
+    profileNoMatch: "Profile photos don't match the selfie",
+    similarity: (percent) => `${percent}% similar`,
   },
   payments: {
     errorFetch: 'Could not fetch transactions',

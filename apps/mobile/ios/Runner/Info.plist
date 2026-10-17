@@ -52,6 +52,6 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photos so you can set a profile picture.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera so you can take a profile picture.</string>
+	<string>We need access to your camera so you can take a profile picture and a live selfie to verify your identity.</string>
 </dict>
 </plist>

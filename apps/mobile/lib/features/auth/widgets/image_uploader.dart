@@ -16,11 +16,23 @@ import '../../../services/cloudinary_service.dart';
 /// secure URL via [onUploaded]. Used by both the register wizard's photo
 /// step and the verification screen's document pickers.
 class ImageUploader extends ConsumerStatefulWidget {
-  const ImageUploader({super.key, required this.label, required this.onUploaded, this.folder});
+  const ImageUploader({
+    super.key,
+    required this.label,
+    required this.onUploaded,
+    this.folder,
+    this.source = ImageSource.gallery,
+    this.preferFrontCamera = false,
+  });
 
   final String label;
   final ValueChanged<String> onUploaded;
   final String? folder;
+
+  /// [ImageSource.camera] takes the photo live instead of picking from the gallery
+  /// (used for the verification selfie).
+  final ImageSource source;
+  final bool preferFrontCamera;
 
   @override
   ConsumerState<ImageUploader> createState() => _ImageUploaderState();
@@ -35,7 +47,11 @@ class _ImageUploaderState extends ConsumerState<ImageUploader> {
     final dict = ref.read(appDictProvider).imageUploader;
     try {
       final picker = ImagePicker();
-      final file = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+      final file = await picker.pickImage(
+        source: widget.source,
+        preferredCameraDevice: widget.preferFrontCamera ? CameraDevice.front : CameraDevice.rear,
+        imageQuality: 80,
+      );
       if (file == null) return;
 
       setState(() {

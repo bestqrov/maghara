@@ -30,7 +30,7 @@ export class VerificationController {
   @UseGuards(AdminJwtGuard)
   @Get('admin/:userId/documents/:kind')
   async getDocument(@Param('userId') userId: string, @Param('kind') kind: string, @Res() res: Response) {
-    if (kind !== 'id' && kind !== 'residency') throw new BadRequestException('Unknown document kind');
+    if (kind !== 'id' && kind !== 'residency' && kind !== 'selfie') throw new BadRequestException('Unknown document kind');
     const { contentType, body } = await this.verificationService.getDocument(userId, kind as DocumentKind);
     res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'private, no-store');
@@ -49,3 +49,4 @@ export class VerificationController {
     return this.verificationService.reject(userId, dto.reason);
   }
 }
+

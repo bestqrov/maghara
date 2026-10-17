@@ -246,6 +246,18 @@ export interface AppDictionary {
     skip: string;
     alreadyVerified: string;
     alreadyPending: string;
+    steps: string[];
+    docTypeLabel: string;
+    idCard: string;
+    passport: string;
+    selfieLabel: string;
+    selfieHint: string;
+    selfieStart: string;
+    selfieCapture: string;
+    selfieRetake: string;
+    selfieCameraError: string;
+    rejected: string;
+    privacy: string;
   };
   visitors: {
     title: string;
@@ -534,13 +546,25 @@ const ar: AppDictionary = {
   },
   verification: {
     title: 'وثّق حسابك مجاناً',
-    subtitle: 'أرسل بطاقة التعريف أو جواز السفر للحصول على شارة "عضو جاد وموثّق" وزد فرصك في الظهور',
+    subtitle: 'صوّر بطاقة التعريف أو جواز السفر والتقط سيلفي مباشر، لنتأكد أنك صاحب الوثيقة ونمنحك شارة "عضو جاد وموثّق"',
     idLabel: 'صورة بطاقة التعريف / جواز السفر',
     residencyLabel: 'وثيقة الإقامة بالخارج (اختياري)',
     submit: 'أرسل للمراجعة',
     skip: 'تخطَّ الآن، وثّق لاحقاً',
     alreadyVerified: 'حسابك موثّق بالفعل ✓',
     alreadyPending: 'طلب التوثيق الخاص بك قيد المراجعة، سنعلمك بالنتيجة قريباً',
+    steps: ['اختر نوع الوثيقة: بطاقة التعريف الوطنية أو جواز السفر', 'صوّر الوثيقة كاملة وبوضوح', 'التقط سيلفي مباشر بالكاميرا، ونقارن وجهك بصورة الوثيقة تلقائياً'],
+    docTypeLabel: 'نوع الوثيقة',
+    idCard: 'بطاقة التعريف الوطنية',
+    passport: 'جواز السفر',
+    selfieLabel: 'سيلفي مباشر',
+    selfieHint: 'انظر إلى الكاميرا في مكان جيد الإضاءة، بدون نظارات شمسية أو ما يغطي الوجه',
+    selfieStart: 'افتح الكاميرا',
+    selfieCapture: 'التقط الصورة',
+    selfieRetake: 'أعد التقاط السيلفي',
+    selfieCameraError: 'تعذّر فتح الكاميرا. اسمح للموقع باستعمال الكاميرا ثم حاول مرة أخرى.',
+    rejected: 'تعذّر قبول طلب التوثيق السابق. يمكنك المحاولة مرة أخرى بصور واضحة وإضاءة جيدة.',
+    privacy: 'تتم مقارنة الوجه على خوادمنا فقط، ولا تظهر وثيقتك أو السيلفي لأي عضو.',
   },
   visitors: {
     title: 'زوار ملفك الشخصي',
@@ -839,6 +863,18 @@ const fr: AppDictionary = {
     skip: 'Passer pour le moment, vérifier plus tard',
     alreadyVerified: 'Votre compte est déjà vérifié ✓',
     alreadyPending: 'Votre demande de vérification est en cours d\'examen, nous vous informerons bientôt',
+    steps: ['Choisissez le type de document : CIN ou passeport', 'Photographiez le document en entier et lisiblement', 'Prenez un selfie en direct : votre visage est comparé automatiquement à la photo du document'],
+    docTypeLabel: 'Type de document',
+    idCard: "Carte d'identité nationale",
+    passport: 'Passeport',
+    selfieLabel: 'Selfie en direct',
+    selfieHint: 'Regardez la caméra dans un endroit bien éclairé, sans lunettes de soleil ni rien qui couvre le visage',
+    selfieStart: 'Ouvrir la caméra',
+    selfieCapture: 'Prendre la photo',
+    selfieRetake: 'Reprendre le selfie',
+    selfieCameraError: "Impossible d'ouvrir la caméra. Autorisez l'accès à la caméra puis réessayez.",
+    rejected: "Votre précédente demande n'a pas pu être acceptée. Réessayez avec des photos nettes et un bon éclairage.",
+    privacy: "La comparaison du visage se fait uniquement sur nos serveurs ; votre document et votre selfie ne sont jamais montrés aux membres.",
   },
   visitors: {
     title: 'Visiteurs de votre profil',
@@ -1136,6 +1172,18 @@ const en: AppDictionary = {
     skip: "Skip for now, I'll verify later",
     alreadyVerified: 'Your account is already verified ✓',
     alreadyPending: 'Your verification request is under review, we will let you know the result soon',
+    steps: ['Choose the document type: national ID card or passport', 'Photograph the whole document clearly', 'Take a live selfie: your face is automatically compared with the document photo'],
+    docTypeLabel: 'Document type',
+    idCard: 'National ID card',
+    passport: 'Passport',
+    selfieLabel: 'Live selfie',
+    selfieHint: 'Look at the camera in good light, without sunglasses or anything covering your face',
+    selfieStart: 'Open camera',
+    selfieCapture: 'Take photo',
+    selfieRetake: 'Retake selfie',
+    selfieCameraError: "Couldn't open the camera. Allow camera access, then try again.",
+    rejected: "Your previous request couldn't be accepted. Try again with clear photos and good lighting.",
+    privacy: 'Faces are compared on our own servers only; your document and selfie are never shown to other members.',
   },
   visitors: {
     title: 'Your profile visitors',
@@ -1435,6 +1483,18 @@ const es: AppDictionary = {
     skip: 'Omitir por ahora, verificaré después',
     alreadyVerified: 'Tu cuenta ya está verificada ✓',
     alreadyPending: 'Tu solicitud de verificación está en revisión, te avisaremos del resultado pronto',
+    steps: ['Elige el tipo de documento: DNI/CIN o pasaporte', 'Fotografía el documento completo y nítido', 'Hazte un selfie en directo: tu cara se compara automáticamente con la foto del documento'],
+    docTypeLabel: 'Tipo de documento',
+    idCard: 'Documento nacional de identidad',
+    passport: 'Pasaporte',
+    selfieLabel: 'Selfie en directo',
+    selfieHint: 'Mira a la cámara con buena luz, sin gafas de sol ni nada que cubra la cara',
+    selfieStart: 'Abrir la cámara',
+    selfieCapture: 'Hacer la foto',
+    selfieRetake: 'Repetir el selfie',
+    selfieCameraError: 'No se pudo abrir la cámara. Permite el acceso a la cámara e inténtalo de nuevo.',
+    rejected: 'Tu solicitud anterior no pudo aceptarse. Inténtalo de nuevo con fotos nítidas y buena luz.',
+    privacy: 'La comparación de la cara se hace solo en nuestros servidores; tu documento y tu selfie nunca se muestran a otros miembros.',
   },
   visitors: {
     title: 'Visitantes de tu perfil',

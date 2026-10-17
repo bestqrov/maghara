@@ -15,11 +15,19 @@ class VerificationService {
     return VerificationStatusResponse.fromJson(res.data!);
   }
 
-  Future<void> submitVerification({required String idDocumentUrl, String? residencyDocumentUrl}) async {
+  /// [documentType] is `ID_CARD` or `PASSPORT`; [selfieUrl] is the live selfie.
+  Future<void> submitVerification({
+    required String documentType,
+    required String idDocumentUrl,
+    required String selfieUrl,
+    String? residencyDocumentUrl,
+  }) async {
     await _dio.post(
       '/verification/submit',
       data: {
+        'documentType': documentType,
         'idDocumentUrl': idDocumentUrl,
+        'selfieUrl': selfieUrl,
         if (residencyDocumentUrl != null) 'residencyDocumentUrl': residencyDocumentUrl,
       },
     );

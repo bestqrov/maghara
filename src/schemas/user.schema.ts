@@ -22,6 +22,22 @@ export class PrivateDocumentRef {
 }
 export const PrivateDocumentRefSchema = SchemaFactory.createForClass(PrivateDocumentRef);
 
+export type IdentityDocumentType = 'ID_CARD' | 'PASSPORT';
+export type FaceMatchStatus = 'MATCH' | 'NO_MATCH' | 'NO_FACE_DOCUMENT' | 'NO_FACE_SELFIE' | 'ERROR';
+
+/** Result of comparing the live selfie with the ID photo (and the profile photos), computed on our server. */
+@Schema({ _id: false })
+export class FaceMatchResult {
+  @Prop({ enum: ['MATCH', 'NO_MATCH', 'NO_FACE_DOCUMENT', 'NO_FACE_SELFIE', 'ERROR'], required: true })
+  status: FaceMatchStatus;
+  /** Selfie vs document face distance (lower = more alike; below 0.6 = same person). */
+  @Prop() distance?: number;
+  /** Selfie vs the closest profile photo face. */
+  @Prop() profileDistance?: number;
+  @Prop() checkedAt?: Date;
+}
+export const FaceMatchResultSchema = SchemaFactory.createForClass(FaceMatchResult);
+
 @Schema({ _id: false })
 export class VerificationDocuments {
   /** Legacy: public Cloudinary URL, only set when the document could not be made private. */
@@ -30,6 +46,11 @@ export class VerificationDocuments {
   /** Private ("authenticated") Cloudinary assets — viewable by admins only, through the API. */
   @Prop({ type: PrivateDocumentRefSchema }) idDocument?: PrivateDocumentRef;
   @Prop({ type: PrivateDocumentRefSchema }) residencyDocument?: PrivateDocumentRef;
+  @Prop({ enum: ['ID_CARD', 'PASSPORT'] }) documentType?: IdentityDocumentType;
+  /** Live selfie taken with the camera, compared with the document's photo. */
+  @Prop({ type: PrivateDocumentRefSchema }) selfie?: PrivateDocumentRef;
+  @Prop() selfieUrl?: string;
+  @Prop({ type: FaceMatchResultSchema }) faceMatch?: FaceMatchResult;
   @Prop() rejectionReason?: string;
   @Prop() submittedAt?: Date;
 }

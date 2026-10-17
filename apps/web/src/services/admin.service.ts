@@ -145,9 +145,19 @@ export interface PendingVerification {
   phoneNumber: string;
   profile: { firstName: string };
   verificationDocuments?: {
+    documentType?: 'ID_CARD' | 'PASSPORT';
     hasIdDocument: boolean;
+    hasSelfie: boolean;
     hasResidencyDocument: boolean;
     submittedAt?: string;
+    /** Server-side comparison of the live selfie with the document photo (and the profile photos). */
+    faceMatch: {
+      status: 'MATCH' | 'NO_MATCH' | 'NO_FACE_DOCUMENT' | 'NO_FACE_SELFIE' | 'ERROR';
+      strong: boolean;
+      distance?: number;
+      profileMatches: boolean | null;
+      profileDistance?: number;
+    } | null;
   };
 }
 
@@ -194,7 +204,7 @@ export async function listPendingVerifications() {
 }
 
 /** Verification documents are private: fetched with the admin token and shown as a local blob URL. */
-export async function fetchVerificationDocument(userId: string, kind: 'id' | 'residency') {
+export async function fetchVerificationDocument(userId: string, kind: 'id' | 'residency' | 'selfie') {
   const { data } = await adminApi.get<Blob>(`/verification/admin/${userId}/documents/${kind}`, { responseType: 'blob' });
   return URL.createObjectURL(data);
 }

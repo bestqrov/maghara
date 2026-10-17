@@ -422,6 +422,14 @@ class VerificationDict {
   final String skip;
   final String alreadyVerified;
   final String alreadyPending;
+  final List<String> steps;
+  final String docTypeLabel;
+  final String idCard;
+  final String passport;
+  final String selfieLabel;
+  final String selfieHint;
+  final String rejected;
+  final String privacy;
 
   const VerificationDict({
     required this.title,
@@ -432,6 +440,14 @@ class VerificationDict {
     required this.skip,
     required this.alreadyVerified,
     required this.alreadyPending,
+    required this.steps,
+    required this.docTypeLabel,
+    required this.idCard,
+    required this.passport,
+    required this.selfieLabel,
+    required this.selfieHint,
+    required this.rejected,
+    required this.privacy,
   });
 }
 
@@ -717,13 +733,21 @@ final AppDictionary arDictionary = AppDictionary(
   ),
   verification: const VerificationDict(
     title: 'وثّق حسابك مجاناً',
-    subtitle: 'صيفط CIN أو Passport للحصول على شارة "عضو جاد وموثق" وزد فرصك فـ الظهور',
+    subtitle: 'صوّر CIN ولا Passport وخود سيلفي مباشر، باش نتأكدو بلي نتا مول الوثيقة وتاخد شارة "عضو جاد وموثق"',
     idLabel: 'صورة CIN / Passport',
     residencyLabel: 'وثيقة الإقامة بالخارج (اختياري)',
     submit: 'صيفط للمراجعة',
     skip: 'تخطى دابا، نوثق من بعد',
     alreadyVerified: 'حسابك موثق بالفعل ✓',
     alreadyPending: 'طلب التوثيق ديالك قيد المراجعة، غادي نعلموك بالنتيجة قريباً',
+    steps: ['ختار نوع الوثيقة: البطاقة الوطنية ولا جواز السفر', 'صوّر الوثيقة كاملة وواضحة', 'خود سيلفي مباشر بالكاميرا، وكنقارنو وجهك مع صورة الوثيقة أوتوماتيكياً'],
+    docTypeLabel: 'نوع الوثيقة',
+    idCard: 'البطاقة الوطنية',
+    passport: 'جواز السفر',
+    selfieLabel: 'سيلفي مباشر (بالكاميرا)',
+    selfieHint: 'شوف فالكاميرا فبلاصة فيها الضو، بلا نظارات شمس ولا شي حاجة مغطية الوجه',
+    rejected: 'ما تقبلش طلب التوثيق اللي فات. عاود جرب بتصاور واضحين وضو مزيان.',
+    privacy: 'مقارنة الوجه كتدار غير فالسيرفرات ديالنا، والوثيقة والسيلفي ما كيبانو لحتى عضو.',
   ),
   visitors: VisitorsDict(
     title: 'زوار البروفايل ديالك',
@@ -950,6 +974,14 @@ final AppDictionary frDictionary = AppDictionary(
     skip: 'Passer pour le moment, vérifier plus tard',
     alreadyVerified: 'Votre compte est déjà vérifié ✓',
     alreadyPending: "Votre demande de vérification est en cours d'examen, nous vous informerons bientôt",
+    steps: ['Choisissez le type de document : CIN ou passeport', 'Photographiez le document en entier et lisiblement', 'Prenez un selfie en direct : votre visage est comparé automatiquement à la photo du document'],
+    docTypeLabel: 'Type de document',
+    idCard: "Carte d'identité nationale",
+    passport: 'Passeport',
+    selfieLabel: 'Selfie en direct (caméra)',
+    selfieHint: 'Regardez la caméra dans un endroit bien éclairé, sans lunettes de soleil ni rien qui couvre le visage',
+    rejected: "Votre précédente demande n'a pas pu être acceptée. Réessayez avec des photos nettes et un bon éclairage.",
+    privacy: "La comparaison du visage se fait uniquement sur nos serveurs ; votre document et votre selfie ne sont jamais montrés aux membres.",
   ),
   visitors: VisitorsDict(
     title: 'Visiteurs de votre profil',
@@ -1166,13 +1198,21 @@ final AppDictionary enDictionary = AppDictionary(
   ),
   verification: const VerificationDict(
     title: 'Verify your account for free',
-    subtitle: 'Submit your ID card or Passport to get the "Serious verified member" badge and boost your visibility',
+    subtitle: 'Photograph your ID card or passport and take a live selfie, so we know the document is yours and give you the "Serious verified member" badge',
     idLabel: 'ID card / Passport photo',
     residencyLabel: 'Foreign residency document (optional)',
     submit: 'Submit for review',
     skip: "Skip for now, I'll verify later",
     alreadyVerified: 'Your account is already verified ✓',
     alreadyPending: 'Your verification request is under review, we will let you know the result soon',
+    steps: ['Choose the document type: national ID card or passport', 'Photograph the whole document clearly', 'Take a live selfie: your face is automatically compared with the document photo'],
+    docTypeLabel: 'Document type',
+    idCard: 'National ID card',
+    passport: 'Passport',
+    selfieLabel: 'Live selfie (camera)',
+    selfieHint: 'Look at the camera in good light, without sunglasses or anything covering your face',
+    rejected: "Your previous request couldn't be accepted. Try again with clear photos and good lighting.",
+    privacy: 'Faces are compared on our own servers only; your document and selfie are never shown to other members.',
   ),
   visitors: VisitorsDict(
     title: 'Your profile visitors',
@@ -1398,6 +1438,14 @@ final AppDictionary esDictionary = AppDictionary(
     skip: 'Omitir por ahora, verificaré después',
     alreadyVerified: 'Tu cuenta ya está verificada ✓',
     alreadyPending: 'Tu solicitud de verificación está en revisión, te avisaremos del resultado pronto',
+    steps: ['Elige el tipo de documento: DNI/CIN o pasaporte', 'Fotografía el documento completo y nítido', 'Hazte un selfie en directo: tu cara se compara automáticamente con la foto del documento'],
+    docTypeLabel: 'Tipo de documento',
+    idCard: 'Documento nacional de identidad',
+    passport: 'Pasaporte',
+    selfieLabel: 'Selfie en directo (cámara)',
+    selfieHint: 'Mira a la cámara con buena luz, sin gafas de sol ni nada que cubra la cara',
+    rejected: 'Tu solicitud anterior no pudo aceptarse. Inténtalo de nuevo con fotos nítidas y buena luz.',
+    privacy: 'La comparación de la cara se hace solo en nuestros servidores; tu documento y tu selfie nunca se muestran a otros miembros.',
   ),
   visitors: VisitorsDict(
     title: 'Visitantes de tu perfil',

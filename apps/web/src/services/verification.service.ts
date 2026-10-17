@@ -14,7 +14,15 @@ export async function getMyVerificationStatus() {
   return data;
 }
 
-export async function submitVerification(payload: { idDocumentUrl: string; residencyDocumentUrl?: string }) {
+export type IdentityDocumentType = 'ID_CARD' | 'PASSPORT';
+
+export async function submitVerification(payload: {
+  documentType: IdentityDocumentType;
+  idDocumentUrl: string;
+  selfieUrl: string;
+  residencyDocumentUrl?: string;
+}) {
   const { data } = await api.post('/verification/submit', payload);
   return data;
 }
+
