@@ -35,6 +35,21 @@ export interface MemberListItem {
   };
 }
 
+export interface MemberPayload {
+  phoneNumber: string;
+  email: string;
+  password?: string;
+  firstName: string;
+  gender: 'MALE' | 'FEMALE';
+  birthDate: string;
+  residenceCountry: string;
+  currentCity: string;
+  originCountry: string;
+  subscriptionTier: string;
+  verificationStatus: string;
+  coinBalance: number;
+}
+
 export interface AdPlacements {
   bannerHome: boolean;
   bannerMatches: boolean;
@@ -273,6 +288,20 @@ export async function updateAdSettings(payload: UpdateAdSettingsPayload) {
 export async function listMembers(search: string, page: number, limit: number) {
   const { data } = await adminApi.get<MemberListResponse>('/admin-users', { params: { search, page, limit } });
   return data;
+}
+
+export async function createMember(payload: MemberPayload) {
+  const { data } = await adminApi.post<MemberListItem>('/admin-users', payload);
+  return data;
+}
+
+export async function updateMember(id: string, payload: Partial<MemberPayload>) {
+  const { data } = await adminApi.patch<MemberListItem>(`/admin-users/${id}`, payload);
+  return data;
+}
+
+export async function deleteMember(id: string) {
+  await adminApi.delete(`/admin-users/${id}`);
 }
 
 export async function downloadMembersCsv() {

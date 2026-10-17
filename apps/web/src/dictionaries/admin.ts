@@ -111,6 +111,24 @@ export interface AdminDictionary {
     next: string;
     pageOf: (page: number, totalPages: number) => string;
     totalCount: (count: number) => string;
+    add: string;
+    edit: string;
+    delete: string;
+    columnActions: string;
+    createTitle: string;
+    editTitle: string;
+    save: string;
+    cancel: string;
+    passwordLabel: string;
+    passwordEditHint: string;
+    genderLabel: string;
+    genderMale: string;
+    genderFemale: string;
+    birthDateLabel: string;
+    originCountryLabel: string;
+    confirmDelete: (name: string) => string;
+    errorSave: string;
+    errorDelete: string;
   };
   signupCampaign: {
     intro: string;
@@ -347,6 +365,24 @@ const ar: AdminDictionary = {
     next: 'التالي',
     pageOf: (page, totalPages) => `صفحة ${page} من ${totalPages}`,
     totalCount: (count) => `${count} عضو`,
+    add: '+ إضافة عضو',
+    edit: 'تعديل',
+    delete: 'حذف',
+    columnActions: 'إجراءات',
+    createTitle: 'إضافة عضو جديد',
+    editTitle: 'تعديل بيانات العضو',
+    save: 'حفظ',
+    cancel: 'إلغاء',
+    passwordLabel: 'كلمة المرور',
+    passwordEditHint: 'اتركها فارغة للإبقاء على كلمة المرور الحالية',
+    genderLabel: 'الجنس',
+    genderMale: 'ذكر',
+    genderFemale: 'أنثى',
+    birthDateLabel: 'تاريخ الميلاد',
+    originCountryLabel: 'بلد الأصل',
+    confirmDelete: (name) => `واش متأكد بغيتي تحذف ${name}؟ غادي يتحذفو حتى المطابقات والمحادثات ديالو، وما يمكنش ترجعهم.`,
+    errorSave: 'تعذّر حفظ بيانات العضو',
+    errorDelete: 'تعذّر حذف العضو',
   },
   signupCampaign: {
     intro: 'ملي تكون هاد الحملة فعّالة، كل عضو جديد يسجل خلال الفترة المحددة يربح اشتراك VIP مجاني تلقائياً بلا ما يدخل أي كود.',
@@ -584,6 +620,24 @@ const en: AdminDictionary = {
     next: 'Next',
     pageOf: (page, totalPages) => `Page ${page} of ${totalPages}`,
     totalCount: (count) => `${count} members`,
+    add: '+ Add member',
+    edit: 'Edit',
+    delete: 'Delete',
+    columnActions: 'Actions',
+    createTitle: 'Add a new member',
+    editTitle: 'Edit member',
+    save: 'Save',
+    cancel: 'Cancel',
+    passwordLabel: 'Password',
+    passwordEditHint: 'Leave empty to keep the current password',
+    genderLabel: 'Gender',
+    genderMale: 'Male',
+    genderFemale: 'Female',
+    birthDateLabel: 'Birth date',
+    originCountryLabel: 'Country of origin',
+    confirmDelete: (name) => `Delete ${name}? Their matches and conversations will be deleted too. This cannot be undone.`,
+    errorSave: 'Could not save the member',
+    errorDelete: 'Could not delete the member',
   },
   signupCampaign: {
     intro:

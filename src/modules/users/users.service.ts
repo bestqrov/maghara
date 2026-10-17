@@ -97,6 +97,13 @@ export class UsersService {
     const isMatch = await bcrypt.compare(dto.password, user.passwordHash);
     if (!isMatch) throw new UnauthorizedException('Password is incorrect');
 
+    await this.purgeUser(user);
+    return { message: 'Account deleted' };
+  }
+
+  /** Deletes a user and everything tied to them (matches, chats, visits, push subscriptions). */
+  async purgeUser(user: User) {
+    const userId = user._id;
     const conversations = await this.conversationModel.find({ participants: userId }).select('_id');
     const conversationIds = conversations.map((c) => c._id);
 
@@ -109,6 +116,5 @@ export class UsersService {
     ]);
 
     await user.deleteOne();
-    return { message: 'Account deleted' };
   }
 }
