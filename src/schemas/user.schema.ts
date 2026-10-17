@@ -95,6 +95,8 @@ export class User extends Document {
   // via auth.service.ts; see scripts/backfillReferralCodes.ts for existing users.
   @Prop({ unique: true, sparse: true, uppercase: true }) referralCode?: string;
   @Prop({ type: Types.ObjectId, ref: 'User' }) referredBy?: Types.ObjectId;
+  /** Set once the referral bonus for this member's verification has been paid, so it is never paid twice. */
+  @Prop({ default: false }) referralBonusPaid: boolean;
   @Prop({ type: [String], default: [] }) redeemedPromoCodes: string[];
 
   // Marks demo/test profiles created by scripts/seed.ts. Excluded from real-user

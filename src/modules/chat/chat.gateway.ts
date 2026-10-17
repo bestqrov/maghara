@@ -27,8 +27,19 @@ export class ChatGateway {
     @ConnectedSocket() client: AuthedSocket,
     @MessageBody() data: { conversationId: string },
   ) {
-    await client.join(data.conversationId);
-    return { event: 'joinedConversation', conversationId: data.conversationId };
+    // Only the two participants may join a room — otherwise anyone could
+    // listen in on another couple's messages as they arrive.
+    try {
+      const conversation = await this.chatService.getConversationForParticipant(
+        String(data?.conversationId),
+        client.data.user.userId,
+      );
+      const room = conversation._id.toString();
+      await client.join(room);
+      return { event: 'joinedConversation', conversationId: room };
+    } catch (err) {
+      throw this.toWsException(err);
+    }
   }
 
   @UseGuards(WsJwtGuard)
@@ -39,19 +50,23 @@ export class ChatGateway {
   ) {
     try {
       const message = await this.chatService.sendMessage(
-        data.conversationId,
+        String(data?.conversationId),
         client.data.user.userId,
-        data.text,
+        data?.text,
       );
-      this.server.to(data.conversationId).emit('newMessage', message);
+      this.server.to(message.conversationId.toString()).emit('newMessage', message);
       return { event: 'messageSent', messageId: message.id };
     } catch (err) {
-      if (err instanceof HttpException) {
-        const response = err.getResponse();
-        const message = typeof response === 'string' ? response : (response as { message?: string }).message;
-        throw new WsException(message ?? err.message);
-      }
-      throw err;
+      throw this.toWsException(err);
     }
+  }
+
+  private toWsException(err: unknown) {
+    if (err instanceof HttpException) {
+      const response = err.getResponse();
+      const message = typeof response === 'string' ? response : (response as { message?: string }).message;
+      return new WsException(message ?? err.message);
+    }
+    return err;
   }
 }

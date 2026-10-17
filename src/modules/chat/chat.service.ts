@@ -1,6 +1,6 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model, Types, isValidObjectId } from 'mongoose';
 import { Conversation } from '../../schemas/conversation.schema';
 import { Message } from '../../schemas/message.schema';
 import { Match } from '../../schemas/match.schema';
@@ -10,6 +10,7 @@ import { PushService } from '../push/push.service';
 
 const FREE_MESSAGE_LIMIT = 10;
 const UNLOCK_COIN_COST = 5;
+const MAX_MESSAGE_LENGTH = 2000;
 
 @Injectable()
 export class ChatService {
@@ -41,12 +42,31 @@ export class ChatService {
     return conversation;
   }
 
-  async sendMessage(conversationId: string, senderId: string, text: string) {
+  /** The conversation, only if `userId` is one of its two participants. */
+  async getConversationForParticipant(conversationId: string, userId: string) {
+    if (!isValidObjectId(conversationId)) throw new NotFoundException('Conversation not found');
     const conversation = await this.conversationModel.findById(conversationId);
     if (!conversation) throw new NotFoundException('Conversation not found');
+    if (!conversation.participants.some((p) => p.toString() === userId)) {
+      throw new ForbiddenException('Not a participant in this conversation');
+    }
+    return conversation;
+  }
 
+  async getMessages(conversationId: string, userId: string) {
+    const conversation = await this.getConversationForParticipant(conversationId, userId);
+    return this.messageModel.find({ conversationId: conversation._id }).sort({ createdAt: 1 });
+  }
+
+  async sendMessage(conversationId: string, senderId: string, rawText: unknown) {
+    const text = typeof rawText === 'string' ? rawText.trim() : '';
+    if (!text) throw new BadRequestException('Message cannot be empty');
+    if (text.length > MAX_MESSAGE_LENGTH) {
+      throw new BadRequestException(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`);
+    }
+
+    const conversation = await this.getConversationForParticipant(conversationId, senderId);
     const participantIds = conversation.participants.map((p) => p.toString());
-    if (!participantIds.includes(senderId)) throw new ForbiddenException('Not a participant in this conversation');
 
     const receiverId = participantIds.find((id) => id !== senderId);
     if (!receiverId) throw new BadRequestException('Conversation is missing a receiver');
@@ -89,8 +109,7 @@ export class ChatService {
   }
 
   async unlockConversationWithCoins(conversationId: string, userId: string) {
-    const conversation = await this.conversationModel.findById(conversationId);
-    if (!conversation) throw new NotFoundException('Conversation not found');
+    const conversation = await this.getConversationForParticipant(conversationId, userId);
 
     const user = await this.userModel.findById(userId);
     if (!user) throw new NotFoundException('User not found');

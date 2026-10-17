@@ -133,6 +133,11 @@ export class AdminUsersService {
       user.vipExpiresAt = undefined;
     }
     if (dto.verificationStatus) {
+      // Members verified before referralBonusPaid existed were already paid —
+      // record that before they leave VERIFIED so a re-approval can't pay again.
+      if (user.verificationStatus === 'VERIFIED' && user.referredBy) {
+        user.referralBonusPaid = true;
+      }
       user.verificationStatus = dto.verificationStatus;
       user.isVerified = dto.verificationStatus === 'VERIFIED';
     }

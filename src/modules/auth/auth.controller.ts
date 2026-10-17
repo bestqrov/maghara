@@ -21,6 +21,10 @@ export class AuthController {
     return this.authService.register(dto);
   }
 
+  // Per-IP brute-force guard. Generous enough for members sharing a mobile
+  // carrier's IP, tight enough to make password guessing impractical.
+  @UseGuards(ThrottlerGuard)
+  @Throttle({ default: { ttl: 15 * 60 * 1000, limit: 20 } })
   @Post('login')
   login(@Body() dto: LoginDto) {
     return this.authService.login(dto);

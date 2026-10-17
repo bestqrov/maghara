@@ -107,10 +107,10 @@ export class VerificationService {
     user.isVerified = true;
     if (user.verificationDocuments) user.verificationDocuments.rejectionReason = undefined;
 
-    // Referral reward fires exactly once: approve() only ever runs on a PENDING
-    // user (guarded by findPending), and a user can never return to PENDING
-    // after being VERIFIED, so this can't double-credit on a later re-approval.
-    if (user.referredBy) {
+    // Referral reward fires exactly once, even if an admin later un-verifies the
+    // member and they get approved again.
+    if (user.referredBy && !user.referralBonusPaid) {
+      user.referralBonusPaid = true;
       user.coinBalance += REFERRAL_BONUS_COINS;
       await this.userModel.updateOne({ _id: user.referredBy }, { $inc: { coinBalance: REFERRAL_BONUS_COINS } });
     }
